@@ -1,0 +1,675 @@
+# R Programming Fundamentals {#sec-r-programming}
+
+```{r}
+#| label: setup
+#| include: false
+library(tidyverse)
+library(gt)
+theme_set(theme_minimal())
+```
+
+::: {.callout-note title="Learning Objectives"}
+After completing this chapter, you will be able to:
+
+- Explain why R is well-suited for scientific computing
+- Use RStudio as an integrated development environment
+- Perform basic arithmetic and variable assignment in R
+- Work with vectors and understand vectorized operations
+- Create and manipulate data frames
+- Use built-in functions and access help documentation
+- Create basic visualizations
+- Read and write data files
+:::
+
+## Why R for Scientific Computing?
+
+R is a programming language designed specifically for statistical computing and graphics [@rproject2024]. Since its creation in 1995, R has become one of the most widely used tools in data science, statistics, and bioinformatics.
+
+R offers several advantages for researchers:
+
+**Statistical Power**
+:   R was built by statisticians for statistics. It includes comprehensive implementations of classical and modern statistical methods.
+
+**Graphics Excellence**
+:   R produces publication-quality graphics with fine-grained control over every aspect of visualization.
+
+**Package Ecosystem**
+:   Over 20,000 packages extend R's capabilities for virtually every analytical need, from genomics to machine learning.
+
+**Reproducibility**
+:   R scripts document your analysis completely. Combined with Quarto (which produced this book!), you can create reproducible documents that integrate code, results, and narrative.
+
+**Active Community**
+:   A large, welcoming community provides abundant resources, tutorials, and support.
+
+**Cost**
+:   R is free and open-source, removing financial barriers to sophisticated analysis.
+
+## RStudio: Your R Environment
+
+While R can run from the command line, most users work in **RStudio**, an integrated development environment (IDE) that makes R more accessible and productive.
+
+### The RStudio Interface
+
+RStudio organizes your workspace into four panes:
+
+**Source (top-left)**
+:   Where you write and edit scripts. Code here isn't executed until you explicitly run it.
+
+**Console (bottom-left)**
+:   The interactive R session. Commands typed here execute immediately. Output appears here.
+
+**Environment/History (top-right)**
+:   Shows variables you've created (Environment tab) and commands you've run (History tab).
+
+**Files/Plots/Help (bottom-right)**
+:   File browser, plot viewer, and help documentation.
+
+::: {.callout-tip}
+Learn keyboard shortcuts! `Ctrl+Enter` (Windows/Linux) or `Cmd+Enter` (Mac) runs the current line or selection. `Ctrl+Shift+S` runs the entire script.
+:::
+
+### RStudio Projects
+
+RStudio Projects organize your work with self-contained directories:
+
+1. Go to File → New Project
+2. Choose New Directory → New Project
+3. Name your project and select a location
+4. RStudio creates a `.Rproj` file
+
+Projects set your working directory automatically and keep related files together—essential for reproducible research.
+
+## R Basics: Arithmetic and Variables
+
+### R as a Calculator
+
+The simplest use of R is arithmetic:
+
+```{r}
+#| label: basic-arithmetic
+
+# Basic operations
+4 * 4
+
+# Order of operations applies
+(4 + 3 * 2^2)
+
+# More complex expressions
+sqrt(144) + log(100)
+```
+
+R follows standard mathematical order of operations (PEMDAS).
+
+### Creating Variables
+
+Variables store values for later use. In R, the assignment operator is `<-`:
+
+```{r}
+#| label: variables
+
+# Assign values to variables
+x <- 2
+y <- 5
+
+# Use variables in calculations
+x * 3
+y + x
+
+# Store results in new variables
+z <- x * y
+z
+```
+
+::: {.callout-note}
+You can also use `=` for assignment in R, but `<-` is the traditional and preferred style. It makes assignment visually distinct from function arguments, which use `=`.
+:::
+
+### Variable Naming Rules
+
+- Names must start with a letter
+- Can contain letters, numbers, periods, and underscores
+- R is case-sensitive: `Gene` and `gene` are different variables
+- Use descriptive names: `sample_count` is better than `sc`
+
+```{r}
+#| label: naming
+#| eval: false
+
+# Valid names
+gene_count <- 100
+Sample.1 <- "control"
+myData2 <- 42
+
+# Invalid (would cause errors)
+# 2samples <- 5      # Can't start with number
+# my-data <- 10      # Hyphens not allowed
+```
+
+## Vectors: R's Fundamental Data Structure
+
+R thinks in terms of **vectors**—ordered collections of values of the same type. Even a single number is a vector of length 1.
+
+### Creating Vectors
+
+The `c()` function (for "combine" or "concatenate") creates vectors:
+
+```{r}
+#| label: vectors
+
+# Numeric vector
+measurements <- c(2, 3, 4, 2, 1, 2, 4, 5, 10, 8, 9)
+measurements
+
+# Character vector
+samples <- c("control", "treatment_A", "treatment_B")
+samples
+
+# Logical vector
+passed <- c(TRUE, FALSE, TRUE, TRUE, FALSE)
+passed
+```
+
+### Sequence Generation
+
+For regular sequences, use shortcuts:
+
+```{r}
+#| label: sequences
+
+# Integer sequence
+1:10
+
+# Sequence with step
+seq(0, 10, by = 0.5)
+
+# Specified length
+seq(0, 1, length.out = 5)
+
+# Repeated values
+rep("A", 5)
+rep(c(1, 2), times = 3)
+rep(c(1, 2), each = 3)
+```
+
+### Vectorized Operations
+
+R's power comes from **vectorized operations**—operations that apply to entire vectors at once:
+
+```{r}
+#| label: vectorized
+
+x <- c(2, 3, 4, 2, 1, 2, 4, 5, 10, 8, 9)
+
+# Operations apply to each element
+x * 2
+x^2
+log(x)
+sqrt(x)
+
+# Operations between vectors (element-wise)
+y <- 1:11
+x + y
+x * y
+```
+
+This is much faster and cleaner than writing loops!
+
+### Vector Indexing
+
+Access specific elements using square brackets:
+
+```{r}
+#| label: indexing
+
+measurements <- c(2, 3, 4, 2, 1, 2, 4, 5, 10, 8, 9)
+
+# Single element (1-indexed!)
+measurements[1]
+measurements[5]
+
+# Multiple elements
+measurements[c(1, 3, 5)]
+
+# Range
+measurements[2:5]
+
+# Negative indices exclude
+measurements[-1]          # All but first
+measurements[-(1:3)]      # All but first three
+
+# Logical indexing
+measurements[measurements > 5]
+```
+
+::: {.callout-important}
+R uses 1-based indexing! The first element is `[1]`, not `[0]` as in Python and most other languages.
+:::
+
+## Data Types in R
+
+R has several fundamental data types:
+
+| Type | Description | Example |
+|:-----|:------------|:--------|
+| `numeric` | Real numbers (default) | `3.14`, `42` |
+| `integer` | Whole numbers | `1L`, `100L` |
+| `character` | Text strings | `"hello"`, `"gene1"` |
+| `logical` | Boolean values | `TRUE`, `FALSE` |
+| `factor` | Categorical variables | Treatment levels |
+
+: R data types {#tbl-data-types}
+
+```{r}
+#| label: types
+
+# Check types with class()
+class(3.14)
+class("hello")
+class(TRUE)
+
+# Type coercion
+as.numeric("42")
+as.character(123)
+as.logical(0)    # FALSE
+as.logical(1)    # TRUE
+```
+
+### Special Values
+
+R has special values for missing data and undefined results:
+
+```{r}
+#| label: special
+
+# Missing value
+NA
+
+# Not a number (undefined)
+0/0
+log(-1)
+
+# Infinity
+1/0
+-1/0
+```
+
+Handling `NA` values is a common task in data analysis.
+
+## Functions
+
+Functions perform operations on inputs and return outputs. R has thousands of built-in functions.
+
+### Using Functions
+
+```{r}
+#| label: functions
+
+x <- c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+
+# Basic statistical functions
+mean(x)
+median(x)
+sd(x)        # Standard deviation
+var(x)       # Variance
+sum(x)
+length(x)
+min(x)
+max(x)
+range(x)     # Returns min and max
+```
+
+### Function Arguments
+
+Functions take arguments that modify their behavior:
+
+```{r}
+#| label: arguments
+
+# Round to 2 decimal places
+round(3.14159, digits = 2)
+
+# Sample with replacement
+sample(1:10, size = 5, replace = TRUE)
+
+# Mean with NA handling
+values <- c(1, 2, NA, 4, 5)
+mean(values)              # Returns NA
+mean(values, na.rm = TRUE)  # Removes NA first
+```
+
+### Getting Help
+
+R has excellent built-in documentation:
+
+```{r}
+#| label: help
+#| eval: false
+
+# Get help on a function
+?mean
+help(mean)
+
+# Search help
+help.search("correlation")
+??correlation
+
+# See function arguments
+args(mean)
+
+# See examples
+example(mean)
+```
+
+The help page structure:
+
+- **Description**: What the function does
+- **Usage**: Function syntax
+- **Arguments**: What inputs it accepts
+- **Value**: What it returns
+- **Examples**: Working code examples
+
+## Data Frames
+
+**Data frames** are R's workhorse for tabular data—think spreadsheets or database tables. Each column is a vector, and columns can have different types.
+
+### Creating Data Frames
+
+```{r}
+#| label: dataframe-create
+
+# Create vectors
+sample_id <- c("S1", "S2", "S3", "S4", "S5")
+treatment <- c("control", "drug_A", "drug_A", "drug_B", "drug_B")
+concentration <- c(0, 10, 20, 10, 20)
+response <- c(1.2, 3.4, 5.6, 2.8, 4.1)
+
+# Combine into data frame
+experiment <- data.frame(
+  sample_id = sample_id,
+  treatment = treatment,
+  concentration = concentration,
+  response = response
+)
+
+experiment
+```
+
+### Examining Data Frames
+
+```{r}
+#| label: examine-df
+
+# Structure
+str(experiment)
+
+# Dimensions
+dim(experiment)
+nrow(experiment)
+ncol(experiment)
+
+# Preview
+head(experiment, 3)
+tail(experiment, 2)
+
+# Summary statistics
+summary(experiment)
+
+# Column names
+names(experiment)
+colnames(experiment)
+```
+
+### Accessing Data Frame Elements
+
+```{r}
+#| label: access-df
+
+# Single column (returns vector)
+experiment$response
+experiment[["response"]]
+experiment[, "response"]
+
+# Multiple columns
+experiment[, c("sample_id", "response")]
+
+# Rows by index
+experiment[1, ]
+experiment[1:3, ]
+
+# Combination
+experiment[1:3, c("treatment", "response")]
+
+# Conditional selection
+experiment[experiment$treatment == "drug_A", ]
+experiment[experiment$response > 3, ]
+```
+
+### Adding and Modifying Columns
+
+```{r}
+#| label: modify-df
+
+# Add a new column
+experiment$replicate <- c(1, 1, 2, 1, 2)
+
+# Calculated column
+experiment$log_response <- log(experiment$response)
+
+experiment
+```
+
+## Reading and Writing Data
+
+### Reading Files
+
+```{r}
+#| label: read-files
+#| eval: false
+
+# CSV files (comma-separated)
+data <- read.csv("data.csv")
+
+# Tab-separated files
+data <- read.table("data.tsv", header = TRUE, sep = "\t")
+
+# Excel files (requires readxl package)
+library(readxl)
+data <- read_excel("data.xlsx")
+
+# Specify options
+data <- read.csv("data.csv",
+                 header = TRUE,
+                 stringsAsFactors = FALSE,
+                 na.strings = c("", "NA", "N/A"))
+```
+
+### Writing Files
+
+```{r}
+#| label: write-files
+#| eval: false
+
+# CSV output
+write.csv(experiment, "experiment_results.csv", row.names = FALSE)
+
+# Tab-separated
+write.table(experiment, "results.tsv", 
+            sep = "\t", 
+            quote = FALSE, 
+            row.names = FALSE)
+```
+
+## Basic Visualization
+
+R excels at creating graphics. Here's a quick introduction to base R plotting:
+
+### Scatter Plots
+
+```{r}
+#| label: fig-scatter
+#| fig-cap: "Basic scatter plot showing quadratic relationship"
+
+x <- 1:10
+y <- x^2
+
+plot(x, y, 
+     main = "Quadratic Relationship",
+     xlab = "X values",
+     ylab = "Y values",
+     col = "darkblue",
+     pch = 16)  # Filled circles
+```
+
+### Histograms
+
+```{r}
+#| label: fig-histogram
+#| fig-cap: "Histogram of normally distributed data"
+
+# Generate random data
+data <- rnorm(1000, mean = 50, sd = 10)
+
+hist(data,
+     main = "Distribution of Values",
+     xlab = "Value",
+     col = "steelblue",
+     breaks = 30)
+```
+
+### Box Plots
+
+```{r}
+#| label: fig-boxplot
+#| fig-cap: "Box plot comparing treatment groups"
+
+# Create sample data
+set.seed(42)
+control <- rnorm(30, mean = 10, sd = 2)
+treatment <- rnorm(30, mean = 15, sd = 3)
+
+boxplot(control, treatment,
+        names = c("Control", "Treatment"),
+        main = "Treatment Effect",
+        ylab = "Response",
+        col = c("lightblue", "lightcoral"))
+```
+
+### Multiple Plots
+
+```{r}
+#| label: fig-multipanel
+#| fig-cap: "Multiple plots in a single figure"
+
+# Create 2x2 layout
+par(mfrow = c(2, 2))
+
+# Four different plots
+plot(1:10, (1:10)^2, type = "l", main = "Line Plot")
+hist(rnorm(100), main = "Histogram")
+boxplot(rnorm(50), main = "Box Plot")
+barplot(c(3, 5, 2, 7), names.arg = c("A", "B", "C", "D"), main = "Bar Plot")
+
+# Reset to single plot
+par(mfrow = c(1, 1))
+```
+
+::: {.callout-tip}
+For publication-quality graphics, explore the **ggplot2** package [@wickham2023r], which provides a powerful and consistent grammar of graphics.
+:::
+
+## Random Sampling and Simulation
+
+R makes it easy to generate random data and run simulations:
+
+```{r}
+#| label: fig-simulation
+#| fig-cap: "Simulated data from a normal distribution with theoretical curve overlay"
+
+# Set seed for reproducibility
+set.seed(123)
+
+# Random samples from distributions
+uniform_sample <- runif(100, min = 0, max = 1)
+normal_sample <- rnorm(1000, mean = 0, sd = 1)
+poisson_sample <- rpois(100, lambda = 5)
+
+# Visualize normal distribution
+hist(normal_sample, 
+     probability = TRUE,  # Density instead of counts
+     main = "Sample vs. Theoretical Distribution",
+     col = "lightblue")
+
+# Add theoretical curve
+curve(dnorm(x, mean = 0, sd = 1), 
+      add = TRUE, 
+      col = "red", 
+      lwd = 2)
+```
+
+### Common Distribution Functions
+
+For distribution `xxx` (e.g., `norm`, `unif`, `pois`, `binom`):
+
+- `rxxx()` — Random samples
+- `dxxx()` — Density/probability
+- `pxxx()` — Cumulative distribution function
+- `qxxx()` — Quantile function
+
+```{r}
+#| label: distributions
+
+# Normal distribution
+rnorm(5)        # 5 random values
+dnorm(0)        # Density at x=0
+pnorm(1.96)     # P(X ≤ 1.96)
+qnorm(0.975)    # Value where P(X ≤ x) = 0.975
+```
+
+## Summary
+
+This chapter introduced R programming fundamentals:
+
+- R is designed for statistical computing with excellent graphics
+- RStudio provides an integrated development environment
+- Variables are assigned with `<-`; R is case-sensitive
+- Vectors are the fundamental data structure; operations are vectorized
+- Data frames hold tabular data with columns of different types
+- Functions perform operations; use `?function` for help
+- R reads/writes CSV, TSV, and Excel files easily
+- Basic plotting is built-in; ggplot2 offers advanced graphics
+
+These fundamentals prepare you for more advanced R programming, including the tidyverse packages covered in subsequent chapters.
+
+## Exercises {.unnumbered}
+
+::: {.callout-tip title="Practice Exercises"}
+**Exercise 1: Vector Operations**
+
+1. Create a vector of the first 20 integers
+2. Calculate the mean, median, and standard deviation
+3. Create a new vector containing only the even numbers
+4. Calculate the sum of squares
+
+**Exercise 2: Data Frame Practice**
+
+Create a data frame representing an experiment:
+1. Include columns for: sample_id, group (control/treatment), measurement
+2. Add 10 rows of sample data
+3. Calculate the mean measurement for each group
+4. Add a new column with log-transformed measurements
+
+**Exercise 3: Random Simulation**
+
+1. Generate 1000 random samples from a normal distribution with mean=100 and sd=15
+2. Create a histogram of the data
+3. Calculate what proportion of values fall between 85 and 115
+4. Compare to the theoretical proportion for a normal distribution
+
+**Exercise 4: File I/O**
+
+1. Create a data frame with experimental data
+2. Save it as a CSV file
+3. Read it back into a new variable
+4. Verify the data matches the original
+:::

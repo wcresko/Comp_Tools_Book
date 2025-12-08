@@ -1,0 +1,1591 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.30">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="A comprehensive guide to essential computational tools for graduate students in bioengineering and life sciences, covering Unix/Linux, R programming, version control with Git/GitHub, and high-performance computing.">
+
+<title>4&nbsp; Files, Pipes, and Redirection – Foundational Computational Tools for Bioengineers</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chapters/05-grep-regex.html" rel="next">
+<link href="../chapters/03-unix-fundamentals.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-d447b626f1df67f6a2368ec23f4c5255.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-c7529a8313f81663d953c47b1ab362ff.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-d447b626f1df67f6a2368ec23f4c5255.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-0dd4bede59fce912683c1f38b3836bca.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-eb3cfb2dc3b1d18999aa5075de07535d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-0dd4bede59fce912683c1f38b3836bca.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar docked quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/04-files-pipes.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Files, Pipes, and Redirection</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../index.html" class="sidebar-logo-link">
+      <img src="../images/uo_logo.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Foundational Computational Tools for Bioengineers</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/wcresko/BioE_Comp_Tools_Book" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/01-introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Computational Tools</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/02-computer-systems.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Computer Systems Architecture</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03-unix-fundamentals.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Unix Fundamentals</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/04-files-pipes.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Files, Pipes, and Redirection</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/05-grep-regex.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">GREP and Regular Expressions</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/06-shell-scripting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Shell Scripting</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/07-r-programming.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">R Programming Fundamentals</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/08-tidy-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Tidy Data Principles</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/09-git-github.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Version Control with Git and GitHub</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/10-hpc-talapas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">High-Performance Computing with Talapas</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/appendix-commands.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Command Reference</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#the-unix-philosophy" id="toc-the-unix-philosophy" class="nav-link active" data-scroll-target="#the-unix-philosophy"><span class="header-section-number">4.1</span> The Unix Philosophy</a></li>
+  <li><a href="#standard-streams-the-foundation" id="toc-standard-streams-the-foundation" class="nav-link" data-scroll-target="#standard-streams-the-foundation"><span class="header-section-number">4.2</span> Standard Streams: The Foundation</a></li>
+  <li><a href="#reading-files" id="toc-reading-files" class="nav-link" data-scroll-target="#reading-files"><span class="header-section-number">4.3</span> Reading Files</a>
+  <ul class="collapse">
+  <li><a href="#choosing-the-right-tool" id="toc-choosing-the-right-tool" class="nav-link" data-scroll-target="#choosing-the-right-tool"><span class="header-section-number">4.3.1</span> Choosing the Right Tool</a></li>
+  <li><a href="#cat-concatenate-and-display" id="toc-cat-concatenate-and-display" class="nav-link" data-scroll-target="#cat-concatenate-and-display"><span class="header-section-number">4.3.2</span> <code>cat</code>: Concatenate and Display</a></li>
+  <li><a href="#less-the-pager" id="toc-less-the-pager" class="nav-link" data-scroll-target="#less-the-pager"><span class="header-section-number">4.3.3</span> <code>less</code>: The Pager</a></li>
+  <li><a href="#head-and-tail-peek-at-extremes" id="toc-head-and-tail-peek-at-extremes" class="nav-link" data-scroll-target="#head-and-tail-peek-at-extremes"><span class="header-section-number">4.3.4</span> <code>head</code> and <code>tail</code>: Peek at Extremes</a></li>
+  </ul></li>
+  <li><a href="#output-redirection" id="toc-output-redirection" class="nav-link" data-scroll-target="#output-redirection"><span class="header-section-number">4.4</span> Output Redirection</a>
+  <ul class="collapse">
+  <li><a href="#overwrite" id="toc-overwrite" class="nav-link" data-scroll-target="#overwrite"><span class="header-section-number">4.4.1</span> Overwrite: <code>&gt;</code></a></li>
+  <li><a href="#append" id="toc-append" class="nav-link" data-scroll-target="#append"><span class="header-section-number">4.4.2</span> Append: <code>&gt;&gt;</code></a></li>
+  <li><a href="#redirecting-errors-2" id="toc-redirecting-errors-2" class="nav-link" data-scroll-target="#redirecting-errors-2"><span class="header-section-number">4.4.3</span> Redirecting Errors: <code>2&gt;</code></a></li>
+  </ul></li>
+  <li><a href="#input-redirection" id="toc-input-redirection" class="nav-link" data-scroll-target="#input-redirection"><span class="header-section-number">4.5</span> Input Redirection</a></li>
+  <li><a href="#pipes-connecting-commands" id="toc-pipes-connecting-commands" class="nav-link" data-scroll-target="#pipes-connecting-commands"><span class="header-section-number">4.6</span> Pipes: Connecting Commands</a>
+  <ul class="collapse">
+  <li><a href="#simple-pipe-examples" id="toc-simple-pipe-examples" class="nav-link" data-scroll-target="#simple-pipe-examples"><span class="header-section-number">4.6.1</span> Simple Pipe Examples</a></li>
+  <li><a href="#building-complex-pipelines" id="toc-building-complex-pipelines" class="nav-link" data-scroll-target="#building-complex-pipelines"><span class="header-section-number">4.6.2</span> Building Complex Pipelines</a></li>
+  <li><a href="#the-tee-command" id="toc-the-tee-command" class="nav-link" data-scroll-target="#the-tee-command"><span class="header-section-number">4.6.3</span> The <code>tee</code> Command</a></li>
+  </ul></li>
+  <li><a href="#essential-pipeline-tools" id="toc-essential-pipeline-tools" class="nav-link" data-scroll-target="#essential-pipeline-tools"><span class="header-section-number">4.7</span> Essential Pipeline Tools</a>
+  <ul class="collapse">
+  <li><a href="#sort-order-lines" id="toc-sort-order-lines" class="nav-link" data-scroll-target="#sort-order-lines"><span class="header-section-number">4.7.1</span> <code>sort</code>: Order Lines</a></li>
+  <li><a href="#uniq-remove-duplicates" id="toc-uniq-remove-duplicates" class="nav-link" data-scroll-target="#uniq-remove-duplicates"><span class="header-section-number">4.7.2</span> <code>uniq</code>: Remove Duplicates</a></li>
+  <li><a href="#cut-extract-columns" id="toc-cut-extract-columns" class="nav-link" data-scroll-target="#cut-extract-columns"><span class="header-section-number">4.7.3</span> <code>cut</code>: Extract Columns</a></li>
+  <li><a href="#tr-translate-characters" id="toc-tr-translate-characters" class="nav-link" data-scroll-target="#tr-translate-characters"><span class="header-section-number">4.7.4</span> <code>tr</code>: Translate Characters</a></li>
+  <li><a href="#grep-search-for-patterns" id="toc-grep-search-for-patterns" class="nav-link" data-scroll-target="#grep-search-for-patterns"><span class="header-section-number">4.7.5</span> <code>grep</code>: Search for Patterns</a></li>
+  </ul></li>
+  <li><a href="#working-with-large-genomic-data" id="toc-working-with-large-genomic-data" class="nav-link" data-scroll-target="#working-with-large-genomic-data"><span class="header-section-number">4.8</span> Working with Large Genomic Data</a>
+  <ul class="collapse">
+  <li><a href="#fasta-format-basics" id="toc-fasta-format-basics" class="nav-link" data-scroll-target="#fasta-format-basics"><span class="header-section-number">4.8.1</span> FASTA Format Basics</a></li>
+  <li><a href="#downloading-genomic-data" id="toc-downloading-genomic-data" class="nav-link" data-scroll-target="#downloading-genomic-data"><span class="header-section-number">4.8.2</span> Downloading Genomic Data</a></li>
+  <li><a href="#working-with-compressed-files" id="toc-working-with-compressed-files" class="nav-link" data-scroll-target="#working-with-compressed-files"><span class="header-section-number">4.8.3</span> Working with Compressed Files</a></li>
+  <li><a href="#analyzing-sequence-data" id="toc-analyzing-sequence-data" class="nav-link" data-scroll-target="#analyzing-sequence-data"><span class="header-section-number">4.8.4</span> Analyzing Sequence Data</a></li>
+  <li><a href="#example-pipeline-gc-content" id="toc-example-pipeline-gc-content" class="nav-link" data-scroll-target="#example-pipeline-gc-content"><span class="header-section-number">4.8.5</span> Example Pipeline: GC Content</a></li>
+  <li><a href="#finding-restriction-sites" id="toc-finding-restriction-sites" class="nav-link" data-scroll-target="#finding-restriction-sites"><span class="header-section-number">4.8.6</span> Finding Restriction Sites</a></li>
+  <li><a href="#stream-processing-download-and-analyze" id="toc-stream-processing-download-and-analyze" class="nav-link" data-scroll-target="#stream-processing-download-and-analyze"><span class="header-section-number">4.8.7</span> Stream Processing: Download and Analyze</a></li>
+  </ul></li>
+  <li><a href="#best-practices" id="toc-best-practices" class="nav-link" data-scroll-target="#best-practices"><span class="header-section-number">4.9</span> Best Practices</a>
+  <ul class="collapse">
+  <li><a href="#pipeline-efficiency" id="toc-pipeline-efficiency" class="nav-link" data-scroll-target="#pipeline-efficiency"><span class="header-section-number">4.9.1</span> Pipeline Efficiency</a></li>
+  <li><a href="#defensive-practices" id="toc-defensive-practices" class="nav-link" data-scroll-target="#defensive-practices"><span class="header-section-number">4.9.2</span> Defensive Practices</a></li>
+  </ul></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">4.10</span> Summary</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/wcresko/BioE_Comp_Tools_Book/edit/main/chapters/04-files-pipes.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/wcresko/BioE_Comp_Tools_Book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="sec-files-pipes" class="quarto-section-identifier"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Files, Pipes, and Redirection</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="callout callout-style-default callout-note callout-titled" title="Learning Objectives">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Learning Objectives
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>After completing this chapter, you will be able to:</p>
+<ul>
+<li>Explain the Unix philosophy and how it shapes command-line tools</li>
+<li>Read files efficiently using <code>cat</code>, <code>less</code>, <code>head</code>, and <code>tail</code></li>
+<li>Use input and output redirection to work with files</li>
+<li>Chain commands together using pipes</li>
+<li>Apply these tools to process genomic data files</li>
+</ul>
+</div>
+</div>
+<section id="the-unix-philosophy" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="the-unix-philosophy"><span class="header-section-number">4.1</span> The Unix Philosophy</h2>
+<p>Unix tools are designed around a simple but powerful philosophy <span class="citation" data-cites="kernighan1984unix">(<a href="../references.html#ref-kernighan1984unix" role="doc-biblioref">Kernighan &amp; Pike, 1984</a>)</span>:</p>
+<blockquote class="blockquote">
+<p>Write programs that do one thing and do it well. Write programs to work together. Write programs to handle text streams, because that is a universal interface.</p>
+</blockquote>
+<p>This philosophy has profound implications for how you work:</p>
+<ol type="1">
+<li><strong>Small, focused tools</strong>: Each command does one specific task excellently</li>
+<li><strong>Composition</strong>: Complex operations are built by combining simple tools</li>
+<li><strong>Text as interface</strong>: Programs communicate through text, making them compatible</li>
+</ol>
+<p>Understanding this philosophy transforms how you approach computational problems. Instead of seeking one program that does everything, you learn to construct pipelines from simple components.</p>
+</section>
+<section id="standard-streams-the-foundation" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="standard-streams-the-foundation"><span class="header-section-number">4.2</span> Standard Streams: The Foundation</h2>
+<p>Every Unix program has three standard communication channels, called <strong>streams</strong>:</p>
+<pre><code>         ┌──────────────┐
+stdin ───&gt;│              │───&gt; stdout
+    (0)   │   Program    │      (1)
+          │              │───&gt; stderr
+          └──────────────┘      (2)</code></pre>
+<dl>
+<dt><strong>Standard Input (stdin)</strong></dt>
+<dd>
+Where programs read input. File descriptor 0. Default: keyboard.
+</dd>
+<dt><strong>Standard Output (stdout)</strong></dt>
+<dd>
+Where programs write normal output. File descriptor 1. Default: terminal screen.
+</dd>
+<dt><strong>Standard Error (stderr)</strong></dt>
+<dd>
+Where programs write error messages. File descriptor 2. Default: terminal screen.
+</dd>
+</dl>
+<p>These streams can be redirected—connected to files or other programs—which is the key to building powerful pipelines.</p>
+</section>
+<section id="reading-files" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="reading-files"><span class="header-section-number">4.3</span> Reading Files</h2>
+<section id="choosing-the-right-tool" class="level3" data-number="4.3.1">
+<h3 data-number="4.3.1" class="anchored" data-anchor-id="choosing-the-right-tool"><span class="header-section-number">4.3.1</span> Choosing the Right Tool</h3>
+<p>Different situations call for different tools:</p>
+<div id="tbl-reading-commands" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-reading-commands-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;4.1: File reading commands and their uses
+</figcaption>
+<div aria-describedby="tbl-reading-commands-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Command</th>
+<th style="text-align: left;">Best For</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>cat</code></td>
+<td style="text-align: left;">Small files, concatenating files</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>less</code></td>
+<td style="text-align: left;">Large files, browsing, searching</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>head</code></td>
+<td style="text-align: left;">First few lines of a file</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>tail</code></td>
+<td style="text-align: left;">Last few lines, monitoring logs</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>wc</code></td>
+<td style="text-align: left;">Counting lines, words, characters</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="cat-concatenate-and-display" class="level3" data-number="4.3.2">
+<h3 data-number="4.3.2" class="anchored" data-anchor-id="cat-concatenate-and-display"><span class="header-section-number">4.3.2</span> <code>cat</code>: Concatenate and Display</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Display a file</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="ex">$</span> cat data.txt</span>
+<span id="cb2-3"><a href="#cb2-3"></a></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="co"># Display multiple files (concatenated)</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="ex">$</span> cat header.txt data.txt footer.txt</span>
+<span id="cb2-6"><a href="#cb2-6"></a></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="co"># Number the output lines</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="ex">$</span> cat <span class="at">-n</span> data.txt</span>
+<span id="cb2-9"><a href="#cb2-9"></a></span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="co"># Show non-printing characters (debugging whitespace)</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a><span class="ex">$</span> cat <span class="at">-A</span> data.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Never use <code>cat</code> on large files! It will flood your terminal with text. For genomic data files, always use <code>head</code>, <code>less</code>, or process through pipes.</p>
+</div>
+</div>
+</section>
+<section id="less-the-pager" class="level3" data-number="4.3.3">
+<h3 data-number="4.3.3" class="anchored" data-anchor-id="less-the-pager"><span class="header-section-number">4.3.3</span> <code>less</code>: The Pager</h3>
+<p>For large files, <code>less</code> lets you navigate page by page:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a><span class="ex">$</span> less huge_file.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Key navigation commands in <code>less</code>:</p>
+<div id="tbl-less-keys" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-less-keys-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;4.2: Navigation keys in <code>less</code>
+</figcaption>
+<div aria-describedby="tbl-less-keys-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Key</th>
+<th style="text-align: left;">Action</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Space, f</td>
+<td style="text-align: left;">Forward one page</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">b</td>
+<td style="text-align: left;">Back one page</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">g</td>
+<td style="text-align: left;">Go to beginning</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">G</td>
+<td style="text-align: left;">Go to end</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">/pattern</td>
+<td style="text-align: left;">Search forward</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">?pattern</td>
+<td style="text-align: left;">Search backward</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">n</td>
+<td style="text-align: left;">Next search match</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">N</td>
+<td style="text-align: left;">Previous search match</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">q</td>
+<td style="text-align: left;">Quit</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="head-and-tail-peek-at-extremes" class="level3" data-number="4.3.4">
+<h3 data-number="4.3.4" class="anchored" data-anchor-id="head-and-tail-peek-at-extremes"><span class="header-section-number">4.3.4</span> <code>head</code> and <code>tail</code>: Peek at Extremes</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># First 10 lines (default)</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="ex">$</span> head data.csv</span>
+<span id="cb4-3"><a href="#cb4-3"></a></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="co"># First 20 lines</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="ex">$</span> head <span class="at">-n</span> 20 data.csv</span>
+<span id="cb4-6"><a href="#cb4-6"></a></span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="co"># All but the last 5 lines</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="ex">$</span> head <span class="at">-n</span> <span class="at">-5</span> data.csv</span>
+<span id="cb4-9"><a href="#cb4-9"></a></span>
+<span id="cb4-10"><a href="#cb4-10"></a><span class="co"># Last 10 lines (default)</span></span>
+<span id="cb4-11"><a href="#cb4-11"></a><span class="ex">$</span> tail data.csv</span>
+<span id="cb4-12"><a href="#cb4-12"></a></span>
+<span id="cb4-13"><a href="#cb4-13"></a><span class="co"># Last 50 lines</span></span>
+<span id="cb4-14"><a href="#cb4-14"></a><span class="ex">$</span> tail <span class="at">-n</span> 50 data.csv</span>
+<span id="cb4-15"><a href="#cb4-15"></a></span>
+<span id="cb4-16"><a href="#cb4-16"></a><span class="co"># Everything after line 100</span></span>
+<span id="cb4-17"><a href="#cb4-17"></a><span class="ex">$</span> tail <span class="at">-n</span> +100 data.csv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>A special use of <code>tail</code> is monitoring files that are being written:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Follow a file as it grows (Ctrl+C to stop)</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="ex">$</span> tail <span class="at">-f</span> analysis.log</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This is invaluable for watching job progress on computing clusters.</p>
+</section>
+</section>
+<section id="output-redirection" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="output-redirection"><span class="header-section-number">4.4</span> Output Redirection</h2>
+<p>Redirection connects a program’s output to a file instead of the terminal.</p>
+<section id="overwrite" class="level3" data-number="4.4.1">
+<h3 data-number="4.4.1" class="anchored" data-anchor-id="overwrite"><span class="header-section-number">4.4.1</span> Overwrite: <code>&gt;</code></h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Save command output to a file</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="ex">$</span> ls <span class="at">-l</span> <span class="op">&gt;</span> file_list.txt</span>
+<span id="cb6-3"><a href="#cb6-3"></a></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="co"># Save date to a file</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="ex">$</span> date <span class="op">&gt;</span> timestamp.txt</span>
+<span id="cb6-6"><a href="#cb6-6"></a></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="co"># Redirect output from any command</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="ex">$</span> echo <span class="st">"Hello, World!"</span> <span class="op">&gt;</span> greeting.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The <code>&gt;</code> operator <strong>overwrites</strong> existing files without warning! Double-check your filenames before running commands with <code>&gt;</code>.</p>
+</div>
+</div>
+</section>
+<section id="append" class="level3" data-number="4.4.2">
+<h3 data-number="4.4.2" class="anchored" data-anchor-id="append"><span class="header-section-number">4.4.2</span> Append: <code>&gt;&gt;</code></h3>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># Add to an existing file</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="ex">$</span> echo <span class="st">"New line"</span> <span class="op">&gt;&gt;</span> notes.txt</span>
+<span id="cb7-3"><a href="#cb7-3"></a></span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="co"># Append today's entries to a log</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="ex">$</span> date <span class="op">&gt;&gt;</span> daily_log.txt</span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="ex">$</span> echo <span class="st">"Analysis completed"</span> <span class="op">&gt;&gt;</span> daily_log.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="redirecting-errors-2" class="level3" data-number="4.4.3">
+<h3 data-number="4.4.3" class="anchored" data-anchor-id="redirecting-errors-2"><span class="header-section-number">4.4.3</span> Redirecting Errors: <code>2&gt;</code></h3>
+<p>Sometimes you want to separate normal output from error messages:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># Send errors to a file, output to screen</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="ex">$</span> ls /nonexistent <span class="dv">2</span><span class="op">&gt;</span> errors.txt</span>
+<span id="cb8-3"><a href="#cb8-3"></a></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="co"># Save output and errors to different files</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="ex">$</span> command <span class="op">&gt;</span> output.txt <span class="dv">2</span><span class="op">&gt;</span> errors.txt</span>
+<span id="cb8-6"><a href="#cb8-6"></a></span>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="co"># Discard errors (send to /dev/null)</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a><span class="ex">$</span> command <span class="dv">2</span><span class="op">&gt;</span> /dev/null</span>
+<span id="cb8-9"><a href="#cb8-9"></a></span>
+<span id="cb8-10"><a href="#cb8-10"></a><span class="co"># Combine stdout and stderr to one file</span></span>
+<span id="cb8-11"><a href="#cb8-11"></a><span class="ex">$</span> command <span class="op">&amp;&gt;</span> all_output.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="input-redirection" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="input-redirection"><span class="header-section-number">4.5</span> Input Redirection</h2>
+<p>Input redirection feeds file contents to a program’s stdin:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># Count lines in a file (two equivalent ways)</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="ex">$</span> wc <span class="at">-l</span> <span class="op">&lt;</span> data.txt</span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="ex">$</span> wc <span class="at">-l</span> data.txt</span>
+<span id="cb9-4"><a href="#cb9-4"></a></span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="co"># Sort input from a file</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a><span class="ex">$</span> sort <span class="op">&lt;</span> names.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>While many commands can read files directly as arguments, input redirection is essential for programs that only read from stdin.</p>
+</section>
+<section id="pipes-connecting-commands" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="pipes-connecting-commands"><span class="header-section-number">4.6</span> Pipes: Connecting Commands</h2>
+<p><strong>Pipes</strong> (<code>|</code>) are the secret weapon of Unix. They connect the stdout of one command to the stdin of another, creating a processing pipeline:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1"></a><span class="ex">command1</span> <span class="kw">|</span> <span class="ex">command2</span> <span class="kw">|</span> <span class="ex">command3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Data flows through the pipeline, transformed at each step, with no intermediate files created.</p>
+<section id="simple-pipe-examples" class="level3" data-number="4.6.1">
+<h3 data-number="4.6.1" class="anchored" data-anchor-id="simple-pipe-examples"><span class="header-section-number">4.6.1</span> Simple Pipe Examples</h3>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># Count files in a directory</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="ex">$</span> ls <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a></span>
+<span id="cb11-4"><a href="#cb11-4"></a><span class="co"># Sort and remove duplicates</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a><span class="ex">$</span> cat names.txt <span class="kw">|</span> <span class="fu">sort</span> <span class="kw">|</span> <span class="fu">uniq</span></span>
+<span id="cb11-6"><a href="#cb11-6"></a></span>
+<span id="cb11-7"><a href="#cb11-7"></a><span class="co"># Find large files</span></span>
+<span id="cb11-8"><a href="#cb11-8"></a><span class="ex">$</span> ls <span class="at">-l</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="st">"\.csv"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="building-complex-pipelines" class="level3" data-number="4.6.2">
+<h3 data-number="4.6.2" class="anchored" data-anchor-id="building-complex-pipelines"><span class="header-section-number">4.6.2</span> Building Complex Pipelines</h3>
+<p>Start simple and build up:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># Step 1: Look at raw data</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="ex">$</span> cat data.csv <span class="kw">|</span> <span class="fu">head</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a></span>
+<span id="cb12-4"><a href="#cb12-4"></a><span class="co"># Step 2: Extract a column (field 2, comma-delimited)</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a><span class="ex">$</span> cat data.csv <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-d</span><span class="st">','</span> <span class="at">-f2</span> <span class="kw">|</span> <span class="fu">head</span></span>
+<span id="cb12-6"><a href="#cb12-6"></a></span>
+<span id="cb12-7"><a href="#cb12-7"></a><span class="co"># Step 3: Remove header, sort</span></span>
+<span id="cb12-8"><a href="#cb12-8"></a><span class="ex">$</span> cat data.csv <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-d</span><span class="st">','</span> <span class="at">-f2</span> <span class="kw">|</span> <span class="fu">tail</span> <span class="at">-n</span> +2 <span class="kw">|</span> <span class="fu">sort</span></span>
+<span id="cb12-9"><a href="#cb12-9"></a></span>
+<span id="cb12-10"><a href="#cb12-10"></a><span class="co"># Step 4: Count unique values</span></span>
+<span id="cb12-11"><a href="#cb12-11"></a><span class="ex">$</span> cat data.csv <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-d</span><span class="st">','</span> <span class="at">-f2</span> <span class="kw">|</span> <span class="fu">tail</span> <span class="at">-n</span> +2 <span class="kw">|</span> <span class="fu">sort</span> <span class="kw">|</span> <span class="fu">uniq</span> <span class="at">-c</span></span>
+<span id="cb12-12"><a href="#cb12-12"></a></span>
+<span id="cb12-13"><a href="#cb12-13"></a><span class="co"># Step 5: Sort by frequency</span></span>
+<span id="cb12-14"><a href="#cb12-14"></a><span class="ex">$</span> cat data.csv <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-d</span><span class="st">','</span> <span class="at">-f2</span> <span class="kw">|</span> <span class="fu">tail</span> <span class="at">-n</span> +2 <span class="kw">|</span> <span class="fu">sort</span> <span class="kw">|</span> <span class="fu">uniq</span> <span class="at">-c</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="at">-rn</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Pipeline Development Strategy">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Pipeline Development Strategy
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Start with <code>head</code> to see sample data</li>
+<li>Add one command at a time</li>
+<li>Verify output at each step</li>
+<li>Build up to the complete pipeline</li>
+<li>Save complex pipelines in scripts</li>
+</ol>
+</div>
+</div>
+</section>
+<section id="the-tee-command" class="level3" data-number="4.6.3">
+<h3 data-number="4.6.3" class="anchored" data-anchor-id="the-tee-command"><span class="header-section-number">4.6.3</span> The <code>tee</code> Command</h3>
+<p>Sometimes you want to save intermediate results while continuing the pipeline. The <code>tee</code> command splits output:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># Save to file AND continue pipeline</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="ex">$</span> cat data.txt <span class="kw">|</span> <span class="fu">sort</span> <span class="kw">|</span> <span class="fu">tee</span> sorted.txt <span class="kw">|</span> <span class="fu">uniq</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This saves the sorted data to <code>sorted.txt</code> while simultaneously passing it to <code>uniq</code>.</p>
+</section>
+</section>
+<section id="essential-pipeline-tools" class="level2" data-number="4.7">
+<h2 data-number="4.7" class="anchored" data-anchor-id="essential-pipeline-tools"><span class="header-section-number">4.7</span> Essential Pipeline Tools</h2>
+<p>Several commands are designed to work in pipelines:</p>
+<section id="sort-order-lines" class="level3" data-number="4.7.1">
+<h3 data-number="4.7.1" class="anchored" data-anchor-id="sort-order-lines"><span class="header-section-number">4.7.1</span> <code>sort</code>: Order Lines</h3>
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1"></a><span class="co"># Alphabetical sort</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="ex">$</span> sort names.txt</span>
+<span id="cb14-3"><a href="#cb14-3"></a></span>
+<span id="cb14-4"><a href="#cb14-4"></a><span class="co"># Numeric sort</span></span>
+<span id="cb14-5"><a href="#cb14-5"></a><span class="ex">$</span> sort <span class="at">-n</span> numbers.txt</span>
+<span id="cb14-6"><a href="#cb14-6"></a></span>
+<span id="cb14-7"><a href="#cb14-7"></a><span class="co"># Reverse sort</span></span>
+<span id="cb14-8"><a href="#cb14-8"></a><span class="ex">$</span> sort <span class="at">-r</span> data.txt</span>
+<span id="cb14-9"><a href="#cb14-9"></a></span>
+<span id="cb14-10"><a href="#cb14-10"></a><span class="co"># Sort by specific column (field 3, tab-delimited)</span></span>
+<span id="cb14-11"><a href="#cb14-11"></a><span class="ex">$</span> sort <span class="at">-t</span><span class="st">$'</span><span class="dt">\t</span><span class="st">'</span> <span class="at">-k3</span> data.tsv</span>
+<span id="cb14-12"><a href="#cb14-12"></a></span>
+<span id="cb14-13"><a href="#cb14-13"></a><span class="co"># Sort numerically by field 2</span></span>
+<span id="cb14-14"><a href="#cb14-14"></a><span class="ex">$</span> sort <span class="at">-t</span><span class="st">','</span> <span class="at">-k2</span> <span class="at">-n</span> data.csv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="uniq-remove-duplicates" class="level3" data-number="4.7.2">
+<h3 data-number="4.7.2" class="anchored" data-anchor-id="uniq-remove-duplicates"><span class="header-section-number">4.7.2</span> <code>uniq</code>: Remove Duplicates</h3>
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># Remove adjacent duplicates (requires sorted input!)</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="ex">$</span> sort names.txt <span class="kw">|</span> <span class="fu">uniq</span></span>
+<span id="cb15-3"><a href="#cb15-3"></a></span>
+<span id="cb15-4"><a href="#cb15-4"></a><span class="co"># Count occurrences</span></span>
+<span id="cb15-5"><a href="#cb15-5"></a><span class="ex">$</span> sort names.txt <span class="kw">|</span> <span class="fu">uniq</span> <span class="at">-c</span></span>
+<span id="cb15-6"><a href="#cb15-6"></a></span>
+<span id="cb15-7"><a href="#cb15-7"></a><span class="co"># Show only duplicated lines</span></span>
+<span id="cb15-8"><a href="#cb15-8"></a><span class="ex">$</span> sort names.txt <span class="kw">|</span> <span class="fu">uniq</span> <span class="at">-d</span></span>
+<span id="cb15-9"><a href="#cb15-9"></a></span>
+<span id="cb15-10"><a href="#cb15-10"></a><span class="co"># Show only unique lines</span></span>
+<span id="cb15-11"><a href="#cb15-11"></a><span class="ex">$</span> sort names.txt <span class="kw">|</span> <span class="fu">uniq</span> <span class="at">-u</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="cut-extract-columns" class="level3" data-number="4.7.3">
+<h3 data-number="4.7.3" class="anchored" data-anchor-id="cut-extract-columns"><span class="header-section-number">4.7.3</span> <code>cut</code>: Extract Columns</h3>
+<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1"></a><span class="co"># Extract column 2 (tab-delimited default)</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="ex">$</span> cut <span class="at">-f2</span> data.tsv</span>
+<span id="cb16-3"><a href="#cb16-3"></a></span>
+<span id="cb16-4"><a href="#cb16-4"></a><span class="co"># Extract columns 1 and 3</span></span>
+<span id="cb16-5"><a href="#cb16-5"></a><span class="ex">$</span> cut <span class="at">-f1,3</span> data.tsv</span>
+<span id="cb16-6"><a href="#cb16-6"></a></span>
+<span id="cb16-7"><a href="#cb16-7"></a><span class="co"># Comma-delimited</span></span>
+<span id="cb16-8"><a href="#cb16-8"></a><span class="ex">$</span> cut <span class="at">-d</span><span class="st">','</span> <span class="at">-f2</span> data.csv</span>
+<span id="cb16-9"><a href="#cb16-9"></a></span>
+<span id="cb16-10"><a href="#cb16-10"></a><span class="co"># Character positions 1-10</span></span>
+<span id="cb16-11"><a href="#cb16-11"></a><span class="ex">$</span> cut <span class="at">-c1-10</span> data.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="tr-translate-characters" class="level3" data-number="4.7.4">
+<h3 data-number="4.7.4" class="anchored" data-anchor-id="tr-translate-characters"><span class="header-section-number">4.7.4</span> <code>tr</code>: Translate Characters</h3>
+<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1"></a><span class="co"># Convert lowercase to uppercase</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a><span class="ex">$</span> echo <span class="st">"hello"</span> <span class="kw">|</span> <span class="fu">tr</span> <span class="st">'a-z'</span> <span class="st">'A-Z'</span></span>
+<span id="cb17-3"><a href="#cb17-3"></a></span>
+<span id="cb17-4"><a href="#cb17-4"></a><span class="co"># Delete characters</span></span>
+<span id="cb17-5"><a href="#cb17-5"></a><span class="ex">$</span> echo <span class="st">"hello123"</span> <span class="kw">|</span> <span class="fu">tr</span> <span class="at">-d</span> <span class="st">'0-9'</span></span>
+<span id="cb17-6"><a href="#cb17-6"></a></span>
+<span id="cb17-7"><a href="#cb17-7"></a><span class="co"># Squeeze repeated characters</span></span>
+<span id="cb17-8"><a href="#cb17-8"></a><span class="ex">$</span> echo <span class="st">"hello    world"</span> <span class="kw">|</span> <span class="fu">tr</span> <span class="at">-s</span> <span class="st">' '</span></span>
+<span id="cb17-9"><a href="#cb17-9"></a></span>
+<span id="cb17-10"><a href="#cb17-10"></a><span class="co"># Replace characters</span></span>
+<span id="cb17-11"><a href="#cb17-11"></a><span class="ex">$</span> cat data.csv <span class="kw">|</span> <span class="fu">tr</span> <span class="st">','</span> <span class="st">'\t'</span>  <span class="co"># CSV to TSV</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="grep-search-for-patterns" class="level3" data-number="4.7.5">
+<h3 data-number="4.7.5" class="anchored" data-anchor-id="grep-search-for-patterns"><span class="header-section-number">4.7.5</span> <code>grep</code>: Search for Patterns</h3>
+<p>We’ll cover <code>grep</code> extensively in <a href="05-grep-regex.html" class="quarto-xref"><span>Chapter 5</span></a>, but here are basic uses:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1"></a><span class="co"># Find lines containing "error"</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="ex">$</span> grep <span class="st">"error"</span> log.txt</span>
+<span id="cb18-3"><a href="#cb18-3"></a></span>
+<span id="cb18-4"><a href="#cb18-4"></a><span class="co"># Case-insensitive search</span></span>
+<span id="cb18-5"><a href="#cb18-5"></a><span class="ex">$</span> grep <span class="at">-i</span> <span class="st">"warning"</span> log.txt</span>
+<span id="cb18-6"><a href="#cb18-6"></a></span>
+<span id="cb18-7"><a href="#cb18-7"></a><span class="co"># Invert match (lines NOT containing pattern)</span></span>
+<span id="cb18-8"><a href="#cb18-8"></a><span class="ex">$</span> grep <span class="at">-v</span> <span class="st">"^#"</span> data.txt  <span class="co"># Remove comment lines</span></span>
+<span id="cb18-9"><a href="#cb18-9"></a></span>
+<span id="cb18-10"><a href="#cb18-10"></a><span class="co"># Count matches</span></span>
+<span id="cb18-11"><a href="#cb18-11"></a><span class="ex">$</span> grep <span class="at">-c</span> <span class="st">"pattern"</span> file.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="working-with-large-genomic-data" class="level2" data-number="4.8">
+<h2 data-number="4.8" class="anchored" data-anchor-id="working-with-large-genomic-data"><span class="header-section-number">4.8</span> Working with Large Genomic Data</h2>
+<p>Let’s apply these tools to real bioinformatics scenarios. Genomic data files are often massive—the human genome reference is over 3 GB. You must process them efficiently.</p>
+<section id="fasta-format-basics" class="level3" data-number="4.8.1">
+<h3 data-number="4.8.1" class="anchored" data-anchor-id="fasta-format-basics"><span class="header-section-number">4.8.1</span> FASTA Format Basics</h3>
+<p>FASTA files store sequences with headers starting with <code>&gt;</code>:</p>
+<pre><code>&gt;sequence1 description
+ATGCGATCGATCGATCGATCG
+ATCGATCGATCGATCGATCGA
+&gt;sequence2 another description
+GCTAGCTAGCTAGCTAGCTAG</code></pre>
+</section>
+<section id="downloading-genomic-data" class="level3" data-number="4.8.2">
+<h3 data-number="4.8.2" class="anchored" data-anchor-id="downloading-genomic-data"><span class="header-section-number">4.8.2</span> Downloading Genomic Data</h3>
+<div class="sourceCode" id="cb20"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1"></a><span class="co"># Download human genome from NCBI using wget</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="ex">$</span> wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/001/405/<span class="dt">\</span></span>
+<span id="cb20-3"><a href="#cb20-3"></a>GCF_000001405.40_GRCh38.p14/GCF_000001405.40_GRCh38.p14_genomic.fna.gz</span>
+<span id="cb20-4"><a href="#cb20-4"></a></span>
+<span id="cb20-5"><a href="#cb20-5"></a><span class="co"># Or using curl</span></span>
+<span id="cb20-6"><a href="#cb20-6"></a><span class="ex">$</span> curl <span class="at">-O</span> https://example.com/genome.fa.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="working-with-compressed-files" class="level3" data-number="4.8.3">
+<h3 data-number="4.8.3" class="anchored" data-anchor-id="working-with-compressed-files"><span class="header-section-number">4.8.3</span> Working with Compressed Files</h3>
+<p>Most genomic data is compressed. Unix tools handle this seamlessly:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1"></a><span class="co"># View compressed file without extracting</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a><span class="ex">$</span> zcat genome.fa.gz <span class="kw">|</span> <span class="fu">head</span></span>
+<span id="cb21-3"><a href="#cb21-3"></a></span>
+<span id="cb21-4"><a href="#cb21-4"></a><span class="co"># Search compressed file</span></span>
+<span id="cb21-5"><a href="#cb21-5"></a><span class="ex">$</span> zgrep <span class="st">"&gt;"</span> genome.fa.gz <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span>
+<span id="cb21-6"><a href="#cb21-6"></a></span>
+<span id="cb21-7"><a href="#cb21-7"></a><span class="co"># Decompress and recompress</span></span>
+<span id="cb21-8"><a href="#cb21-8"></a><span class="ex">$</span> gunzip genome.fa.gz         <span class="co"># Creates genome.fa</span></span>
+<span id="cb21-9"><a href="#cb21-9"></a><span class="ex">$</span> gzip genome.fa              <span class="co"># Creates genome.fa.gz</span></span>
+<span id="cb21-10"><a href="#cb21-10"></a><span class="ex">$</span> gzip <span class="at">-k</span> genome.fa           <span class="co"># Keep original file</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="analyzing-sequence-data" class="level3" data-number="4.8.4">
+<h3 data-number="4.8.4" class="anchored" data-anchor-id="analyzing-sequence-data"><span class="header-section-number">4.8.4</span> Analyzing Sequence Data</h3>
+<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1"></a><span class="co"># Count sequences (headers start with &gt;)</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a><span class="ex">$</span> grep <span class="at">-c</span> <span class="st">"^&gt;"</span> sequences.fa</span>
+<span id="cb22-3"><a href="#cb22-3"></a></span>
+<span id="cb22-4"><a href="#cb22-4"></a><span class="co"># List all sequence headers</span></span>
+<span id="cb22-5"><a href="#cb22-5"></a><span class="ex">$</span> grep <span class="st">"^&gt;"</span> sequences.fa</span>
+<span id="cb22-6"><a href="#cb22-6"></a></span>
+<span id="cb22-7"><a href="#cb22-7"></a><span class="co"># Calculate total sequence length (remove headers and newlines)</span></span>
+<span id="cb22-8"><a href="#cb22-8"></a><span class="ex">$</span> grep <span class="at">-v</span> <span class="st">"^&gt;"</span> genome.fa <span class="kw">|</span> <span class="fu">tr</span> <span class="at">-d</span> <span class="st">'\n'</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-c</span></span>
+<span id="cb22-9"><a href="#cb22-9"></a></span>
+<span id="cb22-10"><a href="#cb22-10"></a><span class="co"># Count nucleotides</span></span>
+<span id="cb22-11"><a href="#cb22-11"></a><span class="ex">$</span> grep <span class="at">-v</span> <span class="st">"^&gt;"</span> genome.fa <span class="kw">|</span> <span class="fu">tr</span> <span class="at">-d</span> <span class="st">'\n'</span> <span class="kw">|</span> <span class="fu">fold</span> <span class="at">-w1</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="kw">|</span> <span class="fu">uniq</span> <span class="at">-c</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="example-pipeline-gc-content" class="level3" data-number="4.8.5">
+<h3 data-number="4.8.5" class="anchored" data-anchor-id="example-pipeline-gc-content"><span class="header-section-number">4.8.5</span> Example Pipeline: GC Content</h3>
+<p>Let’s calculate the GC content (percentage of G and C bases) of a genome:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1"></a><span class="co"># Extract sequence, convert to single line, count G and C</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a><span class="ex">$</span> grep <span class="at">-v</span> <span class="st">"^&gt;"</span> genome.fa <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb23-3"><a href="#cb23-3"></a>  <span class="fu">tr</span> <span class="at">-d</span> <span class="st">'\n'</span> <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb23-4"><a href="#cb23-4"></a>  <span class="fu">tr</span> <span class="at">-cd</span> <span class="st">'GCgc'</span> <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb23-5"><a href="#cb23-5"></a>  <span class="fu">wc</span> <span class="at">-c</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This pipeline:</p>
+<ol type="1">
+<li><code>grep -v "^&gt;"</code> — removes header lines</li>
+<li><code>tr -d '\n'</code> — removes newlines to get one long sequence</li>
+<li><code>tr -cd 'GCgc'</code> — deletes everything except G and C</li>
+<li><code>wc -c</code> — counts remaining characters</li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The backslash <code>\</code> at the end of a line continues the command on the next line, making complex pipelines more readable.</p>
+</div>
+</div>
+</section>
+<section id="finding-restriction-sites" class="level3" data-number="4.8.6">
+<h3 data-number="4.8.6" class="anchored" data-anchor-id="finding-restriction-sites"><span class="header-section-number">4.8.6</span> Finding Restriction Sites</h3>
+<div class="sourceCode" id="cb24"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1"></a><span class="co"># Count EcoRI sites (GAATTC)</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a><span class="ex">$</span> grep <span class="at">-v</span> <span class="st">"^&gt;"</span> genome.fa <span class="kw">|</span> <span class="fu">tr</span> <span class="at">-d</span> <span class="st">'\n'</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-o</span> <span class="st">"GAATTC"</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span>
+<span id="cb24-3"><a href="#cb24-3"></a></span>
+<span id="cb24-4"><a href="#cb24-4"></a><span class="co"># Find all start codons (ATG) and their positions</span></span>
+<span id="cb24-5"><a href="#cb24-5"></a><span class="ex">$</span> grep <span class="at">-v</span> <span class="st">"^&gt;"</span> genome.fa <span class="kw">|</span> <span class="fu">tr</span> <span class="at">-d</span> <span class="st">'\n'</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-b</span> <span class="at">-o</span> <span class="st">"ATG"</span> <span class="kw">|</span> <span class="fu">head</span> <span class="at">-20</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="stream-processing-download-and-analyze" class="level3" data-number="4.8.7">
+<h3 data-number="4.8.7" class="anchored" data-anchor-id="stream-processing-download-and-analyze"><span class="header-section-number">4.8.7</span> Stream Processing: Download and Analyze</h3>
+<p>You can process data without saving intermediate files:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1"></a><span class="co"># Download, decompress, and analyze in one pipeline</span></span>
+<span id="cb25-2"><a href="#cb25-2"></a><span class="ex">$</span> curl <span class="at">-s</span> https://url/to/genome.fa.gz <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb25-3"><a href="#cb25-3"></a>  <span class="fu">gunzip</span> <span class="at">-c</span> <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb25-4"><a href="#cb25-4"></a>  <span class="fu">grep</span> <span class="at">-v</span> <span class="st">"^&gt;"</span> <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb25-5"><a href="#cb25-5"></a>  <span class="fu">tr</span> <span class="at">-d</span> <span class="st">'\n'</span> <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb25-6"><a href="#cb25-6"></a>  <span class="fu">wc</span> <span class="at">-c</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This streams data through memory, never writing to disk—essential when working with files larger than your available storage.</p>
+</section>
+</section>
+<section id="best-practices" class="level2" data-number="4.9">
+<h2 data-number="4.9" class="anchored" data-anchor-id="best-practices"><span class="header-section-number">4.9</span> Best Practices</h2>
+<section id="pipeline-efficiency" class="level3" data-number="4.9.1">
+<h3 data-number="4.9.1" class="anchored" data-anchor-id="pipeline-efficiency"><span class="header-section-number">4.9.1</span> Pipeline Efficiency</h3>
+<ul>
+<li><strong>Filter early</strong>: Reduce data volume as early as possible in the pipeline</li>
+<li><strong>Test incrementally</strong>: Build and verify step by step</li>
+<li><strong>Use appropriate tools</strong>: <code>less</code> for viewing, <code>head</code> for sampling</li>
+<li><strong>Save complex pipelines</strong>: Put them in shell scripts</li>
+</ul>
+</section>
+<section id="defensive-practices" class="level3" data-number="4.9.2">
+<h3 data-number="4.9.2" class="anchored" data-anchor-id="defensive-practices"><span class="header-section-number">4.9.2</span> Defensive Practices</h3>
+<div class="sourceCode" id="cb26"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1"></a><span class="co"># Check file exists before processing</span></span>
+<span id="cb26-2"><a href="#cb26-2"></a><span class="ex">$</span> test <span class="at">-f</span> data.txt <span class="kw">&amp;&amp;</span> <span class="fu">grep</span> <span class="st">"pattern"</span> data.txt</span>
+<span id="cb26-3"><a href="#cb26-3"></a></span>
+<span id="cb26-4"><a href="#cb26-4"></a><span class="co"># Preview destructive operations</span></span>
+<span id="cb26-5"><a href="#cb26-5"></a><span class="ex">$</span> ls <span class="pp">*</span>.tmp                    <span class="co"># See what will be deleted</span></span>
+<span id="cb26-6"><a href="#cb26-6"></a><span class="ex">$</span> rm <span class="pp">*</span>.tmp                    <span class="co"># Then delete</span></span>
+<span id="cb26-7"><a href="#cb26-7"></a></span>
+<span id="cb26-8"><a href="#cb26-8"></a><span class="co"># Use tee to save intermediate results</span></span>
+<span id="cb26-9"><a href="#cb26-9"></a><span class="ex">$</span> complex_pipeline <span class="kw">|</span> <span class="fu">tee</span> checkpoint.txt <span class="kw">|</span> <span class="ex">further_processing</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="summary" class="level2" data-number="4.10">
+<h2 data-number="4.10" class="anchored" data-anchor-id="summary"><span class="header-section-number">4.10</span> Summary</h2>
+<p>This chapter covered the tools for reading, writing, and connecting Unix commands:</p>
+<ul>
+<li>Standard streams (stdin, stdout, stderr) enable program communication</li>
+<li>Output redirection (<code>&gt;</code>, <code>&gt;&gt;</code>) saves results to files</li>
+<li>Input redirection (<code>&lt;</code>) feeds file contents to commands</li>
+<li>Pipes (<code>|</code>) connect commands into powerful pipelines</li>
+<li>Tools like <code>sort</code>, <code>uniq</code>, <code>cut</code>, <code>tr</code>, and <code>grep</code> transform data</li>
+<li>Genomic data analysis leverages these tools at scale</li>
+</ul>
+<p>These concepts form the foundation of Unix data processing. Master them, and you can construct solutions to virtually any text-processing challenge.</p>
+</section>
+<section id="exercises" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="exercises">Exercises</h2>
+<div class="callout callout-style-default callout-tip callout-titled" title="Practice Exercises">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Practice Exercises
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Exercise 1: Redirection Practice</strong></p>
+<ol type="1">
+<li>Use <code>ls -la</code> to list your home directory and save the output to <code>home_contents.txt</code></li>
+<li>Append the current date and time to the end of <code>home_contents.txt</code></li>
+<li>Count how many lines are in the file</li>
+<li>Display only the last 5 lines</li>
+</ol>
+<p><strong>Exercise 2: Pipeline Construction</strong></p>
+<p>Create a file <code>numbers.txt</code> with one number per line (include some duplicates):</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1"></a><span class="bu">echo</span> <span class="at">-e</span> <span class="st">"5\n3\n8\n3\n1\n5\n9\n3\n7"</span> <span class="op">&gt;</span> numbers.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Using pipes: 1. Sort the numbers numerically 2. Remove duplicates 3. Show only the top 3 numbers 4. Save the result to <code>top_three.txt</code></p>
+<p><strong>Exercise 3: Text Processing</strong></p>
+<p>Given a CSV file with format <code>name,score,grade</code>, write a pipeline to: 1. Extract just the scores (column 2) 2. Sort them numerically in descending order 3. Calculate how many scores there are 4. Find the top 5 scores</p>
+<p><strong>Exercise 4: Genomic Data</strong></p>
+<p>Download a small bacterial genome and: 1. Count the number of sequences 2. Find the total sequence length 3. Count each nucleotide (A, T, G, C) 4. Search for a specific restriction enzyme site</p>
+</div>
+</div>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-kernighan1984unix" class="csl-entry" role="listitem">
+Kernighan, B. W., &amp; Pike, R. (1984). <em>The UNIX programming environment</em>.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+            // default icon
+            link.classList.add("external");
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+        for (let i=0; i<annoteTargets.length; i++) {
+          const annoteTarget = annoteTargets[i];
+          const targetCell = annoteTarget.getAttribute("data-target-cell");
+          const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+          const contentFn = () => {
+            const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+            if (content) {
+              const tipContent = content.cloneNode(true);
+              tipContent.classList.add("code-annotation-tip-content");
+              return tipContent.outerHTML;
+            }
+          }
+          const config = {
+            allowHTML: true,
+            content: contentFn,
+            onShow: (instance) => {
+              selectCodeLines(instance.reference);
+              instance.reference.classList.add('code-annotation-active');
+              window.tippy.hideAll();
+            },
+            onHide: (instance) => {
+              unselectCodeLines();
+              instance.reference.classList.remove('code-annotation-active');
+            },
+            maxWidth: 300,
+            delay: [50, 0],
+            duration: [200, 0],
+            offset: [5, 10],
+            arrow: true,
+            appendTo: function(el) {
+              return el.parentElement.parentElement.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'quarto',
+            placement: 'right',
+            popperOptions: {
+              modifiers: [
+              {
+                name: 'flip',
+                options: {
+                  flipVariations: false, // true by default
+                  allowedAutoPlacements: ['right'],
+                  fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
+                },
+              },
+              {
+                name: 'preventOverflow',
+                options: {
+                  mainAxis: false,
+                  altAxis: false
+                }
+              }
+              ]        
+            }      
+          };
+          window.tippy(annoteTarget, config); 
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../chapters/03-unix-fundamentals.html" class="pagination-link" aria-label="Unix Fundamentals">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Unix Fundamentals</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../chapters/05-grep-regex.html" class="pagination-link" aria-label="GREP and Regular Expressions">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">GREP and Regular Expressions</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© 2025 William A. Cresko | Knight Campus for Accelerating Scientific Impact</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/wcresko/BioE_Comp_Tools_Book/edit/main/chapters/04-files-pipes.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/wcresko/BioE_Comp_Tools_Book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p>Built with <a href="https://quarto.org/">Quarto</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

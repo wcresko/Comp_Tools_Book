@@ -1,0 +1,613 @@
+# Version Control with Git and GitHub {#sec-git-github}
+
+```{r}
+#| label: setup
+#| include: false
+library(tidyverse)
+library(gt)
+theme_set(theme_minimal())
+```
+
+::: {.callout-note title="Learning Objectives"}
+After completing this chapter, you will be able to:
+
+- Explain why version control is essential for research
+- Configure Git on your computer
+- Create and manage Git repositories
+- Track changes with commits
+- Work with remote repositories on GitHub
+- Use branches for parallel development
+- Publish websites using GitHub Pages
+:::
+
+## Why Version Control?
+
+Have you ever had files named like this?
+
+```
+analysis_final.R
+analysis_final_v2.R
+analysis_final_v2_REALLY_FINAL.R
+analysis_final_v2_REALLY_FINAL_fixed.R
+```
+
+This ad-hoc versioning is error-prone, confusing, and doesn't scale. **Version control** solves this problem by systematically tracking changes to files over time.
+
+Version control systems provide:
+
+**Complete History**
+:   Every change is recorded. You can see what changed, when, and why.
+
+**Safe Experimentation**
+:   Try new approaches without fear. You can always return to a working version.
+
+**Collaboration**
+:   Multiple people can work on the same project without overwriting each other's work.
+
+**Backup**
+:   Your code exists in multiple places, protecting against data loss.
+
+**Reproducibility**
+:   Tag specific versions for publications. Anyone can access exactly what you used [@blischak2016practical].
+
+## Git: Distributed Version Control
+
+**Git** is the most widely used version control system. Created by Linus Torvalds (who also created Linux), Git is:
+
+- **Distributed**: Every copy is a complete repository with full history
+- **Fast**: Operations happen locally without network delays
+- **Flexible**: Supports many workflows from solo to large team projects
+
+### Key Concepts
+
+Understanding Git's mental model helps everything else make sense:
+
+```{mermaid}
+%%| label: fig-git-workflow
+%%| fig-cap: "The Git workflow: files move from working directory to staging area to repository"
+flowchart LR
+    A[Working Directory] --> GA([git add])
+    GA --> B[Staging Area]
+    B --> GC([git commit])
+    GC --> C[Local Repository]
+    C --> GP([git push])
+    GP --> D[Remote Repository]
+    D --> GPL([git pull])
+    GPL --> A
+    
+    style A fill:#f9d71c,stroke:#333,stroke-width:2px
+    style B fill:#87ceeb,stroke:#333,stroke-width:2px
+    style C fill:#98fb98,stroke:#333,stroke-width:2px
+    style D fill:#ffa07a,stroke:#333,stroke-width:2px
+```
+
+**Working Directory**
+:   The files you see and edit on your computer.
+
+**Staging Area** (Index)
+:   A preparation area where you compose your next commit.
+
+**Local Repository**
+:   The `.git` directory containing all version history.
+
+**Remote Repository**
+:   A copy hosted elsewhere (like GitHub) for backup and collaboration.
+
+## Setting Up Git
+
+### Installation
+
+Check if Git is already installed:
+
+```bash
+$ git --version
+git version 2.43.0
+```
+
+If not installed:
+
+```bash
+# macOS (with Homebrew)
+$ brew install git
+
+# Ubuntu/Debian Linux
+$ sudo apt-get install git
+
+# Windows: Download from git-scm.com
+```
+
+### Configuration
+
+Configure your identity (this appears in your commit history):
+
+```bash
+# Set your name
+$ git config --global user.name "Your Name"
+
+# Set your email (use the same email as your GitHub account)
+$ git config --global user.email "your.email@example.com"
+
+# Set default branch name to 'main'
+$ git config --global init.defaultBranch main
+
+# Verify settings
+$ git config --list
+```
+
+::: {.callout-tip}
+The `--global` flag sets these options for all repositories on your computer. You can override them per-repository by omitting `--global` while inside a specific repo.
+:::
+
+## Creating a Repository
+
+### Method 1: Initialize Locally
+
+Create a new repository from an existing directory:
+
+```bash
+# Navigate to your project directory
+$ cd my_project
+
+# Initialize Git repository
+$ git init
+
+# You'll see a message about creating .git directory
+Initialized empty Git repository in /home/user/my_project/.git/
+```
+
+### Method 2: Clone from GitHub
+
+Copy an existing repository:
+
+```bash
+# Clone a repository
+$ git clone https://github.com/username/repository.git
+
+# Clone into a specific directory
+$ git clone https://github.com/username/repository.git my_local_name
+```
+
+## Basic Git Workflow
+
+The daily rhythm of Git involves four main commands: `status`, `add`, `commit`, and `push`.
+
+### Checking Status
+
+Always start by checking your repository's status:
+
+```bash
+$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+        modified:   analysis.R
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        new_data.csv
+
+no changes added to commit (use "git add" and/or "git commit -a")
+```
+
+### Staging Changes
+
+Add files to the staging area:
+
+```bash
+# Add specific file
+$ git add analysis.R
+
+# Add all changes in current directory
+$ git add .
+
+# Add all changes everywhere
+$ git add -A
+
+# Add only certain file types
+$ git add *.R
+```
+
+### Committing Changes
+
+Record staged changes with a descriptive message:
+
+```bash
+$ git commit -m "Add initial data analysis script"
+[main 7d4e8c2] Add initial data analysis script
+ 1 file changed, 45 insertions(+)
+ create mode 100644 analysis.R
+```
+
+::: {.callout-important title="Write Good Commit Messages"}
+A good commit message:
+
+- Uses present tense: "Add feature" not "Added feature"
+- Is concise but descriptive
+- Explains *what* and *why*, not *how*
+- References issues if applicable: "Fix alignment bug (#42)"
+
+**Bad**: "updates"  
+**Good**: "Add GC content calculation to genome analysis"
+:::
+
+### Viewing History
+
+See your commit history:
+
+```bash
+# Full history
+$ git log
+
+# Condensed one-line format
+$ git log --oneline
+
+# With graph showing branches
+$ git log --oneline --graph --all
+
+# Last 5 commits
+$ git log -5
+```
+
+Example output:
+
+```
+$ git log --oneline
+7d4e8c2 (HEAD -> main) Add initial data analysis script
+3a1b2c3 Update README with project description
+9f8e7d6 Initial commit
+```
+
+## Working with GitHub
+
+**GitHub** is a web-based platform for hosting Git repositories. It adds:
+
+- Cloud backup for your code
+- Collaboration features (issues, pull requests)
+- Project management tools
+- Free website hosting (GitHub Pages)
+- Integration with other services
+
+### Creating a GitHub Account
+
+1. Go to [github.com](https://github.com)
+2. Click "Sign up"
+3. Choose a professional username
+4. Use your academic email for the Student Developer Pack
+
+::: {.callout-tip}
+Apply for the [GitHub Student Developer Pack](https://education.github.com/pack) for free access to premium features and developer tools.
+:::
+
+### Connecting Local to Remote
+
+After creating a repository on GitHub:
+
+```bash
+# Add remote repository (origin is conventional name)
+$ git remote add origin https://github.com/username/repository.git
+
+# Verify the remote
+$ git remote -v
+origin  https://github.com/username/repository.git (fetch)
+origin  https://github.com/username/repository.git (push)
+
+# Push your commits to GitHub
+$ git push -u origin main
+```
+
+The `-u` flag sets up tracking, so future pushes only need `git push`.
+
+### Push and Pull
+
+**Pushing** sends your local commits to GitHub:
+
+```bash
+$ git push origin main
+# or simply, if tracking is set up:
+$ git push
+```
+
+**Pulling** retrieves commits from GitHub:
+
+```bash
+$ git pull origin main
+# or simply:
+$ git pull
+```
+
+::: {.callout-warning}
+Always `pull` before starting work to get any changes from collaborators. Push frequently to back up your work.
+:::
+
+## Branching
+
+**Branches** let you develop features in isolation without affecting the main codebase.
+
+```{mermaid}
+%%| label: fig-git-branching
+%%| fig-cap: "Branching allows parallel development that can later be merged"
+gitGraph
+    commit id: "Initial"
+    commit id: "Add README"
+    branch feature
+    checkout feature
+    commit id: "New feature"
+    commit id: "Fix bug"
+    checkout main
+    commit id: "Update docs"
+    merge feature
+    commit id: "Continue"
+```
+
+### Creating and Switching Branches
+
+```bash
+# Create a new branch
+$ git branch feature-analysis
+
+# Switch to the branch
+$ git checkout feature-analysis
+
+# Or create and switch in one command
+$ git checkout -b feature-analysis
+
+# List all branches
+$ git branch
+* feature-analysis
+  main
+```
+
+### Merging Branches
+
+When your feature is complete, merge it back to main:
+
+```bash
+# Switch to main
+$ git checkout main
+
+# Merge the feature branch
+$ git merge feature-analysis
+
+# Delete the branch after merging (optional)
+$ git branch -d feature-analysis
+```
+
+### Resolving Conflicts
+
+If Git can't automatically merge changes, you'll get a **conflict**:
+
+```bash
+$ git merge feature-branch
+Auto-merging analysis.R
+CONFLICT (content): Merge conflict in analysis.R
+Automatic merge failed; fix conflicts and then commit the result.
+```
+
+The file will contain conflict markers:
+
+```r
+<<<<<<< HEAD
+# Main branch version
+result <- mean(data)
+=======
+# Feature branch version
+result <- median(data)
+>>>>>>> feature-branch
+```
+
+To resolve:
+
+1. Edit the file to keep the code you want
+2. Remove the conflict markers (`<<<<<<<`, `=======`, `>>>>>>>`)
+3. Stage and commit the resolved file
+
+## The .gitignore File
+
+Not everything should be tracked. The `.gitignore` file specifies intentionally untracked files:
+
+```bash
+# Create .gitignore
+$ touch .gitignore
+```
+
+Common patterns for scientific projects:
+
+```bash
+# Data files (too large or sensitive)
+*.fastq
+*.fastq.gz
+*.bam
+*.vcf
+data/raw/*
+
+# R artifacts
+.Rhistory
+.RData
+.Rproj.user/
+
+# Python artifacts
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Output files
+results/temp/*
+*.log
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Credentials (NEVER commit these!)
+*.pem
+.env
+secrets.txt
+```
+
+::: {.callout-warning}
+Add `.gitignore` early! Once files are tracked, adding them to `.gitignore` won't untrack them.
+:::
+
+## GitHub Pages: Free Website Hosting
+
+GitHub Pages turns your repository into a website—perfect for project documentation, lab websites, or personal portfolios.
+
+```{mermaid}
+%%| label: fig-github-pages
+%%| fig-cap: "GitHub Pages workflow: from Quarto documents to live website"
+flowchart LR
+    A[Quarto Documents] --> R([Render])
+    R --> B[HTML Files]
+    B --> GP([git push])
+    GP --> C[GitHub Repository]
+    C --> AU([Automatic])
+    AU --> D[GitHub Pages Website]
+    D --> E[yourname.github.io/repo]
+```
+
+### Setting Up GitHub Pages
+
+1. Go to your repository on GitHub
+2. Click **Settings** → **Pages**
+3. Under "Source", select **Deploy from a branch**
+4. Select branch: **main** and folder: **/docs** (or root)
+5. Click **Save**
+
+Your site will be live at: `https://username.github.io/repository/`
+
+### For Quarto Projects
+
+In your `_quarto.yml`:
+
+```yaml
+project:
+  type: website
+  output-dir: docs
+```
+
+Then render and push:
+
+```bash
+# Render your site
+$ quarto render
+
+# Commit the docs folder
+$ git add docs/
+$ git commit -m "Update website"
+
+# Push to GitHub
+$ git push
+```
+
+## Best Practices
+
+### Repository Organization
+
+```
+project/
+├── README.md          # Project description (always include!)
+├── LICENSE            # How others can use your code
+├── .gitignore         # Files to ignore
+├── data/              # Data files (consider .gitignore for large files)
+│   ├── raw/           # Original, immutable data
+│   └── processed/     # Cleaned data
+├── scripts/           # Analysis scripts
+│   ├── 01_clean.R
+│   └── 02_analyze.R
+├── results/           # Output files
+└── docs/              # Documentation or website
+```
+
+### Commit Frequency
+
+- Commit early, commit often
+- Each commit should be a logical unit of change
+- Don't commit half-finished work to `main`
+- Use branches for experimental work
+
+### Collaboration Workflow
+
+For team projects:
+
+1. **Pull** before starting work
+2. Create a **branch** for your changes
+3. Make commits with clear messages
+4. **Push** your branch to GitHub
+5. Create a **Pull Request** for review
+6. After approval, **merge** to main
+
+## Useful Commands Reference
+
+| Command | Description |
+|:--------|:------------|
+| `git init` | Initialize new repository |
+| `git clone <url>` | Copy remote repository |
+| `git status` | Show current state |
+| `git add <file>` | Stage changes |
+| `git commit -m "msg"` | Record staged changes |
+| `git push` | Upload to remote |
+| `git pull` | Download from remote |
+| `git branch` | List branches |
+| `git checkout -b <name>` | Create and switch branch |
+| `git merge <branch>` | Merge branch |
+| `git log --oneline` | View commit history |
+| `git diff` | Show unstaged changes |
+| `git stash` | Temporarily store changes |
+
+: Essential Git commands {#tbl-git-commands}
+
+## Summary
+
+Version control with Git and GitHub is essential for modern research:
+
+- Git tracks all changes to your files with complete history
+- The workflow is: edit → stage → commit → push
+- Branches enable parallel development and experimentation
+- GitHub provides cloud hosting, collaboration, and free websites
+- Good practices include meaningful commits, .gitignore, and regular pushing
+
+Learning Git has a steep initial curve, but the investment pays dividends throughout your career. Start simple, use it consistently, and gradually adopt more advanced features.
+
+## Resources
+
+- [Pro Git Book](https://git-scm.com/book/en/v2) — Comprehensive free reference [@chacon2014pro]
+- [GitHub Documentation](https://docs.github.com) — Official guides
+- [Software Carpentry Git Lesson](https://swcarpentry.github.io/git-novice/) — Beginner-friendly tutorial
+- [Quarto + GitHub Pages](https://quarto.org/docs/publishing/github-pages.html) — Publishing documentation
+
+## Exercises {.unnumbered}
+
+::: {.callout-tip title="Practice Exercises"}
+**Exercise 1: First Repository**
+
+1. Create a new directory for a test project
+2. Initialize it as a Git repository
+3. Create a README.md file with a project description
+4. Stage and commit the file
+5. View your commit history
+
+**Exercise 2: GitHub Integration**
+
+1. Create a new repository on GitHub (don't initialize with README)
+2. Connect your local repository to GitHub
+3. Push your commits
+4. Verify your files appear on GitHub
+
+**Exercise 3: Branching Practice**
+
+1. Create a branch called `add-analysis`
+2. Add a new script file on that branch
+3. Commit your changes
+4. Switch back to main
+5. Merge the branch
+6. Delete the branch
+
+**Exercise 4: Collaboration Simulation**
+
+1. Clone a repository (your own or a public one)
+2. Make changes on GitHub directly (edit a file in the browser)
+3. Pull those changes to your local repository
+4. Make local changes and push them back
+:::

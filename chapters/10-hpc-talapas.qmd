@@ -1,0 +1,593 @@
+# High-Performance Computing with Talapas {#sec-hpc-talapas}
+
+```{r}
+#| label: setup
+#| include: false
+library(tidyverse)
+library(gt)
+theme_set(theme_minimal())
+```
+
+::: {.callout-note title="Learning Objectives"}
+After completing this chapter, you will be able to:
+
+- Explain what high-performance computing (HPC) is and when to use it
+- Connect to Talapas via SSH and Open OnDemand
+- Navigate the storage system and understand quotas
+- Write and submit batch jobs using SLURM
+- Monitor job status and troubleshoot issues
+- Use software modules and manage environments
+- Follow best practices for responsible cluster use
+:::
+
+## What is High-Performance Computing?
+
+When your laptop isn't enough—when analyses run for days, require hundreds of gigabytes of memory, or need specialized hardware like GPUs—you need **high-performance computing** (HPC).
+
+An HPC cluster is a collection of interconnected computers (called **nodes**) that work together to solve computational problems. Instead of upgrading your personal computer indefinitely, you submit jobs to a shared resource with far more capability.
+
+### When to Use HPC
+
+Consider HPC when:
+
+- Analyses take hours or days on your laptop
+- Data is too large to fit in your computer's memory
+- You need GPUs for machine learning
+- You want to run many similar jobs in parallel
+- Your analysis would monopolize your personal computer
+
+### Talapas: UO's Computing Cluster
+
+**Talapas** is the University of Oregon's HPC cluster, named from a Chinook word for coyote (the educator and keeper of knowledge). It's managed by Research Advanced Computing Services (RACS).
+
+Key resources:
+
+- Over 14,520 CPU cores
+- 129 TB of total memory
+- 89 GPUs (including NVIDIA A100 and H100)
+- 3+ petabytes of storage
+
+## Talapas Architecture
+
+Understanding the cluster architecture helps you use it effectively.
+
+```{mermaid}
+%| echo: false
+%| label: fig-talapas-architecture
+%| fig-cap: "Talapas cluster architecture showing login nodes, scheduler, and compute nodes"
+flowchart TB
+    U[Your Computer] --> SSH([SSH])
+    SSH --> L1[Login Node 1]
+    SSH --> L2[Login Node 2]
+    SSH --> L3[Login Node 3]
+    SSH --> L4[Login Node 4]
+    L1 --> S[SLURM Scheduler]
+    L2 --> S
+    L3 --> S
+    L4 --> S
+    S --> C1[CPU Nodes]
+    S --> C2[GPU Nodes]
+    S --> C3[High-Memory Nodes]
+    C1 --> ST[(Shared Storage)]
+    C2 --> ST
+    C3 --> ST
+    
+    style U fill:#e3f2fd,stroke:#333,stroke-width:2px
+    style L1 fill:#87ceeb,stroke:#333,stroke-width:2px
+    style L2 fill:#87ceeb,stroke:#333,stroke-width:2px
+    style L3 fill:#87ceeb,stroke:#333,stroke-width:2px
+    style L4 fill:#87ceeb,stroke:#333,stroke-width:2px
+    style S fill:#f9d71c,stroke:#333,stroke-width:2px
+    style C1 fill:#98fb98,stroke:#333,stroke-width:2px
+    style C2 fill:#ffa07a,stroke:#333,stroke-width:2px
+    style C3 fill:#dda0dd,stroke:#333,stroke-width:2px
+    style ST fill:#c8e6c9,stroke:#333,stroke-width:2px
+```
+
+### Login Nodes vs. Compute Nodes
+
+::: {.callout-warning title="Never Run Jobs on Login Nodes"}
+**Login nodes** are where you:
+
+- Log in and manage files
+- Edit scripts
+- Submit jobs
+- Check job status
+
+**Do NOT** run computationally intensive work on login nodes! They're shared by everyone, and heavy processes will be terminated.
+
+**Compute nodes** are where your actual work runs, accessed through the job scheduler.
+:::
+
+### Node Types
+
+| Node Type | Cores | Memory | Purpose |
+|:----------|:------|:-------|:--------|
+| Standard CPU | 28-128 | 128-512 GB | General computation |
+| Large Memory | 56 | 1-4 TB | Memory-intensive work |
+| GPU | 28-48 | 256-512 GB | Machine learning, CUDA |
+
+: Talapas node types {#tbl-node-types}
+
+### Partitions (Queues)
+
+Jobs are submitted to **partitions** with different characteristics:
+
+| Partition | Time Limit | Notes |
+|:----------|:-----------|:------|
+| `compute` | 24 hours | General purpose (default) |
+| `short` | 24 hours | Short jobs |
+| `long` | 14 days | Extended jobs |
+| `gpu` / `longgpu` | 24h / 14d | GPU-enabled nodes |
+| `fat` / `longfat` | 24h / 14d | High-memory nodes |
+| `preempt` | varies | Can use idle resources (may be interrupted) |
+
+: Talapas partitions {#tbl-partitions}
+
+## Getting Access
+
+### Step 1: Join a PIRG
+
+A **PIRG** (Principal Investigator Research Group) is your access group. Your PI must add you to their PIRG, or contact RACS to create a new one.
+
+### Step 2: Request Access
+
+Visit [racs.uoregon.edu/request-access](https://racs.uoregon.edu/request-access)
+
+Your credentials:
+
+- **Username**: Your Duck ID
+- **Password**: Your UO password
+
+## Connecting to Talapas
+
+### Option 1: SSH (Command Line)
+
+From your terminal:
+
+```bash
+# Connect to Talapas
+$ ssh yourduckid@login.talapas.uoregon.edu
+
+# Or connect to a specific login node
+$ ssh yourduckid@login1.talapas.uoregon.edu
+```
+
+**Off campus?** Connect to the [UO VPN](https://service.uoregon.edu/TDClient/2030/Portal/KB/ArticleDet?ID=101392) first.
+
+**Windows users**: Use PuTTY, MobaXterm, Windows Terminal, or VS Code with the Remote-SSH extension.
+
+### Option 2: Open OnDemand (Web Browser)
+
+For a graphical interface, use Open OnDemand:
+
+[ondemand.talapas.uoregon.edu](https://ondemand.talapas.uoregon.edu)
+
+Open OnDemand provides:
+
+- File browser for uploads/downloads
+- Interactive applications (RStudio, JupyterLab, MATLAB)
+- Job composer and monitoring
+- Terminal in browser
+
+This is excellent for beginners and interactive data analysis.
+
+## Storage on Talapas
+
+```{mermaid}
+%%| label: fig-storage-structure
+%%| fig-cap: "Talapas storage hierarchy"
+flowchart LR
+    R["/"] --> H["/home"]
+    R --> P["/projects"]
+    H --> HD["/home/duckid<br/>250 GB"]
+    P --> PG["/projects/PIRG"]
+    PG --> PGU["/projects/PIRG/duckid<br/>Your workspace"]
+    PG --> PGS["/projects/PIRG/shared<br/>Shared with group"]
+    
+    style HD fill:#87ceeb,stroke:#333,stroke-width:2px
+    style PGU fill:#98fb98,stroke:#333,stroke-width:2px
+    style PGS fill:#f9d71c,stroke:#333,stroke-width:2px
+```
+
+### Directory Structure
+
+| Location | Quota | Purpose |
+|:---------|:------|:--------|
+| `/home/duckid` | 250 GB | Config files, small scripts |
+| `/projects/PIRG/duckid` | Shared (default 2 TB) | Large data, analysis |
+| `/projects/PIRG/shared` | Shared | Files shared with group |
+| `/tmp` (on compute nodes) | Local to node | Temporary scratch space |
+
+: Talapas storage locations {#tbl-storage}
+
+### Check Your Storage
+
+```bash
+# Home directory usage
+$ df -h ~
+
+# Project directory usage
+$ du -sh /projects/myPIRG/myusername
+
+# Detailed breakdown
+$ du -h --max-depth=1 /projects/myPIRG/myusername
+```
+
+::: {.callout-important}
+**Data is NOT automatically backed up!** You are responsible for backing up important files. Consider using Git for code and external storage for irreplaceable data.
+:::
+
+## SLURM: The Job Scheduler
+
+**SLURM** (**S**imple **L**inux **U**tility for **R**esource **M**anagement) is the software that manages the cluster [@yoo2003slurm]. It:
+
+- Allocates resources fairly among users
+- Queues jobs when resources are busy
+- Tracks resource usage
+
+```{mermaid}
+%%| label: fig-slurm-workflow
+%%| fig-cap: "SLURM job lifecycle from submission to completion"
+flowchart LR
+    A[Submit Job] --> SB([sbatch])
+    SB --> B[Queue]
+    B --> W([Wait])
+    W --> C[Run on Compute Node]
+    C --> CO([Complete])
+    CO --> D[Output Files]
+    
+    style A fill:#f9d71c,stroke:#333,stroke-width:2px
+    style B fill:#87ceeb,stroke:#333,stroke-width:2px
+    style C fill:#98fb98,stroke:#333,stroke-width:2px
+    style D fill:#ffa07a,stroke:#333,stroke-width:2px
+```
+
+## Writing SLURM Batch Scripts
+
+A batch script combines SLURM directives with your commands:
+
+```bash
+#!/bin/bash
+#SBATCH --job-name=my_analysis      # Job name (shows in queue)
+#SBATCH --partition=compute         # Partition (queue)
+#SBATCH --account=myPIRG            # Your PIRG name
+#SBATCH --output=output_%j.log      # Standard output (%j = job ID)
+#SBATCH --error=error_%j.log        # Standard error
+#SBATCH --time=04:00:00             # Time limit (HH:MM:SS)
+#SBATCH --nodes=1                   # Number of nodes
+#SBATCH --ntasks-per-node=1         # Tasks per node
+#SBATCH --cpus-per-task=4           # CPUs per task
+#SBATCH --mem=16G                   # Memory per node
+
+# Load required modules
+module load R/4.3.3
+
+# Change to working directory
+cd /projects/myPIRG/myusername/analysis
+
+# Run your program
+Rscript my_analysis.R
+```
+
+### Understanding SLURM Directives
+
+| Directive | Description | Example |
+|:----------|:------------|:--------|
+| `--partition` | Queue to use | `compute`, `gpu`, `fat` |
+| `--account` | PIRG for accounting | `myPIRG` |
+| `--time` | Maximum runtime | `1-12:00:00` (1 day, 12 hrs) |
+| `--nodes` | Number of nodes | `1` |
+| `--cpus-per-task` | Cores per task | `8` |
+| `--mem` | Total memory per node | `32G` |
+| `--mem-per-cpu` | Memory per CPU | `4G` |
+| `--gres` | Generic resources | `gpu:1` |
+
+: SLURM directives reference {#tbl-slurm-directives}
+
+::: {.callout-tip}
+**Request only what you need!** Smaller resource requests often run sooner. Start conservative and increase if jobs fail.
+:::
+
+## Submitting and Managing Jobs
+
+### Submit a Job
+
+```bash
+# Submit batch job
+$ sbatch my_script.sh
+Submitted batch job 12345678
+```
+
+### Check Job Status
+
+```bash
+# Your jobs
+$ squeue -u $USER
+
+# All jobs on a partition
+$ squeue -p compute
+
+# Detailed job info
+$ scontrol show job 12345678
+```
+
+### Job Status Codes
+
+| Code | Meaning |
+|:-----|:--------|
+| PD | Pending (waiting in queue) |
+| R | Running |
+| CG | Completing |
+| CD | Completed |
+| F | Failed |
+| CA | Cancelled |
+
+: SLURM job status codes {#tbl-status-codes}
+
+### Cancel a Job
+
+```bash
+# Cancel specific job
+$ scancel 12345678
+
+# Cancel all your jobs
+$ scancel -u $USER
+```
+
+### Check Resource Usage
+
+After a job completes:
+
+```bash
+$ sacct -j 12345678 --format=JobID,JobName,Elapsed,MaxRSS,State
+```
+
+## Interactive Jobs
+
+For testing and development, use interactive jobs instead of batch:
+
+```bash
+# Start interactive session
+$ srun --pty --partition=compute --account=myPIRG \
+       --time=2:00:00 --cpus-per-task=4 --mem=8G /bin/bash
+```
+
+Your prompt will change from `login1` to something like `n049`, indicating you're on a compute node.
+
+Interactive jobs are ideal for:
+
+- Testing workflows before batch submission
+- Debugging code
+- Quick data exploration
+- Running GUI applications via Open OnDemand
+
+## Software Modules
+
+Talapas uses the **Lmod** module system to manage software. This lets multiple versions coexist without conflicts.
+
+### Basic Module Commands
+
+```bash
+# List available modules
+$ module avail
+
+# Search for specific software
+$ module spider R
+$ module spider python
+
+# Load a module
+$ module load R/4.3.3
+$ module load miniconda3/20240410
+
+# See loaded modules
+$ module list
+
+# Unload a module
+$ module unload R
+
+# Reset to default state
+$ module purge
+```
+
+### In Batch Scripts
+
+::: {.callout-important}
+Always load modules **after** the `#SBATCH` directives in your batch scripts:
+
+```bash
+#!/bin/bash
+#SBATCH --job-name=analysis
+#SBATCH --partition=compute
+#SBATCH --account=myPIRG
+# ... other directives ...
+
+# Load modules here
+module load R/4.3.3
+
+# Now run your code
+Rscript analysis.R
+```
+:::
+
+## GPU Jobs
+
+For machine learning and GPU-accelerated computing:
+
+```bash
+#!/bin/bash
+#SBATCH --job-name=gpu_job
+#SBATCH --partition=gpu             # GPU partition
+#SBATCH --account=myPIRG
+#SBATCH --time=1-00:00:00           # 1 day
+#SBATCH --nodes=1
+#SBATCH --gres=gpu:1                # Request 1 GPU
+#SBATCH --mem=32G
+
+# Load CUDA and your software
+module load cuda/12.4
+module load miniconda3/20240410
+
+# Activate your environment
+conda activate ml_env
+
+# Run GPU code
+python train_model.py
+```
+
+Check available GPUs:
+
+```bash
+$ /packages/racs/bin/slurm-show-gpus
+```
+
+## A Complete Example
+
+Let's walk through a realistic bioinformatics workflow:
+
+### 1. Prepare Your Script
+
+Create `genome_analysis.sh`:
+
+```bash
+#!/bin/bash
+#SBATCH --job-name=genome_analysis
+#SBATCH --partition=compute
+#SBATCH --account=myPIRG
+#SBATCH --output=logs/genome_%j.out
+#SBATCH --error=logs/genome_%j.err
+#SBATCH --time=08:00:00
+#SBATCH --cpus-per-task=8
+#SBATCH --mem=32G
+
+# Exit on error
+set -e
+
+# Load modules
+module load bwa/0.7.17
+module load samtools/1.17
+
+# Set variables
+GENOME="/projects/myPIRG/shared/reference/human_GRCh38.fa"
+READS_R1="/projects/myPIRG/myuser/data/sample_R1.fastq.gz"
+READS_R2="/projects/myPIRG/myuser/data/sample_R2.fastq.gz"
+OUTPUT="/projects/myPIRG/myuser/results"
+
+# Create output directory
+mkdir -p $OUTPUT
+
+# Log start time
+echo "Starting analysis at $(date)"
+
+# Run alignment
+bwa mem -t $SLURM_CPUS_PER_TASK $GENOME $READS_R1 $READS_R2 | \
+    samtools sort -@ 4 -o $OUTPUT/aligned.bam
+
+# Index BAM file
+samtools index $OUTPUT/aligned.bam
+
+# Log completion
+echo "Analysis completed at $(date)"
+```
+
+### 2. Submit and Monitor
+
+```bash
+# Create logs directory
+$ mkdir -p logs
+
+# Submit job
+$ sbatch genome_analysis.sh
+Submitted batch job 12345678
+
+# Monitor status
+$ squeue -u $USER
+             JOBID PARTITION     NAME     USER  ST       TIME  NODES NODELIST(REASON)
+          12345678   compute genome_a   duckid   R       5:32      1 n042
+
+# Check output in real-time
+$ tail -f logs/genome_12345678.out
+```
+
+## Best Practices
+
+### Do
+
+- Request only the resources you need
+- Test with small datasets first
+- Use `--time` conservatively (but not too short)
+- Clean up old files regularly
+- Use `/projects` for large data
+- Document your workflows
+- Acknowledge RACS in publications
+
+### Don't
+
+- Run heavy computation on login nodes
+- Leave jobs running indefinitely
+- Store sensitive data without encryption
+- Ignore error messages
+- Request maximum resources "just in case"
+
+### Acknowledgment
+
+When publishing research using Talapas, include this acknowledgment:
+
+> "The authors acknowledge Research Advanced Computing Services (RACS) at the University of Oregon for providing computing resources that have contributed to the research results reported within this publication."
+
+## Getting Help
+
+### Resources
+
+- **Documentation**: [uoracs.github.io/talapas2-knowledge-base](https://uoracs.github.io/talapas2-knowledge-base/)
+- **Service Desk**: [hpcrcf.atlassian.net/servicedesk](https://hpcrcf.atlassian.net/servicedesk/customer/portal/1)
+- **Email**: racs@uoregon.edu
+- **Office Hours**: Knight Library, Dream Lab 122E (Wednesdays 1-3pm)
+
+## Summary
+
+High-performance computing extends your analytical capabilities beyond personal computers:
+
+- Talapas provides thousands of CPUs, GPUs, and terabytes of storage
+- Connect via SSH or the Open OnDemand web interface
+- SLURM manages job scheduling and resource allocation
+- Batch scripts combine resource requests with your commands
+- Software modules manage different software versions
+- Responsible use ensures fair access for everyone
+
+Start simple—submit small test jobs, verify they work, then scale up. The HPC learning curve is real, but the capability it provides is essential for modern computational research.
+
+## Exercises {.unnumbered}
+
+::: {.callout-tip title="Practice Exercises"}
+**Exercise 1: First Connection**
+
+1. Log into Talapas via SSH
+2. Check which login node you're on with `hostname`
+3. Explore your home directory and check your quota
+4. Find your project directory
+
+**Exercise 2: Module Practice**
+
+1. Search for available R versions
+2. Load R and verify with `R --version`
+3. Search for Python versions
+4. Create a script that loads both R and Python
+
+**Exercise 3: Interactive Job**
+
+1. Start an interactive session with 2 CPUs and 4GB memory
+2. Note how your prompt changes
+3. Run a simple R command
+4. Exit the interactive session
+
+**Exercise 4: Batch Job**
+
+1. Write a batch script that:
+   - Requests 1 hour, 2 CPUs, 8GB memory
+   - Loads R
+   - Runs a simple R script that generates a plot
+2. Submit the job
+3. Monitor its progress
+4. Examine the output files
+:::

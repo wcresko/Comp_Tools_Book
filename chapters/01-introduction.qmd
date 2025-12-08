@@ -1,0 +1,252 @@
+# Introduction to Computational Tools {#sec-introduction}
+
+```{r}
+#| label: setup
+#| include: false
+library(tidyverse)
+library(gt)
+theme_set(theme_minimal())
+```
+
+::: {.callout-note title="Learning Objectives"}
+After completing this chapter, you will be able to:
+
+- Articulate why computational skills are essential for modern bioscience research
+- Distinguish between coding and scripting languages
+- Identify the computational tools covered in this course
+- Set up your computing environment for the course
+:::
+
+## The Computational Revolution in Biology
+
+Modern biological research has undergone a profound transformation. The advent of high-throughput technologies—from next-generation sequencing to automated microscopy to mass spectrometry—has generated an explosion of data that far exceeds what can be analyzed manually. Consider these examples:
+
+- A single human genome sequence contains approximately **6 billion base pairs**
+- A typical RNA-seq experiment generates **tens of millions** of short reads
+- Proteomics studies can identify and quantify **thousands of proteins** simultaneously
+- High-content imaging screens produce **terabytes** of image data
+
+To make sense of this data deluge, researchers must be fluent in computational tools. This fluency goes beyond simply running pre-made software—it requires understanding how to manipulate data, automate analyses, and ensure reproducibility.
+
+## Why Learn Computational Skills?
+
+There are compelling reasons to invest time in developing computational proficiency:
+
+**Speed and Scale**
+:   Computational tools allow you to perform thousands of operations with single commands. Tasks that would take days by hand can be completed in seconds.
+
+**Reproducibility**
+:   Scripts and code serve as a complete record of your analysis. Unlike clicking through graphical interfaces, command-line workflows can be exactly reproduced, shared, and verified [@sandve2013ten].
+
+**Flexibility**
+:   General-purpose programming languages can handle virtually any data format or analysis type. You're not limited to what software developers anticipated.
+
+**Access to Specialized Tools**
+:   Many cutting-edge analysis tools in bioinformatics are only available through the command line. Learning to use the shell opens doors to thousands of free programs developed by scientists for scientists.
+
+**High-Performance Computing**
+:   Large-scale analyses require computing clusters. These systems are accessed and controlled through command-line interfaces.
+
+::: {.callout-tip title="Career Impact"}
+Computational skills are increasingly valued in academic and industry positions. Investing in these skills now will pay dividends throughout your career.
+:::
+
+## Coding vs. Scripting: What's the Difference?
+
+You'll often hear the terms "coding" and "scripting" used interchangeably, but there are technical distinctions worth understanding.
+
+### Compiled Languages (Coding)
+
+**Compiled languages** require a separate compilation step that translates human-readable source code into machine code before execution. Examples include:
+
+- C/C++
+- Fortran
+- Rust
+- Go
+
+The compilation process produces optimized executable files that run very quickly. However, compiled languages typically require more setup and are less forgiving of errors during development.
+
+### Interpreted Languages (Scripting)
+
+**Interpreted languages** (or scripting languages) execute code line-by-line at runtime, without a separate compilation step. Examples include:
+
+- Bash/Shell
+- Python
+- R
+- Julia
+- Perl
+
+Interpreted languages offer greater flexibility and faster development cycles at the cost of some execution speed. They're ideal for data analysis, automation, and interactive exploration.
+
+::: {.callout-note}
+The distinction between compiled and interpreted languages has become increasingly blurred. Modern systems like Julia use just-in-time (JIT) compilation to achieve near-compiled performance with scripting-language convenience. Python and R can also interface with compiled C/C++ code for performance-critical operations.
+:::
+
+### Which Should You Learn?
+
+For most biological research, **interpreted languages are the right choice**. They offer:
+
+- Rapid prototyping and experimentation
+- Interactive data exploration
+- Extensive libraries for scientific computing
+- Lower barriers to entry for beginners
+
+In this course, we focus primarily on Bash (the Unix shell) and R, with exposure to high-performance computing concepts that may eventually lead you to compiled languages if your research requires it.
+
+## Tools We Will Cover
+
+This book and accompanying course introduce you to a carefully selected set of tools that form the foundation of computational research in the life sciences.
+
+### Unix/Linux and the Shell
+
+The **Unix shell** (specifically Bash) provides:
+
+- A powerful interface for file manipulation
+- Tools for processing large text-based data files
+- The ability to combine simple programs into complex workflows
+- Access to remote computing systems
+
+Understanding Unix is essential because it underlies most scientific computing infrastructure, from laptops to supercomputers.
+
+### R Statistical Programming
+
+**R** is a programming language and environment specifically designed for statistical computing and graphics [@rproject2024]. It offers:
+
+- Comprehensive statistical analysis capabilities
+- Publication-quality graphics
+- Thousands of packages for specialized analyses
+- Integration with reproducible document systems (Quarto, R Markdown)
+- An excellent IDE (RStudio)
+
+### Quarto and Reproducible Documents
+
+**Quarto** is an open-source scientific publishing system [@quarto2024] that allows you to:
+
+- Combine narrative text with executable code
+- Generate reports, presentations, websites, and books
+- Ensure your analyses are fully reproducible
+- Share your work in multiple formats
+
+This book itself was written using Quarto!
+
+### Git and GitHub
+
+**Git** is a version control system that tracks changes to your files over time [@chacon2014pro]. **GitHub** is a web-based platform for hosting Git repositories. Together, they enable:
+
+- Complete history of your project's development
+- Safe experimentation with new ideas
+- Collaboration with colleagues worldwide
+- Sharing code and data publicly
+
+### High-Performance Computing
+
+**Talapas** is the University of Oregon's computing cluster. You'll learn to:
+
+- Access and navigate the cluster
+- Submit and manage batch jobs
+- Use software modules
+- Scale your analyses beyond your laptop's capabilities
+
+## Setting Up Your Computing Environment
+
+Before diving into the technical content, you'll need to set up your computing environment. The required software depends on your operating system.
+
+### All Operating Systems
+
+These tools work across Windows, macOS, and Linux:
+
+1. **R** — Download from [r-project.org](https://www.r-project.org)
+2. **RStudio** — Download from [posit.co/download/rstudio-desktop](https://posit.co/download/rstudio-desktop/)
+3. **Visual Studio Code** — Download from [code.visualstudio.com](https://code.visualstudio.com/)
+4. **Git** — Download from [git-scm.com](https://git-scm.com/)
+
+### macOS Users
+
+macOS includes a Unix-based operating system. To access the shell:
+
+1. Open **Terminal** (found in Applications → Utilities) or
+2. Install **iTerm2** for a more feature-rich terminal experience
+
+### Linux Users
+
+Linux systems include multiple terminal applications. Open your distribution's default terminal emulator, often called "Terminal" or "Console."
+
+### Windows Users {#sec-windows-setup}
+
+Windows requires additional setup to access a Unix-like environment. The recommended approach uses Windows Subsystem for Linux (WSL):
+
+::: {.callout-caution title="Windows Users: Additional Steps Required"}
+Follow these steps to install Ubuntu on Windows:
+
+1. Run **Windows PowerShell** as administrator
+2. Type `wsl --install` and press Enter
+3. Restart your computer
+4. Search for and install **Ubuntu** from the Microsoft Store, or type `wsl --install -d ubuntu` in PowerShell
+5. Open Ubuntu and set up a username and password (doesn't need to match your Windows login)
+6. Run `sudo apt update` followed by `sudo apt upgrade` to update packages
+:::
+
+A detailed guide is available at [ubuntu.com/tutorials/install-ubuntu-on-wsl2-on-windows-10](https://ubuntu.com/tutorials/install-ubuntu-on-wsl2-on-windows-10).
+
+### Talapas Access
+
+To use the university's computing cluster:
+
+1. Ensure you're a member of a PIRG (Principal Investigator Research Group)
+2. Your login credentials are your Duck ID and password
+3. Off-campus access requires the UO VPN
+
+We'll cover Talapas access in detail in @sec-hpc-talapas.
+
+## Course Structure and Expectations
+
+This book is designed to accompany a hands-on course where **most of class time is devoted to coding practice** rather than lectures. Expect to:
+
+- Follow along with examples during class sessions
+- Complete practice exercises to reinforce concepts
+- Submit homework assignments demonstrating your skills
+- Develop a final project applying what you've learned to your own research
+
+::: {.callout-important title="Learning Takes Practice"}
+Computational skills develop through repeated practice. Don't be discouraged if concepts don't click immediately—everyone struggles at first. The key is persistence and willingness to experiment.
+:::
+
+## Getting Help
+
+When you encounter problems (and you will!), several resources are available:
+
+**Manual Pages**
+:   Unix commands have built-in documentation accessible via `man command_name`. Type `q` to exit.
+
+**Help Functions**
+:   In R, use `?function_name` or `help(function_name)` to access documentation.
+
+**The Internet**
+:   Sites like Stack Overflow contain solutions to virtually every common error message. Learning to search effectively is a crucial skill.
+
+**Generative AI**
+:   Tools like ChatGPT and Claude can explain concepts, debug code, and suggest solutions. However, always verify AI-generated code and understand what it does before using it.
+
+**Each Other**
+:   Your classmates are experiencing the same learning curve. Collaboration and discussion accelerate everyone's learning.
+
+## Summary
+
+This chapter introduced the rationale for learning computational tools and provided an overview of the skills you'll develop. Key takeaways:
+
+- Computational literacy is essential for modern biological research
+- Scripting languages (Bash, R, Python) are ideal for data analysis
+- Version control and reproducibility are professional best practices
+- Learning requires patience, practice, and willingness to make mistakes
+
+In the next chapter, we'll explore computer systems architecture to build your mental model of how computers work—knowledge that will inform everything that follows.
+
+## Exercises {.unnumbered}
+
+::: {.callout-tip title="Practice Exercises"}
+1. **Environment Check**: Verify that you can open a terminal on your computer. What appears when you type `echo "Hello World"` and press Enter?
+
+2. **Software Installation**: Install R and RStudio if you haven't already. Open RStudio and type `1 + 1` in the console. What happens?
+
+3. **Reflection**: Write a paragraph describing one computational challenge in your current or planned research. What skills from this course might help address it?
+:::

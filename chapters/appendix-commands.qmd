@@ -1,0 +1,321 @@
+# Command Reference {#sec-appendix-commands}
+
+This appendix provides a quick reference for commands covered throughout the book.
+
+## Unix Navigation Commands
+
+| Command | Description | Example |
+|:--------|:------------|:--------|
+| `pwd` | Print working directory | `pwd` |
+| `ls` | List directory contents | `ls -la` |
+| `cd` | Change directory | `cd ~/projects` |
+| `mkdir` | Create directory | `mkdir -p data/raw` |
+| `rmdir` | Remove empty directory | `rmdir old_folder` |
+
+: Navigation commands {#tbl-nav-commands}
+
+## File Operations
+
+| Command | Description | Example |
+|:--------|:------------|:--------|
+| `cp` | Copy files/directories | `cp file.txt backup/` |
+| `mv` | Move or rename | `mv old.txt new.txt` |
+| `rm` | Remove files | `rm -r old_directory/` |
+| `touch` | Create empty file | `touch notes.txt` |
+| `cat` | Display file contents | `cat data.csv` |
+| `head` | Show first lines | `head -n 20 file.txt` |
+| `tail` | Show last lines | `tail -f log.txt` |
+| `less` | Page through file | `less huge_file.txt` |
+| `wc` | Count lines/words/bytes | `wc -l data.csv` |
+
+: File operation commands {#tbl-file-commands}
+
+## Text Processing
+
+| Command | Description | Example |
+|:--------|:------------|:--------|
+| `grep` | Search for patterns | `grep "error" log.txt` |
+| `grep -E` | Extended regex | `grep -E "gene[0-9]+"` |
+| `grep -v` | Invert match | `grep -v "^#" data.txt` |
+| `grep -c` | Count matches | `grep -c ">" seqs.fa` |
+| `grep -i` | Case insensitive | `grep -i "warning"` |
+| `sort` | Sort lines | `sort -n numbers.txt` |
+| `uniq` | Remove duplicates | `sort \| uniq -c` |
+| `cut` | Extract columns | `cut -f2 data.tsv` |
+| `tr` | Translate characters | `tr 'a-z' 'A-Z'` |
+| `sed` | Stream editor | `sed 's/old/new/g'` |
+| `awk` | Pattern processing | `awk '{print $1}'` |
+
+: Text processing commands {#tbl-text-commands}
+
+## Redirection and Pipes
+
+| Operator | Description | Example |
+|:---------|:------------|:--------|
+| `>` | Redirect output (overwrite) | `ls > files.txt` |
+| `>>` | Redirect output (append) | `echo "done" >> log.txt` |
+| `<` | Redirect input | `wc -l < data.txt` |
+| `2>` | Redirect stderr | `cmd 2> errors.txt` |
+| `&>` | Redirect both stdout/stderr | `cmd &> all.txt` |
+| `\|` | Pipe to next command | `cat file \| sort \| uniq` |
+| `\|&` | Pipe stdout and stderr | `cmd \|& less` |
+
+: Redirection operators {#tbl-redirect-commands}
+
+## File Compression
+
+| Command | Description | Example |
+|:--------|:------------|:--------|
+| `gzip` | Compress file | `gzip large_file.txt` |
+| `gunzip` | Decompress | `gunzip file.txt.gz` |
+| `zcat` | View compressed | `zcat data.gz \| head` |
+| `zgrep` | Search compressed | `zgrep "pattern" file.gz` |
+| `tar` | Archive files | `tar -czvf archive.tar.gz dir/` |
+| `tar` | Extract archive | `tar -xzvf archive.tar.gz` |
+
+: Compression commands {#tbl-compress-commands}
+
+## File Permissions
+
+| Command | Description | Example |
+|:--------|:------------|:--------|
+| `chmod` | Change permissions | `chmod +x script.sh` |
+| `chmod` | Numeric permissions | `chmod 755 script.sh` |
+| `chown` | Change owner | `chown user:group file` |
+
+### Permission Codes
+
+| Mode | Meaning |
+|:-----|:--------|
+| `r` (4) | Read |
+| `w` (2) | Write |
+| `x` (1) | Execute |
+| `755` | rwx for owner, rx for others |
+| `644` | rw for owner, r for others |
+
+: Permission codes {#tbl-permissions}
+
+## System Information
+
+| Command | Description | Example |
+|:--------|:------------|:--------|
+| `whoami` | Current username | `whoami` |
+| `hostname` | Computer name | `hostname` |
+| `date` | Current date/time | `date +%Y-%m-%d` |
+| `df` | Disk space | `df -h` |
+| `du` | Directory size | `du -sh folder/` |
+| `top` | Running processes | `top` |
+| `ps` | Process status | `ps aux` |
+| `kill` | Terminate process | `kill -9 PID` |
+
+: System information commands {#tbl-system-commands}
+
+## Network and Remote
+
+| Command | Description | Example |
+|:--------|:------------|:--------|
+| `ssh` | Secure shell | `ssh user@host` |
+| `scp` | Secure copy | `scp file user@host:path/` |
+| `rsync` | Sync files | `rsync -avz src/ dest/` |
+| `wget` | Download file | `wget URL` |
+| `curl` | Transfer data | `curl -O URL` |
+
+: Network commands {#tbl-network-commands}
+
+## Git Commands
+
+### Setup and Configuration
+
+| Command | Description |
+|:--------|:------------|
+| `git config --global user.name "Name"` | Set username |
+| `git config --global user.email "email"` | Set email |
+| `git config --list` | Show configuration |
+
+### Repository Operations
+
+| Command | Description |
+|:--------|:------------|
+| `git init` | Initialize repository |
+| `git clone URL` | Clone remote repository |
+| `git status` | Show current state |
+| `git log --oneline` | View commit history |
+
+### Making Changes
+
+| Command | Description |
+|:--------|:------------|
+| `git add file` | Stage file |
+| `git add .` | Stage all changes |
+| `git commit -m "message"` | Commit staged changes |
+| `git diff` | Show unstaged changes |
+| `git diff --staged` | Show staged changes |
+
+### Branching
+
+| Command | Description |
+|:--------|:------------|
+| `git branch` | List branches |
+| `git branch name` | Create branch |
+| `git checkout name` | Switch branch |
+| `git checkout -b name` | Create and switch |
+| `git merge name` | Merge branch |
+| `git branch -d name` | Delete branch |
+
+### Remote Operations
+
+| Command | Description |
+|:--------|:------------|
+| `git remote -v` | Show remotes |
+| `git remote add origin URL` | Add remote |
+| `git push origin branch` | Push to remote |
+| `git pull origin branch` | Pull from remote |
+| `git fetch origin` | Fetch without merge |
+
+## SLURM Commands
+
+### Job Submission
+
+| Command | Description |
+|:--------|:------------|
+| `sbatch script.sh` | Submit batch job |
+| `srun --pty bash` | Start interactive job |
+
+### Job Management
+
+| Command | Description |
+|:--------|:------------|
+| `squeue -u $USER` | Show your jobs |
+| `squeue -p partition` | Show partition jobs |
+| `scancel JOBID` | Cancel job |
+| `scancel -u $USER` | Cancel all your jobs |
+| `scontrol show job JOBID` | Job details |
+| `sacct -j JOBID` | Job accounting |
+
+### Information
+
+| Command | Description |
+|:--------|:------------|
+| `sinfo` | Partition information |
+| `sinfo -p partition` | Specific partition |
+
+### Common SBATCH Directives
+
+```bash
+#SBATCH --job-name=name       # Job name
+#SBATCH --partition=compute   # Partition
+#SBATCH --account=PIRG        # Account
+#SBATCH --time=HH:MM:SS       # Time limit
+#SBATCH --nodes=1             # Number of nodes
+#SBATCH --cpus-per-task=4     # CPUs per task
+#SBATCH --mem=16G             # Memory
+#SBATCH --gres=gpu:1          # GPUs
+#SBATCH --output=out_%j.log   # Output file
+#SBATCH --error=err_%j.log    # Error file
+```
+
+## Module Commands
+
+| Command | Description |
+|:--------|:------------|
+| `module avail` | List available modules |
+| `module spider name` | Search for module |
+| `module load name` | Load module |
+| `module unload name` | Unload module |
+| `module list` | Show loaded modules |
+| `module purge` | Unload all modules |
+
+## R Quick Reference
+
+### Basic Operations
+
+```r
+# Assignment
+x <- 5
+
+# Vectors
+v <- c(1, 2, 3, 4, 5)
+
+# Sequences
+1:10
+seq(0, 1, by = 0.1)
+
+# Basic stats
+mean(v)
+sd(v)
+summary(v)
+```
+
+### Data Frames
+
+```r
+# Create
+df <- data.frame(x = 1:3, y = c("a", "b", "c"))
+
+# Access
+df$x
+df[1, ]
+df[, "x"]
+
+# Filter
+df[df$x > 1, ]
+
+# Read/Write
+read.csv("file.csv")
+write.csv(df, "file.csv", row.names = FALSE)
+```
+
+### Getting Help
+
+```r
+?function_name
+help(function_name)
+example(function_name)
+```
+
+## Regular Expression Metacharacters
+
+| Character | Meaning |
+|:----------|:--------|
+| `.` | Any single character |
+| `*` | Zero or more of preceding |
+| `+` | One or more of preceding |
+| `?` | Zero or one of preceding |
+| `^` | Start of line |
+| `$` | End of line |
+| `[]` | Character class |
+| `[^]` | Negated class |
+| `\|` | Alternation (OR) |
+| `()` | Grouping |
+| `{n}` | Exactly n repetitions |
+| `{n,m}` | Between n and m repetitions |
+| `\` | Escape special character |
+
+: Regular expression metacharacters {#tbl-regex-ref}
+
+## Useful Shortcuts
+
+### Bash Keyboard Shortcuts
+
+| Shortcut | Action |
+|:---------|:-------|
+| `Ctrl+C` | Cancel current command |
+| `Ctrl+D` | End of input / logout |
+| `Ctrl+L` | Clear screen |
+| `Ctrl+A` | Move to start of line |
+| `Ctrl+E` | Move to end of line |
+| `Ctrl+R` | Search command history |
+| `Tab` | Autocomplete |
+| `↑` / `↓` | Previous/next command |
+
+### RStudio Keyboard Shortcuts
+
+| Shortcut | Action |
+|:---------|:-------|
+| `Ctrl+Enter` | Run current line |
+| `Ctrl+Shift+Enter` | Run current chunk |
+| `Ctrl+Shift+S` | Run entire script |
+| `Ctrl+Shift+C` | Comment/uncomment |
+| `Ctrl+Shift+M` | Insert pipe `%>%` |
+| `Alt+-` | Insert assignment `<-` |
+| `Ctrl+Shift+K` | Knit document |
