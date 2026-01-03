@@ -25,8 +25,9 @@ book:
     - chapters/06-shell-scripting.qmd
     - chapters/07-r-programming.qmd
     - chapters/08-tidy-data.qmd
-    - chapters/09-git-github.qmd
-    - chapters/10-hpc-talapas.qmd
+    - chapters/09-data-visualization.qmd
+    - chapters/10-git-github.qmd
+    - chapters/11-hpc-talapas.qmd
     - references.qmd
   
   appendices:

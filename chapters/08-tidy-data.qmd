@@ -17,6 +17,10 @@ After completing this chapter, you will be able to:
 - Distinguish between different data types
 - Implement best practices for data organization
 - Use appropriate file formats for data storage
+- Use the tidyverse packages for data manipulation
+- Apply dplyr verbs: filter, select, mutate, arrange, summarize
+- Chain operations using the pipe operator
+- Work with tibbles as modern data frames
 :::
 
 ## Why Data Organization Matters
@@ -406,6 +410,345 @@ If you must use spreadsheets for data entry, follow these guidelines:
 - Separate documentation sheet
 - Explicit coding of all information
 
+## The Tidyverse: A Collection of Data Science Packages
+
+The **tidyverse** is a collection of R packages designed for data science that share a common philosophy and work seamlessly together. These packages make data manipulation, visualization, and analysis more intuitive and readable.
+
+### Core Tidyverse Packages
+
+| Package | Purpose |
+|:--------|:--------|
+| **dplyr** | Data manipulation (filter, select, mutate, etc.) |
+| **ggplot2** | Data visualization |
+| **tidyr** | Data tidying (pivot, separate, etc.) |
+| **readr** | Fast data import |
+| **purrr** | Functional programming |
+| **stringr** | String manipulation |
+| **forcats** | Working with factors |
+| **tibble** | Modern data frames |
+
+: Core tidyverse packages {#tbl-tidyverse}
+
+Load all core packages at once:
+
+```{r}
+#| label: load-tidyverse
+#| eval: false
+
+library(tidyverse)
+```
+
+## The Pipe Operator
+
+One of the most powerful features of the tidyverse is the **pipe operator**, which allows you to chain operations together in a readable way.
+
+### The Native Pipe: `|>`
+
+R 4.1+ includes a native pipe operator `|>`:
+
+```{r}
+#| label: native-pipe
+
+# Without pipe: nested, hard to read
+sqrt(sum(abs(c(-4, 9, -16))))
+
+# With pipe: reads left to right
+c(-4, 9, -16) |>
+  abs() |>
+  sum() |>
+  sqrt()
+```
+
+### The magrittr Pipe: `%>%`
+
+The tidyverse also provides `%>%` from the magrittr package, which has additional features:
+
+```{r}
+#| label: magrittr-pipe
+
+library(dplyr)
+
+# Both work similarly for most cases
+c(1, 2, 3, 4, 5) |> mean()
+c(1, 2, 3, 4, 5) %>% mean()
+```
+
+::: {.callout-tip}
+The pipe transforms `x |> f(y)` into `f(x, y)`. Think of it as "take this, then do that." This makes code read like a recipe: take data, then filter, then select, then summarize.
+:::
+
+## Data Manipulation with dplyr
+
+The **dplyr** package provides a consistent set of "verbs" for data manipulation. These functions are designed to be intuitive and compose well together.
+
+### The Five Core dplyr Verbs
+
+| Verb | Action |
+|:-----|:-------|
+| `filter()` | Pick rows based on conditions |
+| `select()` | Pick columns by name |
+| `arrange()` | Reorder rows |
+| `mutate()` | Create or modify columns |
+| `summarize()` | Reduce to summary statistics |
+
+: The five core dplyr verbs {#tbl-dplyr-verbs}
+
+Let's create sample data to demonstrate these:
+
+```{r}
+#| label: sample-data
+
+# Sample experimental data
+experiments <- tibble(
+  sample_id = paste0("S", 1:12),
+  treatment = rep(c("control", "drug_A", "drug_B"), each = 4),
+  replicate = rep(1:4, 3),
+  expression = c(10.2, 11.1, 9.8, 10.5,   # control
+                 15.3, 14.8, 16.2, 15.0,   # drug_A
+                 18.1, 19.2, 17.5, 18.8),  # drug_B
+  cell_count = c(1000, 1050, 980, 1020,
+                 1100, 1080, 1150, 1090,
+                 1200, 1250, 1180, 1220)
+)
+
+experiments
+```
+
+### Filtering Rows with `filter()`
+
+Select rows that meet specific conditions:
+
+```{r}
+#| label: filter-examples
+
+# Single condition
+experiments |>
+  filter(treatment == "drug_A")
+
+# Multiple conditions (AND)
+experiments |>
+  filter(treatment == "drug_A", expression > 15)
+
+# OR conditions
+experiments |>
+  filter(treatment == "drug_A" | treatment == "drug_B")
+
+# Using %in% for multiple values
+experiments |>
+  filter(treatment %in% c("drug_A", "drug_B"))
+```
+
+### Selecting Columns with `select()`
+
+Choose which columns to keep:
+
+```{r}
+#| label: select-examples
+
+# Select specific columns
+experiments |>
+  select(sample_id, treatment, expression)
+
+# Select range of columns
+experiments |>
+  select(sample_id:replicate)
+
+# Exclude columns with minus
+experiments |>
+  select(-cell_count)
+
+# Select using helper functions
+experiments |>
+  select(starts_with("exp"))
+
+experiments |>
+  select(where(is.numeric))
+```
+
+### Arranging Rows with `arrange()`
+
+Sort data by one or more columns:
+```{r}
+#| label: arrange-examples
+
+# Ascending order (default)
+experiments |>
+  arrange(expression)
+
+# Descending order
+experiments |>
+  arrange(desc(expression))
+
+# Multiple columns
+experiments |>
+  arrange(treatment, desc(expression))
+```
+
+### Creating Columns with `mutate()`
+
+Add new columns or modify existing ones:
+
+```{r}
+#| label: mutate-examples
+
+experiments |>
+  mutate(
+    # Create new columns
+    log_expression = log2(expression),
+    expression_per_cell = expression / cell_count * 1000,
+    # Modify existing
+    treatment = toupper(treatment)
+  )
+```
+
+### Summarizing Data with `summarize()`
+
+Collapse multiple rows into summary statistics:
+
+```{r}
+#| label: summarize-examples
+
+experiments |>
+  summarize(
+    mean_expression = mean(expression),
+    sd_expression = sd(expression),
+    n_samples = n()
+  )
+```
+
+### Grouping with `group_by()`
+
+The real power of `summarize()` comes with `group_by()`:
+
+```{r}
+#| label: group-by-examples
+
+# Summary statistics by treatment
+experiments |>
+  group_by(treatment) |>
+  summarize(
+    mean_expression = mean(expression),
+    sd_expression = sd(expression),
+    n = n()
+  )
+
+# Multiple grouping variables
+experiments |>
+  group_by(treatment) |>
+  summarize(
+    mean_expr = mean(expression),
+    max_expr = max(expression),
+    min_expr = min(expression)
+  ) |>
+  arrange(desc(mean_expr))
+```
+
+### Chaining Operations Together
+
+The power of dplyr shines when chaining multiple operations:
+
+```{r}
+#| label: chaining-example
+
+experiments |>
+  filter(treatment != "control") |>           # Remove controls
+  mutate(log_expr = log2(expression)) |>      # Log transform
+  group_by(treatment) |>                       # Group by treatment
+  summarize(
+    mean_log_expr = mean(log_expr),
+    se = sd(log_expr) / sqrt(n())
+  ) |>
+  arrange(desc(mean_log_expr))                 # Sort by mean
+```
+
+## Tibbles: Modern Data Frames
+
+**Tibbles** are the tidyverse's enhanced version of data frames. They have several advantages:
+
+### Creating Tibbles
+
+```{r}
+#| label: create-tibble
+
+# Create a tibble
+my_tibble <- tibble(
+  x = 1:5,
+  y = x^2,  # Can reference earlier columns
+  z = c("a", "b", "c", "d", "e")
+)
+
+my_tibble
+
+# Convert data frame to tibble
+as_tibble(mtcars) |> head()
+```
+
+### Tibble Advantages
+
+1. **Better printing**: Shows first 10 rows and fits columns to screen
+2. **No partial matching**: `df$col` won't match `df$column`
+3. **No string-to-factor conversion**: Characters stay as characters
+4. **Preserves column types**: Subsetting always returns a tibble
+
+```{r}
+#| label: tibble-advantages
+
+# Data frame subsetting can surprise you
+df <- data.frame(x = 1:3, y = 4:6)
+class(df[, 1])  # Returns vector!
+
+# Tibble subsetting is consistent
+tb <- tibble(x = 1:3, y = 4:6)
+class(tb[, 1])  # Returns tibble
+```
+
+## Additional dplyr Functions
+
+### Conditional Logic with `case_when()`
+
+```{r}
+#| label: case-when
+
+experiments |>
+  mutate(
+    expression_level = case_when(
+      expression < 12 ~ "low",
+      expression < 17 ~ "medium",
+      TRUE ~ "high"
+    )
+  )
+```
+
+### Counting with `count()`
+
+```{r}
+#| label: count-example
+
+experiments |>
+  count(treatment)
+
+experiments |>
+  count(treatment, sort = TRUE)
+```
+
+### Distinct Values with `distinct()`
+
+```{r}
+#| label: distinct-example
+
+experiments |>
+  distinct(treatment)
+```
+
+### Renaming with `rename()`
+
+```{r}
+#| label: rename-example
+
+experiments |>
+  rename(expr = expression, cells = cell_count)
+```
+
 ## Summary
 
 Tidy data provides a consistent structure that simplifies analysis:
@@ -422,7 +765,20 @@ Key principles for data organization:
 - Choose appropriate file formats for your needs
 - Understand the difference between data types
 
-These practices apply regardless of whether you're using R, Python, or other tools. Well-organized data is easier to analyze, share, and preserve.
+The tidyverse provides powerful tools for working with tidy data:
+
+- The **pipe operator** (`|>` or `%>%`) chains operations for readable code
+- **dplyr verbs** provide intuitive data manipulation:
+  - `filter()` selects rows by condition
+  - `select()` picks columns by name
+  - `mutate()` creates or modifies columns
+  - `arrange()` sorts rows
+  - `summarize()` computes summary statistics
+  - `group_by()` enables grouped operations
+- **Tibbles** are enhanced data frames with consistent behavior
+- Functions like `case_when()`, `count()`, and `distinct()` handle common tasks
+
+These practices and tools apply across data science workflows. Well-organized data combined with tidyverse tools makes analysis efficient, reproducible, and shareable.
 
 ## Exercises {.unnumbered}
 
@@ -459,4 +815,36 @@ Create a data dictionary for an experiment tracking:
 **Exercise 4: Spot the Problems**
 
 Review a dataset you've worked with (or your lab's data). Identify any violations of tidy data principles and propose solutions.
+
+**Exercise 5: dplyr Practice**
+
+Using the built-in `mtcars` dataset:
+1. Filter to only cars with 6 or 8 cylinders
+2. Select only the columns `mpg`, `cyl`, `hp`, and `wt`
+3. Create a new column `hp_per_cyl` (horsepower per cylinder)
+4. Arrange by `mpg` in descending order
+
+**Exercise 6: Grouped Summaries**
+
+Using the `iris` dataset:
+1. Calculate the mean and standard deviation of `Sepal.Length` for each `Species`
+2. Find the maximum `Petal.Width` for each species
+3. Count the number of observations per species
+4. Chain all these operations using the pipe operator
+
+**Exercise 7: Data Transformation Pipeline**
+
+Create a complete analysis pipeline that:
+1. Starts with the `mtcars` dataset
+2. Filters to automatic transmission cars (`am == 0`)
+3. Groups by number of cylinders
+4. Calculates mean mpg, mean horsepower, and count per group
+5. Creates a new column classifying fuel efficiency as "good" (mpg >= 20) or "poor"
+6. Arranges by mean mpg descending
+
+**Exercise 8: Tibble Exploration**
+
+1. Convert `mtcars` to a tibble
+2. Compare how the data frame and tibble display when printed
+3. Test subsetting behavior: what class does `mtcars[, 1]` return vs `as_tibble(mtcars)[, 1]`?
 :::
