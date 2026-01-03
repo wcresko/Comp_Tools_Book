@@ -1,0 +1,647 @@
+# Reproducible Documents with Quarto {#sec-quarto-documents}
+
+```{r}
+#| label: setup
+#| include: false
+library(tidyverse)
+library(gt)
+theme_set(theme_minimal())
+```
+
+::: {.callout-note title="Learning Objectives"}
+After completing this chapter, you will be able to:
+
+- Explain the benefits of literate programming for reproducible research
+- Create Quarto documents that combine code, text, and results
+- Use Markdown syntax for text formatting
+- Configure document settings with YAML headers
+- Control code execution and output with chunk options
+- Include mathematical equations and figures
+- Render documents to multiple output formats
+:::
+
+## What is Quarto?
+
+**Quarto** is an open-source scientific publishing system that enables you to create dynamic documents combining narrative text, code, and results. It represents the next generation of literate programming tools, building on the legacy of R Markdown while extending support to multiple programming languages.
+
+Quarto documents are plain text files with the `.qmd` extension that can be rendered to:
+
+- HTML documents and websites
+- PDF documents
+- Microsoft Word documents
+- Presentations (PowerPoint, reveal.js)
+- Books (like this one!)
+- Interactive dashboards
+
+### Why Use Quarto?
+
+Quarto solves fundamental problems in scientific communication:
+
+**Reproducibility**
+:   Your analysis and its documentation live together. Anyone can re-run your code and verify your results.
+
+**Efficiency**
+:   No more copying and pasting results between applications. Update your data, re-render, and all figures and statistics update automatically.
+
+**Transparency**
+:   Readers can see exactly how results were generated. The code *is* the methods section.
+
+**Collaboration**
+:   Plain text files work seamlessly with version control systems like Git.
+
+**Flexibility**
+:   Write once, render to multiple formats. The same document can produce a lab report, a presentation, and a web page.
+
+::: {.callout-tip}
+This entire textbook was written in Quarto! You can see the source files in the repository.
+:::
+
+## Markdown: The Foundation
+
+**Markdown** is a lightweight markup language that lets you add formatting to plain text. Created by John Gruber in 2004, it's designed to be readable in its raw form while rendering to beautifully formatted documents.
+
+### Why Markdown?
+
+- **Simple**: No complex menus or formatting palettes
+- **Portable**: Plain text files work everywhere
+- **Future-proof**: Text files will always be readable
+- **Version-control friendly**: Git can track every change
+
+### Basic Text Formatting
+
+```markdown
+*italic text* or _italic text_
+
+**bold text** or __bold text__
+
+***bold and italic*** or ___bold and italic___
+
+~~strikethrough text~~
+
+`inline code`
+```
+
+Renders as:
+
+*italic text* or _italic text_
+
+**bold text** or __bold text__
+
+***bold and italic*** or ___bold and italic___
+
+~~strikethrough text~~
+
+`inline code`
+
+### Headers
+
+Create hierarchical structure with headers:
+
+```markdown
+# Header 1 (Chapter title)
+## Header 2 (Section)
+### Header 3 (Subsection)
+#### Header 4 (Sub-subsection)
+```
+
+::: {.callout-tip}
+In Quarto books, each chapter typically starts with a single `#` header, with subsequent sections using `##` and `###`.
+:::
+
+### Lists
+
+**Unordered lists** use asterisks, hyphens, or plus signs:
+
+```markdown
+- Item one
+- Item two
+  - Nested item (indent with 2 spaces)
+  - Another nested item
+- Item three
+```
+
+- Item one
+- Item two
+  - Nested item (indent with 2 spaces)
+  - Another nested item
+- Item three
+
+**Ordered lists** use numbers:
+
+```markdown
+1. First step
+2. Second step
+3. Third step
+   1. Sub-step
+   2. Another sub-step
+```
+
+1. First step
+2. Second step
+3. Third step
+   1. Sub-step
+   2. Another sub-step
+
+### Links and Images
+
+```markdown
+[Link text](https://example.com)
+
+[Link with title](https://example.com "Hover text")
+
+![Image caption](images/figure.png)
+
+![Caption with size](images/figure.png){width="50%"}
+```
+
+### Blockquotes
+
+```markdown
+> This is a blockquote. Use it for quotations
+> or to highlight important text.
+>
+> Multiple paragraphs work too.
+```
+
+> This is a blockquote. Use it for quotations
+> or to highlight important text.
+>
+> Multiple paragraphs work too.
+
+### Code Blocks
+
+For displaying code without execution, use fenced code blocks with language specification:
+
+````markdown
+```python
+def hello():
+    print("Hello, World!")
+```
+````
+
+```python
+def hello():
+    print("Hello, World!")
+```
+
+### Tables
+
+Create tables with pipes and hyphens:
+
+```markdown
+| Column 1 | Column 2 | Column 3 |
+|:---------|:--------:|---------:|
+| Left     | Center   | Right    |
+| aligned  | aligned  | aligned  |
+```
+
+| Column 1 | Column 2 | Column 3 |
+|:---------|:--------:|---------:|
+| Left     | Center   | Right    |
+| aligned  | aligned  | aligned  |
+
+The colons indicate alignment: `:---` left, `:---:` center, `---:` right.
+
+## Quarto Document Structure
+
+A Quarto document has three main parts:
+
+1. **YAML Header**: Document metadata and settings
+2. **Markdown Content**: Text and formatting
+3. **Code Chunks**: Executable code blocks
+
+### YAML Header
+
+The YAML header appears at the top of the document, enclosed by triple dashes:
+
+```yaml
+---
+title: "My Analysis Report"
+author: "Your Name"
+date: today
+format: html
+---
+```
+
+**YAML** stands for "YAML Ain't Markup Language" (a recursive acronym). It uses key-value pairs with consistent indentation.
+
+### Common YAML Options
+
+```yaml
+---
+title: "Genomic Analysis Report"
+author: "Jane Scientist"
+date: "2025-01-15"
+format:
+  html:
+    theme: cosmo
+    toc: true
+    toc-depth: 3
+    code-fold: true
+execute:
+  echo: true
+  warning: false
+---
+```
+
+| Option | Description |
+|:-------|:------------|
+| `title` | Document title |
+| `author` | Author name(s) |
+| `date` | Publication date (`today` for current date) |
+| `format` | Output format(s) |
+| `toc` | Include table of contents |
+| `toc-depth` | How many header levels in TOC |
+| `code-fold` | Collapse code by default |
+| `execute` | Global code execution options |
+
+: Common YAML header options {#tbl-yaml-options}
+
+## Code Chunks
+
+Code chunks are the heart of Quarto's power—they let you embed executable code directly in your document.
+
+### Basic Syntax
+
+In Quarto, code chunks use this syntax:
+
+````markdown
+```{r}
+# Your R code here
+mean(c(1, 2, 3, 4, 5))
+```
+````
+
+```{r}
+#| echo: true
+# Your R code here
+mean(c(1, 2, 3, 4, 5))
+```
+
+### Chunk Options
+
+Control chunk behavior with special comments starting with `#|`:
+
+````markdown
+```{r}
+#| label: calculate-mean
+#| echo: true
+#| eval: true
+
+data <- c(1, 2, 3, 4, 5)
+mean(data)
+```
+````
+
+### Essential Chunk Options
+
+| Option | Description | Default |
+|:-------|:------------|:--------|
+| `echo` | Show code in output | `true` |
+| `eval` | Execute the code | `true` |
+| `include` | Include chunk in output | `true` |
+| `output` | Show results | `true` |
+| `warning` | Show warnings | `true` |
+| `message` | Show messages | `true` |
+| `error` | Continue on error | `false` |
+| `cache` | Cache results | `false` |
+
+: Code chunk options {#tbl-chunk-options}
+
+### Controlling Output
+
+```{r}
+#| label: output-examples
+#| echo: fenced
+
+# echo: true shows this code
+x <- rnorm(100)
+summary(x)
+```
+
+**Hide code, show results** (great for final reports):
+
+```{r}
+#| echo: false
+#| label: hidden-code
+
+# Readers see only the output
+hist(rnorm(1000), main = "Normal Distribution", col = "steelblue")
+```
+
+**Show code, hide results** (for teaching):
+
+```{r}
+#| eval: false
+#| label: code-only
+
+# This code is displayed but not executed
+install.packages("new_package")  # Don't actually run this
+```
+
+### Figure Options
+
+Control figure appearance:
+
+```{r}
+#| label: fig-example
+#| fig-cap: "A demonstration plot with custom dimensions"
+#| fig-width: 6
+#| fig-height: 4
+#| fig-align: center
+
+library(ggplot2)
+ggplot(mtcars, aes(x = wt, y = mpg)) +
+  geom_point(color = "steelblue", size = 3) +
+  geom_smooth(method = "lm", se = FALSE, color = "coral") +
+  labs(x = "Weight (1000 lbs)", y = "Miles per Gallon") +
+  theme_minimal()
+```
+
+| Option | Description |
+|:-------|:------------|
+| `fig-cap` | Figure caption |
+| `fig-width` | Width in inches |
+| `fig-height` | Height in inches |
+| `fig-align` | Alignment: left, center, right |
+| `out-width` | Output width (e.g., "80%") |
+| `fig-format` | Format: png, svg, pdf |
+
+: Figure chunk options {#tbl-figure-options}
+
+## Mathematical Equations
+
+Quarto supports LaTeX math notation for equations.
+
+### Inline Math
+
+Use single dollar signs for inline equations:
+
+```markdown
+The mean is calculated as $\bar{x} = \frac{1}{n}\sum_{i=1}^{n} x_i$.
+```
+
+The mean is calculated as $\bar{x} = \frac{1}{n}\sum_{i=1}^{n} x_i$.
+
+### Display Math
+
+Use double dollar signs for centered equations:
+
+```markdown
+$$
+\sigma^2 = \frac{1}{n-1}\sum_{i=1}^{n}(x_i - \bar{x})^2
+$$
+```
+
+$$
+\sigma^2 = \frac{1}{n-1}\sum_{i=1}^{n}(x_i - \bar{x})^2
+$$
+
+### Common Math Notation
+
+| Symbol | Code | Result |
+|:-------|:-----|:-------|
+| Greek letters | `$\alpha, \beta, \gamma$` | $\alpha, \beta, \gamma$ |
+| Subscript | `$x_1, x_{12}$` | $x_1, x_{12}$ |
+| Superscript | `$x^2, x^{10}$` | $x^2, x^{10}$ |
+| Fraction | `$\frac{a}{b}$` | $\frac{a}{b}$ |
+| Square root | `$\sqrt{x}$` | $\sqrt{x}$ |
+| Sum | `$\sum_{i=1}^{n}$` | $\sum_{i=1}^{n}$ |
+| Product | `$\prod_{i=1}^{n}$` | $\prod_{i=1}^{n}$ |
+| Integral | `$\int_0^1 f(x)dx$` | $\int_0^1 f(x)dx$ |
+
+: Common LaTeX math notation {#tbl-math-notation}
+
+### Example: Statistical Formulas
+
+The probability density function of a normal distribution:
+
+$$
+f(x) = \frac{1}{\sigma\sqrt{2\pi}} e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2}
+$$
+
+A regression equation:
+
+$$
+Y_i = \beta_0 + \beta_1 X_{1i} + \beta_2 X_{2i} + \epsilon_i
+$$
+
+## Callout Blocks
+
+Quarto provides special callout blocks for highlighting information:
+
+```markdown
+::: {.callout-note}
+This is a note callout for additional information.
+:::
+
+::: {.callout-warning}
+This warns readers about potential issues.
+:::
+
+::: {.callout-important}
+This highlights critical information.
+:::
+
+::: {.callout-tip}
+This provides helpful tips.
+:::
+
+::: {.callout-caution}
+This urges caution.
+:::
+```
+
+::: {.callout-note}
+This is a note callout for additional information.
+:::
+
+::: {.callout-warning}
+This warns readers about potential issues.
+:::
+
+::: {.callout-tip}
+This provides helpful tips.
+:::
+
+## Cross-References
+
+Reference figures, tables, and sections:
+
+### Figures and Tables
+
+```markdown
+See @fig-example for the scatter plot.
+The options are listed in @tbl-chunk-options.
+```
+
+See @fig-example for the scatter plot.
+The options are listed in @tbl-chunk-options.
+
+### Sections
+
+```markdown
+As discussed in @sec-quarto-documents, Quarto enables...
+```
+
+As discussed in @sec-quarto-documents, Quarto enables reproducible documents.
+
+## Rendering Documents
+
+### From RStudio
+
+- Click the **Render** button, or
+- Use the keyboard shortcut: `Ctrl+Shift+K` (Windows/Linux) or `Cmd+Shift+K` (Mac)
+
+### From Command Line
+
+```bash
+# Render to default format
+$ quarto render document.qmd
+
+# Render to specific format
+$ quarto render document.qmd --to pdf
+
+# Render all documents in a project
+$ quarto render
+```
+
+### Live Preview
+
+For interactive editing:
+
+```bash
+$ quarto preview document.qmd
+```
+
+This opens a browser window that automatically updates as you edit.
+
+## Multiple Output Formats
+
+Render to multiple formats from one source:
+
+```yaml
+---
+title: "My Report"
+format:
+  html:
+    theme: cosmo
+  pdf:
+    documentclass: article
+  docx: default
+---
+```
+
+Then render all formats:
+
+```bash
+$ quarto render document.qmd
+```
+
+## Project Organization
+
+For multi-document projects (like this book), use a `_quarto.yml` file:
+
+```yaml
+project:
+  type: book
+  output-dir: docs
+
+book:
+  title: "My Analysis Book"
+  author: "Your Name"
+  chapters:
+    - index.qmd
+    - intro.qmd
+    - methods.qmd
+    - results.qmd
+    - references.qmd
+
+format:
+  html:
+    theme: cosmo
+```
+
+## Best Practices
+
+### Document Structure
+
+1. **Start with clear objectives**: What should readers learn?
+2. **Organize hierarchically**: Use headers to create logical sections
+3. **Balance code and narrative**: Explain the "why" not just the "what"
+4. **Use meaningful chunk labels**: `#| label: fig-gene-expression` not `#| label: chunk1`
+
+### Code Quality
+
+1. **Show relevant code**: Hide boilerplate, show analysis
+2. **Comment your code**: Explain complex operations
+3. **Use consistent style**: Follow a style guide (tidyverse, etc.)
+4. **Set global options**: Configure defaults in YAML, override as needed
+
+### Reproducibility
+
+1. **Document your environment**: Include package versions
+2. **Use relative paths**: Avoid `/Users/yourname/...`
+3. **Set a random seed**: For reproducible random operations
+4. **Version control**: Track your .qmd files with Git
+
+```{r}
+#| label: session-info
+#| echo: true
+
+# Document your R environment
+sessionInfo()
+```
+
+## Summary
+
+Quarto transforms how we communicate scientific work:
+
+- **Markdown** provides simple, readable formatting syntax
+- **YAML headers** configure document settings
+- **Code chunks** embed executable, reproducible analysis
+- **Multiple formats** serve different audiences from one source
+- **Cross-references** create professional, navigable documents
+
+The investment in learning Quarto pays dividends every time you write a report, prepare a presentation, or publish research. Your future self (and your collaborators) will thank you for the reproducibility.
+
+## Resources
+
+- [Quarto Documentation](https://quarto.org/docs/) — Official comprehensive guide
+- [Quarto Gallery](https://quarto.org/docs/gallery/) — Examples and templates
+- [R Markdown Cookbook](https://bookdown.org/yihui/rmarkdown-cookbook/) — Many techniques apply to Quarto
+- [Markdown Guide](https://www.markdownguide.org/) — Comprehensive Markdown reference
+
+## Exercises {.unnumbered}
+
+::: {.callout-tip title="Practice Exercises"}
+**Exercise 1: First Quarto Document**
+
+1. Create a new file called `first_report.qmd`
+2. Add a YAML header with title, author, and date
+3. Write a brief introduction using headers, bold, and italic text
+4. Include a bulleted list of your analysis goals
+5. Render to HTML
+
+**Exercise 2: Code Integration**
+
+1. Create a document that loads a dataset (use `mtcars` or similar)
+2. Add a code chunk that calculates summary statistics
+3. Add a code chunk that creates a figure with a caption
+4. Use chunk options to hide code but show results for one chunk
+5. Use chunk options to show code but hide results for another
+
+**Exercise 3: Mathematical Notation**
+
+1. Write a document explaining a statistical concept
+2. Include at least one inline equation
+3. Include at least one display equation
+4. Use appropriate callout blocks for tips and warnings
+
+**Exercise 4: Multi-Format Output**
+
+1. Configure your document to render to both HTML and PDF
+2. Render both versions
+3. Note any differences in how content appears
+4. Adjust settings to optimize for each format
+:::

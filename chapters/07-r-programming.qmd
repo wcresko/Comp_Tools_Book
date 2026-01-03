@@ -65,6 +65,8 @@ RStudio organizes your workspace into four panes:
 **Files/Plots/Help (bottom-right)**
 :   File browser, plot viewer, and help documentation.
 
+![The RStudio interface showing all four panes: Source (top-left) with R code, Console (bottom-left) showing command output, Environment/Workspace (top-right) displaying variables and data, and Plots (bottom-right) showing a visualization.](images/RStudio_Screenshot.png){#fig-rstudio-interface width="100%"}
+
 ::: {.callout-tip}
 Learn keyboard shortcuts! `Ctrl+Enter` (Windows/Linux) or `Cmd+Enter` (Mac) runs the current line or selection. `Ctrl+Shift+S` runs the entire script.
 :::
