@@ -614,6 +614,77 @@ echo "working data" > "$TMPFILE"
 # Cleanup happens automatically
 ```
 
+## Running R Scripts from the Shell
+
+While shell scripts are powerful, sometimes you need R's statistical capabilities. The `Rscript` command lets you run R code directly from the shell.
+
+### Basic Usage
+
+```bash
+# Run an R script
+$ Rscript my_analysis.R
+
+# Execute a single R expression
+$ Rscript -e "print('Hello from R!')"
+
+# Quick calculation
+$ Rscript -e "mean(c(1, 2, 3, 4, 5))"
+```
+
+### Passing Arguments to R Scripts
+
+You can pass command-line arguments to R scripts, making them flexible and reusable:
+
+```r
+#!/usr/bin/env Rscript
+# process_data.R - Process a data file with custom parameters
+
+# Capture command-line arguments
+args <- commandArgs(trailingOnly = TRUE)
+
+# Check for required arguments
+if (length(args) < 2) {
+  stop("Usage: Rscript process_data.R <input_file> <output_file>")
+}
+
+input_file <- args[1]
+output_file <- args[2]
+
+# Now use these in your analysis
+data <- read.csv(input_file)
+# ... process data ...
+write.csv(data, output_file)
+
+cat("Processed", input_file, "-> ", output_file, "\n")
+```
+
+Run it from the shell:
+
+```bash
+$ Rscript process_data.R raw_data.csv cleaned_data.csv
+```
+
+### Combining Shell and R
+
+A common pattern is using shell scripts to orchestrate R analyses:
+
+```bash
+#!/bin/bash
+# run_analysis.sh - Process all CSV files in a directory
+
+for file in data/*.csv; do
+    output="results/$(basename "$file" .csv)_processed.csv"
+    echo "Processing $file..."
+    Rscript process_data.R "$file" "$output"
+done
+
+echo "All files processed!"
+```
+
+::: {.callout-tip}
+Using `Rscript` is particularly valuable for batch processing, scheduled tasks (cron jobs), and integration with high-performance computing clusters where you submit shell scripts as jobs.
+:::
+
 ## A Complete Bioinformatics Script
 
 Let's put it all together with a realistic example:
