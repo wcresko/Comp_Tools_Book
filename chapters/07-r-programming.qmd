@@ -12,13 +12,17 @@ theme_set(theme_minimal())
 After completing this chapter, you will be able to:
 
 - Explain why R is well-suited for scientific computing
+- Understand R's object-oriented nature and examine objects with `class()`, `typeof()`, and `str()`
 - Use RStudio as an integrated development environment
 - Perform basic arithmetic and variable assignment in R
 - Work with vectors and understand vectorized operations
-- Create and manipulate data frames
-- Use built-in functions and access help documentation
+- Use logical operators and handle floating-point comparisons correctly
+- Create and manipulate data frames, lists, and matrices
+- Use built-in functions and access help documentation including vignettes
+- Install packages and resolve namespace conflicts
 - Create basic visualizations
 - Read and write data files
+- Clean up your R environment and graphics devices
 :::
 
 ## Why R for Scientific Computing?
@@ -82,6 +86,56 @@ RStudio Projects organize your work with self-contained directories:
 
 Projects set your working directory automatically and keep related files together—essential for reproducible research.
 
+## Understanding R: Everything is an Object
+
+Before diving into R syntax, it helps to understand R's fundamental design philosophy: **everything in R is an object**. This object-oriented approach means that every piece of data you work with—numbers, text, datasets, even functions themselves—is stored as an object with specific properties.
+
+```{r}
+#| label: objects-concept
+
+# Numbers are objects
+x <- 42
+class(x)
+typeof(x)
+
+# Text strings are objects
+name <- "Gene Expression"
+class(name)
+typeof(name)
+
+# Even functions are objects!
+class(mean)
+typeof(mean)
+
+# And data frames are objects
+df <- data.frame(a = 1:3, b = c("x", "y", "z"))
+class(df)
+typeof(df)
+```
+
+Every object has:
+
+- **A class**: Determines how the object behaves with functions (what `class()` returns)
+- **A type**: The underlying storage mode (what `typeof()` returns)
+- **Attributes**: Optional metadata like names, dimensions, or custom properties
+
+The `str()` function provides a compact display of an object's structure:
+
+```{r}
+#| label: str-example
+
+# Examine structure of different objects
+str(x)
+str(name)
+str(df)
+```
+
+Understanding this object-oriented nature helps you:
+
+1. **Debug errors**: When functions fail, check what class of object you're passing
+2. **Use generic functions**: Functions like `print()`, `summary()`, and `plot()` behave differently based on object class
+3. **Extend R**: You can create custom classes with specialized behaviors
+
 ## R Basics: Arithmetic and Variables
 
 ### R as a Calculator
@@ -99,9 +153,24 @@ The simplest use of R is arithmetic:
 
 # More complex expressions
 sqrt(144) + log(100)
+
+# Integer division and modulo
+17 %/% 5    # Integer division: how many times 5 goes into 17
+17 %% 5     # Modulo: remainder after division
 ```
 
-R follows standard mathematical order of operations (PEMDAS).
+R follows standard mathematical order of operations (PEMDAS). The modulo operator (`%%`) is particularly useful for tasks like determining if a number is even or odd, cycling through indices, or extracting digits from numbers:
+
+```{r}
+#| label: modulo-examples
+
+# Check if numbers are even (remainder 0 when divided by 2)
+numbers <- 1:10
+numbers %% 2 == 0
+
+# Extract the last digit of a number
+12345 %% 10
+```
 
 ### Creating Variables
 
@@ -147,6 +216,43 @@ myData2 <- 42
 # 2samples <- 5      # Can't start with number
 # my-data <- 10      # Hyphens not allowed
 ```
+
+### Reserved Words
+
+R has **reserved words** that cannot be used as variable names because they have special meaning in the language:
+
+| Reserved Words | Description |
+|:---------------|:------------|
+| `if`, `else` | Conditional statements |
+| `for`, `while`, `repeat` | Loop constructs |
+| `function` | Function definition |
+| `in` | Used in for loops |
+| `next`, `break` | Loop control |
+| `TRUE`, `FALSE` | Logical constants |
+| `NULL` | Null object |
+| `Inf`, `NaN`, `NA` | Special numeric values |
+
+: R reserved words {#tbl-reserved-words}
+
+R also has **semi-reserved words**—names of built-in constants and functions that you *can* overwrite but generally shouldn't:
+
+```{r}
+#| label: semi-reserved
+#| eval: false
+
+# These work but are dangerous:
+T <- 5       # Overwrites TRUE abbreviation
+F <- 10      # Overwrites FALSE abbreviation
+c <- "text"  # Shadows the c() function
+mean <- 42   # Shadows the mean() function
+
+# If you accidentally overwrite something, use rm() to remove it
+rm(c)        # Removes your 'c' variable, restoring access to c()
+```
+
+::: {.callout-warning}
+Avoid using `T` and `F` as variable names—they are common abbreviations for `TRUE` and `FALSE`. Similarly, never name variables `c`, `t`, `mean`, `sum`, or other common function names.
+:::
 
 ## Key R Terminology
 
@@ -312,6 +418,99 @@ log(-1)
 
 Handling `NA` values is a common task in data analysis.
 
+### Logical Operators and Comparisons
+
+R provides a rich set of operators for logical comparisons and Boolean operations:
+
+```{r}
+#| label: logical-operators
+
+# Comparison operators
+5 > 3     # Greater than
+5 < 3     # Less than
+5 >= 5    # Greater than or equal
+5 <= 5    # Less than or equal
+5 == 5    # Equal (note: two equals signs!)
+5 != 3    # Not equal
+
+# Logical operators
+TRUE & FALSE   # AND
+TRUE | FALSE   # OR
+!TRUE          # NOT
+
+# Vectorized logical operations
+x <- c(1, 5, 10, 15, 20)
+x > 5 & x < 18   # Both conditions must be true
+x < 5 | x > 15   # Either condition can be true
+```
+
+The `%in%` operator is particularly useful for checking membership in a set:
+
+```{r}
+#| label: in-operator
+
+# Check if values are in a set
+genes <- c("BRCA1", "TP53", "EGFR", "KRAS")
+target_genes <- c("TP53", "EGFR")
+
+genes %in% target_genes
+
+# Useful for subsetting
+genes[genes %in% target_genes]
+```
+
+::: {.callout-important title="Operator Precedence"}
+R evaluates operators in a specific order. From highest to lowest precedence:
+
+1. `^` (exponentiation)
+2. `-` (unary minus, for negation)
+3. `:` (sequence)
+4. `%any%` (special operators like `%%`, `%/%`, `%in%`)
+5. `*`, `/` (multiplication, division)
+6. `+`, `-` (addition, subtraction)
+7. `<`, `>`, `<=`, `>=`, `==`, `!=` (comparisons)
+8. `!` (logical NOT)
+9. `&`, `&&` (logical AND)
+10. `|`, `||` (logical OR)
+11. `<-`, `=` (assignment)
+
+Use parentheses to make your intentions clear and avoid unexpected results.
+:::
+
+### Floating-Point Precision
+
+A common source of confusion involves floating-point arithmetic. Computers represent decimal numbers with limited precision, which can lead to unexpected results:
+
+```{r}
+#| label: floating-point
+
+# This seems wrong, but is due to floating-point representation
+0.1 + 0.2 == 0.3
+
+# See the actual values
+print(0.1 + 0.2, digits = 20)
+print(0.3, digits = 20)
+```
+
+Instead of using `==` for floating-point comparisons, use `all.equal()`:
+
+```{r}
+#| label: all-equal
+
+# Safe comparison for floating-point numbers
+all.equal(0.1 + 0.2, 0.3)
+
+# Returns TRUE if values are nearly equal (within tolerance)
+isTRUE(all.equal(0.1 + 0.2, 0.3))
+
+# You can also specify a tolerance
+all.equal(1.0, 1.0001, tolerance = 0.001)
+```
+
+::: {.callout-warning}
+Always use `all.equal()` or check if the difference is within an acceptable tolerance when comparing floating-point numbers. Never rely on `==` for exact equality of decimal calculations.
+:::
+
 ## Functions
 
 Functions perform operations on inputs and return outputs. R has thousands of built-in functions.
@@ -377,6 +576,44 @@ args(mean)
 example(mean)
 ```
 
+#### Vignettes and Demos
+
+Beyond function-level help, packages often include **vignettes**—comprehensive tutorials that demonstrate how to use the package:
+
+```{r}
+#| label: vignettes
+#| eval: false
+
+# List all available vignettes
+vignette()
+
+# List vignettes for a specific package
+vignette(package = "dplyr")
+
+# Open a specific vignette
+vignette("dplyr")
+
+# Browse vignettes in your browser
+browseVignettes("ggplot2")
+```
+
+Some packages also include **demos**—interactive demonstrations of functionality:
+
+```{r}
+#| label: demos
+#| eval: false
+
+# List all available demos
+demo()
+
+# Run a specific demo
+demo(graphics)    # Base R graphics demonstration
+```
+
+::: {.callout-tip}
+Vignettes are often the best place to start when learning a new package. They provide context and workflows that function documentation alone cannot convey.
+:::
+
 The help page structure:
 
 - **Description**: What the function does
@@ -427,6 +664,60 @@ Unlike installation, you need to call `library()` every time you start a new R s
 
 ::: {.callout-tip}
 It's good practice to load all required packages at the beginning of your script. This makes dependencies clear and helps others reproduce your work.
+:::
+
+### Namespace Conflicts
+
+When you load multiple packages, function names can collide. The most recently loaded package "wins," masking functions from earlier packages:
+
+```{r}
+#| label: namespace-conflicts
+#| eval: false
+
+# Loading dplyr after another package
+library(MASS)
+library(dplyr)
+# Warning: The following object is masked from 'package:MASS': select
+```
+
+When conflicts occur, you have several options:
+
+**1. Use the package prefix (recommended)**
+
+```{r}
+#| label: namespace-prefix
+#| eval: false
+
+# Explicitly specify which package's function to use
+dplyr::select(data, column1, column2)
+MASS::select(object)
+
+# This works even without loading the package
+stats::filter(x, method = "convolution")
+```
+
+**2. Control loading order**
+
+Load packages with conflicting names in the order that gives you the default behavior you want.
+
+**3. Use the `conflicted` package**
+
+```{r}
+#| label: conflicted-package
+#| eval: false
+
+# Install and load conflicted
+install.packages("conflicted")
+library(conflicted)
+
+# Now conflicts cause errors instead of silent masking
+# You must explicitly choose which function to use:
+conflict_prefer("filter", "dplyr")
+conflict_prefer("select", "dplyr")
+```
+
+::: {.callout-warning}
+The `filter()` and `lag()` functions from dplyr commonly conflict with base R's `stats::filter()` and `stats::lag()`. If your filtering code suddenly stops working, namespace conflicts are often the culprit.
 :::
 
 ## Data Frames
@@ -941,24 +1232,107 @@ pnorm(1.96)     # P(X ≤ 1.96)
 qnorm(0.975)    # Value where P(X ≤ x) = 0.975
 ```
 
+## Cleaning Up Your Environment
+
+As you work in R, your environment accumulates objects. Periodically cleaning up helps manage memory and avoid confusion.
+
+### Removing Objects
+
+Use `rm()` to remove objects from your environment:
+
+```{r}
+#| label: rm-examples
+#| eval: false
+
+# Remove a single object
+rm(x)
+
+# Remove multiple objects
+rm(x, y, z)
+
+# Remove all objects (use with caution!)
+rm(list = ls())
+```
+
+::: {.callout-warning}
+`rm(list = ls())` removes everything in your environment. Use it intentionally, typically at the start of a script to ensure a clean slate, but never in a shared function or package.
+:::
+
+### Closing Graphics Devices
+
+When working with plots, graphics devices can accumulate. Use `dev.off()` to close them:
+```{r}
+#| label: dev-off
+#| eval: false
+
+# Close the current graphics device
+dev.off()
+
+# Close all graphics devices
+graphics.off()
+
+# List open devices
+dev.list()
+```
+
+This is especially important when saving plots to files—if you don't close the device, the file may not be properly saved:
+
+```{r}
+#| label: save-plot
+#| eval: false
+
+# Save a plot to PDF
+pdf("my_plot.pdf")
+plot(1:10, (1:10)^2)
+dev.off()  # Essential! Closes the file and finalizes it
+
+# Similarly for PNG
+png("my_plot.png", width = 800, height = 600)
+plot(1:10, (1:10)^2)
+dev.off()
+```
+
+### Checking Your Environment
+
+```{r}
+#| label: environment-check
+#| eval: false
+
+# List all objects in the environment
+ls()
+
+# List objects matching a pattern
+ls(pattern = "data")
+
+# Check if an object exists
+exists("my_variable")
+
+# See environment size
+object.size(x)  # Size of one object
+```
+
 ## Summary
 
 This chapter introduced R programming fundamentals:
 
 - R is designed for statistical computing with excellent graphics
+- Everything in R is an object with a class and type; use `class()`, `typeof()`, and `str()` to explore objects
 - RStudio provides an integrated development environment
-- Variables are assigned with `<-`; R is case-sensitive
+- Variables are assigned with `<-`; R is case-sensitive; avoid reserved words and shadowing built-in functions
 - Vectors are the fundamental data structure; operations are vectorized
+- Logical operators (`&`, `|`, `!`, `%in%`) and comparison operators enable conditional logic
+- Floating-point comparisons require `all.equal()` instead of `==`
 - Data frames hold tabular data with columns of different types
 - Lists can contain elements of different types and lengths
 - Matrices are optimized for numerical computations
-- Functions perform operations; use `?function` for help
-- Packages extend R's capabilities; install with `install.packages()`, load with `library()`
+- Functions perform operations; use `?function`, vignettes, and demos for help
+- Packages extend R's capabilities; watch for namespace conflicts when loading multiple packages
 - The split-apply-combine pattern (`tapply()`, `aggregate()`, `apply()`) is fundamental to data analysis
 - Conditional logic (`ifelse()`) and loops enable programmatic control
 - Writing custom functions allows you to encapsulate repeated operations
 - R reads/writes CSV, TSV, and Excel files easily
 - Basic plotting is built-in; ggplot2 offers advanced graphics
+- Use `rm()` and `dev.off()` to clean up your environment and graphics devices
 
 These fundamentals prepare you for more advanced R programming, including the tidyverse packages covered in subsequent chapters.
 
