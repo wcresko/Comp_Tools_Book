@@ -403,6 +403,74 @@ To resolve:
 2. Remove the conflict markers (`<<<<<<<`, `=======`, `>>>>>>>`)
 3. Stage and commit the resolved file
 
+## Pull Requests
+
+**Pull requests** (PRs) are GitHub's mechanism for proposing changes and requesting code review. They're central to collaborative workflows and open-source contributions.
+
+### Creating a Pull Request
+
+After pushing a branch to GitHub:
+
+1. Navigate to your repository on GitHub
+2. You'll see a prompt: "Compare & pull request" — click it
+3. Add a descriptive title and summary of your changes
+4. Assign reviewers if working with collaborators
+5. Click "Create pull request"
+
+Reviewers can then:
+
+- Comment on specific lines of code
+- Request changes
+- Approve the PR
+
+Once approved, click "Merge pull request" to integrate the changes into the main branch.
+
+::: {.callout-tip}
+Pull requests aren't just for teams! Use them on solo projects to:
+
+- Document significant changes with a summary
+- Review your own code before merging
+- Keep a clean history of feature additions
+:::
+
+### Pushing Branches to GitHub
+
+To share a branch with collaborators or create a PR:
+
+```bash
+# Push a new branch to GitHub
+$ git push origin feature-branch
+
+# Delete a remote branch (note the colon)
+$ git push origin :old-branch
+```
+
+## Forking
+
+**Forking** creates your own copy of someone else's repository under your GitHub account. It's different from cloning:
+
+- **Clone**: Direct copy linked to the original repo
+- **Fork**: Independent copy on your GitHub account (which you then clone)
+
+### When to Fork
+
+- Contributing to open-source projects
+- Using someone's code as a starting point for your own project
+- Experimenting with changes you don't have permission to push
+
+### Fork Workflow
+
+1. Click "Fork" on the GitHub repository page
+2. Clone your fork to your local machine
+3. Make changes and push to your fork
+4. Create a pull request to the original repository
+
+This is how most open-source software is developed—outside contributors fork, improve, and submit pull requests back to the main project.
+
+::: {.callout-note}
+Keeping a fork synchronized with the original ("upstream") repository requires additional steps. See GitHub's guide on [Syncing a fork](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork).
+:::
+
 ## The .gitignore File
 
 Not everything should be tracked. The `.gitignore` file specifies intentionally untracked files:
@@ -538,6 +606,133 @@ For team projects:
 5. Create a **Pull Request** for review
 6. After approval, **merge** to main
 
+## Authentication: HTTPS vs SSH
+
+Git can authenticate with GitHub using either HTTPS or SSH:
+
+**HTTPS** (easier to start)
+:   Uses your GitHub username and a personal access token. Credentials can be cached so you don't enter them repeatedly.
+
+**SSH** (recommended for regular use)
+:   Uses cryptographic keys stored on your computer. More secure and convenient once set up.
+
+To switch to SSH, see GitHub's guide on [Connecting with SSH](https://docs.github.com/en/authentication/connecting-to-github-with-ssh).
+
+### Credential Caching (HTTPS)
+
+Avoid entering credentials repeatedly:
+
+```bash
+# Cache credentials for 1 hour (3600 seconds)
+$ git config --global credential.helper 'cache --timeout=3600'
+
+# On macOS, use the keychain
+$ git config --global credential.helper osxkeychain
+
+# On Windows, use the credential manager
+$ git config --global credential.helper manager
+```
+
+## Line Endings Across Operating Systems
+
+Different operating systems use different characters to mark line endings:
+
+- **Linux/macOS**: LF (Line Feed)
+- **Windows**: CRLF (Carriage Return + Line Feed)
+
+This can cause Git to show changes on lines you didn't edit when collaborating across operating systems.
+
+### Solution
+
+Configure Git to handle line endings automatically:
+
+```bash
+# On macOS/Linux
+$ git config --global core.autocrlf input
+
+# On Windows
+$ git config --global core.autocrlf true
+```
+
+## Temporarily Saving Changes: Git Stash
+
+Sometimes you need to switch branches but aren't ready to commit your current changes. `git stash` temporarily saves your work:
+
+```bash
+# Stash current changes
+$ git stash
+
+# List stashed changes
+$ git stash list
+
+# Restore most recent stash
+$ git stash pop
+
+# Restore a specific stash
+$ git stash apply stash@{2}
+
+# Delete a stash
+$ git stash drop stash@{0}
+```
+
+This is useful when you need to quickly switch context—perhaps to fix an urgent bug on another branch—without committing incomplete work.
+
+## Troubleshooting
+
+### Common Issues and Solutions
+
+**Q: I made changes to the wrong branch!**
+
+```bash
+# Stash your changes
+$ git stash
+
+# Switch to correct branch
+$ git checkout correct-branch
+
+# Apply the stashed changes
+$ git stash pop
+```
+
+**Q: I want to undo my last commit (but keep the changes)**
+
+```bash
+$ git reset --soft HEAD~1
+```
+
+**Q: I committed something I shouldn't have**
+
+```bash
+# Remove file from Git but keep it locally
+$ git rm --cached sensitive_file.txt
+$ git commit -m "Remove sensitive file from tracking"
+```
+
+**Q: Everything is broken!**
+
+When all else fails, you can always clone a fresh copy:
+
+```bash
+# Save your current work somewhere safe first!
+$ cp -r my_project my_project_backup
+
+# Clone fresh from GitHub
+$ git clone https://github.com/username/repository.git my_project_fresh
+```
+
+::: {.callout-tip}
+For more Git emergencies, visit [ohshitgit.com](https://ohshitgit.com/) — a humorous but genuinely helpful resource for common Git mistakes.
+:::
+
+### When to Commit?
+
+**Commit early and often.** A good rule of thumb:
+
+- Commit when you've completed a logical unit of work
+- Commit before trying something experimental
+- Commit at the end of each work session
+- If you're asking "should I commit?" — the answer is usually yes
+
 ## Useful Commands Reference
 
 | Command | Description |
@@ -572,9 +767,11 @@ Learning Git has a steep initial curve, but the investment pays dividends throug
 
 ## Resources
 
+- [Happy Git and GitHub for the useR](https://happygitwithr.com/) — Excellent guide for R users by Jenny Bryan
 - [Pro Git Book](https://git-scm.com/book/en/v2) — Comprehensive free reference [@chacon2014pro]
 - [GitHub Documentation](https://docs.github.com) — Official guides
 - [Software Carpentry Git Lesson](https://swcarpentry.github.io/git-novice/) — Beginner-friendly tutorial
+- [Oh Shit, Git!?!](https://ohshitgit.com/) — Solutions for common Git mistakes
 - [Quarto + GitHub Pages](https://quarto.org/docs/publishing/github-pages.html) — Publishing documentation
 
 ## Exercises {.unnumbered}
