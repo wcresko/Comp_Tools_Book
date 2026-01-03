@@ -154,6 +154,8 @@ A **path** specifies the location of a file or directory. Paths come in two form
 Documents/analysis.R
 ```
 
+![Understanding file system paths: This diagram shows how an absolute path like `/home/catchen/working` is constructed by following the directory tree from root (`/`) through each level.](images/Directory_example.jpeg){#fig-paths width="70%"}
+
 Special directory references:
 
 - `.` (single dot) — current directory
