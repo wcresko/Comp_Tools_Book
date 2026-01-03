@@ -146,6 +146,20 @@ myData2 <- 42
 # my-data <- 10      # Hyphens not allowed
 ```
 
+## Key R Terminology
+
+Before diving deeper into R, let's establish some fundamental terminology that you'll encounter throughout your R programming journey:
+
+![Core R concepts: Objects, Vectors, Functions, Parameters, and Arguments are the building blocks of R programming.](images/R_definitions_Logan.001.jpeg){#fig-r-terminology width="90%"}
+
+Understanding R's operators is equally important. The table below shows the main operators you'll use, listed in order of precedence (operations higher in the table are evaluated first):
+
+![R operators reference: This table shows common R operators for indexing, arithmetic, comparison, logical operations, and assignment.](images/R_definitions_Logan.002.jpeg){#fig-r-operators width="70%"}
+
+::: {.callout-tip}
+Note that R uses `<-` for assignment (right to left), while `=` is typically used for argument assignment within function calls. Both work for variable assignment, but `<-` is the conventional R style.
+:::
+
 ## Vectors: R's Fundamental Data Structure
 
 R thinks in terms of **vectors**—ordered collections of values of the same type. Even a single number is a vector of length 1.
