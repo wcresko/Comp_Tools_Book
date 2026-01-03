@@ -28,6 +28,7 @@ book:
     - chapters/09-data-visualization.qmd
     - chapters/10-git-github.qmd
     - chapters/11-hpc-talapas.qmd
+    - chapters/12-quarto-documents.qmd
     - references.qmd
   
   appendices:
