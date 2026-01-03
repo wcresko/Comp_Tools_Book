@@ -1,0 +1,580 @@
+# Data Visualization with ggplot2 {#sec-data-viz}
+
+```{r}
+#| label: setup
+#| include: false
+library(tidyverse)
+library(dslabs)
+theme_set(theme_minimal())
+```
+
+::: {.callout-note title="Learning Objectives"}
+After completing this chapter, you will be able to:
+
+- Explain the Grammar of Graphics philosophy underlying ggplot2
+- Create common plot types: scatter plots, histograms, box plots, bar charts
+- Customize plots with colors, labels, and themes
+- Use faceting to create multi-panel figures
+- Apply data visualization best practices
+- Avoid common visualization pitfalls
+:::
+
+## The Grammar of Graphics
+
+**ggplot2** is R's most popular visualization package, built on the "Grammar of Graphics" framework. Just as grammar provides rules for constructing sentences, the grammar of graphics provides rules for constructing statistical graphics.
+
+### Seven Components of a Graphic
+
+Every ggplot2 visualization is built from these components:
+
+| Component | Description | Example |
+|:----------|:------------|:--------|
+| **Data** | The dataset being visualized | `mtcars`, `iris` |
+| **Aesthetics** | Mappings from data to visual properties | x, y, color, size, shape |
+| **Geometries** | Visual elements representing data | points, lines, bars |
+| **Facets** | Subplots for data subsets | panels by category |
+| **Statistics** | Transformations of data | binning, smoothing |
+| **Coordinates** | The coordinate system | Cartesian, polar |
+| **Themes** | Non-data visual elements | fonts, backgrounds |
+
+: Components of the Grammar of Graphics {#tbl-grammar}
+
+![The Grammar of Graphics framework](images/images_4a.017.jpeg){#fig-grammar-graphics}
+
+## Building a Plot Layer by Layer
+
+ggplot2 builds plots incrementally using the `+` operator:
+
+```{r}
+#| label: basic-ggplot
+
+# Start with data and aesthetics
+ggplot(data = mtcars, aes(x = wt, y = mpg)) +
+  # Add a geometry layer
+  geom_point()
+```
+
+Let's break this down:
+
+1. `ggplot()` initializes the plot with data
+2. `aes()` maps variables to visual properties (aesthetics)
+3. `geom_point()` adds the point geometry
+
+### The Template
+
+Most ggplot2 code follows this template:
+
+```r
+ggplot(data = <DATA>, aes(<MAPPINGS>)) +
+  <GEOM_FUNCTION>() +
+  <OPTIONAL_LAYERS>
+```
+
+## Essential Geoms
+
+### Scatter Plots with `geom_point()`
+
+Scatter plots show relationships between two continuous variables:
+
+```{r}
+#| label: fig-scatter
+#| fig-cap: "Relationship between car weight and fuel efficiency"
+
+ggplot(mtcars, aes(x = wt, y = mpg)) +
+  geom_point() +
+  labs(
+    title = "Fuel Efficiency vs. Weight",
+    x = "Weight (1000 lbs)",
+    y = "Miles per Gallon"
+  )
+```
+
+### Adding Color and Shape
+
+Map additional variables to aesthetics:
+
+```{r}
+#| label: fig-scatter-color
+#| fig-cap: "Scatter plot with color representing cylinders"
+
+ggplot(mtcars, aes(x = wt, y = mpg, color = factor(cyl))) +
+  geom_point(size = 3) +
+  labs(
+    title = "Fuel Efficiency by Weight and Cylinders",
+    x = "Weight (1000 lbs)",
+    y = "Miles per Gallon",
+    color = "Cylinders"
+  )
+```
+
+### Histograms with `geom_histogram()`
+
+Histograms show the distribution of a single continuous variable:
+
+```{r}
+#| label: fig-histogram
+#| fig-cap: "Distribution of diamond prices"
+
+ggplot(diamonds, aes(x = price)) +
+  geom_histogram(binwidth = 500, fill = "steelblue", color = "white") +
+  labs(
+    title = "Distribution of Diamond Prices",
+    x = "Price (USD)",
+    y = "Count"
+  )
+```
+
+### Density Plots with `geom_density()`
+
+Smoothed version of histograms:
+
+```{r}
+#| label: fig-density
+#| fig-cap: "Density plot comparing distributions by cut quality"
+
+ggplot(diamonds, aes(x = price, fill = cut)) +
+  geom_density(alpha = 0.5) +
+  labs(
+    title = "Price Distribution by Cut Quality",
+    x = "Price (USD)",
+    y = "Density"
+  )
+```
+
+### Box Plots with `geom_boxplot()`
+
+Box plots show distribution summaries and are excellent for comparisons:
+
+```{r}
+#| label: fig-boxplot
+#| fig-cap: "Fuel efficiency by number of cylinders"
+
+ggplot(mtcars, aes(x = factor(cyl), y = mpg, fill = factor(cyl))) +
+  geom_boxplot(show.legend = FALSE) +
+  labs(
+    title = "Fuel Efficiency by Cylinder Count",
+    x = "Number of Cylinders",
+    y = "Miles per Gallon"
+  )
+```
+
+![Anatomy of a box plot](images/images_4a.001.jpeg){#fig-boxplot-anatomy width="60%"}
+
+### Bar Charts with `geom_bar()` and `geom_col()`
+
+Use `geom_bar()` for counts and `geom_col()` for values:
+
+```{r}
+#| label: fig-bar
+#| fig-cap: "Count of diamonds by cut quality"
+
+ggplot(diamonds, aes(x = cut, fill = cut)) +
+  geom_bar(show.legend = FALSE) +
+  labs(
+    title = "Diamond Count by Cut Quality",
+    x = "Cut",
+    y = "Count"
+  )
+```
+
+### Line Plots with `geom_line()`
+
+Line plots are ideal for time series or connected observations:
+
+```{r}
+#| label: fig-line
+#| fig-cap: "Example line plot"
+
+# Create sample time series data
+set.seed(42)
+time_data <- tibble(
+  day = 1:30,
+  value = cumsum(rnorm(30))
+)
+
+ggplot(time_data, aes(x = day, y = value)) +
+  geom_line(color = "darkblue", linewidth = 1) +
+  geom_point(color = "darkblue") +
+  labs(
+    title = "Simulated Time Series",
+    x = "Day",
+    y = "Value"
+  )
+```
+
+## Combining Geoms
+
+Layer multiple geoms to create richer visualizations:
+
+```{r}
+#| label: fig-combined
+#| fig-cap: "Scatter plot with trend line"
+
+ggplot(mtcars, aes(x = wt, y = mpg)) +
+  geom_point(aes(color = factor(cyl)), size = 3) +
+  geom_smooth(method = "lm", se = TRUE, color = "black") +
+  labs(
+    title = "Weight vs. MPG with Linear Trend",
+    x = "Weight (1000 lbs)",
+    y = "Miles per Gallon",
+    color = "Cylinders"
+  )
+```
+
+## Faceting: Small Multiples
+
+Faceting creates separate panels for subsets of data.
+
+### `facet_wrap()` for One Variable
+
+```{r}
+#| label: fig-facet-wrap
+#| fig-cap: "MPG vs weight, faceted by cylinder count"
+
+ggplot(mtcars, aes(x = wt, y = mpg)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  facet_wrap(~cyl) +
+  labs(
+    title = "Fuel Efficiency by Weight (Panels by Cylinders)",
+    x = "Weight (1000 lbs)",
+    y = "Miles per Gallon"
+  )
+```
+
+### `facet_grid()` for Two Variables
+
+```{r}
+#| label: fig-facet-grid
+#| fig-cap: "Two-dimensional faceting"
+
+ggplot(mtcars, aes(x = wt, y = mpg)) +
+  geom_point() +
+  facet_grid(am ~ cyl, labeller = labeller(
+    am = c("0" = "Automatic", "1" = "Manual"),
+    cyl = c("4" = "4 cyl", "6" = "6 cyl", "8" = "8 cyl")
+  )) +
+  labs(
+    title = "MPG by Weight, Transmission, and Cylinders",
+    x = "Weight (1000 lbs)",
+    y = "Miles per Gallon"
+  )
+```
+
+## Customizing Your Plots
+
+### Labels and Titles
+
+```{r}
+#| label: fig-labels
+#| fig-cap: "Plot with comprehensive labels"
+
+ggplot(mtcars, aes(x = wt, y = mpg)) +
+  geom_point() +
+  labs(
+    title = "Car Fuel Efficiency",
+    subtitle = "Data from the 1974 Motor Trend magazine",
+    x = "Weight (1000 lbs)",
+    y = "Miles per Gallon",
+    caption = "Source: mtcars dataset"
+  )
+```
+
+### Themes
+
+ggplot2 includes several built-in themes:
+
+```{r}
+#| label: fig-themes
+#| fig-cap: "Comparison of ggplot2 themes"
+#| fig-height: 8
+
+library(patchwork)
+
+p <- ggplot(mtcars, aes(x = wt, y = mpg)) +
+  geom_point() +
+  labs(title = "")
+
+p1 <- p + theme_gray() + labs(title = "theme_gray (default)")
+p2 <- p + theme_minimal() + labs(title = "theme_minimal")
+p3 <- p + theme_classic() + labs(title = "theme_classic")
+p4 <- p + theme_bw() + labs(title = "theme_bw")
+
+(p1 + p2) / (p3 + p4)
+```
+
+### Color Scales
+
+```{r}
+#| label: fig-colors
+#| fig-cap: "Custom color palette"
+
+ggplot(mtcars, aes(x = wt, y = mpg, color = factor(cyl))) +
+  geom_point(size = 3) +
+  scale_color_brewer(palette = "Set1") +
+  labs(
+    title = "Using Color Brewer Palette",
+    color = "Cylinders"
+  ) +
+  theme_minimal()
+```
+
+## Data Visualization Best Practices
+
+Good data visualization communicates clearly and honestly. Follow these principles:
+
+### Show the Data
+
+Don't hide your data behind summaries when individual points are informative:
+
+```{r}
+#| label: fig-show-data
+#| fig-cap: "Showing raw data with summary statistics"
+
+ggplot(mtcars, aes(x = factor(cyl), y = mpg)) +
+  geom_boxplot(outlier.shape = NA, fill = "lightblue") +
+  geom_jitter(width = 0.2, alpha = 0.5) +
+  labs(
+    title = "Show the Data, Not Just the Summary",
+    x = "Cylinders",
+    y = "MPG"
+  )
+```
+
+### Use Position and Length for Precision
+
+Humans are best at comparing positions and lengths. Angles (pie charts) and areas are harder to judge:
+
+```{r}
+#| label: fig-bar-vs-pie
+#| fig-cap: "Bar chart provides clearer comparison than a pie chart would"
+
+# Create summary data
+cut_summary <- diamonds |>
+  count(cut) |>
+  mutate(pct = n / sum(n) * 100)
+
+ggplot(cut_summary, aes(x = reorder(cut, pct), y = pct, fill = cut)) +
+  geom_col(show.legend = FALSE) +
+  coord_flip() +
+  labs(
+    title = "Diamond Distribution by Cut",
+    x = "Cut Quality",
+    y = "Percentage"
+  ) +
+  theme_minimal()
+```
+
+::: {.callout-warning title="Avoid Pie Charts"}
+Pie charts make comparisons difficult because humans are poor at judging angles. Use bar charts instead for categorical comparisons.
+:::
+
+### Order by Meaningful Values
+
+```{r}
+#| label: fig-ordered
+#| fig-cap: "Ordering categories by value aids comparison"
+
+# Calculate mean mpg by manufacturer
+mtcars_summary <- mtcars |>
+  mutate(car = rownames(mtcars)) |>
+  slice_head(n = 10) |>
+  mutate(car = reorder(car, mpg))
+
+ggplot(mtcars_summary, aes(x = car, y = mpg)) +
+  geom_col(fill = "steelblue") +
+  coord_flip() +
+  labs(
+    title = "Fuel Efficiency by Car (Ordered)",
+    x = NULL,
+    y = "Miles per Gallon"
+  )
+```
+
+### Include Zero for Bar Charts
+
+When using bars, start the y-axis at zero. Otherwise, you distort relative magnitudes:
+
+```{r}
+#| label: fig-include-zero
+#| fig-cap: "Bar charts should include zero to show true proportions"
+
+# Example data
+sales <- tibble(
+  quarter = c("Q1", "Q2", "Q3", "Q4"),
+  revenue = c(100, 105, 110, 108)
+)
+
+ggplot(sales, aes(x = quarter, y = revenue)) +
+  geom_col(fill = "coral") +
+  labs(
+    title = "Quarterly Revenue (Starting at Zero)",
+    x = "Quarter",
+    y = "Revenue"
+  ) +
+  theme_minimal()
+```
+
+### Consider Color Blindness
+
+About 8% of men and 0.5% of women have color vision deficiency. Use colorblind-friendly palettes:
+
+```{r}
+#| label: fig-colorblind
+#| fig-cap: "Colorblind-friendly palette"
+
+# Colorblind-friendly colors
+cb_palette <- c("#E69F00", "#56B4E9", "#009E73", "#F0E442",
+                "#0072B2", "#D55E00", "#CC79A7")
+
+ggplot(mtcars, aes(x = wt, y = mpg, color = factor(cyl))) +
+  geom_point(size = 3) +
+  scale_color_manual(values = cb_palette) +
+  labs(
+    title = "Using a Colorblind-Friendly Palette",
+    color = "Cylinders"
+  ) +
+  theme_minimal()
+```
+
+::: {.callout-tip}
+The viridis color scales (`scale_color_viridis_d()`, `scale_fill_viridis_c()`) are designed to be colorblind-friendly and perceptually uniform.
+:::
+
+### Avoid Chart Junk
+
+Remove unnecessary visual elements that don't convey information:
+
+- Avoid 3D effects
+- Remove unnecessary gridlines
+- Don't use gradient fills for categorical data
+- Skip decorative elements
+
+## Common Visualization Tasks
+
+### Comparing Distributions
+
+```{r}
+#| label: fig-distributions
+#| fig-cap: "Comparing distributions with density plots"
+
+ggplot(iris, aes(x = Sepal.Length, fill = Species)) +
+  geom_density(alpha = 0.6) +
+  scale_fill_brewer(palette = "Set2") +
+  labs(
+    title = "Sepal Length Distribution by Species",
+    x = "Sepal Length (cm)",
+    y = "Density"
+  ) +
+  theme_minimal()
+```
+
+### Before-After Comparisons
+
+Slope charts effectively show changes between two time points:
+
+```{r}
+#| label: fig-slope
+#| fig-cap: "Slope chart showing change over time"
+
+# Sample before-after data
+change_data <- tibble(
+  subject = rep(LETTERS[1:5], 2),
+  time = rep(c("Before", "After"), each = 5),
+  value = c(10, 12, 8, 15, 11, 14, 15, 11, 18, 13)
+)
+
+ggplot(change_data, aes(x = time, y = value, group = subject)) +
+  geom_line(aes(color = subject), linewidth = 1) +
+  geom_point(aes(color = subject), size = 3) +
+  labs(
+    title = "Before-After Comparison",
+    x = NULL,
+    y = "Value"
+  ) +
+  theme_minimal()
+```
+
+## Saving Plots
+
+Use `ggsave()` to export plots:
+
+```{r}
+#| label: save-plot
+#| eval: false
+
+# Create a plot
+p <- ggplot(mtcars, aes(x = wt, y = mpg)) +
+  geom_point() +
+  theme_minimal()
+
+# Save as PNG (good for web)
+ggsave("my_plot.png", plot = p, width = 8, height = 6, dpi = 300)
+
+# Save as PDF (good for publications)
+ggsave("my_plot.pdf", plot = p, width = 8, height = 6)
+
+# Save as SVG (good for editing)
+ggsave("my_plot.svg", plot = p, width = 8, height = 6)
+```
+
+## Summary
+
+ggplot2 provides a powerful and consistent framework for data visualization:
+
+- Build plots layer by layer using the Grammar of Graphics
+- Map data to aesthetics (x, y, color, size, shape)
+- Add geometries to represent data visually
+- Use faceting to create multi-panel figures
+- Customize with themes, labels, and color scales
+
+Best practices for effective visualization:
+
+- Show the data when possible
+- Use position and length over angles and area
+- Order categories meaningfully
+- Include zero for bar charts
+- Use colorblind-friendly palettes
+- Avoid chart junk and 3D effects
+
+## Exercises {.unnumbered}
+
+::: {.callout-tip title="Practice Exercises"}
+
+**Exercise 1: Basic Scatter Plot**
+
+Using the `iris` dataset:
+1. Create a scatter plot of `Sepal.Length` vs `Sepal.Width`
+2. Color points by `Species`
+3. Add appropriate labels and a title
+
+**Exercise 2: Distribution Visualization**
+
+Using the `diamonds` dataset:
+1. Create a histogram of `carat`
+2. Experiment with different bin widths
+3. Add a density curve overlay
+
+**Exercise 3: Grouped Comparisons**
+
+Using `mtcars`:
+1. Create box plots of `mpg` grouped by `cyl`
+2. Add jittered points to show individual observations
+3. Use a colorblind-friendly palette
+
+**Exercise 4: Faceted Plot**
+
+Using the `diamonds` dataset:
+1. Create a scatter plot of `carat` vs `price`
+2. Facet by `cut`
+3. Add a smoothed trend line to each panel
+
+**Exercise 5: Publication-Ready Figure**
+
+Create a polished figure using any dataset that includes:
+1. Meaningful title and axis labels
+2. A clean theme
+3. Appropriate colors
+4. No chart junk
+5. Save it as a high-resolution PNG
+:::
