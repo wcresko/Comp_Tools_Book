@@ -29,6 +29,8 @@ book:
     - chapters/10-git-github.qmd
     - chapters/11-hpc-talapas.qmd
     - chapters/12-quarto-documents.qmd
+    - chapters/13-writing-functions.qmd
+    - chapters/14-parallel-computing.qmd
     - references.qmd
   
   appendices:
