@@ -19,8 +19,11 @@ After completing this chapter, you will be able to:
 - Use appropriate file formats for data storage
 - Use the tidyverse packages for data manipulation
 - Apply dplyr verbs: filter, select, mutate, arrange, summarize
+- Join multiple data frames using various join types
+- Reshape data between wide and long formats with pivot functions
 - Chain operations using the pipe operator
 - Work with tibbles as modern data frames
+- Understand when to use data.table for high-performance data wrangling
 :::
 
 ## Why Data Organization Matters
@@ -749,6 +752,358 @@ experiments |>
   rename(expr = expression, cells = cell_count)
 ```
 
+### Subsetting Rows with `slice()`
+
+While `filter()` selects rows based on conditions, `slice()` selects rows by position:
+
+```{r}
+#| label: slice-example
+
+# First 3 rows
+experiments |>
+  slice(1:3)
+
+# Last 2 rows
+experiments |>
+  slice_tail(n = 2)
+
+# Random sample
+set.seed(42)
+experiments |>
+  slice_sample(n = 3)
+
+# Top 3 by expression
+experiments |>
+  slice_max(expression, n = 3)
+```
+
+### Extracting Columns with `pull()`
+
+To extract a single column as a vector (rather than a data frame), use `pull()`:
+
+```{r}
+#| label: pull-example
+
+# Returns a vector, not a data frame
+experiments |>
+  filter(treatment == "drug_A") |>
+  pull(expression)
+
+# Useful for passing to functions that expect vectors
+experiments |>
+  pull(expression) |>
+  mean()
+```
+
+## Joining Data Frames
+
+In real-world analysis, data often lives in multiple tables. **Joins** combine tables based on matching values in key columns.
+
+### Types of Joins
+
+| Join Type | Result |
+|:----------|:-------|
+| `inner_join()` | Keep only rows with matches in both tables |
+| `left_join()` | Keep all rows from left table, add matching data from right |
+| `right_join()` | Keep all rows from right table, add matching data from left |
+| `full_join()` | Keep all rows from both tables |
+| `semi_join()` | Keep rows from left table that have matches in right |
+| `anti_join()` | Keep rows from left table that have NO matches in right |
+
+: Types of joins in dplyr {#tbl-join-types}
+
+### Join Example
+
+Let's create two related tables:
+
+```{r}
+#| label: join-setup
+
+# Sample information
+samples <- tibble(
+  sample_id = c("S1", "S2", "S3", "S4"),
+  patient = c("Patient_A", "Patient_B", "Patient_A", "Patient_C"),
+  timepoint = c("baseline", "baseline", "week4", "baseline")
+)
+
+# Expression measurements (note: S3 is missing, S5 is extra)
+expression_data <- tibble(
+  sample_id = c("S1", "S2", "S4", "S5"),
+  gene_A = c(5.2, 3.1, 4.8, 6.0),
+  gene_B = c(2.1, 1.8, 2.5, 3.2)
+)
+
+samples
+expression_data
+```
+
+### Left Join (Most Common)
+
+Keep all rows from the left table, add matching data from right:
+
+```{r}
+#| label: left-join-example
+
+left_join(samples, expression_data, by = "sample_id")
+```
+
+Note that S3 has `NA` values for the expression columns (no match in right table), and S5 is not included (not in left table).
+
+### Inner Join
+
+Keep only rows with matches in both tables:
+
+```{r}
+#| label: inner-join-example
+
+inner_join(samples, expression_data, by = "sample_id")
+```
+
+### Anti Join
+
+Find rows in the left table with no match in the right:
+
+```{r}
+#| label: anti-join-example
+
+# Which samples are missing expression data?
+anti_join(samples, expression_data, by = "sample_id")
+```
+
+### Joining on Multiple Columns
+
+When tables share multiple key columns, specify them all:
+
+```{r}
+#| label: multi-key-join
+#| eval: false
+
+# Join on multiple columns
+left_join(df1, df2, by = c("patient_id", "visit_date"))
+
+# When column names differ between tables
+left_join(df1, df2, by = c("id" = "patient_id"))
+```
+
+::: {.callout-warning}
+When joining, watch for columns with the same name but different meanings (e.g., "year" in both tables meaning different things). dplyr will automatically suffix them with `.x` and `.y`, but it's better to rename ambiguous columns before joining.
+:::
+
+## Reshaping Data with tidyr
+
+We've already seen `pivot_longer()` and `separate()`. Let's complete the picture with their counterparts.
+
+### Pivot Wider
+
+Convert long data back to wide format with `pivot_wider()`:
+
+```{r}
+#| label: pivot-wider-setup
+
+# Long format data
+gene_expression_long <- tibble(
+  sample = c("S1", "S1", "S2", "S2", "S3", "S3"),
+  gene = c("BRCA1", "TP53", "BRCA1", "TP53", "BRCA1", "TP53"),
+  expression = c(5.2, 3.1, 4.8, 2.9, 6.1, 3.5)
+)
+
+gene_expression_long
+```
+
+```{r}
+#| label: pivot-wider-example
+
+# Spread genes into columns
+gene_expression_long |>
+  pivot_wider(names_from = gene, values_from = expression)
+```
+
+### When to Use Wide vs. Long
+
+- **Long format**: Better for analysis and plotting with ggplot2
+- **Wide format**: Better for certain statistical tests, viewing many variables at once, or sharing with collaborators expecting a spreadsheet layout
+
+You can easily convert between formats as needed:
+
+```{r}
+#| label: pivot-round-trip
+
+# Round trip: long -> wide -> long
+stocks <- tibble(
+  date = as.Date('2024-01-01') + 0:2,
+  AAPL = c(185, 187, 184),
+  GOOGL = c(140, 142, 141),
+  MSFT = c(375, 378, 376)
+)
+
+stocks |>
+  pivot_longer(-date, names_to = "ticker", values_to = "price") |>
+  pivot_wider(names_from = ticker, values_from = price)
+```
+
+### Unite: Combining Columns
+
+The `unite()` function is the opposite of `separate()`:
+
+```{r}
+#| label: unite-example
+
+# Data with separate date components
+date_parts <- tibble(
+  year = c(2024, 2024, 2024),
+  month = c(1, 2, 3),
+  day = c(15, 20, 25),
+  value = c(100, 150, 200)
+)
+
+date_parts
+
+# Combine into a single date column
+date_parts |>
+  unite(date, year, month, day, sep = "-")
+```
+
+You can convert the united column to a proper date type:
+
+```{r}
+#| label: unite-with-type
+
+library(lubridate)
+
+date_parts |>
+  unite(date, year, month, day, sep = "-") |>
+  mutate(date = ymd(date))
+```
+
+### Separate Rows
+
+Sometimes cells contain multiple values. Use `separate_rows()` to split them into separate rows:
+
+```{r}
+#| label: separate-rows-example
+
+# Common in survey data: multiple selections in one cell
+survey <- tibble(
+  respondent = c("Alice", "Bob"),
+  favorite_foods = c("pizza, tacos, sushi", "burgers, fries")
+)
+
+survey
+
+# Split into separate rows
+survey |>
+  separate_rows(favorite_foods, sep = ", ")
+```
+
+### Complete and Expand
+
+When data has implicit missing values, use `complete()` to make them explicit:
+
+```{r}
+#| label: complete-example
+
+# Data with missing combinations
+observations <- tibble(
+  site = c("A", "A", "B"),
+  year = c(2020, 2021, 2020),
+  count = c(10, 15, 8)
+)
+
+observations
+
+# Make all combinations explicit
+observations |>
+  complete(site, year, fill = list(count = 0))
+```
+
+Use `crossing()` to generate all combinations of values:
+
+```{r}
+#| label: crossing-example
+
+crossing(
+  treatment = c("control", "drug_A", "drug_B"),
+  timepoint = c(0, 24, 48),
+  replicate = 1:3
+)
+```
+
+## High-Performance Data Wrangling with data.table
+
+While the tidyverse is excellent for learning and most data analysis tasks, the **data.table** package offers substantial performance advantages for large datasets. It's worth knowing about, especially if you work with big data.
+
+### Why data.table?
+
+data.table excels in several areas:
+
+1. **Speed**: Often 10-100x faster than dplyr for large datasets
+2. **Memory efficiency**: Modifies data in place rather than making copies
+3. **Concise syntax**: Complex operations in a single expression
+4. **No dependencies**: Minimal external package requirements
+
+### Basic data.table Syntax
+
+data.table uses a compact `DT[i, j, by]` syntax:
+
+- **i**: Which rows? (like `filter`)
+- **j**: What to do? (like `select`, `mutate`, `summarize`)
+- **by**: Grouped by what? (like `group_by`)
+
+```{r}
+#| label: datatable-example
+#| eval: false
+
+library(data.table)
+
+# Convert to data.table
+dt <- as.data.table(experiments)
+
+# Filter and summarize in one expression
+dt[treatment == "drug_A",
+   .(mean_expr = mean(expression)),
+   by = treatment]
+
+# Equivalent dplyr:
+# experiments |>
+#   filter(treatment == "drug_A") |>
+#   group_by(treatment) |>
+#   summarize(mean_expr = mean(expression))
+```
+
+### When to Use data.table
+
+Consider data.table when:
+
+- Your dataset has millions of rows
+- You're doing repetitive operations on large data
+- Memory is constrained
+- Speed is critical (e.g., real-time analysis)
+
+For learning and most everyday work, stick with dplyr—it's more readable and has excellent documentation.
+
+### dtplyr: Best of Both Worlds
+
+The **dtplyr** package lets you write dplyr code that runs on data.table:
+
+```{r}
+#| label: dtplyr-example
+#| eval: false
+
+library(dtplyr)
+
+# Create a lazy data.table
+lazy_dt <- lazy_dt(experiments)
+
+# Use dplyr syntax, get data.table speed
+lazy_dt |>
+  filter(treatment != "control") |>
+  group_by(treatment) |>
+  summarize(mean_expr = mean(expression)) |>
+  as_tibble()  # Convert back to tibble
+```
+
+This gives you dplyr's readable syntax with much of data.table's performance.
+
 ## Summary
 
 Tidy data provides a consistent structure that simplifies analysis:
@@ -775,8 +1130,26 @@ The tidyverse provides powerful tools for working with tidy data:
   - `arrange()` sorts rows
   - `summarize()` computes summary statistics
   - `group_by()` enables grouped operations
+  - `slice()` and `pull()` provide positional subsetting and column extraction
+- **Joins** (`left_join()`, `inner_join()`, `anti_join()`, etc.) combine data from multiple tables
 - **Tibbles** are enhanced data frames with consistent behavior
 - Functions like `case_when()`, `count()`, and `distinct()` handle common tasks
+
+The **tidyr** package provides tools for reshaping data:
+
+- `pivot_longer()` converts wide data to long format
+- `pivot_wider()` converts long data to wide format
+- `separate()` splits one column into multiple columns
+- `unite()` combines multiple columns into one
+- `separate_rows()` splits cells with multiple values into rows
+- `complete()` and `crossing()` handle missing combinations
+
+For high-performance needs, **data.table** offers:
+
+- Concise `DT[i, j, by]` syntax
+- 10-100x speed improvements on large datasets
+- Memory efficiency through modification by reference
+- **dtplyr** as a bridge for those who prefer dplyr syntax
 
 These practices and tools apply across data science workflows. Well-organized data combined with tidyverse tools makes analysis efficient, reproducible, and shareable.
 
@@ -847,4 +1220,47 @@ Create a complete analysis pipeline that:
 1. Convert `mtcars` to a tibble
 2. Compare how the data frame and tibble display when printed
 3. Test subsetting behavior: what class does `mtcars[, 1]` return vs `as_tibble(mtcars)[, 1]`?
+
+**Exercise 9: Joining Tables**
+
+Create two tibbles:
+```r
+patients <- tibble(
+  patient_id = c("P001", "P002", "P003", "P004"),
+  name = c("Alice", "Bob", "Carol", "David"),
+  age = c(45, 52, 38, 61)
+)
+
+lab_results <- tibble(
+  patient_id = c("P001", "P002", "P002", "P005"),
+  test = c("glucose", "glucose", "cholesterol", "glucose"),
+  result = c(95, 110, 185, 88)
+)
+```
+
+1. Perform a left join to add lab results to patient information
+2. Use an anti-join to find patients with no lab results
+3. Use an inner join to keep only patients who have lab results
+4. Explain why P005 appears or doesn't appear in each result
+
+**Exercise 10: Reshaping Practice**
+
+Given this long-format data:
+```r
+measurements <- tibble(
+  sample = rep(c("A", "B", "C"), each = 2),
+  metric = rep(c("weight", "height"), 3),
+  value = c(70, 175, 65, 168, 80, 182)
+)
+```
+
+1. Use `pivot_wider()` to create columns for weight and height
+2. Calculate BMI (weight / (height/100)^2) on the wide data
+3. Convert back to long format with `pivot_longer()`
+
+**Exercise 11: Separate and Unite**
+
+1. Given data with a combined column `"2024-01-15"`, use `separate()` to split it into year, month, and day columns
+2. Use `unite()` to combine them back, but with slashes as separators (`"2024/01/15"`)
+3. When might you prefer `separate_rows()` over `separate()`?
 :::
