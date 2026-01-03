@@ -36,6 +36,20 @@ Today, Unix and its derivatives power:
 Learning Unix is an investment that pays dividends throughout your career. The commands you learn today will work on systems you encounter decades from now—Unix's longevity is remarkable in the fast-changing world of technology.
 :::
 
+### The Unix Philosophy
+
+The tools we use in Unix embody a design philosophy that emerged from Bell Labs in the 1970s:
+
+> **Do One Thing And Do It Well**
+
+Each Unix command is designed to perform a single task excellently. By combining simple, well-designed tools, you can build powerful and complex workflows. This "minimalist and modular" approach means:
+
+- Tools are easier to learn (each does one thing)
+- Tools are easier to combine (standardized input/output)
+- Complex tasks become chains of simple operations
+
+You'll see this philosophy throughout Unix: `cat` just displays files, `grep` just searches for patterns, `sort` just sorts lines. The magic happens when you combine them.
+
 ## The Shell: Your Interface to Unix
 
 The **shell** is a program that interprets your commands and communicates with the operating system. Think of it as a translator between human-readable instructions and the computer's internal operations.
@@ -73,6 +87,29 @@ username@computer:~$
 
 The prompt typically shows your username, the computer name, your current directory (`~` means your home directory), and a `$` symbol indicating you're a regular user (a `#` would indicate administrator/root access).
 
+### Essential Keyboard Shortcuts
+
+Learning these shortcuts will dramatically speed up your command-line work:
+
+| Shortcut | Action |
+|:---------|:-------|
+| `Tab` | Auto-complete commands, file names, and paths |
+| `↑` / `↓` | Scroll through command history |
+| `Ctrl+A` | Move cursor to beginning of line |
+| `Ctrl+E` | Move cursor to end of line |
+| `Ctrl+U` | Delete everything before cursor |
+| `Ctrl+K` | Delete everything after cursor |
+| `Ctrl+W` | Delete word before cursor |
+| `Ctrl+R` | Search through command history |
+| `Ctrl+C` | Cancel current command |
+| `Ctrl+L` or `clear` | Clear the terminal screen |
+
+: Essential shell keyboard shortcuts {#tbl-keyboard-shortcuts}
+
+::: {.callout-tip}
+**Tab completion is your best friend!** Start typing a file name and press Tab—the shell will complete it for you. If there are multiple matches, press Tab twice to see all options. This prevents typos and saves enormous amounts of typing.
+:::
+
 ## Anatomy of a Shell Command
 
 Every shell command follows a consistent structure:
@@ -102,6 +139,32 @@ Here, `ls` is the command (list directory contents), `-l` is an option (use long
 
 ::: {.callout-note}
 Options can often be combined. For example, `ls -l -h -a` can be written as `ls -lha`. The order of combined options usually doesn't matter.
+:::
+
+### Getting Help: The `man` Command
+
+Every Unix command has a manual page accessible via the `man` command:
+
+```bash
+$ man ls
+```
+
+This opens the manual for `ls`, showing all available options and usage examples. Navigation within `man`:
+
+- **Space** or **f** — Move forward one page
+- **b** — Move back one page
+- **/pattern** — Search for "pattern" (press `n` for next match)
+- **h** — Show help for navigating the manual
+- **q** — Quit and return to the shell
+
+For a quicker summary, many commands support `--help`:
+
+```bash
+$ ls --help
+```
+
+::: {.callout-tip}
+When you encounter an unfamiliar command, `man` should be your first stop. The manuals are comprehensive and authoritative—they're written by the people who created the commands.
 :::
 
 ## Understanding the File System
@@ -382,6 +445,37 @@ $ wc -w essay.txt  # Words only
 $ wc -c file.bin   # Bytes only
 ```
 
+### Finding Files: `find`
+
+The `find` command searches for files and directories based on various criteria:
+
+```bash
+# Find by name (case-insensitive with -iname)
+$ find . -iname "*.csv"
+
+# Find files modified in the last 7 days
+$ find ~/projects -mtime -7
+
+# Find files larger than 100MB
+$ find . -size +100M
+
+# Find and do something with results
+$ find . -name "*.tmp" -delete
+```
+
+The `find` command is powerful for locating files across complex directory structures. Common options:
+
+| Option | Description |
+|:-------|:------------|
+| `-name` | Match filename (case-sensitive) |
+| `-iname` | Match filename (case-insensitive) |
+| `-type f` | Find files only |
+| `-type d` | Find directories only |
+| `-size +10M` | Larger than 10 megabytes |
+| `-mtime -7` | Modified within 7 days |
+
+: Common `find` options {#tbl-find-options}
+
 ## Naming Conventions
 
 Good naming practices prevent countless problems:
@@ -448,6 +542,100 @@ $ apropos "search term"
 # Find where a command is located
 $ which python
 ```
+
+## File Permissions and Ownership
+
+Unix is a multi-user system, and every file has permissions controlling who can read, write, or execute it. Understanding permissions is essential for security and for running scripts.
+
+### Understanding Permission Strings
+
+When you run `ls -l`, you see permission strings like:
+
+```bash
+-rwxr-xr-x 1 wcresko staff 2048 Jan 15 10:30 analysis.sh
+drwxr-xr-x 3 wcresko staff   96 Jan 15 09:00 data
+```
+
+Let's decode `-rwxr-xr-x`:
+
+| Position | Meaning |
+|:---------|:--------|
+| 1st character | Type: `-` (file), `d` (directory), `l` (link) |
+| Characters 2-4 | **Owner** permissions: `rwx` |
+| Characters 5-7 | **Group** permissions: `r-x` |
+| Characters 8-10 | **Others** permissions: `r-x` |
+
+The three permission types are:
+
+- **r** (read): View file contents or list directory
+- **w** (write): Modify file or add/remove files in directory
+- **x** (execute): Run file as program or enter directory
+- **-**: Permission denied for that operation
+
+### Changing Permissions: `chmod`
+
+The `chmod` command changes file permissions. There are two notations:
+
+**Symbolic notation:**
+
+```bash
+# Add execute permission for owner
+$ chmod u+x script.sh
+
+# Remove write permission for group and others
+$ chmod go-w data.csv
+
+# Set exact permissions (owner: rwx, group: rx, others: rx)
+$ chmod u=rwx,g=rx,o=rx script.sh
+```
+
+**Octal notation** (uses numbers 0-7):
+
+| Number | Permission |
+|:-------|:-----------|
+| 7 | rwx (read + write + execute) |
+| 6 | rw- (read + write) |
+| 5 | r-x (read + execute) |
+| 4 | r-- (read only) |
+| 0 | --- (no permissions) |
+
+```bash
+# Common permission sets
+$ chmod 755 script.sh    # rwxr-xr-x (executable script)
+$ chmod 644 data.csv     # rw-r--r-- (readable file)
+$ chmod 700 private/     # rwx------ (private directory)
+```
+
+### Changing Ownership: `chown`
+
+The `chown` command changes file ownership:
+
+```bash
+# Change owner
+$ chown alice myfile.txt
+
+# Change owner and group
+$ chown alice:researchers myfile.txt
+
+# Recursively change directory ownership
+$ chown -R alice:researchers project/
+```
+
+### Superuser Access: `sudo`
+
+Some operations require administrator (root) privileges. The `sudo` command temporarily elevates your permissions:
+
+```bash
+# Install software (requires admin rights)
+$ sudo apt install cowsay
+
+# Edit a system file
+$ sudo nano /etc/hosts
+```
+
+::: {.callout-warning}
+Use `sudo` carefully! With great power comes great responsibility. Commands run with `sudo` can modify or delete system files, potentially breaking your computer. Always double-check commands before running them with `sudo`.
+:::
 
 ## Summary
 
