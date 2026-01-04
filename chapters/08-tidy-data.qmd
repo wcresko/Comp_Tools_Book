@@ -851,6 +851,28 @@ experiments |>
   count(treatment, sort = TRUE)
 ```
 
+You can also use `n_distinct()` within `summarize()` to count unique values:
+
+```{r}
+#| label: n-distinct-example
+
+# Count unique treatments per experiment condition
+experiments |>
+  summarize(
+    n_samples = n(),
+    n_treatments = n_distinct(treatment),
+    n_replicates = n_distinct(replicate)
+  )
+
+# n_distinct() is especially useful with group_by()
+experiments |>
+  group_by(treatment) |>
+  summarize(
+    samples = n(),
+    unique_replicates = n_distinct(replicate)
+  )
+```
+
 ### Distinct Values with `distinct()`
 
 ```{r}
@@ -911,6 +933,122 @@ experiments |>
   pull(expression) |>
   mean()
 ```
+
+## Working with Factors
+
+**Factors** are R's way of representing categorical data with a fixed set of possible values (called **levels**). The **forcats** package (part of the tidyverse) provides tools for working with factors.
+
+### Creating and Inspecting Factors
+
+```{r}
+#| label: factor-basics
+
+# Create a factor with explicit levels
+treatment <- factor(
+  c("drug", "control", "drug", "placebo"),
+  levels = c("control", "placebo", "drug")  # Explicit order
+)
+
+treatment
+levels(treatment)
+```
+
+### Reordering Factor Levels
+
+For visualization, you often want to order factor levels meaningfully:
+
+```{r}
+#| label: fct-reorder
+
+library(forcats)
+
+# Sample data
+gene_data <- tibble(
+  gene = c("BRCA1", "TP53", "EGFR", "KRAS", "MYC"),
+  expression = c(5.2, 8.1, 3.4, 6.7, 9.2)
+)
+
+# Reorder gene by expression for better plotting
+gene_data |>
+  mutate(gene = fct_reorder(gene, expression)) |>
+  ggplot(aes(x = expression, y = gene)) +
+  geom_point(size = 3) +
+  labs(title = "Gene Expression (ordered)")
+```
+
+Other useful reordering functions:
+
+- `fct_infreq()`: Order by frequency (most common first)
+- `fct_rev()`: Reverse the order
+- `fct_relevel()`: Manually move specific levels to the front
+
+```{r}
+#| label: fct-reorder-examples
+#| eval: false
+
+# Order by frequency
+fct_infreq(treatment)
+
+# Move "control" to be first
+fct_relevel(treatment, "control")
+```
+
+### Recoding Factor Levels
+
+Use `fct_recode()` to change level names:
+
+```{r}
+#| label: fct-recode
+
+# Original factor
+status <- factor(c("WT", "WT", "KO", "HET", "KO"))
+
+# Recode to more descriptive names
+fct_recode(status,
+  "Wild Type" = "WT",
+  "Knockout" = "KO",
+  "Heterozygous" = "HET"
+)
+```
+
+### Collapsing Factor Levels
+
+Use `fct_collapse()` to combine multiple levels into one:
+
+```{r}
+#| label: fct-collapse
+
+# Combine related categories
+tissue <- factor(c("brain", "liver", "heart", "kidney", "lung", "spleen"))
+
+fct_collapse(tissue,
+  neural = "brain",
+  digestive = "liver",
+  circulatory = c("heart", "lung"),
+  other = c("kidney", "spleen")
+)
+```
+
+### Lumping Rare Levels
+
+Use `fct_lump_*()` functions to combine rare categories into "Other":
+
+```{r}
+#| label: fct-lump
+
+# Sample with many categories
+samples <- factor(rep(c("A", "B", "C", "D", "E", "F"), c(50, 30, 10, 5, 3, 2)))
+
+# Keep only the top 3 most common
+fct_lump_n(samples, n = 3)
+
+# Keep levels that appear at least 10 times
+fct_lump_min(samples, min = 10)
+```
+
+::: {.callout-tip}
+When plotting categorical data, proper factor ordering makes visualizations much easier to read. Always consider whether alphabetical order (the default) or a data-driven order (by value, frequency) is more meaningful.
+:::
 
 ## Joining Data Frames
 
