@@ -536,6 +536,47 @@ genes %in% target_genes
 genes[genes %in% target_genes]
 ```
 
+### Finding Indices with `which()`
+
+The `which()` function returns the indices where a logical condition is TRUE—useful when you need positions rather than values:
+
+```{r}
+#| label: which-function
+
+x <- c(10, 5, 20, 15, 8, 25)
+
+# Find indices where condition is TRUE
+which(x > 12)
+
+# Get the values at those positions
+x[which(x > 12)]
+
+# Find the index of the maximum value
+which.max(x)
+
+# Find the index of the minimum value
+which.min(x)
+
+# Find indices of specific values
+which(x == 15)
+
+# Practical example: find which samples exceed a threshold
+expression_levels <- c(2.5, 8.1, 4.2, 12.3, 6.7, 15.2)
+high_expression <- which(expression_levels > 10)
+high_expression  # Indices 4 and 6
+```
+
+::: {.callout-tip}
+While `which()` is useful, you often don't need it—logical vectors work directly for subsetting:
+```{r}
+#| label: which-vs-logical
+# These are equivalent:
+x[which(x > 12)]
+x[x > 12]
+```
+Use `which()` when you specifically need the index positions (e.g., to report which samples, to use in loops, or for `which.max()`/`which.min()`).
+:::
+
 ::: {.callout-important title="Operator Precedence"}
 R evaluates operators in a specific order. From highest to lowest precedence:
 

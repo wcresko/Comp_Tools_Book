@@ -441,6 +441,82 @@ Load all core packages at once:
 library(tidyverse)
 ```
 
+### Data Import with readr
+
+The **readr** package provides fast, friendly functions for reading rectangular data. It's more consistent and feature-rich than base R's `read.csv()`.
+
+```{r}
+#| label: readr-basics
+#| eval: false
+
+# Basic CSV import (tidyverse alternative to read.csv)
+data <- read_csv("experiment_results.csv")
+
+# Tab-separated files
+data <- read_tsv("data.tsv")
+
+# Semicolon-separated (common in European locales)
+data <- read_csv2("data.csv")
+
+# Fixed-width files
+data <- read_fwf("data.txt", fwf_widths(c(10, 5, 8)))
+```
+
+#### Controlling Column Types
+
+By default, `read_csv()` guesses column types from the first 1000 rows. You can override this with `col_types`:
+
+```{r}
+#| label: col-types
+#| eval: false
+
+# Specify column types explicitly
+data <- read_csv(
+  "samples.csv",
+  col_types = cols(
+    sample_id = col_character(),    # Force as character
+    count = col_integer(),          # Integer values
+    concentration = col_double(),   # Decimal numbers
+    date = col_date(),              # Parse as date
+    treatment = col_factor(levels = c("control", "drug_A", "drug_B"))
+  )
+)
+
+# Shorthand specification (c = character, i = integer, d = double, D = date)
+data <- read_csv("samples.csv", col_types = "ciidD")
+
+# Only override specific columns, guess the rest
+data <- read_csv(
+  "samples.csv",
+  col_types = cols(
+    sample_id = col_character(),
+    .default = col_guess()
+  )
+)
+```
+
+::: {.callout-tip}
+Always check `problems(data)` after reading to see if any values couldn't be parsed as expected. This catches data quality issues early!
+:::
+
+#### Handling Messy Column Names
+
+Real-world data often has problematic column names (spaces, special characters, inconsistent capitalization). The **janitor** package provides `clean_names()` to standardize them:
+
+```{r}
+#| label: clean-names
+#| eval: false
+
+library(janitor)
+
+# Before: "Sample ID", "Gene Expression (log2)", "P-Value"
+# After:  "sample_id", "gene_expression_log2",  "p_value"
+data <- read_csv("messy_data.csv") |>
+  clean_names()
+```
+
+This converts all names to lowercase snake_case, making them valid R identifiers and consistent to work with.
+
 ## The Pipe Operator
 
 One of the most powerful features of the tidyverse is the **pipe operator**, which allows you to chain operations together in a readable way.
@@ -702,6 +778,30 @@ my_tibble
 # Convert data frame to tibble
 as_tibble(mtcars) |> head()
 ```
+
+### Creating Small Tibbles with `tribble()`
+
+For small datasets (especially examples or test data), `tribble()` provides a row-by-row format that's easier to read:
+
+```{r}
+#| label: tribble-example
+
+# tribble uses column headers with ~ and row-by-row values
+sample_data <- tribble(
+  ~sample_id, ~treatment, ~expression,
+  "S001",     "control",  10.2,
+  "S002",     "drug_A",   15.3,
+  "S003",     "drug_B",   18.1
+)
+
+sample_data
+```
+
+This format is particularly useful for:
+
+- Creating examples in documentation
+- Quick test datasets
+- Small lookup tables
 
 ### Tibble Advantages
 
