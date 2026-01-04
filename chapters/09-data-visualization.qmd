@@ -19,7 +19,7 @@ After completing this chapter, you will be able to:
 - Avoid common visualization pitfalls
 :::
 
-## The Grammar of Graphics
+## The Grammar of Graphics {#sec-grammar-graphics}
 
 **ggplot2** is R's most popular visualization package, built on the "Grammar of Graphics" framework. Just as grammar provides rules for constructing sentences, the grammar of graphics provides rules for constructing statistical graphics.
 
@@ -41,7 +41,7 @@ Every ggplot2 visualization is built from these components:
 
 ![The Grammar of Graphics framework](images/images_4a.017.jpeg){#fig-grammar-graphics}
 
-## Building a Plot Layer by Layer
+## Building a Plot Layer by Layer {#sec-plot-layers}
 
 ggplot2 builds plots incrementally using the `+` operator:
 
@@ -70,7 +70,7 @@ ggplot(data = <DATA>, aes(<MAPPINGS>)) +
   <OPTIONAL_LAYERS>
 ```
 
-## Essential Geoms
+## Essential Geoms {#sec-geoms}
 
 ### Scatter Plots with `geom_point()`
 
@@ -254,7 +254,7 @@ ggplot(time_data, aes(x = day, y = value)) +
   )
 ```
 
-## Combining Geoms
+## Combining Geoms {#sec-combining-geoms}
 
 Layer multiple geoms to create richer visualizations:
 
@@ -273,7 +273,7 @@ ggplot(mtcars, aes(x = wt, y = mpg)) +
   )
 ```
 
-## Faceting: Small Multiples
+## Faceting: Small Multiples {#sec-faceting}
 
 Faceting creates separate panels for subsets of data.
 
@@ -313,7 +313,7 @@ ggplot(mtcars, aes(x = wt, y = mpg)) +
   )
 ```
 
-## Customizing Your Plots
+## Customizing Your Plots {#sec-plot-customization}
 
 ### Labels and Titles
 
@@ -371,7 +371,7 @@ ggplot(mtcars, aes(x = wt, y = mpg, color = factor(cyl))) +
   theme_minimal()
 ```
 
-## Data Visualization Best Practices
+## Data Visualization Best Practices {#sec-viz-best-practices}
 
 Good data visualization communicates clearly and honestly. Follow these principles:
 
@@ -521,7 +521,7 @@ Remove unnecessary visual elements that don't convey information:
 - Don't use gradient fills for categorical data
 - Skip decorative elements
 
-## Common Visualization Tasks
+## Common Visualization Tasks {#sec-common-viz-tasks}
 
 ### Comparing Distributions
 
@@ -566,7 +566,7 @@ ggplot(change_data, aes(x = time, y = value, group = subject)) +
   theme_minimal()
 ```
 
-## Saving Plots
+## Saving Plots {#sec-saving-plots}
 
 Use `ggsave()` to export plots:
 
@@ -589,7 +589,7 @@ ggsave("my_plot.pdf", plot = p, width = 8, height = 6)
 ggsave("my_plot.svg", plot = p, width = 8, height = 6)
 ```
 
-## Summary
+## Summary {#sec-viz-summary}
 
 ggplot2 provides a powerful and consistent framework for data visualization:
 
@@ -607,6 +607,22 @@ Best practices for effective visualization:
 - Include zero for bar charts
 - Use colorblind-friendly palettes
 - Avoid chart junk and 3D effects
+
+## Additional Reading {.unnumbered}
+
+To master data visualization in R:
+
+- **[ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book.org/)** by Hadley Wickham — The comprehensive guide to ggplot2
+- **[R Graphics Cookbook](https://r-graphics.org/)** by Winston Chang — Practical recipes for common visualization tasks
+- **[Fundamentals of Data Visualization](https://clauswilke.com/dataviz/)** by Claus Wilke — Excellent guide to visualization principles
+- **[Data Visualization: A Practical Introduction](https://socviz.co/)** by Kieran Healy — Thoughtful introduction with R examples
+- **[ColorBrewer](https://colorbrewer2.org/)** — Tool for choosing effective color palettes
+
+For publication-quality figures:
+
+- **[cowplot Package](https://wilkelab.org/cowplot/)** — Combining and arranging ggplot figures
+- **[patchwork Package](https://patchwork.data-imaginist.com/)** — Easy multi-panel figure composition
+- **[ggpubr Package](https://rpkgs.datanovia.com/ggpubr/)** — Publication-ready plots with statistical annotations
 
 ## Exercises {.unnumbered}
 

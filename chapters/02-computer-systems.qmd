@@ -21,7 +21,7 @@ After completing this chapter, you will be able to:
 
 Understanding how computers work at a fundamental level will help you make better decisions about computational resources, write more efficient code, and troubleshoot problems effectively. This chapter provides the conceptual foundation for everything that follows.
 
-## What Is a Computer System?
+## What Is a Computer System? {#sec-what-is-computer}
 
 A computer system consists of four major components working together:
 
@@ -51,7 +51,7 @@ graph TD
 
 At the heart of every computation is the **fetch-decode-execute cycle**, which the CPU performs billions of times per second.
 
-## The Fetch-Decode-Execute Cycle
+## The Fetch-Decode-Execute Cycle {#sec-fetch-decode-execute}
 
 Every instruction your programs execute follows the same fundamental pattern:
 
@@ -72,7 +72,7 @@ graph LR
 
 This cycle repeats continuously, with modern processors executing billions of cycles per second. Understanding this cycle helps explain why some operations are fast (data already in registers) while others are slow (waiting for data from disk).
 
-## The Central Processing Unit (CPU)
+## The Central Processing Unit (CPU) {#sec-cpu}
 
 The CPU is often called the "brain" of the computer, though this metaphor oversimplifies its function. The CPU is really a very fast calculator that follows instructions precisely.
 
@@ -112,7 +112,7 @@ Several metrics describe CPU performance:
 More cores and higher clock speeds don't always mean faster performance for your specific task. Many analyses are limited by memory access speed or storage I/O rather than raw CPU power.
 :::
 
-## Graphics Processing Units (GPUs)
+## Graphics Processing Units (GPUs) {#sec-gpus}
 
 While CPUs are designed for complex sequential tasks, **GPUs** excel at simple parallel operations. Originally designed for rendering graphics (where millions of pixels need similar calculations), GPUs have become essential for:
 
@@ -149,7 +149,7 @@ GPUs differ fundamentally from CPUs:
 If your computation involves applying the same operation to millions of data points (like image processing or matrix multiplication), GPUs can provide dramatic speedups. If your computation requires complex branching logic and sequential dependencies, CPUs are more appropriate.
 :::
 
-## Types of Computer Memory
+## Types of Computer Memory {#sec-memory-types}
 
 Understanding the memory hierarchy helps explain performance characteristics of different operations.
 
@@ -218,7 +218,7 @@ ggplot(memory_data, aes(x = Level, y = Access_ns)) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
-## Operating Systems
+## Operating Systems {#sec-operating-systems}
 
 An **operating system (OS)** is the software layer that manages hardware resources and provides services to applications. Think of it as a translator between your programs and the physical computer.
 
@@ -258,7 +258,7 @@ For scientific computing, you'll encounter:
 A fundamental security concept: every program and user should operate using the minimum permissions necessary to accomplish their task. This limits the damage that can occur from mistakes or malicious actions.
 :::
 
-## Computing Environments
+## Computing Environments {#sec-computing-environments}
 
 Research computing happens across a spectrum of environments, from your laptop to massive cloud data centers.
 
@@ -377,7 +377,7 @@ graph TB
 A common workflow: develop and test locally, run production analyses on a cluster, use cloud resources for specialized needs or when cluster queues are full.
 :::
 
-## The Evolution of Scientific Computing
+## The Evolution of Scientific Computing {#sec-computing-evolution}
 
 Computing infrastructure has evolved dramatically over the past several decades:
 
@@ -413,6 +413,21 @@ This chapter provided foundational knowledge about computer systems:
 - Computing environments range from local to cluster to cloud, each with tradeoffs
 
 Understanding these concepts will help you choose appropriate resources for your analyses, interpret performance characteristics, and communicate effectively with system administrators.
+
+## Additional Reading {.unnumbered}
+
+To deepen your understanding of computer systems architecture:
+
+- **"Code: The Hidden Language of Computer Hardware and Software"** by Charles Petzold — An accessible introduction to how computers work from first principles
+- **"Computer Organization and Design"** by Patterson and Hennessy — The classic textbook on computer architecture
+- **[Putting the "You" in CPU](https://cpu.land/)** — A free, interactive online guide to how processors work
+- **[How Computers Really Work](https://nostarch.com/how-computers-really-work)** by Matthew Justice — A practical guide covering hardware, software, and everything in between
+- **AWS, GCP, and Azure Documentation** — Each cloud provider offers extensive free training on cloud computing concepts
+
+For GPU computing and parallel processing:
+
+- **NVIDIA CUDA Documentation** — Comprehensive guides for GPU programming
+- **[An Even Easier Introduction to CUDA](https://developer.nvidia.com/blog/even-easier-introduction-cuda/)** — NVIDIA's beginner-friendly CUDA tutorial
 
 ## Exercises {.unnumbered}
 

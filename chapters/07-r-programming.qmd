@@ -25,7 +25,7 @@ After completing this chapter, you will be able to:
 - Clean up your R environment and graphics devices
 :::
 
-## Why R for Scientific Computing?
+## Why R for Scientific Computing? {#sec-why-r}
 
 R is a programming language designed specifically for statistical computing and graphics [@rproject2024]. It is an offshoot of a language called **S**, developed in 1976 at Bell Laboratories by John Chambers and colleagues. R was created in 1991 by Ross Ihaka and Robert Gentleman at the University of Auckland, New Zealand (hence the name "R"), and has since become one of the most widely used tools in data science, statistics, and bioinformatics.
 
@@ -51,7 +51,7 @@ R offers several advantages for researchers:
 **Cost**
 :   R is free and open-source, removing financial barriers to sophisticated analysis.
 
-## RStudio: Your R Environment
+## RStudio: Your R Environment {#sec-rstudio}
 
 While R can run from the command line, most users work in **RStudio**, an integrated development environment (IDE) that makes R more accessible and productive.
 
@@ -88,7 +88,7 @@ RStudio Projects organize your work with self-contained directories:
 
 Projects set your working directory automatically and keep related files together—essential for reproducible research.
 
-## Understanding R: Everything is an Object
+## Understanding R: Everything is an Object {#sec-r-objects}
 
 Before diving into R syntax, it helps to understand R's fundamental design philosophy: **everything in R is an object**. This object-oriented approach means that every piece of data you work with—numbers, text, datasets, even functions themselves—is stored as an object with specific properties.
 
@@ -138,7 +138,7 @@ Understanding this object-oriented nature helps you:
 2. **Use generic functions**: Functions like `print()`, `summary()`, and `plot()` behave differently based on object class
 3. **Extend R**: You can create custom classes with specialized behaviors
 
-## R Basics: Arithmetic and Variables
+## R Basics: Arithmetic and Variables {#sec-r-basics}
 
 ### R as a Calculator
 
@@ -256,7 +256,7 @@ rm(c)        # Removes your 'c' variable, restoring access to c()
 Avoid using `T` and `F` as variable names—they are common abbreviations for `TRUE` and `FALSE`. Similarly, never name variables `c`, `t`, `mean`, `sum`, or other common function names.
 :::
 
-## Key R Terminology
+## Key R Terminology {#sec-r-terminology}
 
 Before diving deeper into R, let's establish some fundamental terminology that you'll encounter throughout your R programming journey:
 
@@ -270,7 +270,7 @@ Understanding R's operators is equally important. The table below shows the main
 Note that R uses `<-` for assignment (right to left), while `=` is typically used for argument assignment within function calls. Both work for variable assignment, but `<-` is the conventional R style.
 :::
 
-## Vectors: R's Fundamental Data Structure
+## Vectors: R's Fundamental Data Structure {#sec-vectors}
 
 R thinks in terms of **vectors**—ordered collections of values of the same type. Even a single number is a vector of length 1.
 
@@ -403,7 +403,7 @@ measurements[measurements > 5]
 R uses 1-based indexing! The first element is `[1]`, not `[0]` as in Python and most other languages.
 :::
 
-## Data Types in R
+## Data Types in R {#sec-data-types}
 
 R has several fundamental data types:
 
@@ -651,7 +651,7 @@ near(1.0, 1.001, tol = 0.01)
 
 Use `near()` when filtering or comparing numeric columns in data frames, and `all.equal()` when you need detailed comparison information.
 
-## Functions
+## Functions {#sec-r-functions}
 
 Functions perform operations on inputs and return outputs. R has thousands of built-in functions.
 
@@ -827,7 +827,7 @@ The help page structure:
 - **Value**: What it returns
 - **Examples**: Working code examples
 
-## Installing and Loading Packages
+## Installing and Loading Packages {#sec-packages}
 
 Base R includes dozens of useful functions, but as you become a more advanced R user, you'll need functions for specialized analyses. Fortunately, thousands of additional functions are distributed in the form of R **packages**.
 
@@ -925,7 +925,7 @@ conflict_prefer("select", "dplyr")
 The `filter()` and `lag()` functions from dplyr commonly conflict with base R's `stats::filter()` and `stats::lag()`. If your filtering code suddenly stops working, namespace conflicts are often the culprit.
 :::
 
-## Data Frames
+## Data Frames {#sec-data-frames}
 
 **Data frames** are R's workhorse for tabular data—think spreadsheets or database tables. Each column is a vector, and columns can have different types.
 
@@ -1029,7 +1029,7 @@ experiment$log_response <- log(experiment$response)
 experiment
 ```
 
-## Lists
+## Lists {#sec-lists}
 
 **Lists** are flexible containers that can hold objects of different types and lengths. Unlike vectors, which require all elements to be the same type, lists can contain a mix of vectors, data frames, or even other lists.
 
@@ -1080,7 +1080,7 @@ my_list[[1]][3]  # Third element of first component
 Single brackets `[]` return a sublist, while double brackets `[[]]` extract the actual element. This distinction matters when working with list components.
 :::
 
-## Matrices
+## Matrices {#sec-matrices}
 
 **Matrices** are two-dimensional arrays where all elements must be the same type. Unlike data frames, matrices don't have named columns by default and are optimized for mathematical operations.
 
@@ -1126,7 +1126,7 @@ mat[1:2, 2:3]  # Submatrix
 
 Matrices are particularly useful for linear algebra operations and when you need efficient numerical computations.
 
-## Reading and Writing Data
+## Reading and Writing Data {#sec-reading-writing}
 
 ### Reading Files
 
@@ -1167,7 +1167,7 @@ write.table(experiment, "results.tsv",
             row.names = FALSE)
 ```
 
-## Basic Visualization
+## Basic Visualization {#sec-basic-viz}
 
 R excels at creating graphics. Here's a quick introduction to base R plotting:
 
@@ -1245,7 +1245,7 @@ par(mfrow = c(1, 1))
 For publication-quality graphics, explore the **ggplot2** package [@wickham2023r], which provides a powerful and consistent grammar of graphics.
 :::
 
-## The Split-Apply-Combine Approach
+## The Split-Apply-Combine Approach {#sec-split-apply-combine}
 
 A common pattern in data analysis is to split data by groups, apply a function to each group, and combine the results. This **split-apply-combine** workflow appears repeatedly in scientific computing.
 
@@ -1320,7 +1320,7 @@ sapply(my_list, mean)  # Simplified output
 The tidyverse packages (covered in the next chapter) provide more intuitive alternatives like `group_by()` and `summarize()` for this workflow.
 :::
 
-## Basic Programming Constructs
+## Basic Programming Constructs {#sec-programming-constructs}
 
 As you develop your R skills, you'll encounter situations requiring conditional logic and iteration.
 
@@ -1433,7 +1433,7 @@ summarize_data(data)
 summarize_data(data, digits = 3)
 ```
 
-## Random Sampling and Simulation
+## Random Sampling and Simulation {#sec-random-sampling}
 
 R makes it easy to generate random data and run simulations:
 
@@ -1502,7 +1502,7 @@ hist(sample_means, main = "Distribution of Sample Means",
 
 The `replicate()` function belongs to the "apply" family and returns a matrix (if results are vectors of equal length) or a list (if results vary in length).
 
-## Useful Numeric Transformations
+## Useful Numeric Transformations {#sec-numeric-transformations}
 
 R and the tidyverse provide many functions for transforming numeric data. These are particularly useful within `mutate()` operations.
 
@@ -1597,7 +1597,7 @@ cut(ages, breaks = c(0, 18, 35, 55, 100),
 
 This is particularly useful for creating categorical variables from continuous measurements for analysis or visualization.
 
-## Cleaning Up Your Environment
+## Cleaning Up Your Environment {#sec-cleanup}
 
 As you work in R, your environment accumulates objects. Periodically cleaning up helps manage memory and avoid confusion.
 
@@ -1676,7 +1676,7 @@ exists("my_variable")
 object.size(x)  # Size of one object
 ```
 
-## Summary
+## Summary {#sec-r-summary}
 
 This chapter introduced R programming fundamentals:
 

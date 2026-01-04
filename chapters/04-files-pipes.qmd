@@ -18,7 +18,7 @@ After completing this chapter, you will be able to:
 - Apply these tools to process genomic data files
 :::
 
-## The Unix Philosophy
+## The Unix Philosophy {#sec-unix-philosophy}
 
 Unix tools are designed around a simple but powerful philosophy [@kernighan1984unix]:
 
@@ -32,7 +32,7 @@ This philosophy has profound implications for how you work:
 
 Understanding this philosophy transforms how you approach computational problems. Instead of seeking one program that does everything, you learn to construct pipelines from simple components.
 
-## Standard Streams: The Foundation
+## Standard Streams: The Foundation {#sec-standard-streams}
 
 Every Unix program has three standard communication channels, called **streams**:
 
@@ -55,7 +55,7 @@ stdin ───>│              │───> stdout
 
 These streams can be redirected—connected to files or other programs—which is the key to building powerful pipelines.
 
-## Reading Files
+## Reading Files {#sec-reading-files}
 
 ### Choosing the Right Tool
 
@@ -146,7 +146,7 @@ $ tail -f analysis.log
 
 This is invaluable for watching job progress on computing clusters.
 
-## Output Redirection
+## Output Redirection {#sec-output-redirection}
 
 Redirection connects a program's output to a file instead of the terminal.
 
@@ -196,7 +196,7 @@ $ command 2> /dev/null
 $ command &> all_output.txt
 ```
 
-## Input Redirection
+## Input Redirection {#sec-input-redirection}
 
 Input redirection feeds file contents to a program's stdin:
 
@@ -211,7 +211,7 @@ $ sort < names.txt
 
 While many commands can read files directly as arguments, input redirection is essential for programs that only read from stdin.
 
-## Pipes: Connecting Commands
+## Pipes: Connecting Commands {#sec-pipes}
 
 **Pipes** (`|`) are the secret weapon of Unix. They connect the stdout of one command to the stdin of another, creating a processing pipeline:
 
@@ -274,7 +274,7 @@ $ cat data.txt | sort | tee sorted.txt | uniq
 
 This saves the sorted data to `sorted.txt` while simultaneously passing it to `uniq`.
 
-## Essential Pipeline Tools
+## Essential Pipeline Tools {#sec-pipeline-tools}
 
 Several commands are designed to work in pipelines:
 
@@ -363,7 +363,7 @@ $ grep -v "^#" data.txt  # Remove comment lines
 $ grep -c "pattern" file.txt
 ```
 
-## Working with Large Genomic Data
+## Working with Large Genomic Data {#sec-genomic-data}
 
 Let's apply these tools to real bioinformatics scenarios. Genomic data files are often massive—the human genome reference is over 3 GB. You must process them efficiently.
 
@@ -471,7 +471,7 @@ $ curl -s https://url/to/genome.fa.gz | \
 
 This streams data through memory, never writing to disk—essential when working with files larger than your available storage.
 
-## Best Practices
+## Best Practices {#sec-pipes-best-practices}
 
 ### Pipeline Efficiency
 
@@ -494,7 +494,7 @@ $ rm *.tmp                    # Then delete
 $ complex_pipeline | tee checkpoint.txt | further_processing
 ```
 
-## Summary
+## Summary {#sec-pipes-summary}
 
 This chapter covered the tools for reading, writing, and connecting Unix commands:
 
@@ -506,6 +506,20 @@ This chapter covered the tools for reading, writing, and connecting Unix command
 - Genomic data analysis leverages these tools at scale
 
 These concepts form the foundation of Unix data processing. Master them, and you can construct solutions to virtually any text-processing challenge.
+
+## Additional Reading {.unnumbered}
+
+To explore pipes, redirection, and text processing further:
+
+- **[Data Science at the Command Line](https://datascienceatthecommandline.com/)** by Jeroen Janssens — A comprehensive guide to using command-line tools for data analysis
+- **[The Art of Command Line](https://github.com/jlevy/the-art-of-command-line)** — A curated collection of tips and techniques for command-line mastery
+- **[AWK Programming Language](https://www.gnu.org/software/gawk/manual/)** — The GNU Awk manual for advanced text processing
+- **[sed & awk](https://www.oreilly.com/library/view/sed-awk/1565922255/)** by Dale Dougherty and Arnold Robbins — A comprehensive guide to these powerful text manipulation tools
+
+For bioinformatics-specific applications:
+
+- **[Bioinformatics Data Skills](https://www.oreilly.com/library/view/bioinformatics-data-skills/9781449367480/)** by Vince Buffalo — An excellent resource covering Unix tools in a genomics context
+- **[NCBI FTP Guide](https://www.ncbi.nlm.nih.gov/guide/howto/dwn-genome/)** — How to download genomic data from NCBI
 
 ## Exercises {.unnumbered}
 

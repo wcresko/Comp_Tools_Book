@@ -18,13 +18,13 @@ After completing this chapter, you will be able to:
 - Search genomic data for biological patterns like restriction sites and motifs
 :::
 
-## Introduction to Pattern Matching
+## Introduction to Pattern Matching {#sec-pattern-matching}
 
 While the tools in @sec-files-pipes can filter and transform data, they work on whole lines or fixed positions. **Pattern matching** lets you search based on the *content* of text—finding lines that contain specific sequences of characters.
 
 **GREP** (**G**lobal **R**egular **E**xpression **P**rint) is the Unix standard for pattern matching. Originally developed for the ed text editor in the 1970s, `grep` remains essential for bioinformatics, log analysis, and text processing.
 
-## Basic GREP Usage
+## Basic GREP Usage {#sec-basic-grep}
 
 At its simplest, `grep` finds lines containing a specific string:
 
@@ -78,7 +78,7 @@ $ grep -v "^#" config.txt
 $ grep -C 2 "significant" results.txt
 ```
 
-## Introduction to Regular Expressions
+## Introduction to Regular Expressions {#sec-regex-intro}
 
 So far we've searched for literal text. **Regular expressions** (regex) let you describe patterns that match multiple strings.
 
@@ -174,7 +174,7 @@ $ grep "G\{3,\}" sequence.txt
 In basic `grep`, quantifiers like `?`, `+`, and `{}` must be escaped with `\`. Use `grep -E` or `egrep` to avoid escaping.
 :::
 
-## Extended Regular Expressions
+## Extended Regular Expressions {#sec-extended-regex}
 
 Extended regular expressions (ERE) add more metacharacters and don't require escaping common quantifiers. Use `grep -E` or `egrep`:
 
@@ -229,7 +229,7 @@ $ grep -E "A+T+" sequence.txt
 $ grep -E "[0-9]+" data.txt
 ```
 
-## Practical Bioinformatics Examples
+## Practical Bioinformatics Examples {#sec-regex-bioinformatics}
 
 ### Working with FASTA Files
 
@@ -298,7 +298,7 @@ $ grep -E "^[0-9]{4}-[0-9]{2}-[0-9]{2}.*error" log.txt
 $ grep -oE "ERROR: [A-Za-z]+" log.txt | sort | uniq -c
 ```
 
-## Combining GREP with Pipes
+## Combining GREP with Pipes {#sec-grep-pipes}
 
 The real power of `grep` emerges when combined with other tools:
 
@@ -348,7 +348,7 @@ $ grep -C 5 "error" logfile.txt
 $ grep -A 1 "^>target_gene" sequences.fa | grep -v "^>"
 ```
 
-## Processing Genomic Data: A Complete Example
+## Processing Genomic Data: A Complete Example {#sec-genomic-processing}
 
 Let's work through a realistic analysis pipeline for human chromosome data.
 
@@ -424,7 +424,7 @@ $ curl -s ftp://example.com/genome.fa.gz | \
 $ zgrep -c "^>" genome.fa.gz
 ```
 
-## Common Patterns Reference
+## Common Patterns Reference {#sec-common-patterns}
 
 Here's a quick reference for frequently needed patterns:
 
@@ -445,7 +445,7 @@ Here's a quick reference for frequently needed patterns:
 
 : Common regular expression patterns for bioinformatics {#tbl-common-patterns}
 
-## Summary
+## Summary {#sec-regex-summary}
 
 This chapter covered pattern matching with `grep` and regular expressions:
 
@@ -458,6 +458,21 @@ This chapter covered pattern matching with `grep` and regular expressions:
 - Genomic data analysis uses these tools for motif searching
 
 Regular expressions are a foundational skill. While the syntax can seem cryptic initially, investment in learning regex pays off enormously across all aspects of computational biology.
+
+## Additional Reading {.unnumbered}
+
+To deepen your understanding of regular expressions:
+
+- **[Regular-Expressions.info](https://www.regular-expressions.info/)** — A comprehensive tutorial and reference site for regex
+- **[RegexOne](https://regexone.com/)** — An interactive tutorial for learning regular expressions step by step
+- **[regex101.com](https://regex101.com/)** — An online regex tester with explanations of each component
+- **"Mastering Regular Expressions"** by Jeffrey Friedl — The definitive book on regex theory and practice
+
+For bioinformatics-specific pattern matching:
+
+- **[BioStars: Regular Expressions in Bioinformatics](https://www.biostars.org/)** — Community Q&A with many regex examples
+- **[Rosalind.info](http://rosalind.info/)** — Bioinformatics problem sets that often require regex solutions
+- **GNU Grep Manual** — Official documentation with advanced options: `man grep` or online at [gnu.org](https://www.gnu.org/software/grep/manual/)
 
 ## Exercises {.unnumbered}
 

@@ -20,7 +20,7 @@ After completing this chapter, you will be able to:
 - Follow best practices for responsible cluster use
 :::
 
-## What is High-Performance Computing?
+## What is High-Performance Computing? {#sec-what-is-hpc}
 
 When your laptop isn't enough—when analyses run for days, require hundreds of gigabytes of memory, or need specialized hardware like GPUs—you need **high-performance computing** (HPC).
 
@@ -47,7 +47,7 @@ Key resources:
 - 89 GPUs (including NVIDIA A100 and H100)
 - 3+ petabytes of storage
 
-## Talapas Architecture
+## Talapas Architecture {#sec-talapas-architecture}
 
 Understanding the cluster architecture helps you use it effectively.
 
@@ -124,7 +124,7 @@ Jobs are submitted to **partitions** with different characteristics:
 
 : Talapas partitions {#tbl-partitions}
 
-## Getting Access
+## Getting Access {#sec-getting-access}
 
 ### Step 1: Join a PIRG
 
@@ -139,7 +139,7 @@ Your credentials:
 - **Username**: Your Duck ID
 - **Password**: Your UO password
 
-## Connecting to Talapas
+## Connecting to Talapas {#sec-connecting-talapas}
 
 ### Option 1: SSH (Command Line)
 
@@ -172,7 +172,7 @@ Open OnDemand provides:
 
 This is excellent for beginners and interactive data analysis.
 
-## Storage on Talapas
+## Storage on Talapas {#sec-talapas-storage}
 
 ```{mermaid}
 %%| label: fig-storage-structure
@@ -218,7 +218,7 @@ $ du -h --max-depth=1 /projects/myPIRG/myusername
 **Data is NOT automatically backed up!** You are responsible for backing up important files. Consider using Git for code and external storage for irreplaceable data.
 :::
 
-## SLURM: The Job Scheduler
+## SLURM: The Job Scheduler {#sec-slurm}
 
 **SLURM** (**S**imple **L**inux **U**tility for **R**esource **M**anagement) is the software that manages the cluster [@yoo2003slurm]. It:
 
@@ -243,7 +243,7 @@ flowchart LR
     style D fill:#ffa07a,stroke:#333,stroke-width:2px
 ```
 
-## Writing SLURM Batch Scripts
+## Writing SLURM Batch Scripts {#sec-slurm-scripts}
 
 A batch script combines SLURM directives with your commands:
 
@@ -289,7 +289,7 @@ Rscript my_analysis.R
 **Request only what you need!** Smaller resource requests often run sooner. Start conservative and increase if jobs fail.
 :::
 
-## Submitting and Managing Jobs
+## Submitting and Managing Jobs {#sec-job-management}
 
 ### Submit a Job
 
@@ -343,7 +343,7 @@ After a job completes:
 $ sacct -j 12345678 --format=JobID,JobName,Elapsed,MaxRSS,State
 ```
 
-## Interactive Jobs
+## Interactive Jobs {#sec-interactive-jobs}
 
 For testing and development, use interactive jobs instead of batch:
 
@@ -362,7 +362,7 @@ Interactive jobs are ideal for:
 - Quick data exploration
 - Running GUI applications via Open OnDemand
 
-## Software Modules
+## Software Modules {#sec-modules}
 
 Talapas uses the **Lmod** module system to manage software. This lets multiple versions coexist without conflicts.
 
@@ -410,7 +410,7 @@ Rscript analysis.R
 ```
 :::
 
-## GPU Jobs
+## GPU Jobs {#sec-gpu-jobs}
 
 For machine learning and GPU-accelerated computing:
 
@@ -441,7 +441,7 @@ Check available GPUs:
 $ /packages/racs/bin/slurm-show-gpus
 ```
 
-## A Complete Example
+## A Complete Example {#sec-hpc-example}
 
 Let's walk through a realistic bioinformatics workflow:
 
@@ -509,7 +509,7 @@ $ squeue -u $USER
 $ tail -f logs/genome_12345678.out
 ```
 
-## Best Practices
+## Best Practices {#sec-hpc-best-practices}
 
 ### Do
 
@@ -535,7 +535,7 @@ When publishing research using Talapas, include this acknowledgment:
 
 > "The authors acknowledge Research Advanced Computing Services (RACS) at the University of Oregon for providing computing resources that have contributed to the research results reported within this publication."
 
-## Getting Help
+## Getting Help {#sec-hpc-help}
 
 ### Resources
 
@@ -544,7 +544,7 @@ When publishing research using Talapas, include this acknowledgment:
 - **Email**: racs@uoregon.edu
 - **Office Hours**: Knight Library, Dream Lab 122E (Wednesdays 1-3pm)
 
-## Summary
+## Summary {#sec-hpc-summary}
 
 High-performance computing extends your analytical capabilities beyond personal computers:
 
@@ -556,6 +556,20 @@ High-performance computing extends your analytical capabilities beyond personal 
 - Responsible use ensures fair access for everyone
 
 Start simple—submit small test jobs, verify they work, then scale up. The HPC learning curve is real, but the capability it provides is essential for modern computational research.
+
+## Additional Reading {.unnumbered}
+
+For more on HPC and cluster computing:
+
+- **[Talapas Knowledge Base](https://uoracs.github.io/talapas2-knowledge-base/)** — Official UO documentation for Talapas
+- **[SLURM Documentation](https://slurm.schedmd.com/documentation.html)** — The official SLURM workload manager documentation
+- **[HPC Carpentry](https://www.hpc-carpentry.org/)** — Introductory HPC lessons for researchers
+- **[Introduction to High-Performance Scientific Computing](https://pages.tacc.utexas.edu/~eijkhout/istc/html/)** — Comprehensive textbook on HPC concepts
+
+For workflow management at scale:
+
+- **[Snakemake for HPC](https://snakemake.readthedocs.io/en/stable/executing/cluster.html)** — Running Snakemake workflows on clusters
+- **[Nextflow Executors](https://www.nextflow.io/docs/latest/executor.html)** — Running Nextflow on SLURM and other schedulers
 
 ## Exercises {.unnumbered}
 

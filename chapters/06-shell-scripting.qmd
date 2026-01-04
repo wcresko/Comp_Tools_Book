@@ -20,7 +20,7 @@ After completing this chapter, you will be able to:
 - Build reproducible analysis pipelines
 :::
 
-## Why Shell Scripting?
+## Why Shell Scripting? {#sec-why-shell-scripting}
 
 Throughout the previous chapters, you've been typing commands interactively. While this is great for exploration, real-world analyses require something more:
 
@@ -32,7 +32,7 @@ Throughout the previous chapters, you've been typing commands interactively. Whi
 
 Shell scripts transform a series of commands into a reusable, documented program.
 
-## Your First Shell Script
+## Your First Shell Script {#sec-first-script}
 
 A shell script is simply a text file containing commands. Let's create one:
 
@@ -83,7 +83,7 @@ The `chmod +x` command adds execute permission to the file. After that, you can 
 Always use `chmod +x` on your scripts. It signals that the file is meant to be executed and allows direct invocation.
 :::
 
-## Variables
+## Variables {#sec-shell-variables}
 
 Variables store values for later use. In Bash, variable assignment has strict syntax rules.
 
@@ -191,7 +191,7 @@ echo "Name without extension: $NAME"
 echo "Length: $LENGTH characters"
 ```
 
-## Arrays
+## Arrays {#sec-shell-arrays}
 
 Arrays store multiple values:
 
@@ -221,7 +221,7 @@ for sample in "${SAMPLES[@]}"; do
 done
 ```
 
-## Conditional Statements
+## Conditional Statements {#sec-shell-conditionals}
 
 Conditionals control program flow based on tests.
 
@@ -309,7 +309,7 @@ fi
 Always quote variables in tests: `[ "$VAR" = "value" ]`. Without quotes, empty variables cause syntax errors.
 :::
 
-## Loops
+## Loops {#sec-shell-loops}
 
 Loops repeat actions multiple times.
 
@@ -390,7 +390,7 @@ for file in *.fa; do
 done
 ```
 
-## Command-Line Arguments
+## Command-Line Arguments {#sec-cli-arguments}
 
 Scripts become more flexible when they accept arguments:
 
@@ -460,7 +460,7 @@ fi
 # Continue with processing...
 ```
 
-## Functions
+## Functions {#sec-shell-functions}
 
 Functions make scripts modular and reusable:
 
@@ -530,7 +530,7 @@ else
 fi
 ```
 
-## Error Handling
+## Error Handling {#sec-error-handling}
 
 Robust scripts handle errors gracefully.
 
@@ -614,7 +614,7 @@ echo "working data" > "$TMPFILE"
 # Cleanup happens automatically
 ```
 
-## Running R Scripts from the Shell
+## Running R Scripts from the Shell {#sec-rscript}
 
 While shell scripts are powerful, sometimes you need R's statistical capabilities. The `Rscript` command lets you run R code directly from the shell.
 
@@ -685,7 +685,7 @@ echo "All files processed!"
 Using `Rscript` is particularly valuable for batch processing, scheduled tasks (cron jobs), and integration with high-performance computing clusters where you submit shell scripts as jobs.
 :::
 
-## A Complete Bioinformatics Script
+## A Complete Bioinformatics Script {#sec-complete-script}
 
 Let's put it all together with a realistic example:
 
@@ -852,7 +852,7 @@ fi
 log "Analysis complete. Results written to $OUTPUT"
 ```
 
-## Best Practices Summary
+## Best Practices Summary {#sec-scripting-best-practices}
 
 ::: {.callout-tip title="Shell Scripting Best Practices"}
 1. **Always include a shebang**: `#!/bin/bash`
@@ -867,7 +867,7 @@ log "Analysis complete. Results written to $OUTPUT"
 10. **Document usage**: Include help messages
 :::
 
-## Summary
+## Summary {#sec-scripting-summary}
 
 This chapter covered shell scripting essentials:
 
@@ -881,6 +881,22 @@ This chapter covered shell scripting essentials:
 - Combining these elements creates powerful analysis pipelines
 
 Shell scripting is a foundational skill for computational biology. Even as you learn other languages like R and Python, shell scripts remain invaluable for automation, file management, and orchestrating complex workflows.
+
+## Additional Reading {.unnumbered}
+
+To advance your shell scripting skills:
+
+- **[Bash Guide for Beginners](https://tldp.org/LDP/Bash-Beginners-Guide/html/)** — A comprehensive introduction to Bash scripting
+- **[Advanced Bash-Scripting Guide](https://tldp.org/LDP/abs/html/)** — An in-depth exploration of shell scripting techniques
+- **[ShellCheck](https://www.shellcheck.net/)** — An online tool for finding bugs in your shell scripts
+- **"Learning the bash Shell"** by Cameron Newham — A thorough guide to Bash programming
+- **[Google Shell Style Guide](https://google.github.io/styleguide/shellguide.html)** — Best practices for writing maintainable scripts
+
+For bioinformatics workflow development:
+
+- **[Snakemake](https://snakemake.readthedocs.io/)** — A workflow management system that builds on shell scripting concepts
+- **[Nextflow](https://www.nextflow.io/)** — A domain-specific language for data-driven pipelines
+- **[GNU Make Tutorial](https://www.gnu.org/software/make/manual/)** — Build automation that complements shell scripts
 
 ## Exercises {.unnumbered}
 
