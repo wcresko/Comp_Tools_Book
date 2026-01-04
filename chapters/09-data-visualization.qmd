@@ -124,6 +124,23 @@ ggplot(diamonds, aes(x = price)) +
   )
 ```
 
+### Frequency Polygons with `geom_freqpoly()`
+
+Frequency polygons are an alternative to histograms, showing counts as lines instead of bars. They're especially useful for comparing multiple distributions:
+
+```{r}
+#| label: fig-freqpoly
+#| fig-cap: "Comparing distributions with frequency polygons"
+
+ggplot(diamonds, aes(x = price, color = cut)) +
+  geom_freqpoly(binwidth = 1000, linewidth = 1) +
+  labs(
+    title = "Price Distribution by Cut Quality",
+    x = "Price (USD)",
+    y = "Count"
+  )
+```
+
 ### Density Plots with `geom_density()`
 
 Smoothed version of histograms:
@@ -173,6 +190,41 @@ ggplot(diamonds, aes(x = cut, fill = cut)) +
   labs(
     title = "Diamond Count by Cut Quality",
     x = "Cut",
+    y = "Count"
+  )
+```
+
+#### Grouped Bar Charts with `position = "dodge"`
+
+When you have two categorical variables, use `position = "dodge"` to place bars side-by-side:
+
+```{r}
+#| label: fig-bar-dodge
+#| fig-cap: "Grouped bar chart showing cut quality by clarity"
+
+ggplot(diamonds, aes(x = cut, fill = clarity)) +
+  geom_bar(position = "dodge") +
+  labs(
+    title = "Diamond Count by Cut and Clarity",
+    x = "Cut",
+    y = "Count"
+  )
+```
+
+#### Horizontal Bar Charts with `coord_flip()`
+
+For long category names or many categories, flip the coordinates to make labels readable:
+
+```{r}
+#| label: fig-bar-horizontal
+#| fig-cap: "Horizontal bar chart for better label readability"
+
+ggplot(mpg, aes(x = class, fill = class)) +
+  geom_bar(show.legend = FALSE) +
+  coord_flip() +
+  labs(
+    title = "Vehicle Count by Class",
+    x = NULL,
     y = "Count"
   )
 ```
@@ -371,6 +423,8 @@ Pie charts make comparisons difficult because humans are poor at judging angles.
 
 ### Order by Meaningful Values
 
+By default, R orders categorical variables alphabetically, which is rarely meaningful. Use `reorder()` to order by a numeric value instead:
+
 ```{r}
 #| label: fig-ordered
 #| fig-cap: "Ordering categories by value aids comparison"
@@ -379,7 +433,7 @@ Pie charts make comparisons difficult because humans are poor at judging angles.
 mtcars_summary <- mtcars |>
   mutate(car = rownames(mtcars)) |>
   slice_head(n = 10) |>
-  mutate(car = reorder(car, mpg))
+  mutate(car = reorder(car, mpg))  # Order car names by mpg values
 
 ggplot(mtcars_summary, aes(x = car, y = mpg)) +
   geom_col(fill = "steelblue") +
@@ -388,6 +442,23 @@ ggplot(mtcars_summary, aes(x = car, y = mpg)) +
     title = "Fuel Efficiency by Car (Ordered)",
     x = NULL,
     y = "Miles per Gallon"
+  )
+```
+
+The `reorder()` function takes a categorical variable and a numeric variable, then reorders the categories by the numeric values. You can also specify a summary function when there are multiple values per category:
+
+```{r}
+#| label: reorder-example
+
+# Order vehicle class by median highway mpg
+ggplot(mpg, aes(x = reorder(class, hwy, FUN = median), y = hwy)) +
+  geom_boxplot(fill = "lightblue") +
+  coord_flip() +
+  labs(
+    title = "Highway MPG by Vehicle Class",
+    subtitle = "Ordered by median MPG",
+    x = NULL,
+    y = "Highway MPG"
   )
 ```
 
