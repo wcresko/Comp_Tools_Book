@@ -629,6 +629,28 @@ all.equal(1.0, 1.0001, tolerance = 0.001)
 Always use `all.equal()` or check if the difference is within an acceptable tolerance when comparing floating-point numbers. Never rely on `==` for exact equality of decimal calculations.
 :::
 
+### Using `dplyr::near()` for Comparisons
+
+The tidyverse provides `dplyr::near()` as a convenient alternative for checking near-equality, especially when working with data frames:
+
+```{r}
+#| label: near-function
+
+library(dplyr)
+
+# near() returns TRUE for values within a small tolerance
+near(0.1 + 0.2, 0.3)
+
+# Works well in filter() and mutate()
+df <- tibble(x = c(0.1 + 0.2, 0.5, 0.3))
+df |> filter(near(x, 0.3))
+
+# You can specify a custom tolerance
+near(1.0, 1.001, tol = 0.01)
+```
+
+Use `near()` when filtering or comparing numeric columns in data frames, and `all.equal()` when you need detailed comparison information.
+
 ## Functions
 
 Functions perform operations on inputs and return outputs. R has thousands of built-in functions.
@@ -1324,6 +1346,36 @@ treatment <- c("control", "drug", "drug", "control", "drug")
 colors <- ifelse(treatment == "drug", "red", "blue")
 ```
 
+### Type-Safe Conditionals with `if_else()`
+
+The tidyverse provides `dplyr::if_else()`, which is stricter than base R's `ifelse()`:
+
+```{r}
+#| label: if-else-example
+
+library(dplyr)
+
+x <- c(-2, -1, 0, 1, 2)
+
+# if_else() requires matching types for true/false
+if_else(x > 0, "positive", "non-positive")
+
+# Handles NA explicitly with the 'missing' argument
+y <- c(1, NA, 3, NA, 5)
+if_else(y > 2, "high", "low", missing = "unknown")
+
+# Creates a simple absolute value implementation
+if_else(x < 0, -x, x)
+```
+
+::: {.callout-tip}
+Use `dplyr::if_else()` over base `ifelse()` when:
+
+- You want type checking (prevents accidentally mixing numbers and strings)
+- You need explicit control over NA handling
+- You're already using tidyverse functions
+:::
+
 ### For Loops
 
 While R is optimized for vectorized operations, loops are sometimes necessary:
@@ -1449,6 +1501,101 @@ hist(sample_means, main = "Distribution of Sample Means",
 ```
 
 The `replicate()` function belongs to the "apply" family and returns a matrix (if results are vectors of equal length) or a list (if results vary in length).
+
+## Useful Numeric Transformations
+
+R and the tidyverse provide many functions for transforming numeric data. These are particularly useful within `mutate()` operations.
+
+### Cumulative and Running Aggregates
+
+Base R provides functions for running (cumulative) calculations:
+
+```{r}
+#| label: cumulative-functions
+
+x <- c(1, 2, 3, 4, 5)
+
+cumsum(x)   # Running sum: 1, 3, 6, 10, 15
+cumprod(x)  # Running product: 1, 2, 6, 24, 120
+cummax(x)   # Running maximum
+cummin(x)   # Running minimum
+
+# Useful for time series data
+daily_cases <- c(10, 15, 8, 22, 18)
+cumsum(daily_cases)  # Total cases over time
+```
+
+### Offsets with `lead()` and `lag()`
+
+The `dplyr::lead()` and `dplyr::lag()` functions let you reference values before or after the current position:
+
+```{r}
+#| label: lead-lag
+
+library(dplyr)
+
+x <- c(10, 20, 30, 40, 50)
+
+lag(x)   # Previous value: NA, 10, 20, 30, 40
+lead(x)  # Next value: 20, 30, 40, 50, NA
+
+# Calculate differences from previous value
+x - lag(x)
+
+# Detect changes
+x != lag(x)
+
+# Lag by more than one position
+lag(x, n = 2)
+```
+
+This is invaluable for time series analysis, detecting changes, and calculating growth rates.
+
+### Ranking Values
+
+dplyr provides several ranking functions:
+
+```{r}
+#| label: ranking-functions
+
+x <- c(5, 1, 3, 2, 2, NA)
+
+min_rank(x)      # Standard competition ranking (1, 2, 2, 4)
+dense_rank(x)    # No gaps after ties (1, 2, 2, 3)
+row_number(x)    # Unique ranks (ties broken by position)
+
+# Rank in descending order
+min_rank(desc(x))
+
+# Practical example: find top 3 values
+df <- tibble(gene = c("A", "B", "C", "D", "E"),
+             expression = c(5.2, 8.1, 3.4, 9.7, 6.5))
+df |> filter(min_rank(desc(expression)) <= 3)
+```
+
+### Binning Numbers with `cut()`
+
+The `cut()` function divides continuous data into discrete bins:
+
+```{r}
+#| label: cut-function
+
+ages <- c(15, 25, 35, 45, 55, 65, 75)
+
+# Create age groups
+cut(ages, breaks = c(0, 18, 35, 55, 100))
+
+# Custom labels
+cut(ages,
+    breaks = c(0, 18, 35, 55, 100),
+    labels = c("minor", "young_adult", "middle_aged", "senior"))
+
+# Include lowest value and control interval direction
+cut(ages, breaks = c(0, 18, 35, 55, 100),
+    include.lowest = TRUE, right = FALSE)
+```
+
+This is particularly useful for creating categorical variables from continuous measurements for analysis or visualization.
 
 ## Cleaning Up Your Environment
 
