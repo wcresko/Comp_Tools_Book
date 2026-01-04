@@ -27,7 +27,9 @@ After completing this chapter, you will be able to:
 
 ## Why R for Scientific Computing?
 
-R is a programming language designed specifically for statistical computing and graphics [@rproject2024]. Since its creation in 1995, R has become one of the most widely used tools in data science, statistics, and bioinformatics.
+R is a programming language designed specifically for statistical computing and graphics [@rproject2024]. It is an offshoot of a language called **S**, developed in 1976 at Bell Laboratories by John Chambers and colleagues. R was created in 1991 by Ross Ihaka and Robert Gentleman at the University of Auckland, New Zealand (hence the name "R"), and has since become one of the most widely used tools in data science, statistics, and bioinformatics.
+
+As an **interpreted language**, R code is translated to machine language by the R interpreter each time it runs, as opposed to being compiled beforehand. This makes R highly interactive and excellent for exploratory data analysis.
 
 R offers several advantages for researchers:
 
@@ -314,6 +316,39 @@ rep(c(1, 2), times = 3)
 rep(c(1, 2), each = 3)
 ```
 
+### Sorting Vectors
+
+The `sort()` function returns a sorted vector:
+
+```{r}
+#| label: sort-vectors
+
+# Sort in ascending order (default)
+x <- c(5, 2, 8, 1, 9, 3)
+sort(x)
+
+# Sort in descending order
+sort(x, decreasing = TRUE)
+
+# Sorting character vectors (alphabetical)
+genes <- c("BRCA1", "TP53", "EGFR", "KRAS")
+sort(genes)
+```
+
+To get the indices that would sort a vector (useful for reordering related data), use `order()`:
+
+```{r}
+#| label: order-vectors
+
+x <- c(5, 2, 8, 1, 9, 3)
+order(x)  # Indices: 4th element is smallest, 2nd is next, etc.
+
+# Use order() to sort one vector by another
+names <- c("Sample_A", "Sample_B", "Sample_C")
+values <- c(30, 10, 20)
+names[order(values)]  # Names sorted by values
+```
+
 ### Vectorized Operations
 
 R's power comes from **vectorized operations**—operations that apply to entire vectors at once:
@@ -395,6 +430,48 @@ as.numeric("42")
 as.character(123)
 as.logical(0)    # FALSE
 as.logical(1)    # TRUE
+```
+
+### Factors
+
+**Factors** are special vectors for representing categorical data with a fixed set of possible values called **levels**. They're essential for statistical modeling and data analysis in R:
+
+```{r}
+#| label: factors
+
+# Create a factor from a character vector
+treatment <- c("control", "drug_A", "drug_A", "control", "drug_B", "drug_B")
+treatment_factor <- as.factor(treatment)
+treatment_factor
+
+# Check the levels
+levels(treatment_factor)
+```
+
+::: {.callout-note}
+Factor levels are stored **alphabetically** by default, regardless of the order they appear in your data. This affects how results are displayed and can impact statistical analyses (e.g., the reference level in regression models).
+:::
+
+To specify a custom level order, use the `levels` argument:
+
+```{r}
+#| label: factor-order
+
+# Custom level order
+treatment_ordered <- factor(treatment,
+                            levels = c("control", "drug_A", "drug_B"))
+levels(treatment_ordered)
+
+# This matters for plotting and statistical models
+# where "control" should be the reference level
+```
+
+Factors are memory-efficient because they store unique levels once and use integer indices to reference them. Use `str()` to see this internal representation:
+
+```{r}
+#| label: factor-str
+
+str(treatment_factor)
 ```
 
 ### Special Values
@@ -553,6 +630,65 @@ mean(values)              # Returns NA
 mean(values, na.rm = TRUE)  # Removes NA first
 ```
 
+#### Argument Order and Naming
+
+R functions expect arguments in a specific order. When you don't name arguments, R matches them by position:
+
+```{r}
+#| label: argument-order
+
+# These are equivalent - arguments matched by position
+set.seed(42)
+x1 <- rnorm(5, 0, 10)  # n, mean, sd
+x1
+
+# Named arguments can be in any order
+set.seed(42)
+x2 <- rnorm(sd = 10, n = 5, mean = 0)
+x2
+```
+
+::: {.callout-warning}
+Relying on position order can lead to subtle bugs. If you accidentally swap arguments, you may get unexpected results without any error message:
+
+```{r}
+#| label: argument-order-danger
+
+# Oops! We meant 1000 samples with mean=0 and sd=10
+# But we got 10 samples with mean=1000 and sd=0
+wrong <- rnorm(10, 1000, 0)
+wrong  # All identical values!
+```
+
+When in doubt, name your arguments explicitly for clarity and safety.
+:::
+
+### Nesting Functions
+
+One powerful feature of R is the ability to **nest** function calls—using the output of one function as the input to another without creating intermediate variables:
+
+```{r}
+#| label: nesting-functions
+
+# Without nesting: create intermediate objects
+z <- c(10, 20, 30)
+result1 <- mean(z)
+result1
+
+# With nesting: more concise
+result2 <- mean(c(10, 20, 30))
+result2
+
+# More complex nesting
+# Calculate the mean of the square roots of 1 through 10
+mean(sqrt(1:10))
+
+# Nested functions are evaluated from inside out
+round(mean(sqrt(c(4, 9, 16, 25))), digits = 2)
+```
+
+Nesting makes code more compact, but deeply nested expressions can become hard to read. As a rule of thumb, if you find yourself nesting more than 2-3 functions, consider breaking the expression into steps or using the pipe operator (covered in the tidyverse chapter).
+
 ### Getting Help
 
 R has excellent built-in documentation:
@@ -574,6 +710,12 @@ args(mean)
 
 # See examples
 example(mean)
+
+# Find functions containing a string in their name
+apropos("mean")  # Returns: "colMeans", "mean", "mean.Date", etc.
+
+# Find functions by partial name matching
+apropos("cor")   # Returns all functions containing "cor"
 ```
 
 #### Vignettes and Demos
@@ -770,6 +912,20 @@ summary(experiment)
 names(experiment)
 colnames(experiment)
 ```
+
+In RStudio, you can also use `View()` to open a spreadsheet-like viewer for interactive exploration:
+
+```{r}
+#| label: view-df
+#| eval: false
+
+# Opens data in a viewer pane (RStudio only)
+View(experiment)
+```
+
+::: {.callout-tip}
+`View()` is useful for quick inspection, but avoid using it in scripts meant for non-interactive execution. For large datasets, `View()` can be slow—use `head()` instead.
+:::
 
 ### Accessing Data Frame Elements
 
@@ -1232,6 +1388,27 @@ pnorm(1.96)     # P(X ≤ 1.96)
 qnorm(0.975)    # Value where P(X ≤ x) = 0.975
 ```
 
+### Repeated Simulations with `replicate()`
+
+The `replicate()` function repeats an expression multiple times and collects the results—perfect for simulations:
+
+```{r}
+#| label: replicate-examples
+
+# Shuffle integers 1-10 five times
+set.seed(42)
+replicate(5, sample(1:10, size = 10, replace = FALSE))
+
+# Simulate sampling distributions
+# Take 1000 samples of size 30 and calculate mean of each
+set.seed(123)
+sample_means <- replicate(1000, mean(rnorm(30, mean = 100, sd = 15)))
+hist(sample_means, main = "Distribution of Sample Means",
+     col = "lightgreen", xlab = "Sample Mean")
+```
+
+The `replicate()` function belongs to the "apply" family and returns a matrix (if results are vectors of equal length) or a list (if results vary in length).
+
 ## Cleaning Up Your Environment
 
 As you work in R, your environment accumulates objects. Periodically cleaning up helps manage memory and avoid confusion.
@@ -1390,3 +1567,25 @@ Using the built-in `mtcars` dataset:
 3. Read it back into a new variable
 4. Verify the data matches the original
 :::
+
+## Additional Resources {.unnumbered}
+
+**Official Documentation and Tutorials**
+
+- [The R Project Homepage](https://www.r-project.org) — Official R website with downloads and documentation
+- [An Introduction to R](https://cran.r-project.org/doc/manuals/R-intro.html) — Comprehensive official manual
+- [R for Data Science](https://r4ds.had.co.nz) — Free online book covering the tidyverse approach
+
+**Quick References**
+
+- [Quick-R](https://www.statmethods.net) — Concise reference for common R tasks
+- [RStudio Cheat Sheets](https://posit.co/resources/cheatsheets/) — One-page references for popular packages
+
+**Bioinformatics-Specific**
+
+- [Bioconductor](https://www.bioconductor.org) — R packages for bioinformatics and computational biology
+- [A Primer for Computational Biology](http://library.open.oregonstate.edu/computationalbiology/) — O'Neil, S.T. 2017
+
+**Recommended Books**
+
+- Logan, M. 2010. *Biostatistical Design and Analysis Using R* — Excellent introduction to R for statistical analysis in the life sciences
