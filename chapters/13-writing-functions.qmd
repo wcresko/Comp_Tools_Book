@@ -21,7 +21,7 @@ After completing this chapter, you will be able to:
 - Choose between for loops and functional approaches
 :::
 
-## Why Write Your Own Functions?
+## Why Write Your Own Functions? {#sec-why-functions}
 
 Throughout this book, we've used many functions: some from base R (like `mean()` and `sum()`), others from packages (like `dplyr::filter()` and `ggplot2::ggplot()`). But the real power of programming comes from writing your own functions.
 
@@ -39,7 +39,7 @@ In biosciences, you'll often need custom functions for tasks like:
 - Computing population genetics statistics
 - Processing experimental replicates
 
-## Basic Function Syntax
+## Basic Function Syntax {#sec-function-syntax}
 
 All R functions follow the same basic syntax:
 
@@ -67,7 +67,7 @@ my_short_func = function(x) x^2
 Give your functions short, descriptive names that indicate what they do. `calculate_gc_content` is better than `func1` or `cgc`.
 :::
 
-## A Simple Example: GC Content Calculator
+## A Simple Example: GC Content Calculator {#sec-gc-example}
 
 Let's write a function that calculates the GC content of a DNA sequence --- the proportion of guanine (G) and cytosine (C) bases.
 
@@ -173,7 +173,7 @@ gc_content("ATGCGATCGATCG")       # Uses default 4 digits
 gc_content("ATGCGATCGATCG", 2)    # Override to 2 digits
 ```
 
-## Environments and Lexical Scoping
+## Environments and Lexical Scoping {#sec-lexical-scoping}
 
 An important concept to understand is that functions operate in their own **environment**. Objects created inside a function don't appear in your global environment:
 
@@ -202,7 +202,7 @@ This is called **lexical scoping**. R looks for objects in this order:
 Functions are "sandboxed" --- they don't pollute your global environment with intermediate variables. This makes code cleaner and reduces the risk of naming conflicts.
 :::
 
-## Control Flow in Functions
+## Control Flow in Functions {#sec-control-flow}
 
 ### Using if/else
 
@@ -278,7 +278,7 @@ classify_expression_dt = function(fold_change) {
 classify_expression_dt(fold_changes)
 ```
 
-## Iteration and Functional Programming
+## Iteration and Functional Programming {#sec-iteration}
 
 ### The Problem with for Loops
 
@@ -389,7 +389,7 @@ proteins = c(
 map_df(proteins, analyze_protein)
 ```
 
-## Iterating Over Multiple Inputs
+## Iterating Over Multiple Inputs {#sec-multiple-inputs}
 
 Sometimes you need to iterate over multiple inputs simultaneously.
 
@@ -475,7 +475,7 @@ ggplot(results, aes(x = time, y = population, color = strain)) +
   scale_y_continuous(labels = scales::comma)
 ```
 
-## Best Practices for Writing Functions
+## Best Practices for Writing Functions {#sec-function-best-practices}
 
 ### 1. Use Descriptive Names
 
@@ -613,7 +613,7 @@ sequence_stats = function(composition) {
   sequence_stats()
 ```
 
-## Summary
+## Summary {#sec-functions-summary}
 
 Writing functions is a fundamental programming skill that will dramatically improve your data analysis workflows:
 
@@ -626,6 +626,20 @@ Writing functions is a fundamental programming skill that will dramatically impr
 - **Multiple inputs**: Use `pmap()` or data frame inputs for complex parameter combinations
 
 The next chapter will show you how to debug functions when things go wrong, catch user errors gracefully, and cache results for expensive computations.
+
+## Additional Reading {.unnumbered}
+
+To deepen your understanding of functions and functional programming in R:
+
+- **[R for Data Science: Functions](https://r4ds.hadley.nz/functions)** — Excellent introduction to writing functions
+- **[Advanced R: Functions](https://adv-r.hadley.nz/functions.html)** by Hadley Wickham — Deep dive into function mechanics
+- **[purrr Documentation](https://purrr.tidyverse.org/)** — Complete guide to functional programming with purrr
+- **[R for Data Science: Iteration](https://r4ds.hadley.nz/iteration)** — More on map functions and iteration
+
+For advanced function development:
+
+- **[Advanced R: Functional Programming](https://adv-r.hadley.nz/fp.html)** — Closures, function factories, and more
+- **[R Packages](https://r-pkgs.org/)** by Wickham and Bryan — When you're ready to package your functions
 
 ## Exercises {.unnumbered}
 

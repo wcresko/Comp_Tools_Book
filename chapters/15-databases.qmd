@@ -20,7 +20,7 @@ After completing this chapter, you will be able to:
 - Work with in-process databases like duckdb for large datasets
 :::
 
-## Why Databases?
+## Why Databases? {#sec-why-databases}
 
 A huge amount of scientific data lives in databases. While you can sometimes ask a collaborator to export a snapshot to a CSV file, this approach becomes painful quickly: every time you need updated data or a different subset, you must coordinate with another person. Being able to access databases directly gives you the data you need, when you need it.
 
@@ -40,7 +40,7 @@ In biosciences, you'll encounter databases for:
 - Institutional data warehouses
 - Public resources like NCBI, Ensembl, and UniProt
 
-## Database Basics
+## Database Basics {#sec-db-basics}
 
 At the simplest level, you can think of a database as a collection of data frames, called **tables** in database terminology. Like a data frame, a database table is a collection of named columns where every value in a column is the same type.
 
@@ -66,7 +66,7 @@ Database management systems (DBMS) come in three main forms:
 
 For learning and local analysis, in-process databases like **duckdb** are ideal—no server setup required, and they're designed for analytical workloads.
 
-## Connecting to Databases
+## Connecting to Databases {#sec-db-connecting}
 
 To connect to a database from R, you need two packages:
 
@@ -125,7 +125,7 @@ con <- DBI::dbConnect(
 Never put passwords directly in your code! Use environment variables, the keyring package, or configuration files that aren't committed to version control.
 :::
 
-## Loading Data into a Database
+## Loading Data into a Database {#sec-db-loading}
 
 Let's create some example tables to work with. We'll use familiar datasets:
 
@@ -155,7 +155,7 @@ con |>
 
 However, for large tables this defeats the purpose of using a database. Instead, you'll want to query just the data you need.
 
-## SQL: The Language of Databases
+## SQL: The Language of Databases {#sec-sql}
 
 **SQL** (Structured Query Language) is the standard language for working with databases. While we'll primarily use dbplyr to write dplyr code that gets translated to SQL, understanding SQL basics is valuable.
 
@@ -196,7 +196,7 @@ The clauses must appear in this order, though not all are required.
 
 : SQL clauses and their dplyr equivalents {#tbl-sql-clauses}
 
-## Using dbplyr: dplyr for Databases
+## Using dbplyr: dplyr for Databases {#sec-dbplyr}
 
 **dbplyr** is a dplyr backend that translates your dplyr code to SQL and runs it on the database. This means you can use familiar tidyverse syntax without learning SQL.
 
@@ -244,7 +244,7 @@ efficient_cars |> collect()
 Only `collect()` what you need! Fetching an entire large table defeats the purpose of using a database. Filter and aggregate in the database first, then collect the summarized results.
 :::
 
-## Translating dplyr to SQL
+## Translating dplyr to SQL {#sec-dplyr-sql}
 
 dbplyr translates dplyr verbs to SQL clauses. Let's see how common operations map:
 
@@ -298,7 +298,7 @@ mtcars_db |>
   show_query()
 ```
 
-## SQL Syntax Details
+## SQL Syntax Details {#sec-sql-syntax}
 
 Understanding SQL helps you write better dbplyr code and debug issues.
 
@@ -342,7 +342,7 @@ mtcars_db |>
 
 The subquery is needed because SQL evaluates `WHERE` before `SELECT`, so you can't filter on a column you're creating in the same query.
 
-## Working with Multiple Tables
+## Working with Multiple Tables {#sec-db-multiple-tables}
 
 Databases often store data across multiple related tables (normalized data). You can use joins in dbplyr just like with regular data frames:
 
@@ -358,7 +358,7 @@ orders_db |>
 
 The join is executed in the database, which is much more efficient than loading both tables into R and joining there.
 
-## Window Functions
+## Window Functions {#sec-window-functions}
 
 SQL window functions perform calculations across sets of rows related to the current row. dbplyr translates functions like `lag()`, `lead()`, and `rank()` to their SQL equivalents:
 
@@ -375,7 +375,7 @@ mtcars_db |>
   show_query()
 ```
 
-## Best Practices
+## Best Practices {#sec-db-best-practices}
 
 ### 1. Filter Early
 
@@ -442,7 +442,7 @@ Always close your database connection when you're done:
 dbDisconnect(con)
 ```
 
-## When to Use Databases
+## When to Use Databases {#sec-when-databases}
 
 Databases are valuable when:
 
@@ -454,7 +454,7 @@ Databases are valuable when:
 
 For smaller datasets that fit comfortably in memory, regular data frames are simpler and faster for exploratory analysis.
 
-## Summary
+## Summary {#sec-db-summary}
 
 In this chapter, you learned how to:
 

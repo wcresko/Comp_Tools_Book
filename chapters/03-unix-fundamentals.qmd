@@ -18,7 +18,7 @@ After completing this chapter, you will be able to:
 - Create, move, copy, and delete files and directories
 :::
 
-## What Is Unix?
+## What Is Unix? {#sec-what-is-unix}
 
 **Unix** is a family of operating systems originally developed at Bell Labs in 1969 and publicly released in 1973 [@kernighan1984unix]. What began as a project for a single computer has become the foundation of modern computing infrastructure.
 
@@ -50,7 +50,7 @@ Each Unix command is designed to perform a single task excellently. By combining
 
 You'll see this philosophy throughout Unix: `cat` just displays files, `grep` just searches for patterns, `sort` just sorts lines. The magic happens when you combine them.
 
-## The Shell: Your Interface to Unix
+## The Shell: Your Interface to Unix {#sec-shell-interface}
 
 The **shell** is a program that interprets your commands and communicates with the operating system. Think of it as a translator between human-readable instructions and the computer's internal operations.
 
@@ -110,7 +110,7 @@ Learning these shortcuts will dramatically speed up your command-line work:
 **Tab completion is your best friend!** Start typing a file name and press Tab—the shell will complete it for you. If there are multiple matches, press Tab twice to see all options. This prevents typos and saves enormous amounts of typing.
 :::
 
-## Anatomy of a Shell Command
+## Anatomy of a Shell Command {#sec-shell-command-anatomy}
 
 Every shell command follows a consistent structure:
 
@@ -167,7 +167,7 @@ $ ls --help
 When you encounter an unfamiliar command, `man` should be your first stop. The manuals are comprehensive and authoritative—they're written by the people who created the commands.
 :::
 
-## Understanding the File System
+## Understanding the File System {#sec-file-system}
 
 Unix organizes everything as files within a hierarchical directory structure. Understanding this structure is essential for navigation.
 
@@ -229,7 +229,7 @@ Special directory references:
 Use Tab completion! Start typing a file or directory name and press Tab to autocomplete. This saves typing and prevents errors.
 :::
 
-## Essential Navigation Commands
+## Essential Navigation Commands {#sec-navigation-commands}
 
 ### Where Am I? `pwd`
 
@@ -305,7 +305,7 @@ $ cd /Users/wcresko/projects
 Unlike GUIs, `cd` gives no feedback when successful. If you don't see an error message, the command worked! Use `pwd` to verify where you ended up.
 :::
 
-## Working with Files and Directories
+## Working with Files and Directories {#sec-working-with-files}
 
 Now that you can navigate, let's learn to manipulate files and directories.
 
@@ -476,7 +476,7 @@ The `find` command is powerful for locating files across complex directory struc
 
 : Common `find` options {#tbl-find-options}
 
-## Naming Conventions
+## Naming Conventions {#sec-naming-conventions}
 
 Good naming practices prevent countless problems:
 
@@ -503,7 +503,7 @@ Examples:
 | `data (copy).csv` | `data_copy.csv` |
 | `Joe's file.txt` | `joes_file.txt` |
 
-## Getting Help
+## Getting Help {#sec-unix-getting-help}
 
 ### Manual Pages
 
@@ -543,7 +543,7 @@ $ apropos "search term"
 $ which python
 ```
 
-## File Permissions and Ownership
+## File Permissions and Ownership {#sec-file-permissions}
 
 Unix is a multi-user system, and every file has permissions controlling who can read, write, or execute it. Understanding permissions is essential for security and for running scripts.
 
@@ -637,7 +637,7 @@ $ sudo nano /etc/hosts
 Use `sudo` carefully! With great power comes great responsibility. Commands run with `sudo` can modify or delete system files, potentially breaking your computer. Always double-check commands before running them with `sudo`.
 :::
 
-## Summary
+## Summary {#sec-unix-summary}
 
 This chapter covered the fundamentals of Unix navigation and file manipulation:
 
@@ -650,6 +650,20 @@ This chapter covered the fundamentals of Unix navigation and file manipulation:
 - Manual pages (`man`) provide detailed help
 
 These commands form the foundation for everything else in Unix. Practice them until they become automatic!
+
+## Additional Reading {.unnumbered}
+
+To further develop your Unix skills:
+
+- **[The Linux Command Line](https://linuxcommand.org/tlcl.php)** by William Shotts — A comprehensive, free book on Linux command-line fundamentals
+- **[Software Carpentry: The Unix Shell](https://swcarpentry.github.io/shell-novice/)** — An excellent interactive tutorial designed for scientists
+- **"The Unix Programming Environment"** by Kernighan and Pike — A classic text on Unix philosophy and tools
+- **[Explain Shell](https://explainshell.com/)** — An interactive tool that breaks down complex shell commands into understandable parts
+- **[Linux Pocket Guide](https://www.oreilly.com/library/view/linux-pocket-guide/9781098157913/)** by Daniel Barrett — A handy quick reference for essential commands
+
+For macOS-specific Unix guidance:
+
+- **[macOS Terminal User Guide](https://support.apple.com/guide/terminal/)** — Apple's official documentation for the Terminal application
 
 ## Exercises {.unnumbered}
 

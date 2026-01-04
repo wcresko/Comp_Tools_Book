@@ -26,7 +26,7 @@ After completing this chapter, you will be able to:
 - Understand when to use data.table for high-performance data wrangling
 :::
 
-## Why Data Organization Matters
+## Why Data Organization Matters {#sec-why-data-organization}
 
 Before you can analyze data, you must organize it. The structure of your data profoundly affects how easily you can work with it. A well-organized dataset can be analyzed in minutes; a poorly organized one might require hours of preprocessing.
 
@@ -34,7 +34,7 @@ Consider this scenario: you've completed an experiment and collected data in a s
 
 **Tidy data** provides a standard way to organize data that makes analysis easier. It's not the only valid way to structure data, but it's particularly well-suited for analysis in R and Python.
 
-## The Three Principles of Tidy Data
+## The Three Principles of Tidy Data {#sec-tidy-principles}
 
 Hadley Wickham formalized the concept of tidy data in a influential paper [@wickham2014tidy]. Tidy data follows three rules:
 
@@ -66,7 +66,7 @@ An **observation** is a single unit of data collection—typically one measureme
 
 Each cell contains exactly one value. No merged cells, no multiple values crammed together, no implicit values indicated by color or formatting.
 
-## Tidy vs. Messy Data: Examples
+## Tidy vs. Messy Data: Examples {#sec-tidy-examples}
 
 ### A Tidy Dataset
 
@@ -136,7 +136,7 @@ tidy_data |>
 
 With messy data, you must first reshape it—or write complex code to work around the structure.
 
-## Common Data Problems
+## Common Data Problems {#sec-data-problems}
 
 ### Problem 1: Column Headers Are Values
 
@@ -240,7 +240,7 @@ combined_data |> gt()
 
 Solution: Normalize into separate tables linked by keys.
 
-## Best Practices for Data Organization
+## Best Practices for Data Organization {#sec-data-best-practices}
 
 ### Naming Conventions
 
@@ -296,7 +296,7 @@ Always keep an unchanged copy of your original data. Create a separate processed
 - Share the original data with collaborators
 :::
 
-## Data Types
+## Data Types {#sec-tidy-data-types}
 
 Understanding data types helps you organize and analyze correctly.
 
@@ -380,7 +380,7 @@ treatments_factor <- factor(treatments,
 sort(treatments_factor)
 ```
 
-## Structuring Spreadsheets for Analysis
+## Structuring Spreadsheets for Analysis {#sec-spreadsheets}
 
 If you must use spreadsheets for data entry, follow these guidelines:
 
@@ -413,7 +413,7 @@ If you must use spreadsheets for data entry, follow these guidelines:
 - Separate documentation sheet
 - Explicit coding of all information
 
-## The Tidyverse: A Collection of Data Science Packages
+## The Tidyverse: A Collection of Data Science Packages {#sec-tidyverse}
 
 The **tidyverse** is a collection of R packages designed for data science that share a common philosophy and work seamlessly together. These packages make data manipulation, visualization, and analysis more intuitive and readable.
 
@@ -517,7 +517,7 @@ data <- read_csv("messy_data.csv") |>
 
 This converts all names to lowercase snake_case, making them valid R identifiers and consistent to work with.
 
-## The Pipe Operator
+## The Pipe Operator {#sec-pipe}
 
 One of the most powerful features of the tidyverse is the **pipe operator**, which allows you to chain operations together in a readable way.
 
@@ -556,7 +556,7 @@ c(1, 2, 3, 4, 5) %>% mean()
 The pipe transforms `x |> f(y)` into `f(x, y)`. Think of it as "take this, then do that." This makes code read like a recipe: take data, then filter, then select, then summarize.
 :::
 
-## Data Manipulation with dplyr
+## Data Manipulation with dplyr {#sec-dplyr}
 
 The **dplyr** package provides a consistent set of "verbs" for data manipulation. These functions are designed to be intuitive and compose well together.
 
@@ -757,7 +757,7 @@ experiments |>
   arrange(desc(mean_log_expr))                 # Sort by mean
 ```
 
-## Tibbles: Modern Data Frames
+## Tibbles: Modern Data Frames {#sec-tibbles}
 
 **Tibbles** are the tidyverse's enhanced version of data frames. They have several advantages:
 
@@ -822,7 +822,7 @@ tb <- tibble(x = 1:3, y = 4:6)
 class(tb[, 1])  # Returns tibble
 ```
 
-## Additional dplyr Functions
+## Additional dplyr Functions {#sec-dplyr-additional}
 
 ### Conditional Logic with `case_when()`
 
@@ -934,7 +934,7 @@ experiments |>
   mean()
 ```
 
-## Working with Factors
+## Working with Factors {#sec-factors}
 
 **Factors** are R's way of representing categorical data with a fixed set of possible values (called **levels**). The **forcats** package (part of the tidyverse) provides tools for working with factors.
 
@@ -1050,7 +1050,7 @@ fct_lump_min(samples, min = 10)
 When plotting categorical data, proper factor ordering makes visualizations much easier to read. Always consider whether alphabetical order (the default) or a data-driven order (by value, frequency) is more meaningful.
 :::
 
-## Joining Data Frames
+## Joining Data Frames {#sec-joins}
 
 In real-world analysis, data often lives in multiple tables. **Joins** combine tables based on matching values in key columns.
 
@@ -1144,7 +1144,7 @@ left_join(df1, df2, by = c("id" = "patient_id"))
 When joining, watch for columns with the same name but different meanings (e.g., "year" in both tables meaning different things). dplyr will automatically suffix them with `.x` and `.y`, but it's better to rename ambiguous columns before joining.
 :::
 
-## Reshaping Data with tidyr
+## Reshaping Data with tidyr {#sec-tidyr}
 
 We've already seen `pivot_longer()` and `separate()`. Let's complete the picture with their counterparts.
 
@@ -1283,7 +1283,7 @@ crossing(
 )
 ```
 
-## High-Performance Data Wrangling with data.table
+## High-Performance Data Wrangling with data.table {#sec-data-table}
 
 While the tidyverse is excellent for learning and most data analysis tasks, the **data.table** package offers substantial performance advantages for large datasets. It's worth knowing about, especially if you work with big data.
 
@@ -1359,7 +1359,7 @@ lazy_dt |>
 
 This gives you dplyr's readable syntax with much of data.table's performance.
 
-## Summary
+## Summary {#sec-tidy-summary}
 
 Tidy data provides a consistent structure that simplifies analysis:
 
@@ -1407,6 +1407,22 @@ For high-performance needs, **data.table** offers:
 - **dtplyr** as a bridge for those who prefer dplyr syntax
 
 These practices and tools apply across data science workflows. Well-organized data combined with tidyverse tools makes analysis efficient, reproducible, and shareable.
+
+## Additional Reading {.unnumbered}
+
+To deepen your understanding of tidy data and the tidyverse:
+
+- **[R for Data Science](https://r4ds.hadley.nz/)** by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund — The definitive guide to the tidyverse
+- **[Tidy Data (Original Paper)](https://vita.had.co.nz/papers/tidy-data.pdf)** by Hadley Wickham — The foundational paper on tidy data principles
+- **[dplyr Documentation](https://dplyr.tidyverse.org/)** — Official documentation with examples and vignettes
+- **[tidyr Documentation](https://tidyr.tidyverse.org/)** — Guide to reshaping data
+- **[forcats Documentation](https://forcats.tidyverse.org/)** — Working with categorical data
+- **[janitor Package](https://sfirke.github.io/janitor/)** — Tools for cleaning messy data
+
+For high-performance data manipulation:
+
+- **[data.table Documentation](https://rdatatable.gitlab.io/data.table/)** — The authoritative guide to data.table
+- **[dtplyr Package](https://dtplyr.tidyverse.org/)** — Using dplyr syntax with data.table speed
 
 ## Exercises {.unnumbered}
 

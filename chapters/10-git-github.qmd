@@ -20,7 +20,7 @@ After completing this chapter, you will be able to:
 - Publish websites using GitHub Pages
 :::
 
-## Why Version Control?
+## Why Version Control? {#sec-why-version-control}
 
 Have you ever had files named like this?
 
@@ -50,7 +50,7 @@ Version control systems provide:
 **Reproducibility**
 :   Tag specific versions for publications. Anyone can access exactly what you used [@blischak2016practical].
 
-## Git: Distributed Version Control
+## Git: Distributed Version Control {#sec-git-distributed}
 
 **Git** is the most widely used version control system. Created by Linus Torvalds (who also created Linux), Git is:
 
@@ -93,7 +93,7 @@ flowchart LR
 **Remote Repository**
 :   A copy hosted elsewhere (like GitHub) for backup and collaboration.
 
-## Setting Up Git
+## Setting Up Git {#sec-git-setup}
 
 ### Installation
 
@@ -138,7 +138,7 @@ $ git config --list
 The `--global` flag sets these options for all repositories on your computer. You can override them per-repository by omitting `--global` while inside a specific repo.
 :::
 
-## Creating a Repository
+## Creating a Repository {#sec-creating-repo}
 
 ### Method 1: Initialize Locally
 
@@ -167,7 +167,7 @@ $ git clone https://github.com/username/repository.git
 $ git clone https://github.com/username/repository.git my_local_name
 ```
 
-## Basic Git Workflow
+## Basic Git Workflow {#sec-git-workflow}
 
 The daily rhythm of Git involves four main commands: `status`, `add`, `commit`, and `push`.
 
@@ -259,7 +259,7 @@ $ git log --oneline
 9f8e7d6 Initial commit
 ```
 
-## Working with GitHub
+## Working with GitHub {#sec-github}
 
 **GitHub** is a web-based platform for hosting Git repositories. It adds:
 
@@ -321,7 +321,7 @@ $ git pull
 Always `pull` before starting work to get any changes from collaborators. Push frequently to back up your work.
 :::
 
-## Branching
+## Branching {#sec-branching}
 
 **Branches** let you develop features in isolation without affecting the main codebase.
 
@@ -403,7 +403,7 @@ To resolve:
 2. Remove the conflict markers (`<<<<<<<`, `=======`, `>>>>>>>`)
 3. Stage and commit the resolved file
 
-## Pull Requests
+## Pull Requests {#sec-pull-requests}
 
 **Pull requests** (PRs) are GitHub's mechanism for proposing changes and requesting code review. They're central to collaborative workflows and open-source contributions.
 
@@ -445,7 +445,7 @@ $ git push origin feature-branch
 $ git push origin :old-branch
 ```
 
-## Forking
+## Forking {#sec-forking}
 
 **Forking** creates your own copy of someone else's repository under your GitHub account. It's different from cloning:
 
@@ -471,7 +471,7 @@ This is how most open-source software is developed—outside contributors fork, 
 Keeping a fork synchronized with the original ("upstream") repository requires additional steps. See GitHub's guide on [Syncing a fork](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork).
 :::
 
-## The .gitignore File
+## The .gitignore File {#sec-gitignore}
 
 Not everything should be tracked. The `.gitignore` file specifies intentionally untracked files:
 
@@ -518,7 +518,7 @@ secrets.txt
 Add `.gitignore` early! Once files are tracked, adding them to `.gitignore` won't untrack them.
 :::
 
-## GitHub Pages: Free Website Hosting
+## GitHub Pages: Free Website Hosting {#sec-github-pages}
 
 GitHub Pages turns your repository into a website—perfect for project documentation, lab websites, or personal portfolios.
 
@@ -569,7 +569,7 @@ $ git commit -m "Update website"
 $ git push
 ```
 
-## Best Practices
+## Best Practices {#sec-git-best-practices}
 
 ### Repository Organization
 
@@ -606,7 +606,7 @@ For team projects:
 5. Create a **Pull Request** for review
 6. After approval, **merge** to main
 
-## Authentication: HTTPS vs SSH
+## Authentication: HTTPS vs SSH {#sec-git-auth}
 
 Git can authenticate with GitHub using either HTTPS or SSH:
 
@@ -633,7 +633,7 @@ $ git config --global credential.helper osxkeychain
 $ git config --global credential.helper manager
 ```
 
-## Line Endings Across Operating Systems
+## Line Endings Across Operating Systems {#sec-line-endings}
 
 Different operating systems use different characters to mark line endings:
 
@@ -654,7 +654,7 @@ $ git config --global core.autocrlf input
 $ git config --global core.autocrlf true
 ```
 
-## Temporarily Saving Changes: Git Stash
+## Temporarily Saving Changes: Git Stash {#sec-git-stash}
 
 Sometimes you need to switch branches but aren't ready to commit your current changes. `git stash` temporarily saves your work:
 
@@ -677,7 +677,7 @@ $ git stash drop stash@{0}
 
 This is useful when you need to quickly switch context—perhaps to fix an urgent bug on another branch—without committing incomplete work.
 
-## Troubleshooting
+## Troubleshooting {#sec-git-troubleshooting}
 
 ### Common Issues and Solutions
 
@@ -733,7 +733,7 @@ For more Git emergencies, visit [ohshitgit.com](https://ohshitgit.com/) — a hu
 - Commit at the end of each work session
 - If you're asking "should I commit?" — the answer is usually yes
 
-## Useful Commands Reference
+## Useful Commands Reference {#sec-git-commands}
 
 | Command | Description |
 |:--------|:------------|
@@ -753,7 +753,7 @@ For more Git emergencies, visit [ohshitgit.com](https://ohshitgit.com/) — a hu
 
 : Essential Git commands {#tbl-git-commands}
 
-## Summary
+## Summary {#sec-git-summary}
 
 Version control with Git and GitHub is essential for modern research:
 
@@ -765,7 +765,7 @@ Version control with Git and GitHub is essential for modern research:
 
 Learning Git has a steep initial curve, but the investment pays dividends throughout your career. Start simple, use it consistently, and gradually adopt more advanced features.
 
-## Resources
+## Additional Reading {.unnumbered}
 
 - [Happy Git and GitHub for the useR](https://happygitwithr.com/) — Excellent guide for R users by Jenny Bryan
 - [Pro Git Book](https://git-scm.com/book/en/v2) — Comprehensive free reference [@chacon2014pro]

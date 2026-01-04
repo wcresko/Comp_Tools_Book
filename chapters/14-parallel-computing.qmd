@@ -28,7 +28,7 @@ After completing this chapter, you will be able to:
 - Cache results to avoid recomputation
 :::
 
-## Why Parallel Computing?
+## Why Parallel Computing? {#sec-why-parallel}
 
 Modern computers have multiple processor cores, but by default R only uses one. This means that when you run a computationally intensive analysis --- like bootstrapping, permutation tests, or processing thousands of samples --- most of your computer's power sits idle.
 
@@ -43,7 +43,7 @@ In biosciences, parallel computing is especially valuable for:
 - **Cross-validation** in machine learning
 - **Parameter sweeps** for computational models
 
-## How Many Cores Do You Have?
+## How Many Cores Do You Have? {#sec-cores}
 
 Before parallelizing, find out how many cores are available:
 
@@ -56,7 +56,7 @@ parallel::detectCores()
 
 This number includes both physical cores and "logical" cores (from technologies like Intel's hyperthreading). For CPU-intensive tasks, your effective speedup is typically limited by the number of physical cores.
 
-## A Motivating Example
+## A Motivating Example {#sec-parallel-example}
 
 Let's start with a simple example to demonstrate the power of parallelization. We'll create a deliberately slow function that simulates a computationally expensive operation:
 
@@ -121,7 +121,7 @@ Let's verify the results are identical:
 all.equal(names(serial_results), names(parallel_results))
 ```
 
-## The Future Ecosystem
+## The Future Ecosystem {#sec-future}
 
 The examples above use the **future** package ecosystem, which provides a unified, elegant approach to parallel programming in R. The key packages are:
 
@@ -190,7 +190,7 @@ future_map_dfr(1:4, function(x) {
 })
 ```
 
-## A Real Example: Bootstrapping Gene Expression
+## A Real Example: Bootstrapping Gene Expression {#sec-bootstrap-example}
 
 Let's apply parallel computing to a realistic bioinformatics task: bootstrapping to estimate confidence intervals for differential expression.
 
@@ -308,7 +308,7 @@ parallel_boot %>%
   head(10)
 ```
 
-## Forking vs Sockets
+## Forking vs Sockets {#sec-fork-socket}
 
 There are two main approaches to parallelization:
 
@@ -345,7 +345,7 @@ plan(multisession, workers = 4)
 On Windows, `plan(multicore)` silently falls back to `plan(sequential)`. Always use `plan(multisession)` for cross-platform code.
 :::
 
-## Handling Errors in Parallel Code
+## Handling Errors in Parallel Code {#sec-parallel-errors}
 
 Errors in parallel code can be tricky to debug. The **purrr** package provides `safely()` and `possibly()` to handle errors gracefully:
 
@@ -389,7 +389,7 @@ robust_analysis = possibly(risky_analysis, otherwise = tibble(sample = NA, resul
 future_map_dfr(1:10, robust_analysis)
 ```
 
-## Caching Results
+## Caching Results {#sec-caching}
 
 For expensive computations, cache intermediate results so you don't have to recompute them:
 
@@ -443,7 +443,7 @@ memo_gc_persistent = memoise(
 # Results will be saved to disk and available in future sessions
 ```
 
-## When to Use Parallel Computing
+## When to Use Parallel Computing {#sec-when-parallel}
 
 Parallel computing isn't always faster. Consider:
 
@@ -489,7 +489,7 @@ expand.grid(
   )
 ```
 
-## Best Practices
+## Best Practices {#sec-parallel-best-practices}
 
 ### 1. Start Sequential, Then Parallelize
 
@@ -564,7 +564,7 @@ If you run out of memory, reduce the number of workers:
 plan(multisession, workers = 2)
 ```
 
-## Summary
+## Summary {#sec-parallel-summary}
 
 Parallel computing can dramatically speed up computationally intensive analyses:
 
@@ -613,7 +613,7 @@ For a computationally intensive task of your choice:
 4. Does the speedup match what you'd expect from Amdahl's law?
 :::
 
-## Further Resources
+## Additional Reading {.unnumbered}
 
 - [future package documentation](https://future.futureverse.org/)
 - [furrr package documentation](https://furrr.futureverse.org/)

@@ -20,7 +20,7 @@ After completing this chapter, you will be able to:
 - Render documents to multiple output formats
 :::
 
-## What is Quarto?
+## What is Quarto? {#sec-what-is-quarto}
 
 **Quarto** is an open-source scientific publishing system that enables you to create dynamic documents combining narrative text, code, and results. It represents the next generation of literate programming tools, building on the legacy of R Markdown while extending support to multiple programming languages.
 
@@ -56,7 +56,7 @@ Quarto solves fundamental problems in scientific communication:
 This entire textbook was written in Quarto! You can see the source files in the repository.
 :::
 
-## Markdown: The Foundation
+## Markdown: The Foundation {#sec-markdown}
 
 **Markdown** is a lightweight markup language that lets you add formatting to plain text. Created by John Gruber in 2004, it's designed to be readable in its raw form while rendering to beautifully formatted documents.
 
@@ -202,7 +202,7 @@ Create tables with pipes and hyphens:
 
 The colons indicate alignment: `:---` left, `:---:` center, `---:` right.
 
-## Quarto Document Structure
+## Quarto Document Structure {#sec-quarto-structure}
 
 A Quarto document has three main parts:
 
@@ -257,7 +257,7 @@ execute:
 
 : Common YAML header options {#tbl-yaml-options}
 
-## Code Chunks
+## Code Chunks {#sec-code-chunks}
 
 Code chunks are the heart of Quarto's power—they let you embed executable code directly in your document.
 
@@ -369,7 +369,7 @@ ggplot(mtcars, aes(x = wt, y = mpg)) +
 
 : Figure chunk options {#tbl-figure-options}
 
-## Mathematical Equations
+## Mathematical Equations {#sec-math-equations}
 
 Quarto supports LaTeX math notation for equations.
 
@@ -426,7 +426,7 @@ $$
 Y_i = \beta_0 + \beta_1 X_{1i} + \beta_2 X_{2i} + \epsilon_i
 $$
 
-## Callout Blocks
+## Callout Blocks {#sec-callout-blocks}
 
 Quarto provides special callout blocks for highlighting information:
 
@@ -464,7 +464,7 @@ This warns readers about potential issues.
 This provides helpful tips.
 :::
 
-## Cross-References
+## Cross-References {#sec-cross-references}
 
 Reference figures, tables, and sections:
 
@@ -486,7 +486,7 @@ As discussed in @sec-quarto-documents, Quarto enables...
 
 As discussed in @sec-quarto-documents, Quarto enables reproducible documents.
 
-## Rendering Documents
+## Rendering Documents {#sec-rendering}
 
 ### From RStudio
 
@@ -516,7 +516,7 @@ $ quarto preview document.qmd
 
 This opens a browser window that automatically updates as you edit.
 
-## Multiple Output Formats
+## Multiple Output Formats {#sec-output-formats}
 
 Render to multiple formats from one source:
 
@@ -538,7 +538,7 @@ Then render all formats:
 $ quarto render document.qmd
 ```
 
-## Project Organization
+## Project Organization {#sec-quarto-projects}
 
 For multi-document projects (like this book), use a `_quarto.yml` file:
 
@@ -562,7 +562,7 @@ format:
     theme: cosmo
 ```
 
-## Best Practices
+## Best Practices {#sec-quarto-best-practices}
 
 ### Document Structure
 
@@ -593,7 +593,7 @@ format:
 sessionInfo()
 ```
 
-## Summary
+## Summary {#sec-quarto-summary}
 
 Quarto transforms how we communicate scientific work:
 
@@ -605,7 +605,7 @@ Quarto transforms how we communicate scientific work:
 
 The investment in learning Quarto pays dividends every time you write a report, prepare a presentation, or publish research. Your future self (and your collaborators) will thank you for the reproducibility.
 
-## Resources
+## Additional Reading {.unnumbered}
 
 - [Quarto Documentation](https://quarto.org/docs/) — Official comprehensive guide
 - [Quarto Gallery](https://quarto.org/docs/gallery/) — Examples and templates
