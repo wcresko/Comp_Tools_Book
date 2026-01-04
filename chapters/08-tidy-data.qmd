@@ -604,6 +604,23 @@ experiments |>
   )
 ```
 
+### Replacing Columns with `transmute()`
+
+If you only want to keep the new columns (discarding all others), use `transmute()`:
+
+```{r}
+#| label: transmute-examples
+
+experiments |>
+  transmute(
+    sample_id,  # Keep this column
+    log_expression = log2(expression),
+    normalized = expression / cell_count * 1000
+  )
+```
+
+This is useful when you're creating a derived dataset and don't need the original columns.
+
 ### Summarizing Data with `summarize()`
 
 Collapse multiple rows into summary statistics:
