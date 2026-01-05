@@ -35,20 +35,15 @@ This ad-hoc versioning is error-prone, confusing, and doesn't scale. **Version c
 
 Version control systems provide:
 
-**Complete History**
-:   Every change is recorded. You can see what changed, when, and why.
+**Complete History.** Every change is recorded. You can see what changed, when, and why.
 
-**Safe Experimentation**
-:   Try new approaches without fear. You can always return to a working version.
+**Safe Experimentation.** Try new approaches without fear. You can always return to a working version.
 
-**Collaboration**
-:   Multiple people can work on the same project without overwriting each other's work.
+**Collaboration.** Multiple people can work on the same project without overwriting each other's work.
 
-**Backup**
-:   Your code exists in multiple places, protecting against data loss.
+**Backup.** Your code exists in multiple places, protecting against data loss.
 
-**Reproducibility**
-:   Tag specific versions for publications. Anyone can access exactly what you used [@blischak2016practical].
+**Reproducibility.** Tag specific versions for publications. Anyone can access exactly what you used [@blischak2016practical].
 
 ## Git: Distributed Version Control {#sec-git-distributed}
 
@@ -63,6 +58,7 @@ Version control systems provide:
 Understanding Git's mental model helps everything else make sense:
 
 ```{mermaid}
+%%| echo: false
 %%| label: fig-git-workflow
 %%| fig-cap: "The Git workflow: files move from working directory to staging area to repository"
 flowchart LR
@@ -81,17 +77,13 @@ flowchart LR
     style D fill:#ffa07a,stroke:#333,stroke-width:2px
 ```
 
-**Working Directory**
-:   The files you see and edit on your computer.
+**Working Directory.** The files you see and edit on your computer.
 
-**Staging Area** (Index)
-:   A preparation area where you compose your next commit.
+**Staging Area (Index).** A preparation area where you compose your next commit.
 
-**Local Repository**
-:   The `.git` directory containing all version history.
+**Local Repository.** The `.git` directory containing all version history.
 
-**Remote Repository**
-:   A copy hosted elsewhere (like GitHub) for backup and collaboration.
+**Remote Repository.** A copy hosted elsewhere (like GitHub) for backup and collaboration.
 
 ## Setting Up Git {#sec-git-setup}
 
@@ -326,6 +318,7 @@ Always `pull` before starting work to get any changes from collaborators. Push f
 **Branches** let you develop features in isolation without affecting the main codebase.
 
 ```{mermaid}
+%%| echo: false
 %%| label: fig-git-branching
 %%| fig-cap: "Branching allows parallel development that can later be merged"
 gitGraph
@@ -523,6 +516,7 @@ Add `.gitignore` early! Once files are tracked, adding them to `.gitignore` won'
 GitHub Pages turns your repository into a website—perfect for project documentation, lab websites, or personal portfolios.
 
 ```{mermaid}
+%%| echo: false
 %%| label: fig-github-pages
 %%| fig-cap: "GitHub Pages workflow: from Quarto documents to live website"
 flowchart LR
@@ -610,11 +604,9 @@ For team projects:
 
 Git can authenticate with GitHub using either HTTPS or SSH:
 
-**HTTPS** (easier to start)
-:   Uses your GitHub username and a personal access token. Credentials can be cached so you don't enter them repeatedly.
+**HTTPS (easier to start).** Uses your GitHub username and a personal access token. Credentials can be cached so you don't enter them repeatedly.
 
-**SSH** (recommended for regular use)
-:   Uses cryptographic keys stored on your computer. More secure and convenient once set up.
+**SSH (recommended for regular use).** Uses cryptographic keys stored on your computer. More secure and convenient once set up.
 
 To switch to SSH, see GitHub's guide on [Connecting with SSH](https://docs.github.com/en/authentication/connecting-to-github-with-ssh).
 

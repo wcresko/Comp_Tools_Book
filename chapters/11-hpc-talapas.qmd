@@ -52,9 +52,9 @@ Key resources:
 Understanding the cluster architecture helps you use it effectively.
 
 ```{mermaid}
-%| echo: false
-%| label: fig-talapas-architecture
-%| fig-cap: "Talapas cluster architecture showing login nodes, scheduler, and compute nodes"
+%%| echo: false
+%%| label: fig-talapas-architecture
+%%| fig-cap: "Talapas cluster architecture showing login nodes, scheduler, and compute nodes"
 flowchart TB
     U[Your Computer] --> SSH([SSH])
     SSH --> L1[Login Node 1]
@@ -175,6 +175,7 @@ This is excellent for beginners and interactive data analysis.
 ## Storage on Talapas {#sec-talapas-storage}
 
 ```{mermaid}
+%%| echo: false
 %%| label: fig-storage-structure
 %%| fig-cap: "Talapas storage hierarchy"
 flowchart LR
@@ -227,6 +228,7 @@ $ du -h --max-depth=1 /projects/myPIRG/myusername
 - Tracks resource usage
 
 ```{mermaid}
+%%| echo: false
 %%| label: fig-slurm-workflow
 %%| fig-cap: "SLURM job lifecycle from submission to completion"
 flowchart LR

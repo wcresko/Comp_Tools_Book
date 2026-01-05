@@ -25,19 +25,16 @@ Understanding how computers work at a fundamental level will help you make bette
 
 A computer system consists of four major components working together:
 
-**Hardware**
-:   The physical components you can touch—processors, memory chips, storage devices, and input/output peripherals.
+**Hardware.** The physical components you can touch—processors, memory chips, storage devices, and input/output peripherals.
 
-**Software**
-:   Programs and instructions that tell the hardware what to do. This includes operating systems, applications, and your own scripts.
+**Software.** Programs and instructions that tell the hardware what to do. This includes operating systems, applications, and your own scripts.
 
-**Firmware**
-:   Low-level software embedded directly in hardware components, providing basic control functions.
+**Firmware.** Low-level software embedded directly in hardware components, providing basic control functions.
 
-**Data**
-:   The information being processed, stored, and transmitted by the system.
+**Data.** The information being processed, stored, and transmitted by the system.
 
 ```{mermaid}
+%%| echo: false
 %%| label: fig-computer-components
 %%| fig-cap: "Basic computer system architecture showing the flow of data between components"
 graph TD
@@ -56,6 +53,7 @@ At the heart of every computation is the **fetch-decode-execute cycle**, which t
 Every instruction your programs execute follows the same fundamental pattern:
 
 ```{mermaid}
+%%| echo: false
 %%| label: fig-fetch-decode-execute
 %%| fig-cap: "The fundamental cycle underlying all computer operations"
 graph LR
@@ -80,33 +78,25 @@ The CPU is often called the "brain" of the computer, though this metaphor oversi
 
 The CPU contains several critical components:
 
-**Control Unit (CU)**
-:   Directs the operation of the processor, managing the fetch-decode-execute cycle.
+**Control Unit (CU).** Directs the operation of the processor, managing the fetch-decode-execute cycle.
 
-**Arithmetic Logic Unit (ALU)**
-:   Performs mathematical calculations and logical comparisons.
+**Arithmetic Logic Unit (ALU).** Performs mathematical calculations and logical comparisons.
 
-**Registers**
-:   Ultra-fast temporary storage locations (typically 64 bits each) for data being actively processed.
+**Registers.** Ultra-fast temporary storage locations (typically 64 bits each) for data being actively processed.
 
-**Cache**
-:   High-speed memory buffer that stores frequently accessed data to reduce trips to main memory.
+**Cache.** High-speed memory buffer that stores frequently accessed data to reduce trips to main memory.
 
 ### Key CPU Concepts
 
 Several metrics describe CPU performance:
 
-**Clock Speed**
-:   Measured in gigahertz (GHz), this indicates how many cycles the CPU can perform per second. A 3.5 GHz processor performs 3.5 billion cycles per second.
+**Clock Speed.** Measured in gigahertz (GHz), this indicates how many cycles the CPU can perform per second. A 3.5 GHz processor performs 3.5 billion cycles per second.
 
-**Cores**
-:   Modern CPUs contain multiple independent processing units (cores). An 8-core processor can theoretically perform 8 operations simultaneously.
+**Cores.** Modern CPUs contain multiple independent processing units (cores). An 8-core processor can theoretically perform 8 operations simultaneously.
 
-**Threads**
-:   Virtual cores that allow better utilization of physical cores through simultaneous multithreading (SMT) or hyper-threading.
+**Threads.** Virtual cores that allow better utilization of physical cores through simultaneous multithreading (SMT) or hyper-threading.
 
-**Instruction Set**
-:   The low-level language the CPU understands. Common architectures include x86-64 (Intel/AMD) and ARM (Apple Silicon, most phones).
+**Instruction Set.** The low-level language the CPU understands. Common architectures include x86-64 (Intel/AMD) and ARM (Apple Silicon, most phones).
 
 ::: {.callout-note}
 More cores and higher clock speeds don't always mean faster performance for your specific task. Many analyses are limited by memory access speed or storage I/O rather than raw CPU power.
@@ -125,14 +115,11 @@ While CPUs are designed for complex sequential tasks, **GPUs** excel at simple p
 
 GPUs differ fundamentally from CPUs:
 
-**Streaming Multiprocessors (SMs)**
-:   Processing clusters containing many smaller cores.
+**Streaming Multiprocessors (SMs).** Processing clusters containing many smaller cores.
 
-**CUDA Cores / Stream Processors**
-:   Thousands of simple processing units optimized for parallel computation.
+**CUDA Cores / Stream Processors.** Thousands of simple processing units optimized for parallel computation.
 
-**Video Memory (VRAM)**
-:   Dedicated high-bandwidth memory separate from system RAM.
+**Video Memory (VRAM).** Dedicated high-bandwidth memory separate from system RAM.
 
 ### CPU vs. GPU: When to Use Each
 
@@ -157,14 +144,11 @@ Understanding the memory hierarchy helps explain performance characteristics of 
 
 RAM provides temporary working space for programs and data currently in use. Key characteristics:
 
-**Volatile**
-:   Contents are lost when power is removed.
+**Volatile.** Contents are lost when power is removed.
 
-**Random Access**
-:   Any memory location can be accessed with equal speed (unlike sequential access).
+**Random Access.** Any memory location can be accessed with equal speed (unlike sequential access).
 
-**Types**
-:   - **DRAM (Dynamic RAM)**: Main system memory, requires constant refresh
+**Types.** - **DRAM (Dynamic RAM)**: Main system memory, requires constant refresh
     - **SRAM (Static RAM)**: Used in CPU caches, faster but more expensive
 
 Modern systems typically have 8-64 GB of RAM, though scientific workstations and servers may have much more.
@@ -226,33 +210,25 @@ An **operating system (OS)** is the software layer that manages hardware resourc
 
 Operating systems handle:
 
-**Process Management**
-:   Creating, scheduling, and terminating programs. Managing how CPU time is shared among competing processes.
+**Process Management.** Creating, scheduling, and terminating programs. Managing how CPU time is shared among competing processes.
 
-**Memory Management**
-:   Allocating RAM to programs, implementing virtual memory, protecting programs from interfering with each other's memory.
+**Memory Management.** Allocating RAM to programs, implementing virtual memory, protecting programs from interfering with each other's memory.
 
-**File System Management**
-:   Organizing data on storage devices, managing directories and permissions, handling read/write operations.
+**File System Management.** Organizing data on storage devices, managing directories and permissions, handling read/write operations.
 
-**Device Management**
-:   Providing standardized interfaces to diverse hardware through device drivers.
+**Device Management.** Providing standardized interfaces to diverse hardware through device drivers.
 
-**Security**
-:   User authentication, access control, protection against malicious software.
+**Security.** User authentication, access control, protection against malicious software.
 
 ### Common Operating Systems
 
 For scientific computing, you'll encounter:
 
-**Linux**
-:   Open-source Unix-like OS dominant in servers and clusters. Most bioinformatics tools assume Linux.
+**Linux.** Open-source Unix-like OS dominant in servers and clusters. Most bioinformatics tools assume Linux.
 
-**macOS**
-:   Apple's Unix-based desktop OS. Provides native access to Unix tools.
+**macOS.** Apple's Unix-based desktop OS. Provides native access to Unix tools.
 
-**Windows**
-:   Microsoft's desktop OS. Now supports Linux tools through WSL (see @sec-windows-setup).
+**Windows.** Microsoft's desktop OS. Now supports Linux tools through WSL (see @sec-windows-setup).
 
 ::: {.callout-note title="The Principle of Least Privilege"}
 A fundamental security concept: every program and user should operate using the minimum permissions necessary to accomplish their task. This limits the damage that can occur from mistakes or malicious actions.
@@ -286,6 +262,7 @@ Research computing happens across a spectrum of environments, from your laptop t
 A **computing cluster** is a collection of interconnected computers (nodes) working together as a single system. The University of Oregon's Talapas is an example.
 
 ```{mermaid}
+%%| echo: false
 %%| label: fig-cluster-architecture
 %%| fig-cap: "Simplified cluster architecture with head node, compute nodes, and shared storage"
 graph TB
@@ -302,17 +279,13 @@ graph TB
 
 Key components include:
 
-**Head/Login Node**
-:   Where users log in and submit jobs. Not for running computations!
+**Head/Login Node.** Where users log in and submit jobs. Not for running computations!
 
-**Compute Nodes**
-:   Worker machines that actually run your analyses.
+**Compute Nodes.** Worker machines that actually run your analyses.
 
-**Resource Manager**
-:   Software (like SLURM) that schedules jobs and allocates resources fairly.
+**Resource Manager.** Software (like SLURM) that schedules jobs and allocates resources fairly.
 
-**Shared Storage**
-:   Parallel file systems accessible from all nodes.
+**Shared Storage.** Parallel file systems accessible from all nodes.
 
 **Advantages:**
 
@@ -333,6 +306,7 @@ Key components include:
 **Cloud computing** provides on-demand computing resources over the internet, with pay-as-you-go pricing. Major providers include Amazon Web Services (AWS), Google Cloud Platform (GCP), and Microsoft Azure.
 
 ```{mermaid}
+%%| echo: false
 %%| label: fig-cloud-architecture
 %%| fig-cap: "Cloud computing architecture with multiple availability zones"
 graph TB
@@ -382,6 +356,7 @@ A common workflow: develop and test locally, run production analyses on a cluste
 Computing infrastructure has evolved dramatically over the past several decades:
 
 ```{mermaid}
+%%| echo: false
 %%| label: fig-computing-evolution
 %%| fig-cap: "Evolution of computing paradigms from mainframes to modern hybrid approaches"
 graph LR

@@ -32,20 +32,15 @@ To make sense of this data deluge, researchers must be fluent in computational t
 
 There are compelling reasons to invest time in developing computational proficiency:
 
-**Speed and Scale**
-:   Computational tools allow you to perform thousands of operations with single commands. Tasks that would take days by hand can be completed in seconds.
+**Speed and Scale.** Computational tools allow you to perform thousands of operations with single commands. Tasks that would take days by hand can be completed in seconds.
 
-**Reproducibility**
-:   Scripts and code serve as a complete record of your analysis. Unlike clicking through graphical interfaces, command-line workflows can be exactly reproduced, shared, and verified [@sandve2013ten].
+**Reproducibility.** Scripts and code serve as a complete record of your analysis. Unlike clicking through graphical interfaces, command-line workflows can be exactly reproduced, shared, and verified [@sandve2013ten].
 
-**Flexibility**
-:   General-purpose programming languages can handle virtually any data format or analysis type. You're not limited to what software developers anticipated.
+**Flexibility.** General-purpose programming languages can handle virtually any data format or analysis type. You're not limited to what software developers anticipated.
 
-**Access to Specialized Tools**
-:   Many cutting-edge analysis tools in bioinformatics are only available through the command line. Learning to use the shell opens doors to thousands of free programs developed by scientists for scientists.
+**Access to Specialized Tools.** Many cutting-edge analysis tools in bioinformatics are only available through the command line. Learning to use the shell opens doors to thousands of free programs developed by scientists for scientists.
 
-**High-Performance Computing**
-:   Large-scale analyses require computing clusters. These systems are accessed and controlled through command-line interfaces.
+**High-Performance Computing.** Large-scale analyses require computing clusters. These systems are accessed and controlled through command-line interfaces.
 
 ::: {.callout-tip title="Career Impact"}
 Computational skills are increasingly valued in academic and industry positions. Investing in these skills now will pay dividends throughout your career.
@@ -215,20 +210,15 @@ Computational skills develop through repeated practice. Don't be discouraged if 
 
 When you encounter problems (and you will!), several resources are available:
 
-**Manual Pages**
-:   Unix commands have built-in documentation accessible via `man command_name`. Type `q` to exit.
+**Manual Pages.** Unix commands have built-in documentation accessible via `man command_name`. Type `q` to exit.
 
-**Help Functions**
-:   In R, use `?function_name` or `help(function_name)` to access documentation.
+**Help Functions.** In R, use `?function_name` or `help(function_name)` to access documentation.
 
-**The Internet**
-:   Sites like Stack Overflow contain solutions to virtually every common error message. Learning to search effectively is a crucial skill.
+**The Internet.** Sites like Stack Overflow contain solutions to virtually every common error message. Learning to search effectively is a crucial skill.
 
-**Generative AI**
-:   Tools like ChatGPT and Claude can explain concepts, debug code, and suggest solutions. However, always verify AI-generated code and understand what it does before using it.
+**Generative AI.** Tools like ChatGPT and Claude can explain concepts, debug code, and suggest solutions. However, always verify AI-generated code and understand what it does before using it.
 
-**Each Other**
-:   Your classmates are experiencing the same learning curve. Collaboration and discussion accelerate everyone's learning.
+**Each Other.** Your classmates are experiencing the same learning curve. Collaboration and discussion accelerate everyone's learning.
 
 ## Summary
 
