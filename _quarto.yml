@@ -30,6 +30,7 @@ book:
     - chapters/14-parallel-computing.qmd
     - chapters/15-databases.qmd
     - chapters/12-quarto-documents.qmd
+    - chapters/16-latex-basics.qmd
     - chapters/10-git-github.qmd
     - chapters/11-hpc-talapas.qmd
     - references.qmd
@@ -38,6 +39,7 @@ book:
     - chapters/appendix-unix.qmd
     - chapters/appendix-git.qmd
     - chapters/appendix-r.qmd
+    - chapters/appendix-latex.qmd
     - chapters/appendix-slurm.qmd
     - chapters/appendix-regex.qmd
     - chapters/appendix-shortcuts.qmd
