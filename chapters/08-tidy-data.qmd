@@ -30,9 +30,17 @@ After completing this chapter, you will be able to:
 
 Before you can analyze data, you must organize it. The structure of your data profoundly affects how easily you can work with it. A well-organized dataset can be analyzed in minutes; a poorly organized one might require hours of preprocessing.
 
-Consider this scenario: you've completed an experiment and collected data in a spreadsheet. Now you need to analyze it. If your data is organized consistently and logically, analysis is straightforward. If it's scattered across multiple tabs with inconsistent formatting, merged cells, and color-coded values, you're in for a frustrating experience.
+Consider this scenario: you've completed an experiment measuring gene expression levels in fish embryos exposed to different environmental stressors. You carefully collected samples at multiple developmental stages, ran your assays, and now have a spreadsheet full of numbers. The analysis should be straightforward—just load the data and run some statistical tests.
 
-**Tidy data** provides a standard way to organize data that makes analysis easier. It's not the only valid way to structure data, but it's particularly well-suited for analysis in R and Python.
+But then reality sets in. Your spreadsheet has multiple header rows. Some columns contain merged cells indicating experimental blocks. Treatment conditions are color-coded rather than labeled. Missing values appear as empty cells, question marks, or the word "missing" depending on who entered the data. Suddenly, what should have been an afternoon of analysis becomes a week of data cleaning.
+
+This scenario plays out in laboratories around the world, every day. The solution isn't just better software—it's better data organization from the start.
+
+**Tidy data** provides a standard way to organize data that makes analysis easier. It's not the only valid way to structure data, but it's particularly well-suited for analysis in R and Python. When your data is tidy, you spend less time wrestling with data formats and more time answering scientific questions.
+
+::: {.callout-note title="Data Wrangling in the Wild"}
+It's often said that 80% of data analysis is spent on data cleaning and preparation. While this statistic varies by field and project, the underlying truth remains: thoughtful data organization at the start of a project saves enormous time and frustration later.
+:::
 
 ## The Three Principles of Tidy Data {#sec-tidy-principles}
 

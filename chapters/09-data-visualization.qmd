@@ -19,6 +19,36 @@ After completing this chapter, you will be able to:
 - Avoid common visualization pitfalls
 :::
 
+## Why Visualize Data? {#sec-why-visualize}
+
+Before diving into the mechanics of creating plots, it's worth asking: why visualize data at all? Why not just report the numbers?
+
+The answer lies in how our brains process information. The human visual system has evolved over millions of years to detect patterns, spot outliers, and perceive relationships. A well-designed visualization leverages this natural capability, allowing us to understand complex datasets almost instantly.
+
+Consider the famous **Anscombe's Quartet**—four datasets that have nearly identical summary statistics (same mean, variance, and correlation) but tell completely different stories when plotted:
+
+```{r}
+#| label: fig-anscombes
+#| fig-cap: "Anscombe's Quartet: Four datasets with identical summary statistics but very different patterns"
+#| fig-height: 6
+
+# Anscombe's Quartet demonstration
+anscombe_long <- anscombe |>
+  pivot_longer(everything(),
+               names_to = c(".value", "set"),
+               names_pattern = "(.)(.)")
+
+ggplot(anscombe_long, aes(x = x, y = y)) +
+  geom_point(size = 2, color = "steelblue") +
+  geom_smooth(method = "lm", se = FALSE, color = "coral") +
+  facet_wrap(~set, ncol = 2) +
+  labs(title = "Anscombe's Quartet",
+       subtitle = "Same mean, variance, and correlation—different stories") +
+  theme_minimal()
+```
+
+This example powerfully demonstrates that summary statistics alone can hide important patterns. Visualization reveals what numbers cannot.
+
 ## The Grammar of Graphics {#sec-grammar-graphics}
 
 **ggplot2** is R's most popular visualization package, built on the "Grammar of Graphics" framework [@wickham2016ggplot2]. Just as grammar provides rules for constructing sentences, the grammar of graphics provides rules for constructing statistical graphics.
@@ -69,6 +99,24 @@ ggplot(data = <DATA>, aes(<MAPPINGS>)) +
   <GEOM_FUNCTION>() +
   <OPTIONAL_LAYERS>
 ```
+
+## Choosing the Right Chart Type {#sec-choose-chart}
+
+One of the most important decisions in visualization is selecting the appropriate chart type for your data and message. Different charts excel at different tasks:
+
+| Question | Chart Type | Why |
+|:---------|:-----------|:----|
+| How are values distributed? | Histogram, density plot | Shows shape, center, spread |
+| How do groups compare? | Box plot, bar chart | Side-by-side comparison |
+| How do two variables relate? | Scatter plot | Shows correlation, patterns |
+| How does a value change over time? | Line plot | Connects sequential observations |
+| What is the composition? | Stacked bar, pie chart | Shows parts of a whole |
+
+: Matching questions to chart types {#tbl-chart-types}
+
+::: {.callout-important title="Start with the Question"}
+Before creating any visualization, ask yourself: "What question am I trying to answer?" The chart type should emerge from the question, not the other way around.
+:::
 
 ## Essential Geoms {#sec-geoms}
 
