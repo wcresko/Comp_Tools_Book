@@ -25,13 +25,13 @@ book:
     - chapters/06-shell-scripting.qmd
     - chapters/07-r-programming.qmd
     - chapters/08-tidy-data.qmd
-    - chapters/09-data-visualization.qmd
     - chapters/10-git-github.qmd
-    - chapters/11-hpc-talapas.qmd
-    - chapters/12-quarto-documents.qmd
+    - chapters/09-data-visualization.qmd
     - chapters/13-writing-functions.qmd
     - chapters/14-parallel-computing.qmd
     - chapters/15-databases.qmd
+    - chapters/12-quarto-documents.qmd
+    - chapters/11-hpc-talapas.qmd
     - references.qmd
   
   appendices:
@@ -71,7 +71,7 @@ format:
     toc: true
     toc-depth: 3
     number-sections: true
-    number-depth: 3
+    number-depth: 2
     link-external-icon: true
     link-external-newwindow: true
     fig-cap-location: bottom

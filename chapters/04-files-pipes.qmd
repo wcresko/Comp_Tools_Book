@@ -44,14 +44,11 @@ stdin ───>│              │───> stdout
           └──────────────┘      (2)
 ```
 
-**Standard Input (stdin)**
-:   Where programs read input. File descriptor 0. Default: keyboard.
+**Standard Input (stdin).** Where programs read input. File descriptor 0. Default: keyboard.
 
-**Standard Output (stdout)**
-:   Where programs write normal output. File descriptor 1. Default: terminal screen.
+**Standard Output (stdout).** Where programs write normal output. File descriptor 1. Default: terminal screen.
 
-**Standard Error (stderr)**
-:   Where programs write error messages. File descriptor 2. Default: terminal screen.
+**Standard Error (stderr).** Where programs write error messages. File descriptor 2. Default: terminal screen.
 
 These streams can be redirected—connected to files or other programs—which is the key to building powerful pipelines.
 

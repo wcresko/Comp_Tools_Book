@@ -33,23 +33,17 @@ As an **interpreted language**, R code is translated to machine language by the 
 
 R offers several advantages for researchers:
 
-**Statistical Power**
-:   R was built by statisticians for statistics. It includes comprehensive implementations of classical and modern statistical methods.
+**Statistical Power.** R was built by statisticians for statistics. It includes comprehensive implementations of classical and modern statistical methods.
 
-**Graphics Excellence**
-:   R produces publication-quality graphics with fine-grained control over every aspect of visualization.
+**Graphics Excellence.** R produces publication-quality graphics with fine-grained control over every aspect of visualization.
 
-**Package Ecosystem**
-:   Over 20,000 packages extend R's capabilities for virtually every analytical need, from genomics to machine learning.
+**Package Ecosystem.** Over 20,000 packages extend R's capabilities for virtually every analytical need, from genomics to machine learning.
 
-**Reproducibility**
-:   R scripts document your analysis completely. Combined with Quarto (which produced this book!), you can create reproducible documents that integrate code, results, and narrative.
+**Reproducibility.** R scripts document your analysis completely. Combined with Quarto (which produced this book!), you can create reproducible documents that integrate code, results, and narrative.
 
-**Active Community**
-:   A large, welcoming community provides abundant resources, tutorials, and support.
+**Active Community.** A large, welcoming community provides abundant resources, tutorials, and support.
 
-**Cost**
-:   R is free and open-source, removing financial barriers to sophisticated analysis.
+**Cost.** R is free and open-source, removing financial barriers to sophisticated analysis.
 
 ## RStudio: Your R Environment {#sec-rstudio}
 
@@ -59,17 +53,13 @@ While R can run from the command line, most users work in **RStudio**, an integr
 
 RStudio organizes your workspace into four panes:
 
-**Source (top-left)**
-:   Where you write and edit scripts. Code here isn't executed until you explicitly run it.
+**Source (top-left).** Where you write and edit scripts. Code here isn't executed until you explicitly run it.
 
-**Console (bottom-left)**
-:   The interactive R session. Commands typed here execute immediately. Output appears here.
+**Console (bottom-left).** The interactive R session. Commands typed here execute immediately. Output appears here.
 
-**Environment/History (top-right)**
-:   Shows variables you've created (Environment tab) and commands you've run (History tab).
+**Environment/History (top-right).** Shows variables you've created (Environment tab) and commands you've run (History tab).
 
-**Files/Plots/Help (bottom-right)**
-:   File browser, plot viewer, and help documentation.
+**Files/Plots/Help (bottom-right).** File browser, plot viewer, and help documentation.
 
 ![The RStudio interface showing all four panes: Source (top-left) with R code, Console (bottom-left) showing command output, Environment/Workspace (top-right) displaying variables and data, and Plots (bottom-right) showing a visualization.](images/RStudio_Screenshot.png){#fig-rstudio-interface width="100%"}
 
