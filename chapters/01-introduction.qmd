@@ -79,12 +79,7 @@ The distinction between compiled and interpreted languages has become increasing
 
 ### Which Should You Learn?
 
-For most biological research, **interpreted languages are the right choice**. They offer:
-
-- Rapid prototyping and experimentation
-- Interactive data exploration
-- Extensive libraries for scientific computing
-- Lower barriers to entry for beginners
+For most biological research, **interpreted languages are the right choice**. They enable rapid prototyping and experimentation—you can try an idea, see if it works, and refine it immediately. Their interactive nature makes them ideal for data exploration, allowing you to probe your data and understand its structure before committing to a particular analysis approach. The scientific computing community has developed extensive libraries for these languages, from statistical methods to machine learning to bioinformatics pipelines. And because interpreted languages tend to have more forgiving syntax and immediate feedback, they present lower barriers to entry for beginners.
 
 In this course, we focus primarily on Bash (the Unix shell) and R, with exposure to high-performance computing concepts that may eventually lead you to compiled languages if your research requires it.
 
@@ -94,53 +89,23 @@ This book and accompanying course introduce you to a carefully selected set of t
 
 ### Unix/Linux and the Shell
 
-The **Unix shell** (specifically Bash) provides:
-
-- A powerful interface for file manipulation
-- Tools for processing large text-based data files
-- The ability to combine simple programs into complex workflows
-- Access to remote computing systems
-
-Understanding Unix is essential because it underlies most scientific computing infrastructure, from laptops to supercomputers.
+The **Unix shell** (specifically Bash) provides a powerful interface for file manipulation that goes far beyond what graphical file managers offer. It includes specialized tools for processing large text-based data files—essential when working with genomic sequences, tabular data, or log files. Perhaps most importantly, the shell lets you combine simple programs into complex workflows through pipes and scripting, and it provides access to remote computing systems using the same commands you use locally. Understanding Unix is essential because it underlies most scientific computing infrastructure, from laptops to supercomputers.
 
 ### R Statistical Programming
 
-**R** is a programming language and environment specifically designed for statistical computing and graphics [@rproject2024]. It offers:
-
-- Comprehensive statistical analysis capabilities
-- Publication-quality graphics
-- Thousands of packages for specialized analyses
-- Integration with reproducible document systems (Quarto, R Markdown)
-- An excellent IDE (RStudio)
+**R** is a programming language and environment specifically designed for statistical computing and graphics [@rproject2024]. It provides comprehensive statistical analysis capabilities, from basic descriptive statistics to advanced machine learning algorithms. R excels at producing publication-quality graphics with fine-grained control over every visual element. The community has developed thousands of packages for specialized analyses in virtually every domain of science, and R integrates seamlessly with reproducible document systems like Quarto and R Markdown. The RStudio IDE provides an excellent development environment that makes working with R accessible and productive.
 
 ### Quarto and Reproducible Documents
 
-**Quarto** is an open-source scientific publishing system [@quarto2024] that allows you to:
-
-- Combine narrative text with executable code
-- Generate reports, presentations, websites, and books
-- Ensure your analyses are fully reproducible
-- Share your work in multiple formats
-
-This book itself was written using Quarto!
+**Quarto** is an open-source scientific publishing system [@quarto2024] that enables you to combine narrative text with executable code in a single document. From this unified source, you can generate reports, presentations, websites, and books—all while ensuring your analyses are fully reproducible. Because the code runs when the document renders, results always match the code that produced them. You can then share your work in multiple formats (HTML, PDF, Word) without maintaining separate versions. This book itself was written using Quarto!
 
 ### Git and GitHub
 
-**Git** is a version control system that tracks changes to your files over time [@chacon2014pro; @blischak2016practical]. **GitHub** is a web-based platform for hosting Git repositories. Together, they enable:
-
-- Complete history of your project's development
-- Safe experimentation with new ideas
-- Collaboration with colleagues worldwide
-- Sharing code and data publicly
+**Git** is a version control system that tracks changes to your files over time [@chacon2014pro; @blischak2016practical]. **GitHub** is a web-based platform for hosting Git repositories. Together, they provide a complete history of your project's development, allowing you to understand how your work evolved and revert to earlier versions if needed. Git enables safe experimentation with new ideas through branching—you can try risky changes without affecting your working code. The platform facilitates collaboration with colleagues worldwide, letting multiple people work on the same project simultaneously. And GitHub makes it easy to share code and data publicly, contributing to open science and reproducible research.
 
 ### High-Performance Computing
 
-**Talapas** is the University of Oregon's computing cluster. You'll learn to:
-
-- Access and navigate the cluster
-- Submit and manage batch jobs
-- Use software modules
-- Scale your analyses beyond your laptop's capabilities
+**Talapas** is the University of Oregon's computing cluster. You'll learn to access and navigate this remote computing environment, submit and manage batch jobs that run when resources become available, use software modules to access specialized tools, and scale your analyses far beyond what your laptop can handle. When your analysis takes hours or days, or requires more memory than your personal computer has, Talapas provides the computational power you need.
 
 ## Setting Up Your Computing Environment
 

@@ -25,19 +25,9 @@ After completing this chapter, you will be able to:
 
 Throughout this book, we've used many functions: some from base R (like `mean()` and `sum()`), others from packages (like `dplyr::filter()` and `ggplot2::ggplot()`). But the real power of programming comes from writing your own functions.
 
-Functions allow you to:
+Functions allow you to **avoid repetition** by writing code once and using it many times. When you find yourself copying and pasting the same block of code with minor changes, that's a sign you should write a function. This also **reduces errors**—if you find a bug, you fix it in one place rather than tracking down every copy. Functions **improve readability** by letting you give meaningful names to complex operations; `calculate_gc_content(sequence)` is far clearer than the five lines of code it might contain. And functions make it easy to **share code** with colleagues or package your solutions for the broader community.
 
-- **Avoid repetition**: Write code once, use it many times
-- **Reduce errors**: Fix bugs in one place rather than many
-- **Improve readability**: Give meaningful names to complex operations
-- **Share code**: Package your solutions for others to use
-
-In biosciences, you'll often need custom functions for tasks like:
-
-- Calculating enzyme kinetics parameters
-- Normalizing gene expression data
-- Computing population genetics statistics
-- Processing experimental replicates
+In biosciences, you'll often need custom functions for domain-specific tasks: calculating enzyme kinetics parameters, normalizing gene expression data, computing population genetics statistics, or processing experimental replicates according to your lab's specific protocols.
 
 ## Basic Function Syntax {#sec-function-syntax}
 
