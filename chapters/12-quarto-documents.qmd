@@ -22,7 +22,9 @@ After completing this chapter, you will be able to:
 
 ## What is Quarto? {#sec-what-is-quarto}
 
-**Quarto** is an open-source scientific publishing system that enables you to create dynamic documents combining narrative text, code, and results [@quarto2024]. It represents the next generation of literate programming tools, building on the legacy of R Markdown [@xie2018r] while extending support to multiple programming languages.
+**Quarto** is an open-source scientific publishing system that enables you to create dynamic documents combining narrative text, code, and results [@quarto2024]. It represents the next generation of literate programming tools, building on the legacy of R Markdown [@xie2018r] while extending support to multiple programming languages including R, Python, Julia, and Observable JavaScript.
+
+The name "Quarto" comes from the Latin word for a quarter sheet of paper folded twice to create an eight-page booklet—an evocative reference to the history of publishing and scholarly communication. Just as the quarto format revolutionized book publishing in the 16th century, the Quarto system is revolutionizing how scientists share their work.
 
 Quarto documents are plain text files with the `.qmd` extension that can be rendered to:
 
@@ -55,6 +57,22 @@ Quarto solves fundamental problems in scientific communication:
 ::: {.callout-tip}
 This entire textbook was written in Quarto! You can see the source files in the repository.
 :::
+
+### The Literate Programming Philosophy
+
+Quarto is built on the concept of **literate programming**, introduced by Donald Knuth in 1984. The idea is revolutionary yet simple: instead of writing code with occasional comments, write a human-readable document that happens to contain executable code. As Knuth wrote:
+
+> "Let us change our traditional attitude to the construction of programs: Instead of imagining that our main task is to instruct a computer what to do, let us concentrate rather on explaining to human beings what we want a computer to do."
+
+In practice, this means your analysis scripts become documents that tell a story. The code is woven together with explanations of *why* you're doing each step, *what* you expect to find, and *how* the results should be interpreted. When you share this document, readers understand not just the mechanical steps, but the reasoning behind each analytical choice.
+
+This approach has profound implications for science:
+
+1. **Your methods become self-documenting.** No more separate "methods" documents that drift out of sync with your actual code.
+
+2. **Errors become visible.** When code and narrative live together, inconsistencies between what you say you're doing and what you're actually doing become obvious.
+
+3. **Learning accelerates.** Well-documented analyses serve as tutorials for others (and for your future self) who want to learn your techniques.
 
 ## Markdown: The Foundation {#sec-markdown}
 
@@ -201,6 +219,66 @@ Create tables with pipes and hyphens:
 | aligned  | aligned  | aligned  |
 
 The colons indicate alignment: `:---` left, `:---:` center, `---:` right.
+
+### Horizontal Rules
+
+Create a horizontal divider with three or more hyphens, asterisks, or underscores:
+
+```markdown
+---
+```
+
+---
+
+### Footnotes
+
+Add footnotes for additional context without interrupting the flow:
+
+```markdown
+This is a statement that needs a citation.[^1]
+
+[^1]: This is the footnote content.
+```
+
+This is a statement that needs a citation.[^example]
+
+[^example]: This is the footnote content.
+
+### Definition Lists
+
+Define terms with a colon-based syntax:
+
+```markdown
+Term 1
+:   Definition of the first term.
+
+Term 2
+:   Definition of the second term.
+:   You can have multiple definitions.
+```
+
+Term 1
+:   Definition of the first term.
+
+Term 2
+:   Definition of the second term.
+:   You can have multiple definitions.
+
+### Line Breaks and Paragraphs
+
+In Markdown, a single line break is ignored—you need a blank line to create a new paragraph. To force a line break without a new paragraph, end the line with two spaces or use `<br>`.
+
+::: {.callout-tip title="Markdown Formatting Quick Reference"}
+| Format | Syntax | Result |
+|:-------|:-------|:-------|
+| Bold | `**text**` | **text** |
+| Italic | `*text*` | *text* |
+| Code | `` `code` `` | `code` |
+| Link | `[text](url)` | [text](url) |
+| Strikethrough | `~~text~~` | ~~text~~ |
+| Subscript | `H~2~O` | H~2~O |
+| Superscript | `10^2^` | 10^2^ |
+:::
 
 ## Quarto Document Structure {#sec-quarto-structure}
 

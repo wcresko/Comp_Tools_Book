@@ -22,6 +22,8 @@ After completing this chapter, you will be able to:
 
 ## Why Version Control? {#sec-why-version-control}
 
+Science demands precision and reproducibility. When you publish a paper, readers should be able to understand exactly what you did and replicate your results. Yet many researchers manage their code and manuscripts with methods that would horrify their inner scientist.
+
 Have you ever had files named like this?
 
 ```
@@ -29,9 +31,14 @@ analysis_final.R
 analysis_final_v2.R
 analysis_final_v2_REALLY_FINAL.R
 analysis_final_v2_REALLY_FINAL_fixed.R
+analysis_final_v2_REALLY_FINAL_fixed_AFTER_REVIEWER2.R
 ```
 
-This ad-hoc versioning is error-prone, confusing, and doesn't scale. **Version control** solves this problem by systematically tracking changes to files over time.
+This ad-hoc versioning might seem harmless, but it creates real problems. Which version produced the figures in your paper? What changed between version 2 and the "REALLY_FINAL" version? If you discover an error, can you trace it back to when it was introduced?
+
+**Version control** solves these problems by systematically tracking changes to files over time. It's like having a time machine for your project—you can go back to any point in history, see exactly what changed and when, and understand why each change was made.
+
+The concept isn't new to science. Laboratory notebooks have always served a similar purpose: documenting what was done, when, and by whom. Version control is simply the digital equivalent for code and text, with superpowers that paper notebooks can't match.
 
 Version control systems provide:
 
@@ -44,6 +51,10 @@ Version control systems provide:
 **Backup.** Your code exists in multiple places, protecting against data loss.
 
 **Reproducibility.** Tag specific versions for publications. Anyone can access exactly what you used [@blischak2016practical; @ram2013git].
+
+::: {.callout-note title="Version Control for Papers and Beyond"}
+While we focus on code, version control is equally valuable for manuscripts, theses, and any text-based work. Many researchers now write papers in LaTeX or Markdown and track every revision with Git. Reviewer asked you to change something, then asked you to change it back? No problem—it's all in the history.
+:::
 
 ## Git: Distributed Version Control {#sec-git-distributed}
 
@@ -161,7 +172,16 @@ $ git clone https://github.com/username/repository.git my_local_name
 
 ## Basic Git Workflow {#sec-git-workflow}
 
-The daily rhythm of Git involves four main commands: `status`, `add`, `commit`, and `push`.
+The daily rhythm of Git involves four main commands: `status`, `add`, `commit`, and `push`. Don't be intimidated by the number of Git commands that exist—most researchers use only a handful regularly, and you can be highly productive knowing just these four.
+
+Think of the Git workflow like preparing a package to ship:
+
+1. **You work on your files** (working directory)
+2. **You decide what to include** (`git add` → staging area)
+3. **You seal and label the package** (`git commit` → local repository)
+4. **You send it out** (`git push` → remote repository)
+
+Each commit is like a snapshot of your project at a moment in time, labeled with a message explaining what changed. Over time, these commits form a complete history of your project's evolution.
 
 ### Checking Status
 

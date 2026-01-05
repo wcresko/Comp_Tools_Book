@@ -29,7 +29,13 @@ After completing this chapter, you will be able to:
 
 R is a programming language designed specifically for statistical computing and graphics [@rproject2024]. It is an offshoot of a language called **S**, developed in 1976 at Bell Laboratories by John Chambers and colleagues. R was created in 1991 by Ross Ihaka and Robert Gentleman at the University of Auckland, New Zealand (hence the name "R"), and has since become one of the most widely used tools in data science, statistics, and bioinformatics.
 
-As an **interpreted language**, R code is translated to machine language by the R interpreter each time it runs, as opposed to being compiled beforehand. This makes R highly interactive and excellent for exploratory data analysis.
+Unlike general-purpose languages that happen to have statistics libraries, R was built from the ground up for data analysis. This design choice permeates every aspect of the language—from how it handles vectors and missing values to how it creates publication-quality graphics with minimal code.
+
+As an **interpreted language**, R code is translated to machine language by the R interpreter each time it runs, as opposed to being compiled beforehand. This makes R highly interactive and excellent for exploratory data analysis. You can type a command, see the result immediately, and adjust your approach—a rapid feedback loop that's essential for understanding data.
+
+::: {.callout-tip title="Learning to Think in R"}
+Learning R isn't just about memorizing syntax—it's about learning to think about data in a new way. R encourages you to work with entire vectors and data frames at once rather than processing elements one by one. This "vectorized thinking" may feel unfamiliar at first, but it leads to more concise, readable, and efficient code.
+:::
 
 R offers several advantages for researchers:
 
@@ -44,6 +50,19 @@ R offers several advantages for researchers:
 **Active Community.** A large, welcoming community provides abundant resources, tutorials, and support.
 
 **Cost.** R is free and open-source, removing financial barriers to sophisticated analysis.
+
+### The Console vs. Scripts
+
+When you first start using R, you'll interact with it through the **console**—a command-line interface where you type commands and see results immediately. This is perfect for exploration: trying things out, checking your data, and learning how functions work.
+
+But as your analyses become more complex, you'll want to save your work in **scripts**—text files (ending in `.R`) that contain a sequence of commands. Scripts are the foundation of reproducible research. When you run a script, R executes each command in order, exactly as you wrote it. This means:
+
+1. **You can reproduce your analysis** by running the script again
+2. **Others can verify your work** by reading and running your code
+3. **You can modify and extend** your analysis without starting from scratch
+4. **Your future self will understand** what you did and why
+
+The workflow looks like this: explore in the console to understand your data, then move your successful commands into a script. Your script becomes the official record of your analysis—clean, organized, and executable.
 
 ## RStudio: Your R Environment {#sec-rstudio}
 
