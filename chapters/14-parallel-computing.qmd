@@ -578,6 +578,10 @@ Parallel computing can dramatically speed up computationally intensive analyses:
 
 Parallel programming in R has never been easier. With just a few lines of code, you can harness all your computer's cores for faster, more efficient analyses.
 
+::: {.callout-tip}
+For reference on R functions used in parallel computing workflows, see @sec-appendix-r.
+:::
+
 ## Exercises {.unnumbered}
 
 ::: {.callout-tip title="Practice Exercises"}

@@ -459,6 +459,10 @@ This chapter covered pattern matching with `grep` and regular expressions:
 
 Regular expressions are a foundational skill. While the syntax can seem cryptic initially, investment in learning regex pays off enormously across all aspects of computational biology.
 
+::: {.callout-tip}
+For a comprehensive reference of regular expression patterns and `grep` command syntax, see @sec-appendix-regex. For other Unix commands, see @sec-appendix-unix.
+:::
+
 ## Additional Reading {.unnumbered}
 
 To deepen your understanding of regular expressions:

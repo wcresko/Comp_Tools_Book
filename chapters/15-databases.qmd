@@ -468,6 +468,10 @@ In this chapter, you learned how to:
 
 The combination of dbplyr and DBI lets you leverage your existing tidyverse skills while accessing data at any scale. When you need to work with data too large for memory or collaborate with others through a shared database, these tools let you stay productive without learning an entirely new programming paradigm.
 
+::: {.callout-tip}
+For reference on dplyr and tidyverse functions used with databases, see @sec-appendix-r.
+:::
+
 ## Exercises {.unnumbered}
 
 1. **Basic Connection**: Connect to a duckdb database and load the `nycflights13::flights` data into a table called "flights".

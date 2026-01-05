@@ -43,11 +43,11 @@ Version control systems provide:
 
 **Backup.** Your code exists in multiple places, protecting against data loss.
 
-**Reproducibility.** Tag specific versions for publications. Anyone can access exactly what you used [@blischak2016practical].
+**Reproducibility.** Tag specific versions for publications. Anyone can access exactly what you used [@blischak2016practical; @ram2013git].
 
 ## Git: Distributed Version Control {#sec-git-distributed}
 
-**Git** is the most widely used version control system. Created by Linus Torvalds (who also created Linux), Git is:
+**Git** is the most widely used version control system [@chacon2014pro]. Created by Linus Torvalds (who also created Linux), Git is:
 
 - **Distributed**: Every copy is a complete repository with full history
 - **Fast**: Operations happen locally without network delays
@@ -745,6 +745,8 @@ For more Git emergencies, visit [ohshitgit.com](https://ohshitgit.com/) — a hu
 
 : Essential Git commands {#tbl-git-commands}
 
+For a comprehensive reference of Git commands and workflows, see @sec-appendix-git.
+
 ## Summary {#sec-git-summary}
 
 Version control with Git and GitHub is essential for modern research:
@@ -757,12 +759,16 @@ Version control with Git and GitHub is essential for modern research:
 
 Learning Git has a steep initial curve, but the investment pays dividends throughout your career. Start simple, use it consistently, and gradually adopt more advanced features.
 
+::: {.callout-tip}
+For a complete reference of Git commands with detailed syntax and workflows, see @sec-appendix-git.
+:::
+
 ## Additional Reading {.unnumbered}
 
 - [Happy Git and GitHub for the useR](https://happygitwithr.com/) — Excellent guide for R users by Jenny Bryan
 - [Pro Git Book](https://git-scm.com/book/en/v2) — Comprehensive free reference [@chacon2014pro]
 - [GitHub Documentation](https://docs.github.com) — Official guides
-- [Software Carpentry Git Lesson](https://swcarpentry.github.io/git-novice/) — Beginner-friendly tutorial
+- [Software Carpentry Git Lesson](https://swcarpentry.github.io/git-novice/) [@softwarecarpentry2024git] — Beginner-friendly tutorial
 - [Oh Shit, Git!?!](https://ohshitgit.com/) — Solutions for common Git mistakes
 - [Quarto + GitHub Pages](https://quarto.org/docs/publishing/github-pages.html) — Publishing documentation
 

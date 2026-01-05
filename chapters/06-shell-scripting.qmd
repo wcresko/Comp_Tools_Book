@@ -22,7 +22,7 @@ After completing this chapter, you will be able to:
 
 ## Why Shell Scripting? {#sec-why-shell-scripting}
 
-Throughout the previous chapters, you've been typing commands interactively. While this is great for exploration, real-world analyses require something more:
+Throughout the previous chapters, you've been typing commands interactively. While this is great for exploration, real-world analyses require something more [@sandve2013ten]:
 
 - **Reproducibility**: Record exactly what you did
 - **Automation**: Run the same analysis on many files
@@ -881,6 +881,10 @@ This chapter covered shell scripting essentials:
 - Combining these elements creates powerful analysis pipelines
 
 Shell scripting is a foundational skill for computational biology. Even as you learn other languages like R and Python, shell scripts remain invaluable for automation, file management, and orchestrating complex workflows.
+
+::: {.callout-tip}
+For quick reference on Unix commands used in shell scripts, see @sec-appendix-unix.
+:::
 
 ## Additional Reading {.unnumbered}
 

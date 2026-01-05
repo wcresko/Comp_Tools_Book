@@ -106,6 +106,8 @@ Learning these shortcuts will dramatically speed up your command-line work:
 
 : Essential shell keyboard shortcuts {#tbl-keyboard-shortcuts}
 
+For a complete list of keyboard shortcuts, see @sec-appendix-shortcuts.
+
 ::: {.callout-tip}
 **Tab completion is your best friend!** Start typing a file name and press Tab—the shell will complete it for you. If there are multiple matches, press Tab twice to see all options. This prevents typos and saves enormous amounts of typing.
 :::
@@ -217,7 +219,7 @@ A **path** specifies the location of a file or directory. Paths come in two form
 Documents/analysis.R
 ```
 
-![Understanding file system paths: This diagram shows how an absolute path like `/home/catchen/working` is constructed by following the directory tree from root (`/`) through each level.](images/Directory_example.jpeg){#fig-paths width="70%"}
+![Understanding file system paths: This diagram shows how an absolute path like `/home/catchen/working` is constructed by following the directory tree from root (`/`) through each level.](images/unix_directory_paths.jpeg){#fig-paths width="70%"}
 
 Special directory references:
 
@@ -651,13 +653,17 @@ This chapter covered the fundamentals of Unix navigation and file manipulation:
 
 These commands form the foundation for everything else in Unix. Practice them until they become automatic!
 
+::: {.callout-tip}
+For a comprehensive reference of Unix commands with syntax and examples, see @sec-appendix-unix.
+:::
+
 ## Additional Reading {.unnumbered}
 
 To further develop your Unix skills:
 
 - **[The Linux Command Line](https://linuxcommand.org/tlcl.php)** by William Shotts — A comprehensive, free book on Linux command-line fundamentals
-- **[Software Carpentry: The Unix Shell](https://swcarpentry.github.io/shell-novice/)** — An excellent interactive tutorial designed for scientists
-- **"The Unix Programming Environment"** by Kernighan and Pike — A classic text on Unix philosophy and tools
+- **[Software Carpentry: The Unix Shell](https://swcarpentry.github.io/shell-novice/)** [@softwarecarpentry2024shell] — An excellent interactive tutorial designed for scientists
+- **"The Unix Programming Environment"** [@kernighan1984unix] by Kernighan and Pike — A classic text on Unix philosophy and tools
 - **[Explain Shell](https://explainshell.com/)** — An interactive tool that breaks down complex shell commands into understandable parts
 - **[Linux Pocket Guide](https://www.oreilly.com/library/view/linux-pocket-guide/9781098157913/)** by Daniel Barrett — A handy quick reference for essential commands
 

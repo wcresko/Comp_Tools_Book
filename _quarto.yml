@@ -25,17 +25,22 @@ book:
     - chapters/06-shell-scripting.qmd
     - chapters/07-r-programming.qmd
     - chapters/08-tidy-data.qmd
-    - chapters/10-git-github.qmd
     - chapters/09-data-visualization.qmd
     - chapters/13-writing-functions.qmd
     - chapters/14-parallel-computing.qmd
     - chapters/15-databases.qmd
     - chapters/12-quarto-documents.qmd
+    - chapters/10-git-github.qmd
     - chapters/11-hpc-talapas.qmd
     - references.qmd
   
   appendices:
-    - chapters/appendix-commands.qmd
+    - chapters/appendix-unix.qmd
+    - chapters/appendix-git.qmd
+    - chapters/appendix-r.qmd
+    - chapters/appendix-slurm.qmd
+    - chapters/appendix-regex.qmd
+    - chapters/appendix-shortcuts.qmd
   
   page-navigation: true
   search: true

@@ -415,7 +415,9 @@ If you must use spreadsheets for data entry, follow these guidelines:
 
 ## The Tidyverse: A Collection of Data Science Packages {#sec-tidyverse}
 
-The **tidyverse** is a collection of R packages designed for data science that share a common philosophy and work seamlessly together. These packages make data manipulation, visualization, and analysis more intuitive and readable.
+The **tidyverse** is a collection of R packages designed for data science that share a common philosophy and work seamlessly together [@wickham2019tidyverse]. These packages make data manipulation, visualization, and analysis more intuitive and readable.
+
+![The tidyverse is an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures. The core packages include ggplot2 for visualization, dplyr for data manipulation, tidyr for data tidying, readr for data import, purrr for functional programming, and tibble for modern data frames.](images/tidyverse_packages.jpeg){#fig-tidyverse-packages width="80%"}
 
 ### Core Tidyverse Packages
 
@@ -432,7 +434,7 @@ The **tidyverse** is a collection of R packages designed for data science that s
 
 : Core tidyverse packages {#tbl-tidyverse}
 
-Load all core packages at once:
+Load all core packages at once with a single `library()` call:
 
 ```{r}
 #| label: load-tidyverse
@@ -440,6 +442,8 @@ Load all core packages at once:
 
 library(tidyverse)
 ```
+
+This loads the eight core tidyverse packages and displays helpful information about function conflicts [@wickham2019tidyverse].
 
 ### Data Import with readr
 
@@ -1403,6 +1407,10 @@ For high-performance needs, **data.table** offers:
 
 - Concise `DT[i, j, by]` syntax
 - 10-100x speed improvements on large datasets
+
+::: {.callout-tip}
+For quick reference on tidyverse functions and R data manipulation commands, see @sec-appendix-r.
+:::
 - Memory efficiency through modification by reference
 - **dtplyr** as a bridge for those who prefer dplyr syntax
 

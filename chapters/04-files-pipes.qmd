@@ -504,6 +504,10 @@ This chapter covered the tools for reading, writing, and connecting Unix command
 
 These concepts form the foundation of Unix data processing. Master them, and you can construct solutions to virtually any text-processing challenge.
 
+::: {.callout-tip}
+For quick reference on Unix commands and pipeline tools covered in this chapter, see @sec-appendix-unix.
+:::
+
 ## Additional Reading {.unnumbered}
 
 To explore pipes, redirection, and text processing further:
