@@ -332,7 +332,7 @@ d & e & f
 |:-----------|:-----|:------------|
 | $\bar{x}$ | `\bar{x}` | Sample mean |
 | $\hat{\mu}$ | `\hat{\mu}` | Estimated parameter |
-| $\tilde{x}$ | `\tilde{x}$ | Median |
+| $\tilde{x}$ | `\tilde{x}` | Median |
 | $X \sim N(\mu, \sigma^2)$ | `X \sim N(\mu, \sigma^2)` | Distribution |
 | ${n \choose k}$ | `{n \choose k}` | Binomial coefficient |
 | $\binom{n}{k}$ | `\binom{n}{k}` | Binomial coefficient (alternate) |

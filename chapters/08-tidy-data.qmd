@@ -36,7 +36,7 @@ Consider this scenario: you've completed an experiment and collected data in a s
 
 ## The Three Principles of Tidy Data {#sec-tidy-principles}
 
-Hadley Wickham formalized the concept of tidy data in a influential paper [@wickham2014tidy]. Tidy data follows three rules:
+Hadley Wickham formalized the concept of tidy data in an influential paper [@wickham2014tidy]. Tidy data follows three rules:
 
 ::: {.callout-important title="The Three Rules of Tidy Data"}
 1. Each **variable** forms a column
