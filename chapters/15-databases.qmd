@@ -3,9 +3,10 @@
 ```{r}
 #| label: setup
 #| include: false
-library(tidyverse)
-library(DBI)
-library(dbplyr)
+#| message: false
+
+if (!require("pacman")) install.packages("pacman")
+pacman::p_load(tidyverse, DBI, dbplyr, duckdb)
 theme_set(theme_minimal())
 ```
 
