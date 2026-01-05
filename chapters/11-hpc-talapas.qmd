@@ -38,7 +38,7 @@ Consider HPC when:
 
 ### Talapas: UO's Computing Cluster
 
-**Talapas** is the University of Oregon's HPC cluster, named from a Chinook word for coyote (the educator and keeper of knowledge). It's managed by Research Advanced Computing Services (RACS).
+**Talapas** is the University of Oregon's HPC cluster, named after a Chinook word for coyote (the educator and keeper of knowledge). It's managed by Research Advanced Computing Services (RACS).
 
 Key resources:
 
