@@ -627,6 +627,10 @@ Writing functions is a fundamental programming skill that will dramatically impr
 
 The next chapter will show you how to debug functions when things go wrong, catch user errors gracefully, and cache results for expensive computations.
 
+::: {.callout-tip}
+For quick reference on R function syntax and functional programming tools like `lapply()` and `purrr`, see @sec-appendix-r.
+:::
+
 ## Additional Reading {.unnumbered}
 
 To deepen your understanding of functions and functional programming in R:

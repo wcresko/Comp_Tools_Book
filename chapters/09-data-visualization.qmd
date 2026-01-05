@@ -21,7 +21,7 @@ After completing this chapter, you will be able to:
 
 ## The Grammar of Graphics {#sec-grammar-graphics}
 
-**ggplot2** is R's most popular visualization package, built on the "Grammar of Graphics" framework. Just as grammar provides rules for constructing sentences, the grammar of graphics provides rules for constructing statistical graphics.
+**ggplot2** is R's most popular visualization package, built on the "Grammar of Graphics" framework [@wickham2016ggplot2]. Just as grammar provides rules for constructing sentences, the grammar of graphics provides rules for constructing statistical graphics.
 
 ### Seven Components of a Graphic
 
@@ -39,7 +39,7 @@ Every ggplot2 visualization is built from these components:
 
 : Components of the Grammar of Graphics {#tbl-grammar}
 
-![The Grammar of Graphics framework](images/images_4a.017.jpeg){#fig-grammar-graphics}
+![The Grammar of Graphics framework](images/visualization_grammar_of_graphics.jpeg){#fig-grammar-graphics}
 
 ## Building a Plot Layer by Layer {#sec-plot-layers}
 
@@ -106,6 +106,8 @@ ggplot(mtcars, aes(x = wt, y = mpg, color = factor(cyl))) +
     color = "Cylinders"
   )
 ```
+
+![Scatter plots are excellent for exploring relationships between two continuous variables. This example shows a positive correlation between two traits, demonstrating how scatter plots can reveal patterns in biological data.](images/visualization_scatter_correlation.jpeg){#fig-scatter-correlation width="60%"}
 
 ### Histograms with `geom_histogram()`
 
@@ -175,7 +177,7 @@ ggplot(mtcars, aes(x = factor(cyl), y = mpg, fill = factor(cyl))) +
   )
 ```
 
-![Anatomy of a box plot](images/images_4a.001.jpeg){#fig-boxplot-anatomy width="60%"}
+![Anatomy of a box plot](images/visualization_boxplot_anatomy.jpeg){#fig-boxplot-anatomy width="60%"}
 
 ### Bar Charts with `geom_bar()` and `geom_col()`
 
@@ -272,6 +274,12 @@ ggplot(mtcars, aes(x = wt, y = mpg)) +
     color = "Cylinders"
   )
 ```
+
+::: {.callout-warning title="Choose Appropriate Models"}
+When adding trend lines or smoothing to your data, choose methods that match your data structure and research questions. Overfitting with overly complex models can obscure real patterns rather than reveal them.
+
+![Different curve-fitting methods send different messages about your data. Choose methods that match your hypotheses and data characteristics, not just what makes the prettiest curve. Source: xkcd.com](images/visualization_curve_fitting.png){#fig-curve-fitting-humor width="70%"}
+:::
 
 ## Faceting: Small Multiples {#sec-faceting}
 
@@ -607,6 +615,10 @@ Best practices for effective visualization:
 - Include zero for bar charts
 - Use colorblind-friendly palettes
 - Avoid chart junk and 3D effects
+
+::: {.callout-tip}
+For a reference of ggplot2 functions and R visualization commands, see @sec-appendix-r.
+:::
 
 ## Additional Reading {.unnumbered}
 

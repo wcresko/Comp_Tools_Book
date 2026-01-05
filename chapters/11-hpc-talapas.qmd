@@ -96,7 +96,7 @@ flowchart TB
 
 **Do NOT** run computationally intensive work on login nodes! They're shared by everyone, and heavy processes will be terminated.
 
-**Compute nodes** are where your actual work runs, accessed through the job scheduler.
+**Compute nodes** are where your actual work runs, accessed through the job scheduler (SLURM) [@yoo2003slurm].
 :::
 
 ### Node Types
@@ -286,6 +286,8 @@ Rscript my_analysis.R
 | `--gres` | Generic resources | `gpu:1` |
 
 : SLURM directives reference {#tbl-slurm-directives}
+
+For a comprehensive reference of SLURM commands and directives, see @sec-appendix-slurm.
 
 ::: {.callout-tip}
 **Request only what you need!** Smaller resource requests often run sooner. Start conservative and increase if jobs fail.
@@ -558,6 +560,10 @@ High-performance computing extends your analytical capabilities beyond personal 
 - Responsible use ensures fair access for everyone
 
 Start simple—submit small test jobs, verify they work, then scale up. The HPC learning curve is real, but the capability it provides is essential for modern computational research.
+
+::: {.callout-tip}
+For a complete reference of SLURM commands and batch script directives, see @sec-appendix-slurm.
+:::
 
 ## Additional Reading {.unnumbered}
 

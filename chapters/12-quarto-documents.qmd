@@ -22,7 +22,7 @@ After completing this chapter, you will be able to:
 
 ## What is Quarto? {#sec-what-is-quarto}
 
-**Quarto** is an open-source scientific publishing system that enables you to create dynamic documents combining narrative text, code, and results. It represents the next generation of literate programming tools, building on the legacy of R Markdown while extending support to multiple programming languages.
+**Quarto** is an open-source scientific publishing system that enables you to create dynamic documents combining narrative text, code, and results [@quarto2024]. It represents the next generation of literate programming tools, building on the legacy of R Markdown [@xie2018r] while extending support to multiple programming languages.
 
 Quarto documents are plain text files with the `.qmd` extension that can be rendered to:
 

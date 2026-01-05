@@ -34,7 +34,7 @@ There are compelling reasons to invest time in developing computational proficie
 
 **Speed and Scale.** Computational tools allow you to perform thousands of operations with single commands. Tasks that would take days by hand can be completed in seconds.
 
-**Reproducibility.** Scripts and code serve as a complete record of your analysis. Unlike clicking through graphical interfaces, command-line workflows can be exactly reproduced, shared, and verified [@sandve2013ten].
+**Reproducibility.** Scripts and code serve as a complete record of your analysis. Unlike clicking through graphical interfaces, command-line workflows can be exactly reproduced, shared, and verified [@sandve2013ten; @wilson2017good].
 
 **Flexibility.** General-purpose programming languages can handle virtually any data format or analysis type. You're not limited to what software developers anticipated.
 
@@ -43,7 +43,7 @@ There are compelling reasons to invest time in developing computational proficie
 **High-Performance Computing.** Large-scale analyses require computing clusters. These systems are accessed and controlled through command-line interfaces.
 
 ::: {.callout-tip title="Career Impact"}
-Computational skills are increasingly valued in academic and industry positions. Investing in these skills now will pay dividends throughout your career.
+Computational skills are increasingly valued in academic and industry positions. Investing in these skills now will pay dividends throughout your career. Organizing your computational projects well from the start saves countless hours later [@noble2009quick].
 :::
 
 ## Coding vs. Scripting: What's the Difference?
@@ -90,7 +90,7 @@ In this course, we focus primarily on Bash (the Unix shell) and R, with exposure
 
 ## Tools We Will Cover
 
-This book and accompanying course introduce you to a carefully selected set of tools that form the foundation of computational research in the life sciences.
+This book and accompanying course introduce you to a carefully selected set of tools that form the foundation of computational research in the life sciences [@buffalo2015bioinformatics].
 
 ### Unix/Linux and the Shell
 
@@ -126,7 +126,7 @@ This book itself was written using Quarto!
 
 ### Git and GitHub
 
-**Git** is a version control system that tracks changes to your files over time [@chacon2014pro]. **GitHub** is a web-based platform for hosting Git repositories. Together, they enable:
+**Git** is a version control system that tracks changes to your files over time [@chacon2014pro; @blischak2016practical]. **GitHub** is a web-based platform for hosting Git repositories. Together, they enable:
 
 - Complete history of your project's development
 - Safe experimentation with new ideas
@@ -217,6 +217,8 @@ When you encounter problems (and you will!), several resources are available:
 **The Internet.** Sites like Stack Overflow contain solutions to virtually every common error message. Learning to search effectively is a crucial skill.
 
 **Generative AI.** Tools like ChatGPT and Claude can explain concepts, debug code, and suggest solutions. However, always verify AI-generated code and understand what it does before using it.
+
+![Discriminative models predict labels from features by learning decision boundaries, while generative models learn the underlying probability distributions of data to generate new content. Understanding this distinction helps you choose the right AI tool for your task.](images/ai_discriminative_vs_generative.png){#fig-discriminative-generative-ai width="80%"}
 
 **Each Other.** Your classmates are experiencing the same learning curve. Collaboration and discussion accelerate everyone's learning.
 
