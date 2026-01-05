@@ -18,6 +18,12 @@ After completing this chapter, you will be able to:
 - Create, move, copy, and delete files and directories
 :::
 
+Unix is the operating system of choice in data science and scientific computing. In this chapter, we introduce you to the Unix way of thinking using a practical example: how to keep a data analysis project organized. Along the way, you will learn the most commonly used commands, though we won't cover every detail—Unix is vast, and mastery comes through practice.
+
+We encourage you to keep learning, especially when you find yourself reaching for the mouse too often or performing repetitive tasks. In those moments, there is almost certainly a more efficient way to accomplish your goal using Unix. As you work through this book and beyond, consider exploring additional resources such as the interactive tutorials at [Codecademy](https://www.codecademy.com/learn/learn-the-command-line), [edX](https://www.edx.org/course/introduction-linux-linuxfoundationx-lfs101x-1), or [Coursera](https://www.coursera.org/learn/unix). For reference material, *Bite Size Linux* and *Bite Size Command Line* by Julia Evans are particularly clear and accessible.
+
+When searching for Unix resources, keep in mind that you may encounter terms like *Linux*, *the shell*, and *the command line*. These all refer to aspects of what we're learning here: a series of commands and a philosophy that enables you to organize files and automate tasks without relying on graphical interfaces.
+
 ## What Is Unix? {#sec-what-is-unix}
 
 **Unix** is a family of operating systems originally developed at Bell Labs in 1969 and publicly released in 1973 [@kernighan1984unix]. What began as a project for a single computer has become the foundation of modern computing infrastructure.
@@ -52,7 +58,9 @@ You'll see this philosophy throughout Unix: `cat` just displays files, `grep` ju
 
 ## The Shell: Your Interface to Unix {#sec-shell-interface}
 
-The **shell** is a program that interprets your commands and communicates with the operating system. Think of it as a translator between human-readable instructions and the computer's internal operations.
+Instead of clicking, dragging, and dropping to organize our files and folders, we will be typing Unix commands into the **terminal**. The way we do this is similar to how you might type commands into an R console, but instead of generating plots and statistical summaries, we will be organizing files on our system and building powerful data pipelines.
+
+The **shell** is the program that interprets your commands and communicates with the operating system. Think of it as a translator between human-readable instructions and the computer's internal operations. When you open a terminal, you're interacting with the shell.
 
 While graphical user interfaces (GUIs) like Finder on Mac or File Explorer on Windows are intuitive for casual use, the shell offers:
 
@@ -86,6 +94,19 @@ username@computer:~$
 ```
 
 The prompt typically shows your username, the computer name, your current directory (`~` means your home directory), and a `$` symbol indicating you're a regular user (a `#` would indicate administrator/root access).
+
+Once you have a terminal open, you can start typing commands. You should see a blinking cursor at the spot where what you type will appear. This position is called the **command line**. Once you type something and press Enter (or Return on Mac), Unix will try to execute the command. Try this simple example:
+
+```bash
+$ echo "hello world"
+hello world
+```
+
+The `echo` command is similar to `print()` in R—it simply displays the text you provide. Notice that you can't use the mouse to move around in the terminal the way you might in a word processor. You have to use the keyboard. To recall a command you previously typed, use the up arrow key. This is one of many conveniences that make the command line efficient once you learn its patterns.
+
+::: {.callout-note}
+Throughout this book, we show Unix commands with a `$` prefix to indicate the prompt. You don't type the `$`—it's just showing where the command begins. Lines without `$` represent output from commands.
+:::
 
 ### Essential Keyboard Shortcuts
 
@@ -171,11 +192,13 @@ When you encounter an unfamiliar command, `man` should be your first stop. The m
 
 ## Understanding the File System {#sec-file-system}
 
-Unix organizes everything as files within a hierarchical directory structure. Understanding this structure is essential for navigation.
+We refer to all the files, folders, and programs on your computer as the **filesystem**. In Unix, everything is organized as files within a hierarchical directory structure. Keep in mind that folders and programs are technically also files, but this is a detail we rarely think about. Understanding this structure is essential for navigation.
 
 ### The Directory Tree
 
-The entire file system branches from a single root directory, represented by `/`:
+The first concept you need to grasp to become a Unix user is how your filesystem is organized. You should think of it as a series of nested folders, each containing files, folders, and executable programs.
+
+In Unix, we refer to folders as **directories**. Directories that are inside other directories are called **subdirectories**. The entire file system branches from a single **root directory**, represented by `/`:
 
 ```
 /
@@ -203,35 +226,55 @@ Key directories include:
 **`/tmp`**
 :   Temporary files that may be deleted on reboot.
 
+The **home directory** is where all your personal files are kept, as opposed to system files that come with your computer. Your home directory is typically named after your username. For example, if your username is `wcresko`, your home directory might be `/home/wcresko` on Linux or `/Users/wcresko` on macOS.
+
+To understand the hierarchical nature of the filesystem, imagine you want to delete a file called `cv.tex` that lives in a `resumes` folder, which is inside a `docs` folder, which is inside your home directory. In a graphical file manager, you would double-click `docs`, then `resumes`, then drag `cv.tex` to the trash. This sequence of clicks mirrors the hierarchical path: `cv.tex` is inside `resumes`, which is inside `docs`, which is inside your home directory.
+
+In Unix, we express this same relationship as a **path**: `~/docs/resumes/cv.tex`. The forward slashes separate each level of the directory tree, and `~` is shorthand for your home directory.
+
+::: {.callout-note title="Note for Windows Users"}
+When using Windows Subsystem for Linux (WSL), your Unix home directory is different from your Windows home directory. The Unix home will be something like `/home/yourusername`, while your Windows Documents folder is typically accessible at `/mnt/c/Users/yourusername/Documents`. Keep this distinction in mind when organizing files.
+:::
+
 ### Absolute vs. Relative Paths
 
-A **path** specifies the location of a file or directory. Paths come in two forms:
+A **path** specifies the location of a file or directory. The name comes from the fact that the path string spells out the route you need to follow to get to a location from some starting point. Paths come in two forms:
 
 **Absolute Paths**
-:   Start from the root directory (`/`). They work from anywhere because they specify the complete location.
+:   Start from the root directory (`/`). They work from anywhere because they specify the complete location from the root of the filesystem. An absolute path always begins with `/` or `~`.
 ```bash
 /Users/wcresko/Documents/analysis.R
+~/Documents/analysis.R
 ```
 
 **Relative Paths**
-:   Start from your current directory. Shorter but depend on where you are.
+:   Start from your current directory. Shorter but depend on where you are. If a path does not start with `/` or `~`, Unix assumes it is relative to your current working directory.
 ```bash
 Documents/analysis.R
 ```
 
 ![Understanding file system paths: This diagram shows how an absolute path like `/home/catchen/working` is constructed by following the directory tree from root (`/`) through each level.](images/unix_directory_paths.jpeg){#fig-paths width="70%"}
 
-Special directory references:
+Unix provides shorthand symbols for common directory references:
 
-- `.` (single dot) — current directory
-- `..` (double dot) — parent directory (one level up)
-- `~` — your home directory
+| Symbol | Meaning |
+|:-------|:--------|
+| `.` | Current directory (where you are now) |
+| `..` | Parent directory (one level up) |
+| `~` | Your home directory |
+| `-` | Previous directory (where you were before) |
+
+: Special directory symbols {#tbl-dir-symbols}
+
+These symbols can be combined in paths. For example, `../..` means "go up two directories," and `~/projects` means "the projects folder in my home directory."
 
 ::: {.callout-tip}
 Use Tab completion! Start typing a file or directory name and press Tab to autocomplete. This saves typing and prevents errors.
 :::
 
 ## Essential Navigation Commands {#sec-navigation-commands}
+
+In a point-and-click system, you always know where you are—the window shows the folder contents and the title bar displays the location. In the terminal, we don't have the same visual cues, but the concept of a **current location** is equally important. We call this the **working directory**, and every terminal window has one.
 
 ### Where Am I? `pwd`
 
@@ -241,18 +284,20 @@ $ pwd
 /Users/wcresko/projects/analysis
 ```
 
-Always know where you are before running commands—especially destructive ones!
+When you first open a terminal, it typically starts in your home directory. The output of `pwd` will vary depending on your system—you might see `/Users/yourusername` on macOS, `/home/yourusername` on Linux, or `/c/Users/yourusername` on Git Bash for Windows.
+
+Always know where you are before running commands—especially destructive ones like `rm`!
 
 ### What's Here? `ls`
 
-The `ls` command (**l**i**s**t) shows directory contents:
+In a graphical file manager, you know what's in a directory because you see icons representing files and folders. In the terminal, we use the `ls` command (**l**i**s**t) to see directory contents:
 
 ```bash
 $ ls
 data/  results/  analysis.R  README.md
 ```
 
-Common options make `ls` more informative:
+By default, `ls` provides a compact listing. Common options make it more informative:
 
 | Option | Description |
 |:-------|:------------|
@@ -282,13 +327,13 @@ The long format shows: permissions, links, owner, group, size, modification date
 
 ### Moving Around: `cd`
 
-The `cd` command (**c**hange **d**irectory) moves you to a different location:
+The `cd` command (**c**hange **d**irectory) moves you to a different location. When you use `cd`, you change your working directory just as you would double-click a folder in a graphical file manager.
 
 ```bash
-# Go to a specific directory
+# Go to a specific directory (relative path)
 $ cd Documents
 
-# Go up one directory
+# Go up one directory (to parent)
 $ cd ..
 
 # Go to home directory (three equivalent ways)
@@ -303,9 +348,81 @@ $ cd -
 $ cd /Users/wcresko/projects
 ```
 
-::: {.callout-caution}
-Unlike GUIs, `cd` gives no feedback when successful. If you don't see an error message, the command worked! Use `pwd` to verify where you ended up.
+::: {.callout-tip title="Pro Tip: Tab Completion"}
+In Unix, you can auto-complete paths by pressing Tab. This is essential for efficient command-line work. Type `cd Do` and press Tab—if `Documents` is the only directory starting with "Do", Unix will complete it for you. If there are multiple matches, press Tab twice to see all options. Using Unix without Tab completion is painfully slow; make it a habit from the start.
 :::
+
+When using `cd`, you can type either a full path (starting with `/` or `~`) or a relative path. If the path you type doesn't start with `/` or `~`, Unix assumes you're typing a relative path and looks for the directory within your current working directory. So if you're in your home directory and type `cd projects`, Unix looks for a `projects` subdirectory inside your home. But if you type `cd Users`, you'll get an error—there's no `Users` directory inside your home directory.
+
+::: {.callout-caution}
+Unlike GUIs, `cd` gives no feedback when successful. No news is good news! If you don't see an error message, the command worked. Use `pwd` to verify where you ended up.
+:::
+
+You can chain directory moves with forward slashes. To navigate to a nested directory in one command:
+
+```bash
+# Move through multiple directories
+$ cd projects/analysis/data
+
+# Move up two levels
+$ cd ../..
+
+# Move up one level and into a sibling directory
+$ cd ../other_project
+```
+
+Two more useful `cd` tricks: typing `cd -` returns you to whatever directory you were in before your last `cd` command, which is handy if you typed a long path and want to go back. And typing just `cd` with no arguments always returns you to your home directory.
+
+### Navigation Examples
+
+Let's work through some examples to solidify these concepts. Consider this directory structure:
+
+```
+~
+├── docs/
+│   ├── reports/
+│   └── resumes/
+│       └── cv.tex
+└── projects/
+    ├── project-1/
+    │   ├── data/
+    │   └── figs/
+    └── project-2/
+        └── analysis.R
+```
+
+**Example 1:** Starting from `~/projects`, navigate to `figs` in `project-1`:
+
+```bash
+# Using a relative path
+$ cd project-1/figs
+
+# Verify we're in the right place
+$ pwd
+/home/wcresko/projects/project-1/figs
+```
+
+**Example 2:** From `~/projects`, navigate to `reports` in `docs`:
+
+```bash
+# Using a relative path (go up, then into docs)
+$ cd ../docs/reports
+
+# Or using an absolute path
+$ cd ~/docs/reports
+```
+
+**Example 3:** From `~/projects/project-1/figs`, navigate to `project-2`:
+
+```bash
+# Go up two levels, then into project-2
+$ cd ../../project-2
+
+# Or use the full path
+$ cd ~/projects/project-2
+```
+
+Notice how relative paths require you to think about where you are, while absolute paths work from anywhere but are longer to type. Both approaches are useful—Tab completion makes either one efficient.
 
 ## Working with Files and Directories {#sec-working-with-files}
 
@@ -480,30 +597,45 @@ The `find` command is powerful for locating files across complex directory struc
 
 ## Naming Conventions {#sec-naming-conventions}
 
-Good naming practices prevent countless problems:
+Before you start organizing projects with Unix, you should adopt a naming convention that you will use systematically for your files and directories. Good naming practices prevent countless problems and help you find files quickly, even months or years after creating them.
+
+The [Smithsonian Data Management Best Practices](https://library.si.edu/sites/default/files/tutorial/pdf/filenamingorganizing20180227.pdf) outlines five principles of file naming and organization:
+
+1. Have a distinctive, human-readable name that gives an indication of the content
+2. Follow a consistent pattern that is machine-friendly
+3. Organize files into directories that follow a consistent pattern
+4. Avoid repetition of semantic elements among file and directory names
+5. Have a file extension that matches the file format (never change extensions!)
+
+For specific coding conventions, we recommend following the [Tidyverse Style Guide](https://style.tidyverse.org/), which provides consistent patterns for naming files and variables in R projects.
 
 ::: {.callout-important title="File Naming Rules"}
 **DO:**
+
 - Use lowercase letters, numbers, underscores (`_`), and hyphens (`-`)
-- Use meaningful, descriptive names
-- Include dates in ISO format if relevant: `data_2024-01-15.csv`
-- Use appropriate file extensions
+- Use meaningful, descriptive names that indicate content
+- Include dates in ISO format when relevant: `data_2024-01-15.csv`
+- Use appropriate file extensions that match the format
 
 **DON'T:**
+
 - Use spaces (use `_` or `-` instead)
-- Start names with `-` (confused with options)
+- Start names with `-` (confused with command options)
 - Use special characters: `* ? [ ] ' " \ / < > |`
 - Use extremely long names
 :::
 
 Examples:
 
-| Bad | Good |
-|:----|:-----|
-| `my data.csv` | `my_data.csv` |
-| `-results.txt` | `results.txt` |
-| `data (copy).csv` | `data_copy.csv` |
-| `Joe's file.txt` | `joes_file.txt` |
+| Bad | Good | Why |
+|:----|:-----|:----|
+| `my data.csv` | `my_data.csv` | Spaces cause problems in shell commands |
+| `-results.txt` | `results.txt` | Leading dash is confused with options |
+| `data (copy).csv` | `data_backup.csv` | Parentheses require escaping |
+| `Joe's file.txt` | `joes_file.txt` | Apostrophe causes quoting issues |
+| `FINAL_v2_FINAL.csv` | `analysis_2024-01-15.csv` | Date-based versioning is clearer |
+
+: File naming examples {#tbl-naming-examples}
 
 ## Getting Help {#sec-unix-getting-help}
 
@@ -638,6 +770,202 @@ $ sudo nano /etc/hosts
 ::: {.callout-warning}
 Use `sudo` carefully! With great power comes great responsibility. Commands run with `sudo` can modify or delete system files, potentially breaking your computer. Always double-check commands before running them with `sudo`.
 :::
+
+## Preparing for a Data Science Project {#sec-prep-project}
+
+Now let's put these commands into practice by setting up a proper directory structure for a data science project. A well-organized project directory makes your work reproducible and easier to navigate.
+
+We recommend creating a dedicated directory to hold all your projects. This keeps your work organized and separate from other files in your home directory:
+
+```bash
+$ cd ~
+$ mkdir projects
+$ cd projects
+```
+
+For this example, let's create a project analyzing gun violence data (based on a [real project on GitHub](https://github.com/rairizarry/murders)). We'll create subdirectories for raw data and processed data:
+
+```bash
+$ mkdir murders
+$ cd murders
+$ mkdir data rdas
+$ ls
+data  rdas
+$ pwd
+/home/wcresko/projects/murders
+```
+
+Our project structure now looks like this:
+
+```
+~/projects/
+└── murders/
+    ├── data/      # Raw data files
+    └── rdas/      # Processed R data files
+```
+
+::: {.callout-tip title="Project Organization Tips"}
+- Create a `projects` directory in your home folder to contain all your work
+- Give each project its own directory with a descriptive name
+- Use consistent subdirectory names across projects (e.g., `data`, `results`, `scripts`, `figures`)
+- Keep raw data separate from processed data
+- Consider adding a `README.md` file to describe the project
+:::
+
+From any terminal, you can navigate to this project by typing:
+
+```bash
+$ cd ~/projects/murders
+```
+
+As your projects grow, you might expand this structure:
+
+```
+~/projects/
+└── murders/
+    ├── data/           # Raw, unmodified data
+    ├── rdas/           # Processed R data objects
+    ├── scripts/        # Analysis scripts
+    ├── results/        # Analysis output
+    ├── figures/        # Generated plots
+    └── README.md       # Project description
+```
+
+This organization keeps related files together, makes your analysis reproducible, and helps collaborators (including your future self) understand the project structure.
+
+## Advanced Unix Concepts {#sec-advanced-unix}
+
+Most Unix implementations include a large number of powerful tools and utilities beyond what we've covered here. As you become more comfortable with the basics, you'll want to explore these advanced topics. The main purpose of this section is to make you aware of what's available; you can dive deeper as needed.
+
+### Wild Cards
+
+One of the most powerful features of Unix is **wild cards**—special characters that match multiple files at once. Suppose you want to remove all temporary HTML files from a project. Removing them one by one would be tedious, but with wild cards you can match them all:
+
+```bash
+# List all HTML files
+$ ls *.html
+
+# Remove all HTML files
+$ rm *.html
+```
+
+The `*` wild card matches any number of any characters. The `?` wild card matches exactly one character:
+
+```bash
+# Match files like file-001.html, file-002.html, file-999.html
+$ ls file-???.html
+
+# Remove all files starting with "temp"
+$ rm temp*
+
+# Match files with any extension
+$ ls data.*
+```
+
+::: {.callout-warning title="Wild Card Danger"}
+Combining `rm` with `*` can be dangerous! The command `rm *` deletes everything in the current directory without asking for confirmation. Always use `ls` first to see what a wild card pattern matches before using it with `rm`.
+:::
+
+### Environment Variables
+
+Unix has settings that affect your command-line environment called **environment variables**. These are distinguished by a `$` prefix. Some important ones:
+
+```bash
+# Your home directory
+$ echo $HOME
+/home/wcresko
+
+# Your username
+$ echo $USER
+wcresko
+
+# Your current shell
+$ echo $SHELL
+/bin/bash
+
+# Where Unix looks for programs
+$ echo $PATH
+/usr/local/bin:/usr/bin:/bin
+
+# See all environment variables
+$ env
+```
+
+Environment variables control how your shell behaves and where it looks for programs. The `PATH` variable is particularly important—it's a colon-separated list of directories where Unix searches for executable programs.
+
+### Executables and the PATH
+
+In Unix, all programs are files—they're called **executables**. When you type `ls`, `grep`, or `git`, Unix runs an executable file. You can find where a program lives using `which`:
+
+```bash
+$ which git
+/usr/bin/git
+
+$ which python
+/usr/bin/python
+```
+
+The `PATH` environment variable tells Unix where to look for executables. When you type a command, Unix searches through each directory in `PATH` until it finds a matching program:
+
+```bash
+$ echo $PATH
+/usr/local/bin:/usr/bin:/bin:/home/wcresko/bin
+```
+
+Unix searches these directories in order. If you have your own scripts in `~/bin`, you can add that directory to your PATH to make them accessible from anywhere.
+
+### Shells and Configuration Files
+
+The **shell** is the program that interprets your commands. **Bash** (Bourne Again Shell) is the most common, but others exist like **zsh** (default on modern macOS) and **fish**. You can see which shell you're using:
+
+```bash
+$ echo $SHELL
+/bin/bash
+```
+
+Your shell can be customized through configuration files that run when you open a terminal:
+
+| Shell | Configuration Files |
+|:------|:-------------------|
+| Bash | `~/.bashrc`, `~/.bash_profile` |
+| Zsh | `~/.zshrc`, `~/.zprofile` |
+
+These files can set environment variables, define aliases (shortcuts for commands), and customize your prompt. For example, adding this line to `~/.bashrc` creates a shortcut:
+
+```bash
+alias ll='ls -la'
+```
+
+After editing configuration files, apply the changes by running:
+
+```bash
+$ source ~/.bashrc
+```
+
+### Commands Worth Learning
+
+Several other commands are worth knowing about as you advance:
+
+| Command | Description |
+|:--------|:------------|
+| `tar` | Archive files and directories into one file |
+| `ssh` | Connect securely to another computer |
+| `ln` | Create symbolic links (shortcuts to files) |
+| `nano` or `vim` | Edit files in the terminal |
+| `awk` | Powerful text processing (covered in @sec-grep-regex) |
+| `sed` | Stream editor for text transformation |
+
+### File Manipulation from R
+
+You can also perform file operations from within R using functions like `file.create()`, `file.copy()`, `file.rename()`, and `file.remove()`. See `?files` in R for the complete list. The `unlink()` function removes files and directories.
+
+While not generally recommended, you can run Unix commands from R using the `system()` function:
+
+```r
+system("ls -la")
+```
+
+This can be useful for integrating Unix tools into R scripts, but native R functions are usually preferable for portability.
 
 ## Summary {#sec-unix-summary}
 
