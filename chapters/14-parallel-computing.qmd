@@ -233,7 +233,7 @@ bootstrap_fold_change = function(gene_data) {
   # Resample within each group
   boot_sample = gene_data %>%
     group_by(group) %>%
-    slice_sample(n = n(), replace = TRUE) %>%
+    slice_sample(prop = 1, replace = TRUE) %>%
     ungroup()
 
   # Calculate mean expression per group
