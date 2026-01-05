@@ -22,13 +22,7 @@ After completing this chapter, you will be able to:
 
 ## Why Shell Scripting? {#sec-why-shell-scripting}
 
-Throughout the previous chapters, you've been typing commands interactively. While this is great for exploration, real-world analyses require something more [@sandve2013ten]:
-
-- **Reproducibility**: Record exactly what you did
-- **Automation**: Run the same analysis on many files
-- **Efficiency**: Avoid repetitive typing
-- **Documentation**: Explain why you did each step
-- **Sharing**: Let others reproduce your work
+Throughout the previous chapters, you've been typing commands interactively. While this is great for exploration, real-world analyses require something more [@sandve2013ten]. You need **reproducibility**—a complete record of exactly what you did so you (or others) can repeat the analysis. You need **automation** so you can run the same analysis on many files without typing each command manually. Scripts provide **efficiency** by eliminating repetitive typing, and they serve as **documentation** that explains why you did each step. Finally, scripts enable **sharing**—letting collaborators reproduce your work with a single command.
 
 Shell scripts transform a series of commands into a reusable, documented program.
 
@@ -57,12 +51,14 @@ ls -la
 
 The first line `#!/bin/bash` is called a **shebang** (or hashbang). It tells the operating system which interpreter should execute this script. Always include it.
 
-Other common shebangs:
+| Shebang | Interpreter | Notes |
+|:--------|:------------|:------|
+| `#!/bin/bash` | Bash shell | Most common for shell scripts |
+| `#!/bin/sh` | POSIX shell | More portable across systems |
+| `#!/usr/bin/env python3` | Python 3 | Uses env to find Python |
+| `#!/usr/bin/env Rscript` | R | For R scripts |
 
-- `#!/bin/bash` — Bash shell (most common)
-- `#!/bin/sh` — POSIX shell (more portable)
-- `#!/usr/bin/env python3` — Python 3
-- `#!/usr/bin/env Rscript` — R
+: Common shebang lines {#tbl-shebangs}
 
 ### Running Scripts
 

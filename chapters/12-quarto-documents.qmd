@@ -80,10 +80,7 @@ This approach has profound implications for science:
 
 ### Why Markdown?
 
-- **Simple**: No complex menus or formatting palettes
-- **Portable**: Plain text files work everywhere
-- **Future-proof**: Text files will always be readable
-- **Version-control friendly**: Git can track every change
+Markdown's appeal lies in its simplicity—there are no complex menus or formatting palettes to learn. You write plain text with a few special characters, and the formatting appears when the document renders. This simplicity makes Markdown incredibly **portable**: your files work on any computer, in any text editor, without special software. Because Markdown files are plain text, they're also **future-proof**—unlike proprietary formats that may become obsolete, text files will always be readable. Finally, plain text is **version-control friendly**: Git can track every change you make, showing exactly what was added, removed, or modified between versions.
 
 ### Basic Text Formatting
 
