@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.7.30">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="description" content="A comprehensive guide to essential computational tools for graduate students in bioengineering and life sciences, covering Unix/Linux, R programming, version control with Git/GitHub, and high-performance computing.">
-<title>14&nbsp; Parallel Computing in R – Foundational Computational Tools for Bioengineers</title>
+<title>12&nbsp; Parallel Computing in R – Foundational Computational Tools for Bioengineers</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -274,7 +274,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/14-parallel-computing.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Parallel Computing in R</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/14-parallel-computing.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Parallel Computing in R</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -357,44 +357,44 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/09-data-visualization.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Data Visualization with ggplot2</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../chapters/10-git-github.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Version Control with Git and GitHub</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Version Control with Git and GitHub</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/11-hpc-talapas.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">High-Performance Computing with Talapas</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/12-quarto-documents.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Reproducible Documents with Quarto</span></span></a>
+  <a href="../chapters/09-data-visualization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Data Visualization with ggplot2</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/13-writing-functions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Writing Functions in R</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Writing Functions in R</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/14-parallel-computing.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Parallel Computing in R</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Parallel Computing in R</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/15-databases.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Working with Databases</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Working with Databases</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/12-quarto-documents.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Reproducible Documents with Quarto</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/11-hpc-talapas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">High-Performance Computing with Talapas</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -428,71 +428,71 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#sec-why-parallel" id="toc-sec-why-parallel" class="nav-link active" data-scroll-target="#sec-why-parallel"><span class="header-section-number">14.1</span> Why Parallel Computing?</a></li>
-  <li><a href="#sec-cores" id="toc-sec-cores" class="nav-link" data-scroll-target="#sec-cores"><span class="header-section-number">14.2</span> How Many Cores Do You Have?</a></li>
+<li><a href="#sec-why-parallel" id="toc-sec-why-parallel" class="nav-link active" data-scroll-target="#sec-why-parallel"><span class="header-section-number">12.1</span> Why Parallel Computing?</a></li>
+  <li><a href="#sec-cores" id="toc-sec-cores" class="nav-link" data-scroll-target="#sec-cores"><span class="header-section-number">12.2</span> How Many Cores Do You Have?</a></li>
   <li>
-<a href="#sec-parallel-example" id="toc-sec-parallel-example" class="nav-link" data-scroll-target="#sec-parallel-example"><span class="header-section-number">14.3</span> A Motivating Example</a>
+<a href="#sec-parallel-example" id="toc-sec-parallel-example" class="nav-link" data-scroll-target="#sec-parallel-example"><span class="header-section-number">12.3</span> A Motivating Example</a>
   <ul class="collapse">
-<li><a href="#serial-execution" id="toc-serial-execution" class="nav-link" data-scroll-target="#serial-execution"><span class="header-section-number">14.3.1</span> Serial Execution</a></li>
-  <li><a href="#parallel-execution" id="toc-parallel-execution" class="nav-link" data-scroll-target="#parallel-execution"><span class="header-section-number">14.3.2</span> Parallel Execution</a></li>
+<li><a href="#serial-execution" id="toc-serial-execution" class="nav-link" data-scroll-target="#serial-execution">Serial Execution</a></li>
+  <li><a href="#parallel-execution" id="toc-parallel-execution" class="nav-link" data-scroll-target="#parallel-execution">Parallel Execution</a></li>
   </ul>
 </li>
   <li>
-<a href="#sec-future" id="toc-sec-future" class="nav-link" data-scroll-target="#sec-future"><span class="header-section-number">14.4</span> The Future Ecosystem</a>
+<a href="#sec-future" id="toc-sec-future" class="nav-link" data-scroll-target="#sec-future"><span class="header-section-number">12.4</span> The Future Ecosystem</a>
   <ul class="collapse">
-<li><a href="#setting-up-parallel-execution" id="toc-setting-up-parallel-execution" class="nav-link" data-scroll-target="#setting-up-parallel-execution"><span class="header-section-number">14.4.1</span> Setting Up Parallel Execution</a></li>
-  <li><a href="#future_lapply-parallel-apply" id="toc-future_lapply-parallel-apply" class="nav-link" data-scroll-target="#future_lapply-parallel-apply"><span class="header-section-number">14.4.2</span> future_lapply: Parallel Apply</a></li>
-  <li><a href="#furrr-parallel-purrr" id="toc-furrr-parallel-purrr" class="nav-link" data-scroll-target="#furrr-parallel-purrr"><span class="header-section-number">14.4.3</span> furrr: Parallel purrr</a></li>
+<li><a href="#setting-up-parallel-execution" id="toc-setting-up-parallel-execution" class="nav-link" data-scroll-target="#setting-up-parallel-execution">Setting Up Parallel Execution</a></li>
+  <li><a href="#future_lapply-parallel-apply" id="toc-future_lapply-parallel-apply" class="nav-link" data-scroll-target="#future_lapply-parallel-apply">future_lapply: Parallel Apply</a></li>
+  <li><a href="#furrr-parallel-purrr" id="toc-furrr-parallel-purrr" class="nav-link" data-scroll-target="#furrr-parallel-purrr">furrr: Parallel purrr</a></li>
   </ul>
 </li>
   <li>
-<a href="#sec-bootstrap-example" id="toc-sec-bootstrap-example" class="nav-link" data-scroll-target="#sec-bootstrap-example"><span class="header-section-number">14.5</span> A Real Example: Bootstrapping Gene Expression</a>
+<a href="#sec-bootstrap-example" id="toc-sec-bootstrap-example" class="nav-link" data-scroll-target="#sec-bootstrap-example"><span class="header-section-number">12.5</span> A Real Example: Bootstrapping Gene Expression</a>
   <ul class="collapse">
-<li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup"><span class="header-section-number">14.5.1</span> Setup</a></li>
-  <li><a href="#bootstrap-function" id="toc-bootstrap-function" class="nav-link" data-scroll-target="#bootstrap-function"><span class="header-section-number">14.5.2</span> Bootstrap Function</a></li>
-  <li><a href="#compare-serial-vs-parallel" id="toc-compare-serial-vs-parallel" class="nav-link" data-scroll-target="#compare-serial-vs-parallel"><span class="header-section-number">14.5.3</span> Compare Serial vs Parallel</a></li>
-  <li><a href="#view-results" id="toc-view-results" class="nav-link" data-scroll-target="#view-results"><span class="header-section-number">14.5.4</span> View Results</a></li>
+<li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
+  <li><a href="#bootstrap-function" id="toc-bootstrap-function" class="nav-link" data-scroll-target="#bootstrap-function">Bootstrap Function</a></li>
+  <li><a href="#compare-serial-vs-parallel" id="toc-compare-serial-vs-parallel" class="nav-link" data-scroll-target="#compare-serial-vs-parallel">Compare Serial vs Parallel</a></li>
+  <li><a href="#view-results" id="toc-view-results" class="nav-link" data-scroll-target="#view-results">View Results</a></li>
   </ul>
 </li>
   <li>
-<a href="#sec-fork-socket" id="toc-sec-fork-socket" class="nav-link" data-scroll-target="#sec-fork-socket"><span class="header-section-number">14.6</span> Forking vs Sockets</a>
+<a href="#sec-fork-socket" id="toc-sec-fork-socket" class="nav-link" data-scroll-target="#sec-fork-socket"><span class="header-section-number">12.6</span> Forking vs Sockets</a>
   <ul class="collapse">
-<li><a href="#socket-based-multisession" id="toc-socket-based-multisession" class="nav-link" data-scroll-target="#socket-based-multisession"><span class="header-section-number">14.6.1</span> Socket-based (multisession)</a></li>
-  <li><a href="#fork-based-multicore" id="toc-fork-based-multicore" class="nav-link" data-scroll-target="#fork-based-multicore"><span class="header-section-number">14.6.2</span> Fork-based (multicore)</a></li>
+<li><a href="#socket-based-multisession" id="toc-socket-based-multisession" class="nav-link" data-scroll-target="#socket-based-multisession">Socket-based (multisession)</a></li>
+  <li><a href="#fork-based-multicore" id="toc-fork-based-multicore" class="nav-link" data-scroll-target="#fork-based-multicore">Fork-based (multicore)</a></li>
   </ul>
 </li>
-  <li><a href="#sec-parallel-errors" id="toc-sec-parallel-errors" class="nav-link" data-scroll-target="#sec-parallel-errors"><span class="header-section-number">14.7</span> Handling Errors in Parallel Code</a></li>
+  <li><a href="#sec-parallel-errors" id="toc-sec-parallel-errors" class="nav-link" data-scroll-target="#sec-parallel-errors"><span class="header-section-number">12.7</span> Handling Errors in Parallel Code</a></li>
   <li>
-<a href="#sec-caching" id="toc-sec-caching" class="nav-link" data-scroll-target="#sec-caching"><span class="header-section-number">14.8</span> Caching Results</a>
+<a href="#sec-caching" id="toc-sec-caching" class="nav-link" data-scroll-target="#sec-caching"><span class="header-section-number">12.8</span> Caching Results</a>
   <ul class="collapse">
-<li><a href="#persistent-caching" id="toc-persistent-caching" class="nav-link" data-scroll-target="#persistent-caching"><span class="header-section-number">14.8.1</span> Persistent Caching</a></li>
-  </ul>
-</li>
-  <li>
-<a href="#sec-when-parallel" id="toc-sec-when-parallel" class="nav-link" data-scroll-target="#sec-when-parallel"><span class="header-section-number">14.9</span> When to Use Parallel Computing</a>
-  <ul class="collapse">
-<li><a href="#good-candidates-for-parallelization" id="toc-good-candidates-for-parallelization" class="nav-link" data-scroll-target="#good-candidates-for-parallelization"><span class="header-section-number">14.9.1</span> Good Candidates for Parallelization</a></li>
-  <li><a href="#poor-candidates" id="toc-poor-candidates" class="nav-link" data-scroll-target="#poor-candidates"><span class="header-section-number">14.9.2</span> Poor Candidates</a></li>
-  <li><a href="#amdahls-law" id="toc-amdahls-law" class="nav-link" data-scroll-target="#amdahls-law"><span class="header-section-number">14.9.3</span> Amdahl’s Law</a></li>
+<li><a href="#persistent-caching" id="toc-persistent-caching" class="nav-link" data-scroll-target="#persistent-caching">Persistent Caching</a></li>
   </ul>
 </li>
   <li>
-<a href="#sec-parallel-best-practices" id="toc-sec-parallel-best-practices" class="nav-link" data-scroll-target="#sec-parallel-best-practices"><span class="header-section-number">14.10</span> Best Practices</a>
+<a href="#sec-when-parallel" id="toc-sec-when-parallel" class="nav-link" data-scroll-target="#sec-when-parallel"><span class="header-section-number">12.9</span> When to Use Parallel Computing</a>
   <ul class="collapse">
-<li><a href="#start-sequential-then-parallelize" id="toc-start-sequential-then-parallelize" class="nav-link" data-scroll-target="#start-sequential-then-parallelize"><span class="header-section-number">14.10.1</span> 1. Start Sequential, Then Parallelize</a></li>
-  <li><a href="#set-random-seeds" id="toc-set-random-seeds" class="nav-link" data-scroll-target="#set-random-seeds"><span class="header-section-number">14.10.2</span> 2. Set Random Seeds</a></li>
-  <li><a href="#monitor-progress" id="toc-monitor-progress" class="nav-link" data-scroll-target="#monitor-progress"><span class="header-section-number">14.10.3</span> 3. Monitor Progress</a></li>
-  <li><a href="#manage-memory" id="toc-manage-memory" class="nav-link" data-scroll-target="#manage-memory"><span class="header-section-number">14.10.4</span> 4. Manage Memory</a></li>
+<li><a href="#good-candidates-for-parallelization" id="toc-good-candidates-for-parallelization" class="nav-link" data-scroll-target="#good-candidates-for-parallelization">Good Candidates for Parallelization</a></li>
+  <li><a href="#poor-candidates" id="toc-poor-candidates" class="nav-link" data-scroll-target="#poor-candidates">Poor Candidates</a></li>
+  <li><a href="#amdahls-law" id="toc-amdahls-law" class="nav-link" data-scroll-target="#amdahls-law">Amdahl’s Law</a></li>
   </ul>
 </li>
-  <li><a href="#sec-parallel-summary" id="toc-sec-parallel-summary" class="nav-link" data-scroll-target="#sec-parallel-summary"><span class="header-section-number">14.11</span> Summary</a></li>
+  <li>
+<a href="#sec-parallel-best-practices" id="toc-sec-parallel-best-practices" class="nav-link" data-scroll-target="#sec-parallel-best-practices"><span class="header-section-number">12.10</span> Best Practices</a>
+  <ul class="collapse">
+<li><a href="#start-sequential-then-parallelize" id="toc-start-sequential-then-parallelize" class="nav-link" data-scroll-target="#start-sequential-then-parallelize">1. Start Sequential, Then Parallelize</a></li>
+  <li><a href="#set-random-seeds" id="toc-set-random-seeds" class="nav-link" data-scroll-target="#set-random-seeds">2. Set Random Seeds</a></li>
+  <li><a href="#monitor-progress" id="toc-monitor-progress" class="nav-link" data-scroll-target="#monitor-progress">3. Monitor Progress</a></li>
+  <li><a href="#manage-memory" id="toc-manage-memory" class="nav-link" data-scroll-target="#manage-memory">4. Manage Memory</a></li>
+  </ul>
+</li>
+  <li><a href="#sec-parallel-summary" id="toc-sec-parallel-summary" class="nav-link" data-scroll-target="#sec-parallel-summary"><span class="header-section-number">12.11</span> Summary</a></li>
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
   <li><a href="#additional-reading" id="toc-additional-reading" class="nav-link" data-scroll-target="#additional-reading">Additional Reading</a></li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/wcresko/BioE_Comp_Tools_Book/edit/main/chapters/14-parallel-computing.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/wcresko/BioE_Comp_Tools_Book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title"><span id="sec-parallel-computing" class="quarto-section-identifier"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Parallel Computing in R</span></span></h1>
+<h1 class="title"><span id="sec-parallel-computing" class="quarto-section-identifier"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Parallel Computing in R</span></span></h1>
 </div>
 
 
@@ -529,8 +529,8 @@ Learning Objectives
 </ul>
 </div>
 </div>
-<section id="sec-why-parallel" class="level2" data-number="14.1"><h2 data-number="14.1" class="anchored" data-anchor-id="sec-why-parallel">
-<span class="header-section-number">14.1</span> Why Parallel Computing?</h2>
+<section id="sec-why-parallel" class="level2" data-number="12.1"><h2 data-number="12.1" class="anchored" data-anchor-id="sec-why-parallel">
+<span class="header-section-number">12.1</span> Why Parallel Computing?</h2>
 <p>Modern computers have multiple processor cores, but by default R only uses one. This means that when you run a computationally intensive analysis — like bootstrapping, permutation tests, or processing thousands of samples — most of your computer’s power sits idle.</p>
 <p><strong>Parallel computing</strong> lets you use all available cores simultaneously, potentially reducing computation time by a factor equal to your core count. A task that takes 8 hours on one core might take just 1 hour across 8 cores.</p>
 <p>In biosciences, parallel computing is especially valuable for:</p>
@@ -547,16 +547,16 @@ Learning Objectives
 <strong>Cross-validation</strong> in machine learning</li>
 <li>
 <strong>Parameter sweeps</strong> for computational models</li>
-</ul></section><section id="sec-cores" class="level2" data-number="14.2"><h2 data-number="14.2" class="anchored" data-anchor-id="sec-cores">
-<span class="header-section-number">14.2</span> How Many Cores Do You Have?</h2>
+</ul></section><section id="sec-cores" class="level2" data-number="12.2"><h2 data-number="12.2" class="anchored" data-anchor-id="sec-cores">
+<span class="header-section-number">12.2</span> How Many Cores Do You Have?</h2>
 <p>Before parallelizing, find out how many cores are available:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>parallel<span class="sc">::</span><span class="fu">detectCores</span>()</span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="co">#&gt; [1] 14</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This number includes both physical cores and “logical” cores (from technologies like Intel’s hyperthreading). For CPU-intensive tasks, your effective speedup is typically limited by the number of physical cores.</p>
-</section><section id="sec-parallel-example" class="level2" data-number="14.3"><h2 data-number="14.3" class="anchored" data-anchor-id="sec-parallel-example">
-<span class="header-section-number">14.3</span> A Motivating Example</h2>
+</section><section id="sec-parallel-example" class="level2" data-number="12.3"><h2 data-number="12.3" class="anchored" data-anchor-id="sec-parallel-example">
+<span class="header-section-number">12.3</span> A Motivating Example</h2>
 <p>Let’s start with a simple example to demonstrate the power of parallelization. We’ll create a deliberately slow function that simulates a computationally expensive operation:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Simulate analyzing a biological sample (takes 2 seconds each)</span></span>
@@ -572,8 +572,7 @@ Learning Objectives
 <span id="cb2-11"><a href="#cb2-11"></a>  )</span>
 <span id="cb2-12"><a href="#cb2-12"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="serial-execution" class="level3" data-number="14.3.1"><h3 data-number="14.3.1" class="anchored" data-anchor-id="serial-execution">
-<span class="header-section-number">14.3.1</span> Serial Execution</h3>
+<section id="serial-execution" class="level3"><h3 class="anchored" data-anchor-id="serial-execution">Serial Execution</h3>
 <p>First, let’s process 8 samples the traditional way:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">library</span>(tictoc)</span>
@@ -584,8 +583,7 @@ Learning Objectives
 <span id="cb3-6"><a href="#cb3-6"></a><span class="co">#&gt; 16.049 sec elapsed</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>As expected, processing 8 samples at 2 seconds each takes about 16 seconds.</p>
-</section><section id="parallel-execution" class="level3" data-number="14.3.2"><h3 data-number="14.3.2" class="anchored" data-anchor-id="parallel-execution">
-<span class="header-section-number">14.3.2</span> Parallel Execution</h3>
+</section><section id="parallel-execution" class="level3"><h3 class="anchored" data-anchor-id="parallel-execution">Parallel Execution</h3>
 <p>Now let’s do the same thing in parallel using the <strong>future.apply</strong> package:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">library</span>(future.apply)</span>
@@ -603,12 +601,12 @@ Learning Objectives
 <span id="cb5-2"><a href="#cb5-2"></a><span class="fu">all.equal</span>(<span class="fu">names</span>(serial_results), <span class="fu">names</span>(parallel_results))</span>
 <span id="cb5-3"><a href="#cb5-3"></a><span class="co">#&gt; [1] TRUE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section></section><section id="sec-future" class="level2" data-number="14.4"><h2 data-number="14.4" class="anchored" data-anchor-id="sec-future">
-<span class="header-section-number">14.4</span> The Future Ecosystem</h2>
+</section></section><section id="sec-future" class="level2" data-number="12.4"><h2 data-number="12.4" class="anchored" data-anchor-id="sec-future">
+<span class="header-section-number">12.4</span> The Future Ecosystem</h2>
 <p>The examples above use the <strong>future</strong> package ecosystem, which provides a unified, elegant approach to parallel programming in R. The key packages are:</p>
 <div id="tbl-future-packages" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-future-packages-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;14.1: The future ecosystem
+Table&nbsp;12.1: The future ecosystem
 </figcaption><div aria-describedby="tbl-future-packages-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <thead><tr class="header">
@@ -633,8 +631,7 @@ Table&nbsp;14.1: The future ecosystem
 </div>
 </figure>
 </div>
-<section id="setting-up-parallel-execution" class="level3" data-number="14.4.1"><h3 data-number="14.4.1" class="anchored" data-anchor-id="setting-up-parallel-execution">
-<span class="header-section-number">14.4.1</span> Setting Up Parallel Execution</h3>
+<section id="setting-up-parallel-execution" class="level3"><h3 class="anchored" data-anchor-id="setting-up-parallel-execution">Setting Up Parallel Execution</h3>
 <p>Before running parallel code, you must set a “plan” that determines how futures are resolved:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">library</span>(future)</span>
@@ -649,8 +646,7 @@ Table&nbsp;14.1: The future ecosystem
 <span id="cb6-10"><a href="#cb6-10"></a><span class="fu">plan</span>(multicore)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>For most users, <code>plan(multisession)</code> is the safest choice as it works on all operating systems.</p>
-</section><section id="future_lapply-parallel-apply" class="level3" data-number="14.4.2"><h3 data-number="14.4.2" class="anchored" data-anchor-id="future_lapply-parallel-apply">
-<span class="header-section-number">14.4.2</span> future_lapply: Parallel Apply</h3>
+</section><section id="future_lapply-parallel-apply" class="level3"><h3 class="anchored" data-anchor-id="future_lapply-parallel-apply">future_lapply: Parallel Apply</h3>
 <p>The <code>future_lapply()</code> function is a drop-in replacement for <code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code>:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># Serial version</span></span>
@@ -670,8 +666,7 @@ Table&nbsp;14.1: The future ecosystem
 <span id="cb7-15"><a href="#cb7-15"></a><span class="co">#&gt; [[4]]</span></span>
 <span id="cb7-16"><a href="#cb7-16"></a><span class="co">#&gt; [1] 16</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="furrr-parallel-purrr" class="level3" data-number="14.4.3"><h3 data-number="14.4.3" class="anchored" data-anchor-id="furrr-parallel-purrr">
-<span class="header-section-number">14.4.3</span> furrr: Parallel purrr</h3>
+</section><section id="furrr-parallel-purrr" class="level3"><h3 class="anchored" data-anchor-id="furrr-parallel-purrr">furrr: Parallel purrr</h3>
 <p>If you prefer <strong>purrr</strong>’s syntax, <strong>furrr</strong> provides parallel versions of all map functions:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">library</span>(furrr)</span>
@@ -714,11 +709,10 @@ Table&nbsp;14.1: The future ecosystem
 </div>
 </div>
 </div>
-</section></section><section id="sec-bootstrap-example" class="level2" data-number="14.5"><h2 data-number="14.5" class="anchored" data-anchor-id="sec-bootstrap-example">
-<span class="header-section-number">14.5</span> A Real Example: Bootstrapping Gene Expression</h2>
+</section></section><section id="sec-bootstrap-example" class="level2" data-number="12.5"><h2 data-number="12.5" class="anchored" data-anchor-id="sec-bootstrap-example">
+<span class="header-section-number">12.5</span> A Real Example: Bootstrapping Gene Expression</h2>
 <p>Let’s apply parallel computing to a realistic bioinformatics task: bootstrapping to estimate confidence intervals for differential expression.</p>
-<section id="setup" class="level3" data-number="14.5.1"><h3 data-number="14.5.1" class="anchored" data-anchor-id="setup">
-<span class="header-section-number">14.5.1</span> Setup</h3>
+<section id="setup" class="level3"><h3 class="anchored" data-anchor-id="setup">Setup</h3>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
 <span id="cb9-2"><a href="#cb9-2"></a></span>
@@ -793,8 +787,7 @@ Table&nbsp;14.1: The future ecosystem
 </div>
 </div>
 </div>
-</section><section id="bootstrap-function" class="level3" data-number="14.5.2"><h3 data-number="14.5.2" class="anchored" data-anchor-id="bootstrap-function">
-<span class="header-section-number">14.5.2</span> Bootstrap Function</h3>
+</section><section id="bootstrap-function" class="level3"><h3 class="anchored" data-anchor-id="bootstrap-function">Bootstrap Function</h3>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># Function to bootstrap fold change for one gene</span></span>
 <span id="cb10-2"><a href="#cb10-2"></a>bootstrap_fold_change <span class="ot">=</span> <span class="cf">function</span>(gene_data) {</span>
@@ -832,8 +825,7 @@ Table&nbsp;14.1: The future ecosystem
 <span id="cb10-34"><a href="#cb10-34"></a>  )</span>
 <span id="cb10-35"><a href="#cb10-35"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="compare-serial-vs-parallel" class="level3" data-number="14.5.3"><h3 data-number="14.5.3" class="anchored" data-anchor-id="compare-serial-vs-parallel">
-<span class="header-section-number">14.5.3</span> Compare Serial vs Parallel</h3>
+</section><section id="compare-serial-vs-parallel" class="level3"><h3 class="anchored" data-anchor-id="compare-serial-vs-parallel">Compare Serial vs Parallel</h3>
 <p>Let’s bootstrap confidence intervals for 20 genes:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>genes_to_test <span class="ot">=</span> <span class="fu">paste0</span>(<span class="st">"gene_"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>)</span>
@@ -854,8 +846,7 @@ Table&nbsp;14.1: The future ecosystem
 <span id="cb11-16"><a href="#cb11-16"></a><span class="co">#&gt; 2.95 sec elapsed</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The parallel version should be substantially faster, with speedup proportional to your core count.</p>
-</section><section id="view-results" class="level3" data-number="14.5.4"><h3 data-number="14.5.4" class="anchored" data-anchor-id="view-results">
-<span class="header-section-number">14.5.4</span> View Results</h3>
+</section><section id="view-results" class="level3"><h3 class="anchored" data-anchor-id="view-results">View Results</h3>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>parallel_boot <span class="sc">%&gt;%</span></span>
 <span id="cb12-2"><a href="#cb12-2"></a>  <span class="fu">mutate</span>(</span>
@@ -964,19 +955,17 @@ Table&nbsp;14.1: The future ecosystem
 </div>
 </div>
 </div>
-</section></section><section id="sec-fork-socket" class="level2" data-number="14.6"><h2 data-number="14.6" class="anchored" data-anchor-id="sec-fork-socket">
-<span class="header-section-number">14.6</span> Forking vs Sockets</h2>
+</section></section><section id="sec-fork-socket" class="level2" data-number="12.6"><h2 data-number="12.6" class="anchored" data-anchor-id="sec-fork-socket">
+<span class="header-section-number">12.6</span> Forking vs Sockets</h2>
 <p>There are two main approaches to parallelization:</p>
-<section id="socket-based-multisession" class="level3" data-number="14.6.1"><h3 data-number="14.6.1" class="anchored" data-anchor-id="socket-based-multisession">
-<span class="header-section-number">14.6.1</span> Socket-based (multisession)</h3>
+<section id="socket-based-multisession" class="level3"><h3 class="anchored" data-anchor-id="socket-based-multisession">Socket-based (multisession)</h3>
 <ul>
 <li>Creates new R sessions for each worker</li>
 <li>Works on <strong>all operating systems</strong> including Windows</li>
 <li>Requires copying data to each worker (slower startup)</li>
 <li>Selected with <code>plan(multisession)</code>
 </li>
-</ul></section><section id="fork-based-multicore" class="level3" data-number="14.6.2"><h3 data-number="14.6.2" class="anchored" data-anchor-id="fork-based-multicore">
-<span class="header-section-number">14.6.2</span> Fork-based (multicore)</h3>
+</ul></section><section id="fork-based-multicore" class="level3"><h3 class="anchored" data-anchor-id="fork-based-multicore">Fork-based (multicore)</h3>
 <ul>
 <li>Clones the current R session</li>
 <li>Works on <strong>Unix/Mac only</strong> (not Windows)</li>
@@ -1008,8 +997,8 @@ Warning
 <p>On Windows, <code>plan(multicore)</code> silently falls back to <code>plan(sequential)</code>. Always use <code>plan(multisession)</code> for cross-platform code.</p>
 </div>
 </div>
-</section></section><section id="sec-parallel-errors" class="level2" data-number="14.7"><h2 data-number="14.7" class="anchored" data-anchor-id="sec-parallel-errors">
-<span class="header-section-number">14.7</span> Handling Errors in Parallel Code</h2>
+</section></section><section id="sec-parallel-errors" class="level2" data-number="12.7"><h2 data-number="12.7" class="anchored" data-anchor-id="sec-parallel-errors">
+<span class="header-section-number">12.7</span> Handling Errors in Parallel Code</h2>
 <p>Errors in parallel code can be tricky to debug. The <strong>purrr</strong> package provides <code>safely()</code> and <code>possibly()</code> to handle errors gracefully:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="co"># A function that sometimes fails</span></span>
@@ -1098,8 +1087,8 @@ Warning
 </div>
 </div>
 </div>
-</section><section id="sec-caching" class="level2" data-number="14.8"><h2 data-number="14.8" class="anchored" data-anchor-id="sec-caching">
-<span class="header-section-number">14.8</span> Caching Results</h2>
+</section><section id="sec-caching" class="level2" data-number="12.8"><h2 data-number="12.8" class="anchored" data-anchor-id="sec-caching">
+<span class="header-section-number">12.8</span> Caching Results</h2>
 <p>For expensive computations, cache intermediate results so you don’t have to recompute them:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">library</span>(memoise)</span>
@@ -1128,8 +1117,7 @@ Warning
 <span id="cb16-24"><a href="#cb16-24"></a><span class="fu">toc</span>()</span>
 <span id="cb16-25"><a href="#cb16-25"></a><span class="co">#&gt; 0.019 sec elapsed</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="persistent-caching" class="level3" data-number="14.8.1"><h3 data-number="14.8.1" class="anchored" data-anchor-id="persistent-caching">
-<span class="header-section-number">14.8.1</span> Persistent Caching</h3>
+<section id="persistent-caching" class="level3"><h3 class="anchored" data-anchor-id="persistent-caching">Persistent Caching</h3>
 <p>To cache results across R sessions (useful for long analyses):</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="co"># Create a cache directory</span></span>
@@ -1144,11 +1132,10 @@ Warning
 <span id="cb17-10"><a href="#cb17-10"></a></span>
 <span id="cb17-11"><a href="#cb17-11"></a><span class="co"># Results will be saved to disk and available in future sessions</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section></section><section id="sec-when-parallel" class="level2" data-number="14.9"><h2 data-number="14.9" class="anchored" data-anchor-id="sec-when-parallel">
-<span class="header-section-number">14.9</span> When to Use Parallel Computing</h2>
+</section></section><section id="sec-when-parallel" class="level2" data-number="12.9"><h2 data-number="12.9" class="anchored" data-anchor-id="sec-when-parallel">
+<span class="header-section-number">12.9</span> When to Use Parallel Computing</h2>
 <p>Parallel computing isn’t always faster. Consider:</p>
-<section id="good-candidates-for-parallelization" class="level3" data-number="14.9.1"><h3 data-number="14.9.1" class="anchored" data-anchor-id="good-candidates-for-parallelization">
-<span class="header-section-number">14.9.1</span> Good Candidates for Parallelization</h3>
+<section id="good-candidates-for-parallelization" class="level3"><h3 class="anchored" data-anchor-id="good-candidates-for-parallelization">Good Candidates for Parallelization</h3>
 <ul>
 <li>
 <strong>Independent iterations</strong>: Each iteration doesn’t depend on others</li>
@@ -1158,8 +1145,7 @@ Warning
 <strong>Many iterations</strong>: Overhead is amortized across many runs</li>
 <li>
 <strong>Long-running operations</strong>: Minutes or hours of total computation</li>
-</ul></section><section id="poor-candidates" class="level3" data-number="14.9.2"><h3 data-number="14.9.2" class="anchored" data-anchor-id="poor-candidates">
-<span class="header-section-number">14.9.2</span> Poor Candidates</h3>
+</ul></section><section id="poor-candidates" class="level3"><h3 class="anchored" data-anchor-id="poor-candidates">Poor Candidates</h3>
 <ul>
 <li>
 <strong>Fast operations</strong>: Overhead exceeds computation time</li>
@@ -1169,8 +1155,7 @@ Warning
 <strong>Memory-intensive</strong>: Each worker needs its own copy of data</li>
 <li>
 <strong>I/O bound</strong>: Waiting for disk/network, not CPU</li>
-</ul></section><section id="amdahls-law" class="level3" data-number="14.9.3"><h3 data-number="14.9.3" class="anchored" data-anchor-id="amdahls-law">
-<span class="header-section-number">14.9.3</span> Amdahl’s Law</h3>
+</ul></section><section id="amdahls-law" class="level3"><h3 class="anchored" data-anchor-id="amdahls-law">Amdahl’s Law</h3>
 <p>The maximum speedup from parallelization is limited by the sequential portion of your code. If 50% of your code must run sequentially, you can never achieve more than 2× speedup, regardless of core count.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -1180,10 +1165,9 @@ Warning
 </div>
 </div>
 </div>
-</section></section><section id="sec-parallel-best-practices" class="level2" data-number="14.10"><h2 data-number="14.10" class="anchored" data-anchor-id="sec-parallel-best-practices">
-<span class="header-section-number">14.10</span> Best Practices</h2>
-<section id="start-sequential-then-parallelize" class="level3" data-number="14.10.1"><h3 data-number="14.10.1" class="anchored" data-anchor-id="start-sequential-then-parallelize">
-<span class="header-section-number">14.10.1</span> 1. Start Sequential, Then Parallelize</h3>
+</section></section><section id="sec-parallel-best-practices" class="level2" data-number="12.10"><h2 data-number="12.10" class="anchored" data-anchor-id="sec-parallel-best-practices">
+<span class="header-section-number">12.10</span> Best Practices</h2>
+<section id="start-sequential-then-parallelize" class="level3"><h3 class="anchored" data-anchor-id="start-sequential-then-parallelize">1. Start Sequential, Then Parallelize</h3>
 <p>Always develop and debug your code in sequential mode first:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="co"># Debug with sequential execution</span></span>
@@ -1196,8 +1180,7 @@ Warning
 <span id="cb18-8"><a href="#cb18-8"></a><span class="fu">plan</span>(multisession)</span>
 <span id="cb18-9"><a href="#cb18-9"></a>full_results <span class="ot">=</span> <span class="fu">future_map_dfr</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>, my_analysis_function)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="set-random-seeds" class="level3" data-number="14.10.2"><h3 data-number="14.10.2" class="anchored" data-anchor-id="set-random-seeds">
-<span class="header-section-number">14.10.2</span> 2. Set Random Seeds</h3>
+</section><section id="set-random-seeds" class="level3"><h3 class="anchored" data-anchor-id="set-random-seeds">2. Set Random Seeds</h3>
 <p>For reproducible parallel simulations:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="co"># future.apply</span></span>
@@ -1206,8 +1189,7 @@ Warning
 <span id="cb19-4"><a href="#cb19-4"></a><span class="co"># furrr</span></span>
 <span id="cb19-5"><a href="#cb19-5"></a><span class="fu">future_map</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, my_function, <span class="at">.options =</span> <span class="fu">furrr_options</span>(<span class="at">seed =</span> <span class="dv">123</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="monitor-progress" class="level3" data-number="14.10.3"><h3 data-number="14.10.3" class="anchored" data-anchor-id="monitor-progress">
-<span class="header-section-number">14.10.3</span> 3. Monitor Progress</h3>
+</section><section id="monitor-progress" class="level3"><h3 class="anchored" data-anchor-id="monitor-progress">3. Monitor Progress</h3>
 <p>Use progress bars to track long-running parallel jobs:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">library</span>(progressr)</span>
@@ -1223,16 +1205,15 @@ Warning
 <span id="cb20-11"><a href="#cb20-11"></a>  })</span>
 <span id="cb20-12"><a href="#cb20-12"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="manage-memory" class="level3" data-number="14.10.4"><h3 data-number="14.10.4" class="anchored" data-anchor-id="manage-memory">
-<span class="header-section-number">14.10.4</span> 4. Manage Memory</h3>
+</section><section id="manage-memory" class="level3"><h3 class="anchored" data-anchor-id="manage-memory">4. Manage Memory</h3>
 <p>Each parallel worker needs memory for: - A copy of R - Any data passed to the function - Results being computed</p>
 <p>If you run out of memory, reduce the number of workers:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="co"># Use fewer workers for memory-intensive tasks</span></span>
 <span id="cb21-2"><a href="#cb21-2"></a><span class="fu">plan</span>(multisession, <span class="at">workers =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section></section><section id="sec-parallel-summary" class="level2" data-number="14.11"><h2 data-number="14.11" class="anchored" data-anchor-id="sec-parallel-summary">
-<span class="header-section-number">14.11</span> Summary</h2>
+</section></section><section id="sec-parallel-summary" class="level2" data-number="12.11"><h2 data-number="12.11" class="anchored" data-anchor-id="sec-parallel-summary">
+<span class="header-section-number">12.11</span> Summary</h2>
 <p>Parallel computing can dramatically speed up computationally intensive analyses:</p>
 <ul>
 <li>The <strong>future</strong> ecosystem provides a simple, unified approach to parallelization</li>
@@ -1740,12 +1721,12 @@ Practice Exercises
   });
   </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="../chapters/13-writing-functions.html" class="pagination-link" aria-label="Writing Functions in R">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Writing Functions in R</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Writing Functions in R</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../chapters/15-databases.html" class="pagination-link" aria-label="Working with Databases">
-        <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Working with Databases</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Working with Databases</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

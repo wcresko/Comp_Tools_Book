@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.7.30">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="description" content="A comprehensive guide to essential computational tools for graduate students in bioengineering and life sciences, covering Unix/Linux, R programming, version control with Git/GitHub, and high-performance computing.">
-<title>9&nbsp; Data Visualization with ggplot2 – Foundational Computational Tools for Bioengineers</title>
+<title>10&nbsp; Data Visualization with ggplot2 – Foundational Computational Tools for Bioengineers</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -62,8 +62,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../chapters/10-git-github.html" rel="next">
-<link href="../chapters/08-tidy-data.html" rel="prev">
+<link href="../chapters/13-writing-functions.html" rel="next">
+<link href="../chapters/10-git-github.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -274,7 +274,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/09-data-visualization.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Data Visualization with ggplot2</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/09-data-visualization.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Data Visualization with ggplot2</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -357,44 +357,44 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/09-data-visualization.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Data Visualization with ggplot2</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../chapters/10-git-github.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Version Control with Git and GitHub</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Version Control with Git and GitHub</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/11-hpc-talapas.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">High-Performance Computing with Talapas</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chapters/12-quarto-documents.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Reproducible Documents with Quarto</span></span></a>
+  <a href="../chapters/09-data-visualization.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Data Visualization with ggplot2</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/13-writing-functions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Writing Functions in R</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Writing Functions in R</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/14-parallel-computing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Parallel Computing in R</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Parallel Computing in R</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/15-databases.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Working with Databases</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Working with Databases</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/12-quarto-documents.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Reproducible Documents with Quarto</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/11-hpc-talapas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">High-Performance Computing with Talapas</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -429,73 +429,73 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
 <li>
-<a href="#sec-grammar-graphics" id="toc-sec-grammar-graphics" class="nav-link active" data-scroll-target="#sec-grammar-graphics"><span class="header-section-number">9.1</span> The Grammar of Graphics</a>
+<a href="#sec-grammar-graphics" id="toc-sec-grammar-graphics" class="nav-link active" data-scroll-target="#sec-grammar-graphics"><span class="header-section-number">10.1</span> The Grammar of Graphics</a>
   <ul class="collapse">
-<li><a href="#seven-components-of-a-graphic" id="toc-seven-components-of-a-graphic" class="nav-link" data-scroll-target="#seven-components-of-a-graphic"><span class="header-section-number">9.1.1</span> Seven Components of a Graphic</a></li>
+<li><a href="#seven-components-of-a-graphic" id="toc-seven-components-of-a-graphic" class="nav-link" data-scroll-target="#seven-components-of-a-graphic">Seven Components of a Graphic</a></li>
   </ul>
 </li>
   <li>
-<a href="#sec-plot-layers" id="toc-sec-plot-layers" class="nav-link" data-scroll-target="#sec-plot-layers"><span class="header-section-number">9.2</span> Building a Plot Layer by Layer</a>
+<a href="#sec-plot-layers" id="toc-sec-plot-layers" class="nav-link" data-scroll-target="#sec-plot-layers"><span class="header-section-number">10.2</span> Building a Plot Layer by Layer</a>
   <ul class="collapse">
-<li><a href="#the-template" id="toc-the-template" class="nav-link" data-scroll-target="#the-template"><span class="header-section-number">9.2.1</span> The Template</a></li>
+<li><a href="#the-template" id="toc-the-template" class="nav-link" data-scroll-target="#the-template">The Template</a></li>
   </ul>
 </li>
   <li>
-<a href="#sec-geoms" id="toc-sec-geoms" class="nav-link" data-scroll-target="#sec-geoms"><span class="header-section-number">9.3</span> Essential Geoms</a>
+<a href="#sec-geoms" id="toc-sec-geoms" class="nav-link" data-scroll-target="#sec-geoms"><span class="header-section-number">10.3</span> Essential Geoms</a>
   <ul class="collapse">
-<li><a href="#scatter-plots-with-geom_point" id="toc-scatter-plots-with-geom_point" class="nav-link" data-scroll-target="#scatter-plots-with-geom_point"><span class="header-section-number">9.3.1</span> Scatter Plots with <code>geom_point()</code></a></li>
-  <li><a href="#adding-color-and-shape" id="toc-adding-color-and-shape" class="nav-link" data-scroll-target="#adding-color-and-shape"><span class="header-section-number">9.3.2</span> Adding Color and Shape</a></li>
-  <li><a href="#histograms-with-geom_histogram" id="toc-histograms-with-geom_histogram" class="nav-link" data-scroll-target="#histograms-with-geom_histogram"><span class="header-section-number">9.3.3</span> Histograms with <code>geom_histogram()</code></a></li>
-  <li><a href="#frequency-polygons-with-geom_freqpoly" id="toc-frequency-polygons-with-geom_freqpoly" class="nav-link" data-scroll-target="#frequency-polygons-with-geom_freqpoly"><span class="header-section-number">9.3.4</span> Frequency Polygons with <code>geom_freqpoly()</code></a></li>
-  <li><a href="#density-plots-with-geom_density" id="toc-density-plots-with-geom_density" class="nav-link" data-scroll-target="#density-plots-with-geom_density"><span class="header-section-number">9.3.5</span> Density Plots with <code>geom_density()</code></a></li>
-  <li><a href="#box-plots-with-geom_boxplot" id="toc-box-plots-with-geom_boxplot" class="nav-link" data-scroll-target="#box-plots-with-geom_boxplot"><span class="header-section-number">9.3.6</span> Box Plots with <code>geom_boxplot()</code></a></li>
-  <li><a href="#bar-charts-with-geom_bar-and-geom_col" id="toc-bar-charts-with-geom_bar-and-geom_col" class="nav-link" data-scroll-target="#bar-charts-with-geom_bar-and-geom_col"><span class="header-section-number">9.3.7</span> Bar Charts with <code>geom_bar()</code> and <code>geom_col()</code></a></li>
-  <li><a href="#line-plots-with-geom_line" id="toc-line-plots-with-geom_line" class="nav-link" data-scroll-target="#line-plots-with-geom_line"><span class="header-section-number">9.3.8</span> Line Plots with <code>geom_line()</code></a></li>
+<li><a href="#scatter-plots-with-geom_point" id="toc-scatter-plots-with-geom_point" class="nav-link" data-scroll-target="#scatter-plots-with-geom_point">Scatter Plots with <code>geom_point()</code></a></li>
+  <li><a href="#adding-color-and-shape" id="toc-adding-color-and-shape" class="nav-link" data-scroll-target="#adding-color-and-shape">Adding Color and Shape</a></li>
+  <li><a href="#histograms-with-geom_histogram" id="toc-histograms-with-geom_histogram" class="nav-link" data-scroll-target="#histograms-with-geom_histogram">Histograms with <code>geom_histogram()</code></a></li>
+  <li><a href="#frequency-polygons-with-geom_freqpoly" id="toc-frequency-polygons-with-geom_freqpoly" class="nav-link" data-scroll-target="#frequency-polygons-with-geom_freqpoly">Frequency Polygons with <code>geom_freqpoly()</code></a></li>
+  <li><a href="#density-plots-with-geom_density" id="toc-density-plots-with-geom_density" class="nav-link" data-scroll-target="#density-plots-with-geom_density">Density Plots with <code>geom_density()</code></a></li>
+  <li><a href="#box-plots-with-geom_boxplot" id="toc-box-plots-with-geom_boxplot" class="nav-link" data-scroll-target="#box-plots-with-geom_boxplot">Box Plots with <code>geom_boxplot()</code></a></li>
+  <li><a href="#bar-charts-with-geom_bar-and-geom_col" id="toc-bar-charts-with-geom_bar-and-geom_col" class="nav-link" data-scroll-target="#bar-charts-with-geom_bar-and-geom_col">Bar Charts with <code>geom_bar()</code> and <code>geom_col()</code></a></li>
+  <li><a href="#line-plots-with-geom_line" id="toc-line-plots-with-geom_line" class="nav-link" data-scroll-target="#line-plots-with-geom_line">Line Plots with <code>geom_line()</code></a></li>
   </ul>
 </li>
-  <li><a href="#sec-combining-geoms" id="toc-sec-combining-geoms" class="nav-link" data-scroll-target="#sec-combining-geoms"><span class="header-section-number">9.4</span> Combining Geoms</a></li>
+  <li><a href="#sec-combining-geoms" id="toc-sec-combining-geoms" class="nav-link" data-scroll-target="#sec-combining-geoms"><span class="header-section-number">10.4</span> Combining Geoms</a></li>
   <li>
-<a href="#sec-faceting" id="toc-sec-faceting" class="nav-link" data-scroll-target="#sec-faceting"><span class="header-section-number">9.5</span> Faceting: Small Multiples</a>
+<a href="#sec-faceting" id="toc-sec-faceting" class="nav-link" data-scroll-target="#sec-faceting"><span class="header-section-number">10.5</span> Faceting: Small Multiples</a>
   <ul class="collapse">
-<li><a href="#facet_wrap-for-one-variable" id="toc-facet_wrap-for-one-variable" class="nav-link" data-scroll-target="#facet_wrap-for-one-variable"><span class="header-section-number">9.5.1</span> <code>facet_wrap()</code> for One Variable</a></li>
-  <li><a href="#facet_grid-for-two-variables" id="toc-facet_grid-for-two-variables" class="nav-link" data-scroll-target="#facet_grid-for-two-variables"><span class="header-section-number">9.5.2</span> <code>facet_grid()</code> for Two Variables</a></li>
-  </ul>
-</li>
-  <li>
-<a href="#sec-plot-customization" id="toc-sec-plot-customization" class="nav-link" data-scroll-target="#sec-plot-customization"><span class="header-section-number">9.6</span> Customizing Your Plots</a>
-  <ul class="collapse">
-<li><a href="#labels-and-titles" id="toc-labels-and-titles" class="nav-link" data-scroll-target="#labels-and-titles"><span class="header-section-number">9.6.1</span> Labels and Titles</a></li>
-  <li><a href="#themes" id="toc-themes" class="nav-link" data-scroll-target="#themes"><span class="header-section-number">9.6.2</span> Themes</a></li>
-  <li><a href="#color-scales" id="toc-color-scales" class="nav-link" data-scroll-target="#color-scales"><span class="header-section-number">9.6.3</span> Color Scales</a></li>
+<li><a href="#facet_wrap-for-one-variable" id="toc-facet_wrap-for-one-variable" class="nav-link" data-scroll-target="#facet_wrap-for-one-variable"><code>facet_wrap()</code> for One Variable</a></li>
+  <li><a href="#facet_grid-for-two-variables" id="toc-facet_grid-for-two-variables" class="nav-link" data-scroll-target="#facet_grid-for-two-variables"><code>facet_grid()</code> for Two Variables</a></li>
   </ul>
 </li>
   <li>
-<a href="#sec-viz-best-practices" id="toc-sec-viz-best-practices" class="nav-link" data-scroll-target="#sec-viz-best-practices"><span class="header-section-number">9.7</span> Data Visualization Best Practices</a>
+<a href="#sec-plot-customization" id="toc-sec-plot-customization" class="nav-link" data-scroll-target="#sec-plot-customization"><span class="header-section-number">10.6</span> Customizing Your Plots</a>
   <ul class="collapse">
-<li><a href="#show-the-data" id="toc-show-the-data" class="nav-link" data-scroll-target="#show-the-data"><span class="header-section-number">9.7.1</span> Show the Data</a></li>
-  <li><a href="#use-position-and-length-for-precision" id="toc-use-position-and-length-for-precision" class="nav-link" data-scroll-target="#use-position-and-length-for-precision"><span class="header-section-number">9.7.2</span> Use Position and Length for Precision</a></li>
-  <li><a href="#order-by-meaningful-values" id="toc-order-by-meaningful-values" class="nav-link" data-scroll-target="#order-by-meaningful-values"><span class="header-section-number">9.7.3</span> Order by Meaningful Values</a></li>
-  <li><a href="#include-zero-for-bar-charts" id="toc-include-zero-for-bar-charts" class="nav-link" data-scroll-target="#include-zero-for-bar-charts"><span class="header-section-number">9.7.4</span> Include Zero for Bar Charts</a></li>
-  <li><a href="#consider-color-blindness" id="toc-consider-color-blindness" class="nav-link" data-scroll-target="#consider-color-blindness"><span class="header-section-number">9.7.5</span> Consider Color Blindness</a></li>
-  <li><a href="#avoid-chart-junk" id="toc-avoid-chart-junk" class="nav-link" data-scroll-target="#avoid-chart-junk"><span class="header-section-number">9.7.6</span> Avoid Chart Junk</a></li>
+<li><a href="#labels-and-titles" id="toc-labels-and-titles" class="nav-link" data-scroll-target="#labels-and-titles">Labels and Titles</a></li>
+  <li><a href="#themes" id="toc-themes" class="nav-link" data-scroll-target="#themes">Themes</a></li>
+  <li><a href="#color-scales" id="toc-color-scales" class="nav-link" data-scroll-target="#color-scales">Color Scales</a></li>
   </ul>
 </li>
   <li>
-<a href="#sec-common-viz-tasks" id="toc-sec-common-viz-tasks" class="nav-link" data-scroll-target="#sec-common-viz-tasks"><span class="header-section-number">9.8</span> Common Visualization Tasks</a>
+<a href="#sec-viz-best-practices" id="toc-sec-viz-best-practices" class="nav-link" data-scroll-target="#sec-viz-best-practices"><span class="header-section-number">10.7</span> Data Visualization Best Practices</a>
   <ul class="collapse">
-<li><a href="#comparing-distributions" id="toc-comparing-distributions" class="nav-link" data-scroll-target="#comparing-distributions"><span class="header-section-number">9.8.1</span> Comparing Distributions</a></li>
-  <li><a href="#before-after-comparisons" id="toc-before-after-comparisons" class="nav-link" data-scroll-target="#before-after-comparisons"><span class="header-section-number">9.8.2</span> Before-After Comparisons</a></li>
+<li><a href="#show-the-data" id="toc-show-the-data" class="nav-link" data-scroll-target="#show-the-data">Show the Data</a></li>
+  <li><a href="#use-position-and-length-for-precision" id="toc-use-position-and-length-for-precision" class="nav-link" data-scroll-target="#use-position-and-length-for-precision">Use Position and Length for Precision</a></li>
+  <li><a href="#order-by-meaningful-values" id="toc-order-by-meaningful-values" class="nav-link" data-scroll-target="#order-by-meaningful-values">Order by Meaningful Values</a></li>
+  <li><a href="#include-zero-for-bar-charts" id="toc-include-zero-for-bar-charts" class="nav-link" data-scroll-target="#include-zero-for-bar-charts">Include Zero for Bar Charts</a></li>
+  <li><a href="#consider-color-blindness" id="toc-consider-color-blindness" class="nav-link" data-scroll-target="#consider-color-blindness">Consider Color Blindness</a></li>
+  <li><a href="#avoid-chart-junk" id="toc-avoid-chart-junk" class="nav-link" data-scroll-target="#avoid-chart-junk">Avoid Chart Junk</a></li>
   </ul>
 </li>
-  <li><a href="#sec-saving-plots" id="toc-sec-saving-plots" class="nav-link" data-scroll-target="#sec-saving-plots"><span class="header-section-number">9.9</span> Saving Plots</a></li>
-  <li><a href="#sec-viz-summary" id="toc-sec-viz-summary" class="nav-link" data-scroll-target="#sec-viz-summary"><span class="header-section-number">9.10</span> Summary</a></li>
+  <li>
+<a href="#sec-common-viz-tasks" id="toc-sec-common-viz-tasks" class="nav-link" data-scroll-target="#sec-common-viz-tasks"><span class="header-section-number">10.8</span> Common Visualization Tasks</a>
+  <ul class="collapse">
+<li><a href="#comparing-distributions" id="toc-comparing-distributions" class="nav-link" data-scroll-target="#comparing-distributions">Comparing Distributions</a></li>
+  <li><a href="#before-after-comparisons" id="toc-before-after-comparisons" class="nav-link" data-scroll-target="#before-after-comparisons">Before-After Comparisons</a></li>
+  </ul>
+</li>
+  <li><a href="#sec-saving-plots" id="toc-sec-saving-plots" class="nav-link" data-scroll-target="#sec-saving-plots"><span class="header-section-number">10.9</span> Saving Plots</a></li>
+  <li><a href="#sec-viz-summary" id="toc-sec-viz-summary" class="nav-link" data-scroll-target="#sec-viz-summary"><span class="header-section-number">10.10</span> Summary</a></li>
   <li><a href="#additional-reading" id="toc-additional-reading" class="nav-link" data-scroll-target="#additional-reading">Additional Reading</a></li>
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/wcresko/BioE_Comp_Tools_Book/edit/main/chapters/09-data-visualization.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/wcresko/BioE_Comp_Tools_Book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title"><span id="sec-data-viz" class="quarto-section-identifier"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Data Visualization with ggplot2</span></span></h1>
+<h1 class="title"><span id="sec-data-viz" class="quarto-section-identifier"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Data Visualization with ggplot2</span></span></h1>
 </div>
 
 
@@ -530,15 +530,14 @@ Learning Objectives
 </ul>
 </div>
 </div>
-<section id="sec-grammar-graphics" class="level2" data-number="9.1"><h2 data-number="9.1" class="anchored" data-anchor-id="sec-grammar-graphics">
-<span class="header-section-number">9.1</span> The Grammar of Graphics</h2>
+<section id="sec-grammar-graphics" class="level2" data-number="10.1"><h2 data-number="10.1" class="anchored" data-anchor-id="sec-grammar-graphics">
+<span class="header-section-number">10.1</span> The Grammar of Graphics</h2>
 <p><strong>ggplot2</strong> is R’s most popular visualization package, built on the “Grammar of Graphics” framework. Just as grammar provides rules for constructing sentences, the grammar of graphics provides rules for constructing statistical graphics.</p>
-<section id="seven-components-of-a-graphic" class="level3" data-number="9.1.1"><h3 data-number="9.1.1" class="anchored" data-anchor-id="seven-components-of-a-graphic">
-<span class="header-section-number">9.1.1</span> Seven Components of a Graphic</h3>
+<section id="seven-components-of-a-graphic" class="level3"><h3 class="anchored" data-anchor-id="seven-components-of-a-graphic">Seven Components of a Graphic</h3>
 <p>Every ggplot2 visualization is built from these components:</p>
 <div id="tbl-grammar" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-grammar-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;9.1: Components of the Grammar of Graphics
+Table&nbsp;10.1: Components of the Grammar of Graphics
 </figcaption><div aria-describedby="tbl-grammar-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <colgroup>
@@ -599,11 +598,11 @@ Table&nbsp;9.1: Components of the Grammar of Graphics
 <img src="images/images_4a.017.jpeg" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-grammar-graphics-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;9.1: The Grammar of Graphics framework
+Figure&nbsp;10.1: The Grammar of Graphics framework
 </figcaption></figure>
 </div>
-</section></section><section id="sec-plot-layers" class="level2" data-number="9.2"><h2 data-number="9.2" class="anchored" data-anchor-id="sec-plot-layers">
-<span class="header-section-number">9.2</span> Building a Plot Layer by Layer</h2>
+</section></section><section id="sec-plot-layers" class="level2" data-number="10.2"><h2 data-number="10.2" class="anchored" data-anchor-id="sec-plot-layers">
+<span class="header-section-number">10.2</span> Building a Plot Layer by Layer</h2>
 <p>ggplot2 builds plots incrementally using the <code>+</code> operator:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Start with data and aesthetics</span></span>
@@ -626,16 +625,14 @@ Figure&nbsp;9.1: The Grammar of Graphics framework
 <li>
 <code>geom_point()</code> adds the point geometry</li>
 </ol>
-<section id="the-template" class="level3" data-number="9.2.1"><h3 data-number="9.2.1" class="anchored" data-anchor-id="the-template">
-<span class="header-section-number">9.2.1</span> The Template</h3>
+<section id="the-template" class="level3"><h3 class="anchored" data-anchor-id="the-template">The Template</h3>
 <p>Most ggplot2 code follows this template:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="sc">&lt;</span>DATA<span class="sc">&gt;</span>, <span class="fu">aes</span>(<span class="sc">&lt;</span>MAPPINGS<span class="sc">&gt;</span>)) <span class="sc">+</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a>  <span class="er">&lt;</span>GEOM_FUNCTION<span class="sc">&gt;</span>() <span class="sc">+</span></span>
 <span id="cb2-3"><a href="#cb2-3"></a>  <span class="er">&lt;</span>OPTIONAL_LAYERS<span class="sc">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section></section><section id="sec-geoms" class="level2" data-number="9.3"><h2 data-number="9.3" class="anchored" data-anchor-id="sec-geoms">
-<span class="header-section-number">9.3</span> Essential Geoms</h2>
-<section id="scatter-plots-with-geom_point" class="level3" data-number="9.3.1"><h3 data-number="9.3.1" class="anchored" data-anchor-id="scatter-plots-with-geom_point">
-<span class="header-section-number">9.3.1</span> Scatter Plots with <code>geom_point()</code>
+</section></section><section id="sec-geoms" class="level2" data-number="10.3"><h2 data-number="10.3" class="anchored" data-anchor-id="sec-geoms">
+<span class="header-section-number">10.3</span> Essential Geoms</h2>
+<section id="scatter-plots-with-geom_point" class="level3"><h3 class="anchored" data-anchor-id="scatter-plots-with-geom_point">Scatter Plots with <code>geom_point()</code>
 </h3>
 <p>Scatter plots show relationships between two continuous variables:</p>
 <div class="cell" data-layout-align="center">
@@ -652,13 +649,12 @@ Figure&nbsp;9.1: The Grammar of Graphics framework
 <img src="09-data-visualization_files/figure-html/fig-scatter-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scatter-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;9.2: Relationship between car weight and fuel efficiency
+Figure&nbsp;10.2: Relationship between car weight and fuel efficiency
 </figcaption></figure>
 </div>
 </div>
 </div>
-</section><section id="adding-color-and-shape" class="level3" data-number="9.3.2"><h3 data-number="9.3.2" class="anchored" data-anchor-id="adding-color-and-shape">
-<span class="header-section-number">9.3.2</span> Adding Color and Shape</h3>
+</section><section id="adding-color-and-shape" class="level3"><h3 class="anchored" data-anchor-id="adding-color-and-shape">Adding Color and Shape</h3>
 <p>Map additional variables to aesthetics:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">ggplot</span>(mtcars, <span class="fu">aes</span>(<span class="at">x =</span> wt, <span class="at">y =</span> mpg, <span class="at">color =</span> <span class="fu">factor</span>(cyl))) <span class="sc">+</span></span>
@@ -675,13 +671,12 @@ Figure&nbsp;9.2: Relationship between car weight and fuel efficiency
 <img src="09-data-visualization_files/figure-html/fig-scatter-color-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scatter-color-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;9.3: Scatter plot with color representing cylinders
+Figure&nbsp;10.3: Scatter plot with color representing cylinders
 </figcaption></figure>
 </div>
 </div>
 </div>
-</section><section id="histograms-with-geom_histogram" class="level3" data-number="9.3.3"><h3 data-number="9.3.3" class="anchored" data-anchor-id="histograms-with-geom_histogram">
-<span class="header-section-number">9.3.3</span> Histograms with <code>geom_histogram()</code>
+</section><section id="histograms-with-geom_histogram" class="level3"><h3 class="anchored" data-anchor-id="histograms-with-geom_histogram">Histograms with <code>geom_histogram()</code>
 </h3>
 <p>Histograms show the distribution of a single continuous variable:</p>
 <div class="cell" data-layout-align="center">
@@ -698,13 +693,12 @@ Figure&nbsp;9.3: Scatter plot with color representing cylinders
 <img src="09-data-visualization_files/figure-html/fig-histogram-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-histogram-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;9.4: Distribution of diamond prices
+Figure&nbsp;10.4: Distribution of diamond prices
 </figcaption></figure>
 </div>
 </div>
 </div>
-</section><section id="frequency-polygons-with-geom_freqpoly" class="level3" data-number="9.3.4"><h3 data-number="9.3.4" class="anchored" data-anchor-id="frequency-polygons-with-geom_freqpoly">
-<span class="header-section-number">9.3.4</span> Frequency Polygons with <code>geom_freqpoly()</code>
+</section><section id="frequency-polygons-with-geom_freqpoly" class="level3"><h3 class="anchored" data-anchor-id="frequency-polygons-with-geom_freqpoly">Frequency Polygons with <code>geom_freqpoly()</code>
 </h3>
 <p>Frequency polygons are an alternative to histograms, showing counts as lines instead of bars. They’re especially useful for comparing multiple distributions:</p>
 <div class="cell" data-layout-align="center">
@@ -721,13 +715,12 @@ Figure&nbsp;9.4: Distribution of diamond prices
 <img src="09-data-visualization_files/figure-html/fig-freqpoly-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-freqpoly-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;9.5: Comparing distributions with frequency polygons
+Figure&nbsp;10.5: Comparing distributions with frequency polygons
 </figcaption></figure>
 </div>
 </div>
 </div>
-</section><section id="density-plots-with-geom_density" class="level3" data-number="9.3.5"><h3 data-number="9.3.5" class="anchored" data-anchor-id="density-plots-with-geom_density">
-<span class="header-section-number">9.3.5</span> Density Plots with <code>geom_density()</code>
+</section><section id="density-plots-with-geom_density" class="level3"><h3 class="anchored" data-anchor-id="density-plots-with-geom_density">Density Plots with <code>geom_density()</code>
 </h3>
 <p>Smoothed version of histograms:</p>
 <div class="cell" data-layout-align="center">
@@ -744,13 +737,12 @@ Figure&nbsp;9.5: Comparing distributions with frequency polygons
 <img src="09-data-visualization_files/figure-html/fig-density-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-density-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;9.6: Density plot comparing distributions by cut quality
+Figure&nbsp;10.6: Density plot comparing distributions by cut quality
 </figcaption></figure>
 </div>
 </div>
 </div>
-</section><section id="box-plots-with-geom_boxplot" class="level3" data-number="9.3.6"><h3 data-number="9.3.6" class="anchored" data-anchor-id="box-plots-with-geom_boxplot">
-<span class="header-section-number">9.3.6</span> Box Plots with <code>geom_boxplot()</code>
+</section><section id="box-plots-with-geom_boxplot" class="level3"><h3 class="anchored" data-anchor-id="box-plots-with-geom_boxplot">Box Plots with <code>geom_boxplot()</code>
 </h3>
 <p>Box plots show distribution summaries and are excellent for comparisons:</p>
 <div class="cell" data-layout-align="center">
@@ -767,7 +759,7 @@ Figure&nbsp;9.6: Density plot comparing distributions by cut quality
 <img src="09-data-visualization_files/figure-html/fig-boxplot-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-boxplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;9.7: Fuel efficiency by number of cylinders
+Figure&nbsp;10.7: Fuel efficiency by number of cylinders
 </figcaption></figure>
 </div>
 </div>
@@ -777,11 +769,10 @@ Figure&nbsp;9.7: Fuel efficiency by number of cylinders
 <img src="images/images_4a.001.jpeg" class="img-fluid figure-img" style="width:60.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-boxplot-anatomy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;9.8: Anatomy of a box plot
+Figure&nbsp;10.8: Anatomy of a box plot
 </figcaption></figure>
 </div>
-</section><section id="bar-charts-with-geom_bar-and-geom_col" class="level3" data-number="9.3.7"><h3 data-number="9.3.7" class="anchored" data-anchor-id="bar-charts-with-geom_bar-and-geom_col">
-<span class="header-section-number">9.3.7</span> Bar Charts with <code>geom_bar()</code> and <code>geom_col()</code>
+</section><section id="bar-charts-with-geom_bar-and-geom_col" class="level3"><h3 class="anchored" data-anchor-id="bar-charts-with-geom_bar-and-geom_col">Bar Charts with <code>geom_bar()</code> and <code>geom_col()</code>
 </h3>
 <p>Use <code>geom_bar()</code> for counts and <code>geom_col()</code> for values:</p>
 <div class="cell" data-layout-align="center">
@@ -798,7 +789,7 @@ Figure&nbsp;9.8: Anatomy of a box plot
 <img src="09-data-visualization_files/figure-html/fig-bar-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bar-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;9.9: Count of diamonds by cut quality
+Figure&nbsp;10.9: Count of diamonds by cut quality
 </figcaption></figure>
 </div>
 </div>
@@ -820,7 +811,7 @@ Figure&nbsp;9.9: Count of diamonds by cut quality
 <img src="09-data-visualization_files/figure-html/fig-bar-dodge-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bar-dodge-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;9.10: Grouped bar chart showing cut quality by clarity
+Figure&nbsp;10.10: Grouped bar chart showing cut quality by clarity
 </figcaption></figure>
 </div>
 </div>
@@ -843,13 +834,12 @@ Figure&nbsp;9.10: Grouped bar chart showing cut quality by clarity
 <img src="09-data-visualization_files/figure-html/fig-bar-horizontal-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bar-horizontal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;9.11: Horizontal bar chart for better label readability
+Figure&nbsp;10.11: Horizontal bar chart for better label readability
 </figcaption></figure>
 </div>
 </div>
 </div>
-</section></section><section id="line-plots-with-geom_line" class="level3" data-number="9.3.8"><h3 data-number="9.3.8" class="anchored" data-anchor-id="line-plots-with-geom_line">
-<span class="header-section-number">9.3.8</span> Line Plots with <code>geom_line()</code>
+</section></section><section id="line-plots-with-geom_line" class="level3"><h3 class="anchored" data-anchor-id="line-plots-with-geom_line">Line Plots with <code>geom_line()</code>
 </h3>
 <p>Line plots are ideal for time series or connected observations:</p>
 <div class="cell" data-layout-align="center">
@@ -874,13 +864,13 @@ Figure&nbsp;9.11: Horizontal bar chart for better label readability
 <img src="09-data-visualization_files/figure-html/fig-line-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-line-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;9.12: Example line plot
+Figure&nbsp;10.12: Example line plot
 </figcaption></figure>
 </div>
 </div>
 </div>
-</section></section><section id="sec-combining-geoms" class="level2" data-number="9.4"><h2 data-number="9.4" class="anchored" data-anchor-id="sec-combining-geoms">
-<span class="header-section-number">9.4</span> Combining Geoms</h2>
+</section></section><section id="sec-combining-geoms" class="level2" data-number="10.4"><h2 data-number="10.4" class="anchored" data-anchor-id="sec-combining-geoms">
+<span class="header-section-number">10.4</span> Combining Geoms</h2>
 <p>Layer multiple geoms to create richer visualizations:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">ggplot</span>(mtcars, <span class="fu">aes</span>(<span class="at">x =</span> wt, <span class="at">y =</span> mpg)) <span class="sc">+</span></span>
@@ -898,16 +888,16 @@ Figure&nbsp;9.12: Example line plot
 <img src="09-data-visualization_files/figure-html/fig-combined-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-combined-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;9.13: Scatter plot with trend line
+Figure&nbsp;10.13: Scatter plot with trend line
 </figcaption></figure>
 </div>
 </div>
 </div>
-</section><section id="sec-faceting" class="level2" data-number="9.5"><h2 data-number="9.5" class="anchored" data-anchor-id="sec-faceting">
-<span class="header-section-number">9.5</span> Faceting: Small Multiples</h2>
+</section><section id="sec-faceting" class="level2" data-number="10.5"><h2 data-number="10.5" class="anchored" data-anchor-id="sec-faceting">
+<span class="header-section-number">10.5</span> Faceting: Small Multiples</h2>
 <p>Faceting creates separate panels for subsets of data.</p>
-<section id="facet_wrap-for-one-variable" class="level3" data-number="9.5.1"><h3 data-number="9.5.1" class="anchored" data-anchor-id="facet_wrap-for-one-variable">
-<span class="header-section-number">9.5.1</span> <code>facet_wrap()</code> for One Variable</h3>
+<section id="facet_wrap-for-one-variable" class="level3"><h3 class="anchored" data-anchor-id="facet_wrap-for-one-variable">
+<code>facet_wrap()</code> for One Variable</h3>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">ggplot</span>(mtcars, <span class="fu">aes</span>(<span class="at">x =</span> wt, <span class="at">y =</span> mpg)) <span class="sc">+</span></span>
 <span id="cb14-2"><a href="#cb14-2"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
@@ -924,13 +914,13 @@ Figure&nbsp;9.13: Scatter plot with trend line
 <img src="09-data-visualization_files/figure-html/fig-facet-wrap-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-facet-wrap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;9.14: MPG vs weight, faceted by cylinder count
+Figure&nbsp;10.14: MPG vs weight, faceted by cylinder count
 </figcaption></figure>
 </div>
 </div>
 </div>
-</section><section id="facet_grid-for-two-variables" class="level3" data-number="9.5.2"><h3 data-number="9.5.2" class="anchored" data-anchor-id="facet_grid-for-two-variables">
-<span class="header-section-number">9.5.2</span> <code>facet_grid()</code> for Two Variables</h3>
+</section><section id="facet_grid-for-two-variables" class="level3"><h3 class="anchored" data-anchor-id="facet_grid-for-two-variables">
+<code>facet_grid()</code> for Two Variables</h3>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">ggplot</span>(mtcars, <span class="fu">aes</span>(<span class="at">x =</span> wt, <span class="at">y =</span> mpg)) <span class="sc">+</span></span>
 <span id="cb15-2"><a href="#cb15-2"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
@@ -949,15 +939,14 @@ Figure&nbsp;9.14: MPG vs weight, faceted by cylinder count
 <img src="09-data-visualization_files/figure-html/fig-facet-grid-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-facet-grid-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;9.15: Two-dimensional faceting
+Figure&nbsp;10.15: Two-dimensional faceting
 </figcaption></figure>
 </div>
 </div>
 </div>
-</section></section><section id="sec-plot-customization" class="level2" data-number="9.6"><h2 data-number="9.6" class="anchored" data-anchor-id="sec-plot-customization">
-<span class="header-section-number">9.6</span> Customizing Your Plots</h2>
-<section id="labels-and-titles" class="level3" data-number="9.6.1"><h3 data-number="9.6.1" class="anchored" data-anchor-id="labels-and-titles">
-<span class="header-section-number">9.6.1</span> Labels and Titles</h3>
+</section></section><section id="sec-plot-customization" class="level2" data-number="10.6"><h2 data-number="10.6" class="anchored" data-anchor-id="sec-plot-customization">
+<span class="header-section-number">10.6</span> Customizing Your Plots</h2>
+<section id="labels-and-titles" class="level3"><h3 class="anchored" data-anchor-id="labels-and-titles">Labels and Titles</h3>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">ggplot</span>(mtcars, <span class="fu">aes</span>(<span class="at">x =</span> wt, <span class="at">y =</span> mpg)) <span class="sc">+</span></span>
 <span id="cb16-2"><a href="#cb16-2"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
@@ -974,13 +963,12 @@ Figure&nbsp;9.15: Two-dimensional faceting
 <img src="09-data-visualization_files/figure-html/fig-labels-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-labels-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;9.16: Plot with comprehensive labels
+Figure&nbsp;10.16: Plot with comprehensive labels
 </figcaption></figure>
 </div>
 </div>
 </div>
-</section><section id="themes" class="level3" data-number="9.6.2"><h3 data-number="9.6.2" class="anchored" data-anchor-id="themes">
-<span class="header-section-number">9.6.2</span> Themes</h3>
+</section><section id="themes" class="level3"><h3 class="anchored" data-anchor-id="themes">Themes</h3>
 <p>ggplot2 includes several built-in themes:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">library</span>(patchwork)</span>
@@ -1001,13 +989,12 @@ Figure&nbsp;9.16: Plot with comprehensive labels
 <img src="09-data-visualization_files/figure-html/fig-themes-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-themes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;9.17: Comparison of ggplot2 themes
+Figure&nbsp;10.17: Comparison of ggplot2 themes
 </figcaption></figure>
 </div>
 </div>
 </div>
-</section><section id="color-scales" class="level3" data-number="9.6.3"><h3 data-number="9.6.3" class="anchored" data-anchor-id="color-scales">
-<span class="header-section-number">9.6.3</span> Color Scales</h3>
+</section><section id="color-scales" class="level3"><h3 class="anchored" data-anchor-id="color-scales">Color Scales</h3>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">ggplot</span>(mtcars, <span class="fu">aes</span>(<span class="at">x =</span> wt, <span class="at">y =</span> mpg, <span class="at">color =</span> <span class="fu">factor</span>(cyl))) <span class="sc">+</span></span>
 <span id="cb18-2"><a href="#cb18-2"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
@@ -1023,16 +1010,15 @@ Figure&nbsp;9.17: Comparison of ggplot2 themes
 <img src="09-data-visualization_files/figure-html/fig-colors-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-colors-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;9.18: Custom color palette
+Figure&nbsp;10.18: Custom color palette
 </figcaption></figure>
 </div>
 </div>
 </div>
-</section></section><section id="sec-viz-best-practices" class="level2" data-number="9.7"><h2 data-number="9.7" class="anchored" data-anchor-id="sec-viz-best-practices">
-<span class="header-section-number">9.7</span> Data Visualization Best Practices</h2>
+</section></section><section id="sec-viz-best-practices" class="level2" data-number="10.7"><h2 data-number="10.7" class="anchored" data-anchor-id="sec-viz-best-practices">
+<span class="header-section-number">10.7</span> Data Visualization Best Practices</h2>
 <p>Good data visualization communicates clearly and honestly. Follow these principles:</p>
-<section id="show-the-data" class="level3" data-number="9.7.1"><h3 data-number="9.7.1" class="anchored" data-anchor-id="show-the-data">
-<span class="header-section-number">9.7.1</span> Show the Data</h3>
+<section id="show-the-data" class="level3"><h3 class="anchored" data-anchor-id="show-the-data">Show the Data</h3>
 <p>Don’t hide your data behind summaries when individual points are informative:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">ggplot</span>(mtcars, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(cyl), <span class="at">y =</span> mpg)) <span class="sc">+</span></span>
@@ -1049,13 +1035,12 @@ Figure&nbsp;9.18: Custom color palette
 <img src="09-data-visualization_files/figure-html/fig-show-data-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-show-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;9.19: Showing raw data with summary statistics
+Figure&nbsp;10.19: Showing raw data with summary statistics
 </figcaption></figure>
 </div>
 </div>
 </div>
-</section><section id="use-position-and-length-for-precision" class="level3" data-number="9.7.2"><h3 data-number="9.7.2" class="anchored" data-anchor-id="use-position-and-length-for-precision">
-<span class="header-section-number">9.7.2</span> Use Position and Length for Precision</h3>
+</section><section id="use-position-and-length-for-precision" class="level3"><h3 class="anchored" data-anchor-id="use-position-and-length-for-precision">Use Position and Length for Precision</h3>
 <p>Humans are best at comparing positions and lengths. Angles (pie charts) and areas are harder to judge:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="co"># Create summary data</span></span>
@@ -1078,7 +1063,7 @@ Figure&nbsp;9.19: Showing raw data with summary statistics
 <img src="09-data-visualization_files/figure-html/fig-bar-vs-pie-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bar-vs-pie-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;9.20: Bar chart provides clearer comparison than a pie chart would
+Figure&nbsp;10.20: Bar chart provides clearer comparison than a pie chart would
 </figcaption></figure>
 </div>
 </div>
@@ -1096,8 +1081,7 @@ Avoid Pie Charts
 <p>Pie charts make comparisons difficult because humans are poor at judging angles. Use bar charts instead for categorical comparisons.</p>
 </div>
 </div>
-</section><section id="order-by-meaningful-values" class="level3" data-number="9.7.3"><h3 data-number="9.7.3" class="anchored" data-anchor-id="order-by-meaningful-values">
-<span class="header-section-number">9.7.3</span> Order by Meaningful Values</h3>
+</section><section id="order-by-meaningful-values" class="level3"><h3 class="anchored" data-anchor-id="order-by-meaningful-values">Order by Meaningful Values</h3>
 <p>By default, R orders categorical variables alphabetically, which is rarely meaningful. Use <code><a href="https://rdrr.io/r/stats/reorder.factor.html">reorder()</a></code> to order by a numeric value instead:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="co"># Calculate mean mpg by manufacturer</span></span>
@@ -1120,7 +1104,7 @@ Avoid Pie Charts
 <img src="09-data-visualization_files/figure-html/fig-ordered-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ordered-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;9.21: Ordering categories by value aids comparison
+Figure&nbsp;10.21: Ordering categories by value aids comparison
 </figcaption></figure>
 </div>
 </div>
@@ -1144,8 +1128,7 @@ Figure&nbsp;9.21: Ordering categories by value aids comparison
 </div>
 </div>
 </div>
-</section><section id="include-zero-for-bar-charts" class="level3" data-number="9.7.4"><h3 data-number="9.7.4" class="anchored" data-anchor-id="include-zero-for-bar-charts">
-<span class="header-section-number">9.7.4</span> Include Zero for Bar Charts</h3>
+</section><section id="include-zero-for-bar-charts" class="level3"><h3 class="anchored" data-anchor-id="include-zero-for-bar-charts">Include Zero for Bar Charts</h3>
 <p>When using bars, start the y-axis at zero. Otherwise, you distort relative magnitudes:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="co"># Example data</span></span>
@@ -1168,13 +1151,12 @@ Figure&nbsp;9.21: Ordering categories by value aids comparison
 <img src="09-data-visualization_files/figure-html/fig-include-zero-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-include-zero-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;9.22: Bar charts should include zero to show true proportions
+Figure&nbsp;10.22: Bar charts should include zero to show true proportions
 </figcaption></figure>
 </div>
 </div>
 </div>
-</section><section id="consider-color-blindness" class="level3" data-number="9.7.5"><h3 data-number="9.7.5" class="anchored" data-anchor-id="consider-color-blindness">
-<span class="header-section-number">9.7.5</span> Consider Color Blindness</h3>
+</section><section id="consider-color-blindness" class="level3"><h3 class="anchored" data-anchor-id="consider-color-blindness">Consider Color Blindness</h3>
 <p>About 8% of men and 0.5% of women have color vision deficiency. Use colorblind-friendly palettes:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="co"># Colorblind-friendly colors</span></span>
@@ -1195,7 +1177,7 @@ Figure&nbsp;9.22: Bar charts should include zero to show true proportions
 <img src="09-data-visualization_files/figure-html/fig-colorblind-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-colorblind-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;9.23: Colorblind-friendly palette
+Figure&nbsp;10.23: Colorblind-friendly palette
 </figcaption></figure>
 </div>
 </div>
@@ -1213,18 +1195,16 @@ Tip
 <p>The viridis color scales (<code>scale_color_viridis_d()</code>, <code>scale_fill_viridis_c()</code>) are designed to be colorblind-friendly and perceptually uniform.</p>
 </div>
 </div>
-</section><section id="avoid-chart-junk" class="level3" data-number="9.7.6"><h3 data-number="9.7.6" class="anchored" data-anchor-id="avoid-chart-junk">
-<span class="header-section-number">9.7.6</span> Avoid Chart Junk</h3>
+</section><section id="avoid-chart-junk" class="level3"><h3 class="anchored" data-anchor-id="avoid-chart-junk">Avoid Chart Junk</h3>
 <p>Remove unnecessary visual elements that don’t convey information:</p>
 <ul>
 <li>Avoid 3D effects</li>
 <li>Remove unnecessary gridlines</li>
 <li>Don’t use gradient fills for categorical data</li>
 <li>Skip decorative elements</li>
-</ul></section></section><section id="sec-common-viz-tasks" class="level2" data-number="9.8"><h2 data-number="9.8" class="anchored" data-anchor-id="sec-common-viz-tasks">
-<span class="header-section-number">9.8</span> Common Visualization Tasks</h2>
-<section id="comparing-distributions" class="level3" data-number="9.8.1"><h3 data-number="9.8.1" class="anchored" data-anchor-id="comparing-distributions">
-<span class="header-section-number">9.8.1</span> Comparing Distributions</h3>
+</ul></section></section><section id="sec-common-viz-tasks" class="level2" data-number="10.8"><h2 data-number="10.8" class="anchored" data-anchor-id="sec-common-viz-tasks">
+<span class="header-section-number">10.8</span> Common Visualization Tasks</h2>
+<section id="comparing-distributions" class="level3"><h3 class="anchored" data-anchor-id="comparing-distributions">Comparing Distributions</h3>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x =</span> Sepal.Length, <span class="at">fill =</span> Species)) <span class="sc">+</span></span>
 <span id="cb25-2"><a href="#cb25-2"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
@@ -1241,13 +1221,12 @@ Tip
 <img src="09-data-visualization_files/figure-html/fig-distributions-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-distributions-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;9.24: Comparing distributions with density plots
+Figure&nbsp;10.24: Comparing distributions with density plots
 </figcaption></figure>
 </div>
 </div>
 </div>
-</section><section id="before-after-comparisons" class="level3" data-number="9.8.2"><h3 data-number="9.8.2" class="anchored" data-anchor-id="before-after-comparisons">
-<span class="header-section-number">9.8.2</span> Before-After Comparisons</h3>
+</section><section id="before-after-comparisons" class="level3"><h3 class="anchored" data-anchor-id="before-after-comparisons">Before-After Comparisons</h3>
 <p>Slope charts effectively show changes between two time points:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="co"># Sample before-after data</span></span>
@@ -1272,13 +1251,13 @@ Figure&nbsp;9.24: Comparing distributions with density plots
 <img src="09-data-visualization_files/figure-html/fig-slope-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-slope-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;9.25: Slope chart showing change over time
+Figure&nbsp;10.25: Slope chart showing change over time
 </figcaption></figure>
 </div>
 </div>
 </div>
-</section></section><section id="sec-saving-plots" class="level2" data-number="9.9"><h2 data-number="9.9" class="anchored" data-anchor-id="sec-saving-plots">
-<span class="header-section-number">9.9</span> Saving Plots</h2>
+</section></section><section id="sec-saving-plots" class="level2" data-number="10.9"><h2 data-number="10.9" class="anchored" data-anchor-id="sec-saving-plots">
+<span class="header-section-number">10.9</span> Saving Plots</h2>
 <p>Use <code>ggsave()</code> to export plots:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="co"># Create a plot</span></span>
@@ -1295,8 +1274,8 @@ Figure&nbsp;9.25: Slope chart showing change over time
 <span id="cb27-12"><a href="#cb27-12"></a><span class="co"># Save as SVG (good for editing)</span></span>
 <span id="cb27-13"><a href="#cb27-13"></a><span class="fu">ggsave</span>(<span class="st">"my_plot.svg"</span>, <span class="at">plot =</span> p, <span class="at">width =</span> <span class="dv">8</span>, <span class="at">height =</span> <span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="sec-viz-summary" class="level2" data-number="9.10"><h2 data-number="9.10" class="anchored" data-anchor-id="sec-viz-summary">
-<span class="header-section-number">9.10</span> Summary</h2>
+</section><section id="sec-viz-summary" class="level2" data-number="10.10"><h2 data-number="10.10" class="anchored" data-anchor-id="sec-viz-summary">
+<span class="header-section-number">10.10</span> Summary</h2>
 <p>ggplot2 provides a powerful and consistent framework for data visualization:</p>
 <ul>
 <li>Build plots layer by layer using the Grammar of Graphics</li>
@@ -1818,13 +1797,13 @@ Practice Exercises
     }
   });
   </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="../chapters/08-tidy-data.html" class="pagination-link" aria-label="Tidy Data Principles">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Tidy Data Principles</span></span>
+      <a href="../chapters/10-git-github.html" class="pagination-link" aria-label="Version Control with Git and GitHub">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Version Control with Git and GitHub</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../chapters/10-git-github.html" class="pagination-link" aria-label="Version Control with Git and GitHub">
-        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Version Control with Git and GitHub</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../chapters/13-writing-functions.html" class="pagination-link" aria-label="Writing Functions in R">
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Writing Functions in R</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
