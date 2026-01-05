@@ -42,7 +42,7 @@ Each chapter builds on previous material, so I recommend reading them in order, 
 - **Practice exercises** to reinforce your learning
 - **Cross-references** connecting related concepts across chapters
 
-::: {.callout-note title="Hands-On Practice"}
+::: {.callout-tip title="Hands-On Practice"}
 The best way to learn computational skills is to **type the commands yourself**. Avoid copying and pasting when possible—the muscle memory of typing commands is part of the learning process.
 :::
 

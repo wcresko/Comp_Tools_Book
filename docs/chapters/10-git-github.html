@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.7.30">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="description" content="A comprehensive guide to essential computational tools for graduate students in bioengineering and life sciences, covering Unix/Linux, R programming, version control with Git/GitHub, and high-performance computing.">
-<title>9&nbsp; Version Control with Git and GitHub – Foundational Computational Tools for Bioengineers</title>
+<title>14&nbsp; Version Control with Git and GitHub – Foundational Computational Tools for Bioengineers</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -82,8 +82,8 @@ div.csl-indent {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../chapters/09-data-visualization.html" rel="next">
-<link href="../chapters/08-tidy-data.html" rel="prev">
+<link href="../chapters/11-hpc-talapas.html" rel="next">
+<link href="../chapters/12-quarto-documents.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -294,7 +294,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/10-git-github.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Version Control with Git and GitHub</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/10-git-github.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Version Control with Git and GitHub</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -377,38 +377,38 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/10-git-github.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Version Control with Git and GitHub</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../chapters/09-data-visualization.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Data Visualization with ggplot2</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Data Visualization with ggplot2</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/13-writing-functions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Writing Functions in R</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Writing Functions in R</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/14-parallel-computing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Parallel Computing in R</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Parallel Computing in R</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/15-databases.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Working with Databases</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Working with Databases</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/12-quarto-documents.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Reproducible Documents with Quarto</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Reproducible Documents with Quarto</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/10-git-github.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Version Control with Git and GitHub</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -434,8 +434,38 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/appendix-commands.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Command Reference</span></span></a>
+  <a href="../chapters/appendix-unix.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Unix Command Reference</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/appendix-git.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Git Command Reference</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/appendix-r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">R Command Reference</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/appendix-slurm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">SLURM Command Reference</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/appendix-regex.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Regular Expression Reference</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/appendix-shortcuts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">Keyboard Shortcuts Reference</span></span></a>
   </div>
 </li>
       </ul>
@@ -448,29 +478,29 @@ div.csl-indent {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#sec-why-version-control" id="toc-sec-why-version-control" class="nav-link active" data-scroll-target="#sec-why-version-control"><span class="header-section-number">9.1</span> Why Version Control?</a></li>
+<li><a href="#sec-why-version-control" id="toc-sec-why-version-control" class="nav-link active" data-scroll-target="#sec-why-version-control"><span class="header-section-number">14.1</span> Why Version Control?</a></li>
   <li>
-<a href="#sec-git-distributed" id="toc-sec-git-distributed" class="nav-link" data-scroll-target="#sec-git-distributed"><span class="header-section-number">9.2</span> Git: Distributed Version Control</a>
+<a href="#sec-git-distributed" id="toc-sec-git-distributed" class="nav-link" data-scroll-target="#sec-git-distributed"><span class="header-section-number">14.2</span> Git: Distributed Version Control</a>
   <ul class="collapse">
 <li><a href="#key-concepts" id="toc-key-concepts" class="nav-link" data-scroll-target="#key-concepts">Key Concepts</a></li>
   </ul>
 </li>
   <li>
-<a href="#sec-git-setup" id="toc-sec-git-setup" class="nav-link" data-scroll-target="#sec-git-setup"><span class="header-section-number">9.3</span> Setting Up Git</a>
+<a href="#sec-git-setup" id="toc-sec-git-setup" class="nav-link" data-scroll-target="#sec-git-setup"><span class="header-section-number">14.3</span> Setting Up Git</a>
   <ul class="collapse">
 <li><a href="#installation" id="toc-installation" class="nav-link" data-scroll-target="#installation">Installation</a></li>
   <li><a href="#configuration" id="toc-configuration" class="nav-link" data-scroll-target="#configuration">Configuration</a></li>
   </ul>
 </li>
   <li>
-<a href="#sec-creating-repo" id="toc-sec-creating-repo" class="nav-link" data-scroll-target="#sec-creating-repo"><span class="header-section-number">9.4</span> Creating a Repository</a>
+<a href="#sec-creating-repo" id="toc-sec-creating-repo" class="nav-link" data-scroll-target="#sec-creating-repo"><span class="header-section-number">14.4</span> Creating a Repository</a>
   <ul class="collapse">
 <li><a href="#method-1-initialize-locally" id="toc-method-1-initialize-locally" class="nav-link" data-scroll-target="#method-1-initialize-locally">Method 1: Initialize Locally</a></li>
   <li><a href="#method-2-clone-from-github" id="toc-method-2-clone-from-github" class="nav-link" data-scroll-target="#method-2-clone-from-github">Method 2: Clone from GitHub</a></li>
   </ul>
 </li>
   <li>
-<a href="#sec-git-workflow" id="toc-sec-git-workflow" class="nav-link" data-scroll-target="#sec-git-workflow"><span class="header-section-number">9.5</span> Basic Git Workflow</a>
+<a href="#sec-git-workflow" id="toc-sec-git-workflow" class="nav-link" data-scroll-target="#sec-git-workflow"><span class="header-section-number">14.5</span> Basic Git Workflow</a>
   <ul class="collapse">
 <li><a href="#checking-status" id="toc-checking-status" class="nav-link" data-scroll-target="#checking-status">Checking Status</a></li>
   <li><a href="#staging-changes" id="toc-staging-changes" class="nav-link" data-scroll-target="#staging-changes">Staging Changes</a></li>
@@ -479,7 +509,7 @@ div.csl-indent {
   </ul>
 </li>
   <li>
-<a href="#sec-github" id="toc-sec-github" class="nav-link" data-scroll-target="#sec-github"><span class="header-section-number">9.6</span> Working with GitHub</a>
+<a href="#sec-github" id="toc-sec-github" class="nav-link" data-scroll-target="#sec-github"><span class="header-section-number">14.6</span> Working with GitHub</a>
   <ul class="collapse">
 <li><a href="#creating-a-github-account" id="toc-creating-a-github-account" class="nav-link" data-scroll-target="#creating-a-github-account">Creating a GitHub Account</a></li>
   <li><a href="#connecting-local-to-remote" id="toc-connecting-local-to-remote" class="nav-link" data-scroll-target="#connecting-local-to-remote">Connecting Local to Remote</a></li>
@@ -487,7 +517,7 @@ div.csl-indent {
   </ul>
 </li>
   <li>
-<a href="#sec-branching" id="toc-sec-branching" class="nav-link" data-scroll-target="#sec-branching"><span class="header-section-number">9.7</span> Branching</a>
+<a href="#sec-branching" id="toc-sec-branching" class="nav-link" data-scroll-target="#sec-branching"><span class="header-section-number">14.7</span> Branching</a>
   <ul class="collapse">
 <li><a href="#creating-and-switching-branches" id="toc-creating-and-switching-branches" class="nav-link" data-scroll-target="#creating-and-switching-branches">Creating and Switching Branches</a></li>
   <li><a href="#merging-branches" id="toc-merging-branches" class="nav-link" data-scroll-target="#merging-branches">Merging Branches</a></li>
@@ -495,29 +525,29 @@ div.csl-indent {
   </ul>
 </li>
   <li>
-<a href="#sec-pull-requests" id="toc-sec-pull-requests" class="nav-link" data-scroll-target="#sec-pull-requests"><span class="header-section-number">9.8</span> Pull Requests</a>
+<a href="#sec-pull-requests" id="toc-sec-pull-requests" class="nav-link" data-scroll-target="#sec-pull-requests"><span class="header-section-number">14.8</span> Pull Requests</a>
   <ul class="collapse">
 <li><a href="#creating-a-pull-request" id="toc-creating-a-pull-request" class="nav-link" data-scroll-target="#creating-a-pull-request">Creating a Pull Request</a></li>
   <li><a href="#pushing-branches-to-github" id="toc-pushing-branches-to-github" class="nav-link" data-scroll-target="#pushing-branches-to-github">Pushing Branches to GitHub</a></li>
   </ul>
 </li>
   <li>
-<a href="#sec-forking" id="toc-sec-forking" class="nav-link" data-scroll-target="#sec-forking"><span class="header-section-number">9.9</span> Forking</a>
+<a href="#sec-forking" id="toc-sec-forking" class="nav-link" data-scroll-target="#sec-forking"><span class="header-section-number">14.9</span> Forking</a>
   <ul class="collapse">
 <li><a href="#when-to-fork" id="toc-when-to-fork" class="nav-link" data-scroll-target="#when-to-fork">When to Fork</a></li>
   <li><a href="#fork-workflow" id="toc-fork-workflow" class="nav-link" data-scroll-target="#fork-workflow">Fork Workflow</a></li>
   </ul>
 </li>
-  <li><a href="#sec-gitignore" id="toc-sec-gitignore" class="nav-link" data-scroll-target="#sec-gitignore"><span class="header-section-number">9.10</span> The .gitignore File</a></li>
+  <li><a href="#sec-gitignore" id="toc-sec-gitignore" class="nav-link" data-scroll-target="#sec-gitignore"><span class="header-section-number">14.10</span> The .gitignore File</a></li>
   <li>
-<a href="#sec-github-pages" id="toc-sec-github-pages" class="nav-link" data-scroll-target="#sec-github-pages"><span class="header-section-number">9.11</span> GitHub Pages: Free Website Hosting</a>
+<a href="#sec-github-pages" id="toc-sec-github-pages" class="nav-link" data-scroll-target="#sec-github-pages"><span class="header-section-number">14.11</span> GitHub Pages: Free Website Hosting</a>
   <ul class="collapse">
 <li><a href="#setting-up-github-pages" id="toc-setting-up-github-pages" class="nav-link" data-scroll-target="#setting-up-github-pages">Setting Up GitHub Pages</a></li>
   <li><a href="#for-quarto-projects" id="toc-for-quarto-projects" class="nav-link" data-scroll-target="#for-quarto-projects">For Quarto Projects</a></li>
   </ul>
 </li>
   <li>
-<a href="#sec-git-best-practices" id="toc-sec-git-best-practices" class="nav-link" data-scroll-target="#sec-git-best-practices"><span class="header-section-number">9.12</span> Best Practices</a>
+<a href="#sec-git-best-practices" id="toc-sec-git-best-practices" class="nav-link" data-scroll-target="#sec-git-best-practices"><span class="header-section-number">14.12</span> Best Practices</a>
   <ul class="collapse">
 <li><a href="#repository-organization" id="toc-repository-organization" class="nav-link" data-scroll-target="#repository-organization">Repository Organization</a></li>
   <li><a href="#commit-frequency" id="toc-commit-frequency" class="nav-link" data-scroll-target="#commit-frequency">Commit Frequency</a></li>
@@ -525,34 +555,34 @@ div.csl-indent {
   </ul>
 </li>
   <li>
-<a href="#sec-git-auth" id="toc-sec-git-auth" class="nav-link" data-scroll-target="#sec-git-auth"><span class="header-section-number">9.13</span> Authentication: HTTPS vs SSH</a>
+<a href="#sec-git-auth" id="toc-sec-git-auth" class="nav-link" data-scroll-target="#sec-git-auth"><span class="header-section-number">14.13</span> Authentication: HTTPS vs SSH</a>
   <ul class="collapse">
 <li><a href="#credential-caching-https" id="toc-credential-caching-https" class="nav-link" data-scroll-target="#credential-caching-https">Credential Caching (HTTPS)</a></li>
   </ul>
 </li>
   <li>
-<a href="#sec-line-endings" id="toc-sec-line-endings" class="nav-link" data-scroll-target="#sec-line-endings"><span class="header-section-number">9.14</span> Line Endings Across Operating Systems</a>
+<a href="#sec-line-endings" id="toc-sec-line-endings" class="nav-link" data-scroll-target="#sec-line-endings"><span class="header-section-number">14.14</span> Line Endings Across Operating Systems</a>
   <ul class="collapse">
 <li><a href="#solution" id="toc-solution" class="nav-link" data-scroll-target="#solution">Solution</a></li>
   </ul>
 </li>
-  <li><a href="#sec-git-stash" id="toc-sec-git-stash" class="nav-link" data-scroll-target="#sec-git-stash"><span class="header-section-number">9.15</span> Temporarily Saving Changes: Git Stash</a></li>
+  <li><a href="#sec-git-stash" id="toc-sec-git-stash" class="nav-link" data-scroll-target="#sec-git-stash"><span class="header-section-number">14.15</span> Temporarily Saving Changes: Git Stash</a></li>
   <li>
-<a href="#sec-git-troubleshooting" id="toc-sec-git-troubleshooting" class="nav-link" data-scroll-target="#sec-git-troubleshooting"><span class="header-section-number">9.16</span> Troubleshooting</a>
+<a href="#sec-git-troubleshooting" id="toc-sec-git-troubleshooting" class="nav-link" data-scroll-target="#sec-git-troubleshooting"><span class="header-section-number">14.16</span> Troubleshooting</a>
   <ul class="collapse">
 <li><a href="#common-issues-and-solutions" id="toc-common-issues-and-solutions" class="nav-link" data-scroll-target="#common-issues-and-solutions">Common Issues and Solutions</a></li>
   <li><a href="#when-to-commit" id="toc-when-to-commit" class="nav-link" data-scroll-target="#when-to-commit">When to Commit?</a></li>
   </ul>
 </li>
-  <li><a href="#sec-git-commands" id="toc-sec-git-commands" class="nav-link" data-scroll-target="#sec-git-commands"><span class="header-section-number">9.17</span> Useful Commands Reference</a></li>
-  <li><a href="#sec-git-summary" id="toc-sec-git-summary" class="nav-link" data-scroll-target="#sec-git-summary"><span class="header-section-number">9.18</span> Summary</a></li>
+  <li><a href="#sec-git-commands" id="toc-sec-git-commands" class="nav-link" data-scroll-target="#sec-git-commands"><span class="header-section-number">14.17</span> Useful Commands Reference</a></li>
+  <li><a href="#sec-git-summary" id="toc-sec-git-summary" class="nav-link" data-scroll-target="#sec-git-summary"><span class="header-section-number">14.18</span> Summary</a></li>
   <li><a href="#additional-reading" id="toc-additional-reading" class="nav-link" data-scroll-target="#additional-reading">Additional Reading</a></li>
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/wcresko/BioE_Comp_Tools_Book/edit/main/chapters/10-git-github.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/wcresko/BioE_Comp_Tools_Book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title"><span id="sec-git-github" class="quarto-section-identifier"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Version Control with Git and GitHub</span></span></h1>
+<h1 class="title"><span id="sec-git-github" class="quarto-section-identifier"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Version Control with Git and GitHub</span></span></h1>
 </div>
 
 
@@ -588,8 +618,8 @@ Learning Objectives
 </ul>
 </div>
 </div>
-<section id="sec-why-version-control" class="level2" data-number="9.1"><h2 data-number="9.1" class="anchored" data-anchor-id="sec-why-version-control">
-<span class="header-section-number">9.1</span> Why Version Control?</h2>
+<section id="sec-why-version-control" class="level2" data-number="14.1"><h2 data-number="14.1" class="anchored" data-anchor-id="sec-why-version-control">
+<span class="header-section-number">14.1</span> Why Version Control?</h2>
 <p>Have you ever had files named like this?</p>
 <pre><code>analysis_final.R
 analysis_final_v2.R
@@ -601,10 +631,10 @@ analysis_final_v2_REALLY_FINAL_fixed.R</code></pre>
 <p><strong>Safe Experimentation.</strong> Try new approaches without fear. You can always return to a working version.</p>
 <p><strong>Collaboration.</strong> Multiple people can work on the same project without overwriting each other’s work.</p>
 <p><strong>Backup.</strong> Your code exists in multiple places, protecting against data loss.</p>
-<p><strong>Reproducibility.</strong> Tag specific versions for publications. Anyone can access exactly what you used <span class="citation" data-cites="blischak2016practical">(<a href="../references.html#ref-blischak2016practical" role="doc-biblioref">Blischak et al., 2016</a>)</span>.</p>
-</section><section id="sec-git-distributed" class="level2" data-number="9.2"><h2 data-number="9.2" class="anchored" data-anchor-id="sec-git-distributed">
-<span class="header-section-number">9.2</span> Git: Distributed Version Control</h2>
-<p><strong>Git</strong> is the most widely used version control system. Created by Linus Torvalds (who also created Linux), Git is:</p>
+<p><strong>Reproducibility.</strong> Tag specific versions for publications. Anyone can access exactly what you used <span class="citation" data-cites="blischak2016practical ram2013git">(<a href="../references.html#ref-blischak2016practical" role="doc-biblioref">Blischak et al., 2016</a>; <a href="../references.html#ref-ram2013git" role="doc-biblioref">Ram, 2013</a>)</span>.</p>
+</section><section id="sec-git-distributed" class="level2" data-number="14.2"><h2 data-number="14.2" class="anchored" data-anchor-id="sec-git-distributed">
+<span class="header-section-number">14.2</span> Git: Distributed Version Control</h2>
+<p><strong>Git</strong> is the most widely used version control system <span class="citation" data-cites="chacon2014pro">(<a href="../references.html#ref-chacon2014pro" role="doc-biblioref">Chacon &amp; Straub, 2014</a>)</span>. Created by Linus Torvalds (who also created Linux), Git is:</p>
 <ul>
 <li>
 <strong>Distributed</strong>: Every copy is a complete repository with full history</li>
@@ -638,7 +668,7 @@ analysis_final_v2_REALLY_FINAL_fixed.R</code></pre>
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-git-workflow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;9.1: The Git workflow: files move from working directory to staging area to repository
+Figure&nbsp;14.1: The Git workflow: files move from working directory to staging area to repository
 </figcaption></figure>
 </div>
 </div>
@@ -647,8 +677,8 @@ Figure&nbsp;9.1: The Git workflow: files move from working directory to staging 
 <p><strong>Staging Area (Index).</strong> A preparation area where you compose your next commit.</p>
 <p><strong>Local Repository.</strong> The <code>.git</code> directory containing all version history.</p>
 <p><strong>Remote Repository.</strong> A copy hosted elsewhere (like GitHub) for backup and collaboration.</p>
-</section></section><section id="sec-git-setup" class="level2" data-number="9.3"><h2 data-number="9.3" class="anchored" data-anchor-id="sec-git-setup">
-<span class="header-section-number">9.3</span> Setting Up Git</h2>
+</section></section><section id="sec-git-setup" class="level2" data-number="14.3"><h2 data-number="14.3" class="anchored" data-anchor-id="sec-git-setup">
+<span class="header-section-number">14.3</span> Setting Up Git</h2>
 <section id="installation" class="level3"><h3 class="anchored" data-anchor-id="installation">Installation</h3>
 <p>Check if Git is already installed:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1"></a><span class="ex">$</span> git <span class="at">--version</span></span>
@@ -687,8 +717,8 @@ Tip
 <p>The <code>--global</code> flag sets these options for all repositories on your computer. You can override them per-repository by omitting <code>--global</code> while inside a specific repo.</p>
 </div>
 </div>
-</section></section><section id="sec-creating-repo" class="level2" data-number="9.4"><h2 data-number="9.4" class="anchored" data-anchor-id="sec-creating-repo">
-<span class="header-section-number">9.4</span> Creating a Repository</h2>
+</section></section><section id="sec-creating-repo" class="level2" data-number="14.4"><h2 data-number="14.4" class="anchored" data-anchor-id="sec-creating-repo">
+<span class="header-section-number">14.4</span> Creating a Repository</h2>
 <section id="method-1-initialize-locally" class="level3"><h3 class="anchored" data-anchor-id="method-1-initialize-locally">Method 1: Initialize Locally</h3>
 <p>Create a new repository from an existing directory:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Navigate to your project directory</span></span>
@@ -706,8 +736,8 @@ Tip
 <span id="cb6-3"><a href="#cb6-3"></a></span>
 <span id="cb6-4"><a href="#cb6-4"></a><span class="co"># Clone into a specific directory</span></span>
 <span id="cb6-5"><a href="#cb6-5"></a><span class="ex">$</span> git clone https://github.com/username/repository.git my_local_name</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section></section><section id="sec-git-workflow" class="level2" data-number="9.5"><h2 data-number="9.5" class="anchored" data-anchor-id="sec-git-workflow">
-<span class="header-section-number">9.5</span> Basic Git Workflow</h2>
+</section></section><section id="sec-git-workflow" class="level2" data-number="14.5"><h2 data-number="14.5" class="anchored" data-anchor-id="sec-git-workflow">
+<span class="header-section-number">14.5</span> Basic Git Workflow</h2>
 <p>The daily rhythm of Git involves four main commands: <code>status</code>, <code>add</code>, <code>commit</code>, and <code>push</code>.</p>
 <section id="checking-status" class="level3"><h3 class="anchored" data-anchor-id="checking-status">Checking Status</h3>
 <p>Always start by checking your repository’s status:</p>
@@ -782,8 +812,8 @@ Write Good Commit Messages
 7d4e8c2 (HEAD -&gt; main) Add initial data analysis script
 3a1b2c3 Update README with project description
 9f8e7d6 Initial commit</code></pre>
-</section></section><section id="sec-github" class="level2" data-number="9.6"><h2 data-number="9.6" class="anchored" data-anchor-id="sec-github">
-<span class="header-section-number">9.6</span> Working with GitHub</h2>
+</section></section><section id="sec-github" class="level2" data-number="14.6"><h2 data-number="14.6" class="anchored" data-anchor-id="sec-github">
+<span class="header-section-number">14.6</span> Working with GitHub</h2>
 <p><strong>GitHub</strong> is a web-based platform for hosting Git repositories. It adds:</p>
 <ul>
 <li>Cloud backup for your code</li>
@@ -848,8 +878,8 @@ Warning
 <p>Always <code>pull</code> before starting work to get any changes from collaborators. Push frequently to back up your work.</p>
 </div>
 </div>
-</section></section><section id="sec-branching" class="level2" data-number="9.7"><h2 data-number="9.7" class="anchored" data-anchor-id="sec-branching">
-<span class="header-section-number">9.7</span> Branching</h2>
+</section></section><section id="sec-branching" class="level2" data-number="14.7"><h2 data-number="14.7" class="anchored" data-anchor-id="sec-branching">
+<span class="header-section-number">14.7</span> Branching</h2>
 <p><strong>Branches</strong> let you develop features in isolation without affecting the main codebase.</p>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
@@ -871,7 +901,7 @@ Warning
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-git-branching-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;9.2: Branching allows parallel development that can later be merged
+Figure&nbsp;14.2: Branching allows parallel development that can later be merged
 </figcaption></figure>
 </div>
 </div>
@@ -919,8 +949,8 @@ Figure&nbsp;9.2: Branching allows parallel development that can later be merged
 <li>Edit the file to keep the code you want</li>
 <li>Remove the conflict markers (<code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>, <code>=======</code>, <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>)</li>
 <li>Stage and commit the resolved file</li>
-</ol></section></section><section id="sec-pull-requests" class="level2" data-number="9.8"><h2 data-number="9.8" class="anchored" data-anchor-id="sec-pull-requests">
-<span class="header-section-number">9.8</span> Pull Requests</h2>
+</ol></section></section><section id="sec-pull-requests" class="level2" data-number="14.8"><h2 data-number="14.8" class="anchored" data-anchor-id="sec-pull-requests">
+<span class="header-section-number">14.8</span> Pull Requests</h2>
 <p><strong>Pull requests</strong> (PRs) are GitHub’s mechanism for proposing changes and requesting code review. They’re central to collaborative workflows and open-source contributions.</p>
 <section id="creating-a-pull-request" class="level3"><h3 class="anchored" data-anchor-id="creating-a-pull-request">Creating a Pull Request</h3>
 <p>After pushing a branch to GitHub:</p>
@@ -963,8 +993,8 @@ Tip
 <span id="cb19-3"><a href="#cb19-3"></a></span>
 <span id="cb19-4"><a href="#cb19-4"></a><span class="co"># Delete a remote branch (note the colon)</span></span>
 <span id="cb19-5"><a href="#cb19-5"></a><span class="ex">$</span> git push origin :old-branch</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section></section><section id="sec-forking" class="level2" data-number="9.9"><h2 data-number="9.9" class="anchored" data-anchor-id="sec-forking">
-<span class="header-section-number">9.9</span> Forking</h2>
+</section></section><section id="sec-forking" class="level2" data-number="14.9"><h2 data-number="14.9" class="anchored" data-anchor-id="sec-forking">
+<span class="header-section-number">14.9</span> Forking</h2>
 <p><strong>Forking</strong> creates your own copy of someone else’s repository under your GitHub account. It’s different from cloning:</p>
 <ul>
 <li>
@@ -998,8 +1028,8 @@ Note
 <p>Keeping a fork synchronized with the original (“upstream”) repository requires additional steps. See GitHub’s guide on <a href="https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork">Syncing a fork</a>.</p>
 </div>
 </div>
-</section></section><section id="sec-gitignore" class="level2" data-number="9.10"><h2 data-number="9.10" class="anchored" data-anchor-id="sec-gitignore">
-<span class="header-section-number">9.10</span> The .gitignore File</h2>
+</section></section><section id="sec-gitignore" class="level2" data-number="14.10"><h2 data-number="14.10" class="anchored" data-anchor-id="sec-gitignore">
+<span class="header-section-number">14.10</span> The .gitignore File</h2>
 <p>Not everything should be tracked. The <code>.gitignore</code> file specifies intentionally untracked files:</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1"></a><span class="co"># Create .gitignore</span></span>
 <span id="cb20-2"><a href="#cb20-2"></a><span class="ex">$</span> touch .gitignore</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1046,8 +1076,8 @@ Warning
 <p>Add <code>.gitignore</code> early! Once files are tracked, adding them to <code>.gitignore</code> won’t untrack them.</p>
 </div>
 </div>
-</section><section id="sec-github-pages" class="level2" data-number="9.11"><h2 data-number="9.11" class="anchored" data-anchor-id="sec-github-pages">
-<span class="header-section-number">9.11</span> GitHub Pages: Free Website Hosting</h2>
+</section><section id="sec-github-pages" class="level2" data-number="14.11"><h2 data-number="14.11" class="anchored" data-anchor-id="sec-github-pages">
+<span class="header-section-number">14.11</span> GitHub Pages: Free Website Hosting</h2>
 <p>GitHub Pages turns your repository into a website—perfect for project documentation, lab websites, or personal portfolios.</p>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
@@ -1066,7 +1096,7 @@ Warning
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-github-pages-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;9.3: GitHub Pages workflow: from Quarto documents to live website
+Figure&nbsp;14.3: GitHub Pages workflow: from Quarto documents to live website
 </figcaption></figure>
 </div>
 </div>
@@ -1098,8 +1128,8 @@ Figure&nbsp;9.3: GitHub Pages workflow: from Quarto documents to live website
 <span id="cb23-7"><a href="#cb23-7"></a></span>
 <span id="cb23-8"><a href="#cb23-8"></a><span class="co"># Push to GitHub</span></span>
 <span id="cb23-9"><a href="#cb23-9"></a><span class="ex">$</span> git push</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section></section><section id="sec-git-best-practices" class="level2" data-number="9.12"><h2 data-number="9.12" class="anchored" data-anchor-id="sec-git-best-practices">
-<span class="header-section-number">9.12</span> Best Practices</h2>
+</section></section><section id="sec-git-best-practices" class="level2" data-number="14.12"><h2 data-number="14.12" class="anchored" data-anchor-id="sec-git-best-practices">
+<span class="header-section-number">14.12</span> Best Practices</h2>
 <section id="repository-organization" class="level3"><h3 class="anchored" data-anchor-id="repository-organization">Repository Organization</h3>
 <pre><code>project/
 ├── README.md          # Project description (always include!)
@@ -1131,8 +1161,8 @@ Figure&nbsp;9.3: GitHub Pages workflow: from Quarto documents to live website
 <strong>Push</strong> your branch to GitHub</li>
 <li>Create a <strong>Pull Request</strong> for review</li>
 <li>After approval, <strong>merge</strong> to main</li>
-</ol></section></section><section id="sec-git-auth" class="level2" data-number="9.13"><h2 data-number="9.13" class="anchored" data-anchor-id="sec-git-auth">
-<span class="header-section-number">9.13</span> Authentication: HTTPS vs SSH</h2>
+</ol></section></section><section id="sec-git-auth" class="level2" data-number="14.13"><h2 data-number="14.13" class="anchored" data-anchor-id="sec-git-auth">
+<span class="header-section-number">14.13</span> Authentication: HTTPS vs SSH</h2>
 <p>Git can authenticate with GitHub using either HTTPS or SSH:</p>
 <p><strong>HTTPS (easier to start).</strong> Uses your GitHub username and a personal access token. Credentials can be cached so you don’t enter them repeatedly.</p>
 <p><strong>SSH (recommended for regular use).</strong> Uses cryptographic keys stored on your computer. More secure and convenient once set up.</p>
@@ -1147,8 +1177,8 @@ Figure&nbsp;9.3: GitHub Pages workflow: from Quarto documents to live website
 <span id="cb25-6"><a href="#cb25-6"></a></span>
 <span id="cb25-7"><a href="#cb25-7"></a><span class="co"># On Windows, use the credential manager</span></span>
 <span id="cb25-8"><a href="#cb25-8"></a><span class="ex">$</span> git config <span class="at">--global</span> credential.helper manager</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section></section><section id="sec-line-endings" class="level2" data-number="9.14"><h2 data-number="9.14" class="anchored" data-anchor-id="sec-line-endings">
-<span class="header-section-number">9.14</span> Line Endings Across Operating Systems</h2>
+</section></section><section id="sec-line-endings" class="level2" data-number="14.14"><h2 data-number="14.14" class="anchored" data-anchor-id="sec-line-endings">
+<span class="header-section-number">14.14</span> Line Endings Across Operating Systems</h2>
 <p>Different operating systems use different characters to mark line endings:</p>
 <ul>
 <li>
@@ -1164,8 +1194,8 @@ Figure&nbsp;9.3: GitHub Pages workflow: from Quarto documents to live website
 <span id="cb26-3"><a href="#cb26-3"></a></span>
 <span id="cb26-4"><a href="#cb26-4"></a><span class="co"># On Windows</span></span>
 <span id="cb26-5"><a href="#cb26-5"></a><span class="ex">$</span> git config <span class="at">--global</span> core.autocrlf true</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section></section><section id="sec-git-stash" class="level2" data-number="9.15"><h2 data-number="9.15" class="anchored" data-anchor-id="sec-git-stash">
-<span class="header-section-number">9.15</span> Temporarily Saving Changes: Git Stash</h2>
+</section></section><section id="sec-git-stash" class="level2" data-number="14.15"><h2 data-number="14.15" class="anchored" data-anchor-id="sec-git-stash">
+<span class="header-section-number">14.15</span> Temporarily Saving Changes: Git Stash</h2>
 <p>Sometimes you need to switch branches but aren’t ready to commit your current changes. <code>git stash</code> temporarily saves your work:</p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1"></a><span class="co"># Stash current changes</span></span>
 <span id="cb27-2"><a href="#cb27-2"></a><span class="ex">$</span> git stash</span>
@@ -1182,8 +1212,8 @@ Figure&nbsp;9.3: GitHub Pages workflow: from Quarto documents to live website
 <span id="cb27-13"><a href="#cb27-13"></a><span class="co"># Delete a stash</span></span>
 <span id="cb27-14"><a href="#cb27-14"></a><span class="ex">$</span> git stash drop stash@{0}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This is useful when you need to quickly switch context—perhaps to fix an urgent bug on another branch—without committing incomplete work.</p>
-</section><section id="sec-git-troubleshooting" class="level2" data-number="9.16"><h2 data-number="9.16" class="anchored" data-anchor-id="sec-git-troubleshooting">
-<span class="header-section-number">9.16</span> Troubleshooting</h2>
+</section><section id="sec-git-troubleshooting" class="level2" data-number="14.16"><h2 data-number="14.16" class="anchored" data-anchor-id="sec-git-troubleshooting">
+<span class="header-section-number">14.16</span> Troubleshooting</h2>
 <section id="common-issues-and-solutions" class="level3"><h3 class="anchored" data-anchor-id="common-issues-and-solutions">Common Issues and Solutions</h3>
 <p><strong>Q: I made changes to the wrong branch!</strong></p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1"></a><span class="co"># Stash your changes</span></span>
@@ -1227,11 +1257,11 @@ Tip
 <li>Commit before trying something experimental</li>
 <li>Commit at the end of each work session</li>
 <li>If you’re asking “should I commit?” — the answer is usually yes</li>
-</ul></section></section><section id="sec-git-commands" class="level2" data-number="9.17"><h2 data-number="9.17" class="anchored" data-anchor-id="sec-git-commands">
-<span class="header-section-number">9.17</span> Useful Commands Reference</h2>
+</ul></section></section><section id="sec-git-commands" class="level2" data-number="14.17"><h2 data-number="14.17" class="anchored" data-anchor-id="sec-git-commands">
+<span class="header-section-number">14.17</span> Useful Commands Reference</h2>
 <div id="tbl-git-commands" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-git-commands-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;9.1: Essential Git commands
+Table&nbsp;14.1: Essential Git commands
 </figcaption><div aria-describedby="tbl-git-commands-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <thead><tr class="header">
@@ -1296,8 +1326,9 @@ Table&nbsp;9.1: Essential Git commands
 </div>
 </figure>
 </div>
-</section><section id="sec-git-summary" class="level2" data-number="9.18"><h2 data-number="9.18" class="anchored" data-anchor-id="sec-git-summary">
-<span class="header-section-number">9.18</span> Summary</h2>
+<p>For a comprehensive reference of Git commands and workflows, see <a href="appendix-git.html" class="quarto-xref"><span>Appendix B</span></a>.</p>
+</section><section id="sec-git-summary" class="level2" data-number="14.18"><h2 data-number="14.18" class="anchored" data-anchor-id="sec-git-summary">
+<span class="header-section-number">14.18</span> Summary</h2>
 <p>Version control with Git and GitHub is essential for modern research:</p>
 <ul>
 <li>Git tracks all changes to your files with complete history</li>
@@ -1307,6 +1338,19 @@ Table&nbsp;9.1: Essential Git commands
 <li>Good practices include meaningful commits, .gitignore, and regular pushing</li>
 </ul>
 <p>Learning Git has a steep initial curve, but the investment pays dividends throughout your career. Start simple, use it consistently, and gradually adopt more advanced features.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For a complete reference of Git commands with detailed syntax and workflows, see <a href="appendix-git.html" class="quarto-xref"><span>Appendix B</span></a>.</p>
+</div>
+</div>
 </section><section id="additional-reading" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="additional-reading">Additional Reading</h2>
 <ul>
 <li>
@@ -1317,7 +1361,7 @@ Table&nbsp;9.1: Essential Git commands
 <li>
 <a href="https://docs.github.com">GitHub Documentation</a> — Official guides</li>
 <li>
-<a href="https://swcarpentry.github.io/git-novice/">Software Carpentry Git Lesson</a> — Beginner-friendly tutorial</li>
+<a href="https://swcarpentry.github.io/git-novice/">Software Carpentry Git Lesson</a> <span class="citation" data-cites="softwarecarpentry2024git">(<a href="../references.html#ref-softwarecarpentry2024git" role="doc-biblioref">Software Carpentry, 2024</a>)</span> — Beginner-friendly tutorial</li>
 <li>
 <a href="https://ohshitgit.com/">Oh Shit, Git!?!</a> — Solutions for common Git mistakes</li>
 <li>
@@ -1371,10 +1415,16 @@ Practice Exercises
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
 <div id="ref-blischak2016practical" class="csl-entry" role="listitem">
-Blischak, J. D., Davenport, E. R., &amp; Wilson, G. (2016). <em><a href="https://doi.org/10.1371/journal.pcbi.1004668">A quick introduction to version control with git and GitHub</a></em>.
+Blischak, J. D., Davenport, E. R., &amp; Wilson, G. (2016). <a href="https://doi.org/10.1371/journal.pcbi.1004668">A quick introduction to version control with git and GitHub</a>.
 </div>
 <div id="ref-chacon2014pro" class="csl-entry" role="listitem">
 Chacon, S., &amp; Straub, B. (2014). <em><a href="https://git-scm.com/book/en/v2">Pro git</a></em>.
+</div>
+<div id="ref-ram2013git" class="csl-entry" role="listitem">
+Ram, K. (2013). <a href="https://doi.org/10.1186/1751-0473-8-7">Git can facilitate greater reproducibility and increased transparency in science</a>.
+</div>
+<div id="ref-softwarecarpentry2024git" class="csl-entry" role="listitem">
+Software Carpentry (2024). <a href="https://swcarpentry.github.io/git-novice/">Version control with git</a>.
 </div>
 </div>
 </section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
@@ -1835,13 +1885,13 @@ Chacon, S., &amp; Straub, B. (2014). <em><a href="https://git-scm.com/book/en/v2
     }
   });
   </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="../chapters/08-tidy-data.html" class="pagination-link" aria-label="Tidy Data Principles">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Tidy Data Principles</span></span>
+      <a href="../chapters/12-quarto-documents.html" class="pagination-link" aria-label="Reproducible Documents with Quarto">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Reproducible Documents with Quarto</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../chapters/09-data-visualization.html" class="pagination-link" aria-label="Data Visualization with ggplot2">
-        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Data Visualization with ggplot2</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../chapters/11-hpc-talapas.html" class="pagination-link" aria-label="High-Performance Computing with Talapas">
+        <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">High-Performance Computing with Talapas</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
