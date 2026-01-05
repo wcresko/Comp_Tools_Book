@@ -1283,9 +1283,12 @@ head(iris)
 # Mean of all numeric columns by Species
 aggregate(. ~ Species, data = iris, FUN = mean)
 
-# Multiple statistics
-aggregate(Sepal.Length ~ Species, data = iris,
-          FUN = function(x) c(mean = mean(x), sd = sd(x)))
+# Multiple statistics (result contains a matrix column)
+agg_result <- aggregate(Sepal.Length ~ Species, data = iris,
+                        FUN = function(x) c(mean = mean(x), sd = sd(x)))
+
+# Convert to a regular data frame for display
+do.call(data.frame, agg_result)
 ```
 
 ### The `apply()` Family
