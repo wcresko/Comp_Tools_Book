@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.7.30">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
 <meta name="description" content="A comprehensive guide to essential computational tools for graduate students in bioengineering and life sciences, covering Unix/Linux, R programming, version control with Git/GitHub, and high-performance computing.">
-
 <title>2&nbsp; Computer Systems Architecture – Foundational Computational Tools for Bioengineers</title>
 <style>
 code{white-space: pre-wrap;}
@@ -58,7 +55,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 
-
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
@@ -81,8 +77,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap-0dd4bede59fce912683c1f38b3836bca.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/bootstrap/bootstrap-dark-eb3cfb2dc3b1d18999aa5075de07535d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-0dd4bede59fce912683c1f38b3836bca.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
+<link href="../site_libs/bootstrap/bootstrap-0dd4bede59fce912683c1f38b3836bca.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -108,14 +103,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script>
-<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
-<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
-<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
-
-
+}</script><script src="../site_libs/quarto-diagram/mermaid.min.js"></script><script src="../site_libs/quarto-diagram/mermaid-init.js"></script><link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 </head>
-
 <body class="nav-sidebar docked quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
@@ -281,9 +270,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </script>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
@@ -294,16 +281,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="../index.html" class="sidebar-logo-link">
-      <img src="../images/uo_logo.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
-      </a>
+      <img src="../images/uo_logo.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none"></a>
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Foundational Computational Tools for Bioengineers</a> 
         <div class="sidebar-tools-main">
@@ -319,7 +301,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
@@ -375,14 +357,44 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/09-git-github.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Version Control with Git and GitHub</span></span></a>
+  <a href="../chapters/09-data-visualization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Data Visualization with ggplot2</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/10-hpc-talapas.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">High-Performance Computing with Talapas</span></span></a>
+  <a href="../chapters/10-git-github.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Version Control with Git and GitHub</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/11-hpc-talapas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">High-Performance Computing with Talapas</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/12-quarto-documents.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Reproducible Documents with Quarto</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/13-writing-functions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Writing Functions in R</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/14-parallel-computing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Parallel Computing in R</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/15-databases.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Working with Databases</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -399,67 +411,71 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/appendix-commands.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Command Reference</span></span></a>
   </div>
 </li>
       </ul>
-  </li>
+</li>
     </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#what-is-a-computer-system" id="toc-what-is-a-computer-system" class="nav-link active" data-scroll-target="#what-is-a-computer-system"><span class="header-section-number">2.1</span> What Is a Computer System?</a></li>
-  <li><a href="#the-fetch-decode-execute-cycle" id="toc-the-fetch-decode-execute-cycle" class="nav-link" data-scroll-target="#the-fetch-decode-execute-cycle"><span class="header-section-number">2.2</span> The Fetch-Decode-Execute Cycle</a></li>
-  <li><a href="#the-central-processing-unit-cpu" id="toc-the-central-processing-unit-cpu" class="nav-link" data-scroll-target="#the-central-processing-unit-cpu"><span class="header-section-number">2.3</span> The Central Processing Unit (CPU)</a>
+<li><a href="#sec-what-is-computer" id="toc-sec-what-is-computer" class="nav-link active" data-scroll-target="#sec-what-is-computer"><span class="header-section-number">2.1</span> What Is a Computer System?</a></li>
+  <li><a href="#sec-fetch-decode-execute" id="toc-sec-fetch-decode-execute" class="nav-link" data-scroll-target="#sec-fetch-decode-execute"><span class="header-section-number">2.2</span> The Fetch-Decode-Execute Cycle</a></li>
+  <li>
+<a href="#sec-cpu" id="toc-sec-cpu" class="nav-link" data-scroll-target="#sec-cpu"><span class="header-section-number">2.3</span> The Central Processing Unit (CPU)</a>
   <ul class="collapse">
-  <li><a href="#cpu-components" id="toc-cpu-components" class="nav-link" data-scroll-target="#cpu-components"><span class="header-section-number">2.3.1</span> CPU Components</a></li>
+<li><a href="#cpu-components" id="toc-cpu-components" class="nav-link" data-scroll-target="#cpu-components"><span class="header-section-number">2.3.1</span> CPU Components</a></li>
   <li><a href="#key-cpu-concepts" id="toc-key-cpu-concepts" class="nav-link" data-scroll-target="#key-cpu-concepts"><span class="header-section-number">2.3.2</span> Key CPU Concepts</a></li>
-  </ul></li>
-  <li><a href="#graphics-processing-units-gpus" id="toc-graphics-processing-units-gpus" class="nav-link" data-scroll-target="#graphics-processing-units-gpus"><span class="header-section-number">2.4</span> Graphics Processing Units (GPUs)</a>
+  </ul>
+</li>
+  <li>
+<a href="#sec-gpus" id="toc-sec-gpus" class="nav-link" data-scroll-target="#sec-gpus"><span class="header-section-number">2.4</span> Graphics Processing Units (GPUs)</a>
   <ul class="collapse">
-  <li><a href="#gpu-architecture" id="toc-gpu-architecture" class="nav-link" data-scroll-target="#gpu-architecture"><span class="header-section-number">2.4.1</span> GPU Architecture</a></li>
+<li><a href="#gpu-architecture" id="toc-gpu-architecture" class="nav-link" data-scroll-target="#gpu-architecture"><span class="header-section-number">2.4.1</span> GPU Architecture</a></li>
   <li><a href="#cpu-vs.-gpu-when-to-use-each" id="toc-cpu-vs.-gpu-when-to-use-each" class="nav-link" data-scroll-target="#cpu-vs.-gpu-when-to-use-each"><span class="header-section-number">2.4.2</span> CPU vs.&nbsp;GPU: When to Use Each</a></li>
-  </ul></li>
-  <li><a href="#types-of-computer-memory" id="toc-types-of-computer-memory" class="nav-link" data-scroll-target="#types-of-computer-memory"><span class="header-section-number">2.5</span> Types of Computer Memory</a>
+  </ul>
+</li>
+  <li>
+<a href="#sec-memory-types" id="toc-sec-memory-types" class="nav-link" data-scroll-target="#sec-memory-types"><span class="header-section-number">2.5</span> Types of Computer Memory</a>
   <ul class="collapse">
-  <li><a href="#random-access-memory-ram" id="toc-random-access-memory-ram" class="nav-link" data-scroll-target="#random-access-memory-ram"><span class="header-section-number">2.5.1</span> Random Access Memory (RAM)</a></li>
+<li><a href="#random-access-memory-ram" id="toc-random-access-memory-ram" class="nav-link" data-scroll-target="#random-access-memory-ram"><span class="header-section-number">2.5.1</span> Random Access Memory (RAM)</a></li>
   <li><a href="#persistent-storage" id="toc-persistent-storage" class="nav-link" data-scroll-target="#persistent-storage"><span class="header-section-number">2.5.2</span> Persistent Storage</a></li>
   <li><a href="#the-memory-hierarchy" id="toc-the-memory-hierarchy" class="nav-link" data-scroll-target="#the-memory-hierarchy"><span class="header-section-number">2.5.3</span> The Memory Hierarchy</a></li>
-  </ul></li>
-  <li><a href="#operating-systems" id="toc-operating-systems" class="nav-link" data-scroll-target="#operating-systems"><span class="header-section-number">2.6</span> Operating Systems</a>
+  </ul>
+</li>
+  <li>
+<a href="#sec-operating-systems" id="toc-sec-operating-systems" class="nav-link" data-scroll-target="#sec-operating-systems"><span class="header-section-number">2.6</span> Operating Systems</a>
   <ul class="collapse">
-  <li><a href="#core-functions" id="toc-core-functions" class="nav-link" data-scroll-target="#core-functions"><span class="header-section-number">2.6.1</span> Core Functions</a></li>
+<li><a href="#core-functions" id="toc-core-functions" class="nav-link" data-scroll-target="#core-functions"><span class="header-section-number">2.6.1</span> Core Functions</a></li>
   <li><a href="#common-operating-systems" id="toc-common-operating-systems" class="nav-link" data-scroll-target="#common-operating-systems"><span class="header-section-number">2.6.2</span> Common Operating Systems</a></li>
-  </ul></li>
-  <li><a href="#computing-environments" id="toc-computing-environments" class="nav-link" data-scroll-target="#computing-environments"><span class="header-section-number">2.7</span> Computing Environments</a>
+  </ul>
+</li>
+  <li>
+<a href="#sec-computing-environments" id="toc-sec-computing-environments" class="nav-link" data-scroll-target="#sec-computing-environments"><span class="header-section-number">2.7</span> Computing Environments</a>
   <ul class="collapse">
-  <li><a href="#local-computing" id="toc-local-computing" class="nav-link" data-scroll-target="#local-computing"><span class="header-section-number">2.7.1</span> Local Computing</a></li>
+<li><a href="#local-computing" id="toc-local-computing" class="nav-link" data-scroll-target="#local-computing"><span class="header-section-number">2.7.1</span> Local Computing</a></li>
   <li><a href="#cluster-computing" id="toc-cluster-computing" class="nav-link" data-scroll-target="#cluster-computing"><span class="header-section-number">2.7.2</span> Cluster Computing</a></li>
   <li><a href="#cloud-computing" id="toc-cloud-computing" class="nav-link" data-scroll-target="#cloud-computing"><span class="header-section-number">2.7.3</span> Cloud Computing</a></li>
   <li><a href="#choosing-the-right-environment" id="toc-choosing-the-right-environment" class="nav-link" data-scroll-target="#choosing-the-right-environment"><span class="header-section-number">2.7.4</span> Choosing the Right Environment</a></li>
-  </ul></li>
-  <li><a href="#the-evolution-of-scientific-computing" id="toc-the-evolution-of-scientific-computing" class="nav-link" data-scroll-target="#the-evolution-of-scientific-computing"><span class="header-section-number">2.8</span> The Evolution of Scientific Computing</a></li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">2.9</span> Summary</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/wcresko/BioE_Comp_Tools_Book/edit/main/chapters/02-computer-systems.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/wcresko/BioE_Comp_Tools_Book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+</li>
+  <li><a href="#sec-computing-evolution" id="toc-sec-computing-evolution" class="nav-link" data-scroll-target="#sec-computing-evolution"><span class="header-section-number">2.8</span> The Evolution of Scientific Computing</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">2.9</span> Summary</a></li>
+  <li><a href="#additional-reading" id="toc-additional-reading" class="nav-link" data-scroll-target="#additional-reading">Additional Reading</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/wcresko/BioE_Comp_Tools_Book/edit/main/chapters/02-computer-systems.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/wcresko/BioE_Comp_Tools_Book/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
 <h1 class="title"><span id="sec-computer-systems" class="quarto-section-identifier"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Computer Systems Architecture</span></span></h1>
 </div>
 
@@ -474,10 +490,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   
 
 
-</header>
-
-
-<div class="callout callout-style-default callout-note callout-titled" title="Learning Objectives">
+</header><div class="callout callout-style-default callout-note callout-titled" title="Learning Objectives">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -499,8 +512,8 @@ Learning Objectives
 </div>
 </div>
 <p>Understanding how computers work at a fundamental level will help you make better decisions about computational resources, write more efficient code, and troubleshoot problems effectively. This chapter provides the conceptual foundation for everything that follows.</p>
-<section id="what-is-a-computer-system" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="what-is-a-computer-system"><span class="header-section-number">2.1</span> What Is a Computer System?</h2>
+<section id="sec-what-is-computer" class="level2" data-number="2.1"><h2 data-number="2.1" class="anchored" data-anchor-id="sec-what-is-computer">
+<span class="header-section-number">2.1</span> What Is a Computer System?</h2>
 <p>A computer system consists of four major components working together:</p>
 <dl>
 <dt><strong>Hardware</strong></dt>
@@ -530,8 +543,7 @@ The information being processed, stored, and transmitted by the system.
 <span id="cb1-7"><a href="#cb1-7"></a>    C --&gt; E</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-computer-components" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-computer-components-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-computer-components-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div>
 <pre class="mermaid mermaid-js" data-label="fig-computer-components">graph TD
     A[Input Devices] --&gt; B[CPU]
@@ -545,15 +557,13 @@ The information being processed, stored, and transmitted by the system.
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-computer-components-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;2.1: Basic computer system architecture showing the flow of data between components
-</figcaption>
-</figure>
+</figcaption></figure>
 </div>
 </div>
 </div>
 <p>At the heart of every computation is the <strong>fetch-decode-execute cycle</strong>, which the CPU performs billions of times per second.</p>
-</section>
-<section id="the-fetch-decode-execute-cycle" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="the-fetch-decode-execute-cycle"><span class="header-section-number">2.2</span> The Fetch-Decode-Execute Cycle</h2>
+</section><section id="sec-fetch-decode-execute" class="level2" data-number="2.2"><h2 data-number="2.2" class="anchored" data-anchor-id="sec-fetch-decode-execute">
+<span class="header-section-number">2.2</span> The Fetch-Decode-Execute Cycle</h2>
 <p>Every instruction your programs execute follows the same fundamental pattern:</p>
 <div class="cell" data-layout-align="default">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource default number-lines code-with-copy"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1"></a>graph LR</span>
@@ -563,8 +573,7 @@ Figure&nbsp;2.1: Basic computer system architecture showing the flow of data bet
 <span id="cb2-5"><a href="#cb2-5"></a>    D --&gt; A</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-fetch-decode-execute" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-fetch-decode-execute-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-fetch-decode-execute-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div>
 <pre class="mermaid mermaid-js" data-label="fig-fetch-decode-execute">graph LR
     A[Fetch Instruction] --&gt; B[Decode Instruction]
@@ -576,24 +585,26 @@ Figure&nbsp;2.1: Basic computer system architecture showing the flow of data bet
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fetch-decode-execute-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;2.2: The fundamental cycle underlying all computer operations
-</figcaption>
-</figure>
+</figcaption></figure>
 </div>
 </div>
 </div>
 <ol type="1">
-<li><strong>Fetch</strong>: The CPU retrieves the next instruction from memory</li>
-<li><strong>Decode</strong>: The CPU interprets what the instruction means</li>
-<li><strong>Execute</strong>: The CPU performs the specified operation</li>
-<li><strong>Store</strong>: Results are saved to memory or a register</li>
+<li>
+<strong>Fetch</strong>: The CPU retrieves the next instruction from memory</li>
+<li>
+<strong>Decode</strong>: The CPU interprets what the instruction means</li>
+<li>
+<strong>Execute</strong>: The CPU performs the specified operation</li>
+<li>
+<strong>Store</strong>: Results are saved to memory or a register</li>
 </ol>
 <p>This cycle repeats continuously, with modern processors executing billions of cycles per second. Understanding this cycle helps explain why some operations are fast (data already in registers) while others are slow (waiting for data from disk).</p>
-</section>
-<section id="the-central-processing-unit-cpu" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="the-central-processing-unit-cpu"><span class="header-section-number">2.3</span> The Central Processing Unit (CPU)</h2>
+</section><section id="sec-cpu" class="level2" data-number="2.3"><h2 data-number="2.3" class="anchored" data-anchor-id="sec-cpu">
+<span class="header-section-number">2.3</span> The Central Processing Unit (CPU)</h2>
 <p>The CPU is often called the “brain” of the computer, though this metaphor oversimplifies its function. The CPU is really a very fast calculator that follows instructions precisely.</p>
-<section id="cpu-components" class="level3" data-number="2.3.1">
-<h3 data-number="2.3.1" class="anchored" data-anchor-id="cpu-components"><span class="header-section-number">2.3.1</span> CPU Components</h3>
+<section id="cpu-components" class="level3" data-number="2.3.1"><h3 data-number="2.3.1" class="anchored" data-anchor-id="cpu-components">
+<span class="header-section-number">2.3.1</span> CPU Components</h3>
 <p>The CPU contains several critical components:</p>
 <dl>
 <dt><strong>Control Unit (CU)</strong></dt>
@@ -612,10 +623,8 @@ Ultra-fast temporary storage locations (typically 64 bits each) for data being a
 <dd>
 High-speed memory buffer that stores frequently accessed data to reduce trips to main memory.
 </dd>
-</dl>
-</section>
-<section id="key-cpu-concepts" class="level3" data-number="2.3.2">
-<h3 data-number="2.3.2" class="anchored" data-anchor-id="key-cpu-concepts"><span class="header-section-number">2.3.2</span> Key CPU Concepts</h3>
+</dl></section><section id="key-cpu-concepts" class="level3" data-number="2.3.2"><h3 data-number="2.3.2" class="anchored" data-anchor-id="key-cpu-concepts">
+<span class="header-section-number">2.3.2</span> Key CPU Concepts</h3>
 <p>Several metrics describe CPU performance:</p>
 <dl>
 <dt><strong>Clock Speed</strong></dt>
@@ -648,10 +657,8 @@ Note
 <p>More cores and higher clock speeds don’t always mean faster performance for your specific task. Many analyses are limited by memory access speed or storage I/O rather than raw CPU power.</p>
 </div>
 </div>
-</section>
-</section>
-<section id="graphics-processing-units-gpus" class="level2" data-number="2.4">
-<h2 data-number="2.4" class="anchored" data-anchor-id="graphics-processing-units-gpus"><span class="header-section-number">2.4</span> Graphics Processing Units (GPUs)</h2>
+</section></section><section id="sec-gpus" class="level2" data-number="2.4"><h2 data-number="2.4" class="anchored" data-anchor-id="sec-gpus">
+<span class="header-section-number">2.4</span> Graphics Processing Units (GPUs)</h2>
 <p>While CPUs are designed for complex sequential tasks, <strong>GPUs</strong> excel at simple parallel operations. Originally designed for rendering graphics (where millions of pixels need similar calculations), GPUs have become essential for:</p>
 <ul>
 <li>Machine learning and deep neural networks</li>
@@ -659,8 +666,8 @@ Note
 <li>Cryptocurrency mining</li>
 <li>Image and video processing</li>
 </ul>
-<section id="gpu-architecture" class="level3" data-number="2.4.1">
-<h3 data-number="2.4.1" class="anchored" data-anchor-id="gpu-architecture"><span class="header-section-number">2.4.1</span> GPU Architecture</h3>
+<section id="gpu-architecture" class="level3" data-number="2.4.1"><h3 data-number="2.4.1" class="anchored" data-anchor-id="gpu-architecture">
+<span class="header-section-number">2.4.1</span> GPU Architecture</h3>
 <p>GPUs differ fundamentally from CPUs:</p>
 <dl>
 <dt><strong>Streaming Multiprocessors (SMs)</strong></dt>
@@ -675,29 +682,23 @@ Thousands of simple processing units optimized for parallel computation.
 <dd>
 Dedicated high-bandwidth memory separate from system RAM.
 </dd>
-</dl>
-</section>
-<section id="cpu-vs.-gpu-when-to-use-each" class="level3" data-number="2.4.2">
-<h3 data-number="2.4.2" class="anchored" data-anchor-id="cpu-vs.-gpu-when-to-use-each"><span class="header-section-number">2.4.2</span> CPU vs.&nbsp;GPU: When to Use Each</h3>
+</dl></section><section id="cpu-vs.-gpu-when-to-use-each" class="level3" data-number="2.4.2"><h3 data-number="2.4.2" class="anchored" data-anchor-id="cpu-vs.-gpu-when-to-use-each">
+<span class="header-section-number">2.4.2</span> CPU vs.&nbsp;GPU: When to Use Each</h3>
 <div id="tbl-cpu-gpu" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-cpu-gpu-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-cpu-gpu-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Table&nbsp;2.1: Comparison of CPU and GPU characteristics
-</figcaption>
-<div aria-describedby="tbl-cpu-gpu-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+</figcaption><div aria-describedby="tbl-cpu-gpu-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <colgroup>
 <col style="width: 61%">
 <col style="width: 19%">
 <col style="width: 19%">
 </colgroup>
-<thead>
-<tr class="header">
+<thead><tr class="header">
 <th style="text-align: left;">Characteristic</th>
 <th style="text-align: left;">CPU</th>
 <th style="text-align: left;">GPU</th>
-</tr>
-</thead>
+</tr></thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Design Focus</td>
@@ -737,13 +738,11 @@ Tip
 <p>If your computation involves applying the same operation to millions of data points (like image processing or matrix multiplication), GPUs can provide dramatic speedups. If your computation requires complex branching logic and sequential dependencies, CPUs are more appropriate.</p>
 </div>
 </div>
-</section>
-</section>
-<section id="types-of-computer-memory" class="level2" data-number="2.5">
-<h2 data-number="2.5" class="anchored" data-anchor-id="types-of-computer-memory"><span class="header-section-number">2.5</span> Types of Computer Memory</h2>
+</section></section><section id="sec-memory-types" class="level2" data-number="2.5"><h2 data-number="2.5" class="anchored" data-anchor-id="sec-memory-types">
+<span class="header-section-number">2.5</span> Types of Computer Memory</h2>
 <p>Understanding the memory hierarchy helps explain performance characteristics of different operations.</p>
-<section id="random-access-memory-ram" class="level3" data-number="2.5.1">
-<h3 data-number="2.5.1" class="anchored" data-anchor-id="random-access-memory-ram"><span class="header-section-number">2.5.1</span> Random Access Memory (RAM)</h3>
+<section id="random-access-memory-ram" class="level3" data-number="2.5.1"><h3 data-number="2.5.1" class="anchored" data-anchor-id="random-access-memory-ram">
+<span class="header-section-number">2.5.1</span> Random Access Memory (RAM)</h3>
 <p>RAM provides temporary working space for programs and data currently in use. Key characteristics:</p>
 <dl>
 <dt><strong>Volatile</strong></dt>
@@ -757,15 +756,16 @@ Any memory location can be accessed with equal speed (unlike sequential access).
 <dt><strong>Types</strong></dt>
 <dd>
 <ul>
-<li><strong>DRAM (Dynamic RAM)</strong>: Main system memory, requires constant refresh</li>
-<li><strong>SRAM (Static RAM)</strong>: Used in CPU caches, faster but more expensive</li>
+<li>
+<strong>DRAM (Dynamic RAM)</strong>: Main system memory, requires constant refresh</li>
+<li>
+<strong>SRAM (Static RAM)</strong>: Used in CPU caches, faster but more expensive</li>
 </ul>
 </dd>
 </dl>
 <p>Modern systems typically have 8-64 GB of RAM, though scientific workstations and servers may have much more.</p>
-</section>
-<section id="persistent-storage" class="level3" data-number="2.5.2">
-<h3 data-number="2.5.2" class="anchored" data-anchor-id="persistent-storage"><span class="header-section-number">2.5.2</span> Persistent Storage</h3>
+</section><section id="persistent-storage" class="level3" data-number="2.5.2"><h3 data-number="2.5.2" class="anchored" data-anchor-id="persistent-storage">
+<span class="header-section-number">2.5.2</span> Persistent Storage</h3>
 <p>Unlike RAM, storage devices retain data without power:</p>
 <p><strong>Hard Disk Drives (HDDs)</strong></p>
 <ul>
@@ -794,31 +794,26 @@ Important
 <p>The memory hierarchy creates significant performance differences. Data in CPU registers can be accessed in nanoseconds, data in RAM in tens of nanoseconds, but data on disk takes milliseconds—a difference of six orders of magnitude!</p>
 </div>
 </div>
-</section>
-<section id="the-memory-hierarchy" class="level3" data-number="2.5.3">
-<h3 data-number="2.5.3" class="anchored" data-anchor-id="the-memory-hierarchy"><span class="header-section-number">2.5.3</span> The Memory Hierarchy</h3>
-<p><a href="#fig-memory-hierarchy" class="quarto-xref">Figure&nbsp;<span>2.3</span></a> illustrates the tradeoffs between speed, capacity, and cost:</p>
+</section><section id="the-memory-hierarchy" class="level3" data-number="2.5.3"><h3 data-number="2.5.3" class="anchored" data-anchor-id="the-memory-hierarchy">
+<span class="header-section-number">2.5.3</span> The Memory Hierarchy</h3>
+<p><a href="#fig-memory-hierarchy" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-memory-hierarchy</span></a> illustrates the tradeoffs between speed, capacity, and cost:</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div id="fig-memory-hierarchy" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-memory-hierarchy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-memory-hierarchy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="02-computer-systems_files/figure-html/fig-memory-hierarchy-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-memory-hierarchy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;2.3: The memory hierarchy: faster storage is smaller and more expensive
-</figcaption>
-</figure>
+</figcaption></figure>
 </div>
 </div>
 </div>
-</section>
-</section>
-<section id="operating-systems" class="level2" data-number="2.6">
-<h2 data-number="2.6" class="anchored" data-anchor-id="operating-systems"><span class="header-section-number">2.6</span> Operating Systems</h2>
+</section></section><section id="sec-operating-systems" class="level2" data-number="2.6"><h2 data-number="2.6" class="anchored" data-anchor-id="sec-operating-systems">
+<span class="header-section-number">2.6</span> Operating Systems</h2>
 <p>An <strong>operating system (OS)</strong> is the software layer that manages hardware resources and provides services to applications. Think of it as a translator between your programs and the physical computer.</p>
-<section id="core-functions" class="level3" data-number="2.6.1">
-<h3 data-number="2.6.1" class="anchored" data-anchor-id="core-functions"><span class="header-section-number">2.6.1</span> Core Functions</h3>
+<section id="core-functions" class="level3" data-number="2.6.1"><h3 data-number="2.6.1" class="anchored" data-anchor-id="core-functions">
+<span class="header-section-number">2.6.1</span> Core Functions</h3>
 <p>Operating systems handle:</p>
 <dl>
 <dt><strong>Process Management</strong></dt>
@@ -841,10 +836,8 @@ Providing standardized interfaces to diverse hardware through device drivers.
 <dd>
 User authentication, access control, protection against malicious software.
 </dd>
-</dl>
-</section>
-<section id="common-operating-systems" class="level3" data-number="2.6.2">
-<h3 data-number="2.6.2" class="anchored" data-anchor-id="common-operating-systems"><span class="header-section-number">2.6.2</span> Common Operating Systems</h3>
+</dl></section><section id="common-operating-systems" class="level3" data-number="2.6.2"><h3 data-number="2.6.2" class="anchored" data-anchor-id="common-operating-systems">
+<span class="header-section-number">2.6.2</span> Common Operating Systems</h3>
 <p>For scientific computing, you’ll encounter:</p>
 <dl>
 <dt><strong>Linux</strong></dt>
@@ -857,7 +850,7 @@ Apple’s Unix-based desktop OS. Provides native access to Unix tools.
 </dd>
 <dt><strong>Windows</strong></dt>
 <dd>
-Microsoft’s desktop OS. Now supports Linux tools through WSL (see <a href="01-introduction.html#sec-windows-setup" class="quarto-xref"><span>Section 1.5.4</span></a>).
+Microsoft’s desktop OS. Now supports Linux tools through WSL (see <a href="#sec-windows-setup" class="quarto-xref"><span class="quarto-unresolved-ref">sec-windows-setup</span></a>).
 </dd>
 </dl>
 <div class="callout callout-style-default callout-note callout-titled" title="The Principle of Least Privilege">
@@ -873,13 +866,11 @@ The Principle of Least Privilege
 <p>A fundamental security concept: every program and user should operate using the minimum permissions necessary to accomplish their task. This limits the damage that can occur from mistakes or malicious actions.</p>
 </div>
 </div>
-</section>
-</section>
-<section id="computing-environments" class="level2" data-number="2.7">
-<h2 data-number="2.7" class="anchored" data-anchor-id="computing-environments"><span class="header-section-number">2.7</span> Computing Environments</h2>
+</section></section><section id="sec-computing-environments" class="level2" data-number="2.7"><h2 data-number="2.7" class="anchored" data-anchor-id="sec-computing-environments">
+<span class="header-section-number">2.7</span> Computing Environments</h2>
 <p>Research computing happens across a spectrum of environments, from your laptop to massive cloud data centers.</p>
-<section id="local-computing" class="level3" data-number="2.7.1">
-<h3 data-number="2.7.1" class="anchored" data-anchor-id="local-computing"><span class="header-section-number">2.7.1</span> Local Computing</h3>
+<section id="local-computing" class="level3" data-number="2.7.1"><h3 data-number="2.7.1" class="anchored" data-anchor-id="local-computing">
+<span class="header-section-number">2.7.1</span> Local Computing</h3>
 <p><strong>Local computing</strong> refers to resources physically present and directly controlled by you—your laptop, desktop, or lab workstation.</p>
 <p><strong>Advantages:</strong></p>
 <ul>
@@ -895,10 +886,8 @@ The Principle of Least Privilege
 <li>You’re responsible for maintenance and backups</li>
 <li>High upfront cost for powerful machines</li>
 <li>Resources sit idle during off-hours</li>
-</ul>
-</section>
-<section id="cluster-computing" class="level3" data-number="2.7.2">
-<h3 data-number="2.7.2" class="anchored" data-anchor-id="cluster-computing"><span class="header-section-number">2.7.2</span> Cluster Computing</h3>
+</ul></section><section id="cluster-computing" class="level3" data-number="2.7.2"><h3 data-number="2.7.2" class="anchored" data-anchor-id="cluster-computing">
+<span class="header-section-number">2.7.2</span> Cluster Computing</h3>
 <p>A <strong>computing cluster</strong> is a collection of interconnected computers (nodes) working together as a single system. The University of Oregon’s Talapas is an example.</p>
 <div class="cell" data-layout-align="default">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource default number-lines code-with-copy"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1"></a>graph TB</span>
@@ -913,8 +902,7 @@ The Principle of Least Privilege
 <span id="cb3-10"><a href="#cb3-10"></a>    U[Users] --&gt; M</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-cluster-architecture" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-cluster-architecture-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-cluster-architecture-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div>
 <pre class="mermaid mermaid-js" data-label="fig-cluster-architecture">graph TB
     M[Head/Login Node] --&gt; N1[Compute Node 1]
@@ -931,8 +919,7 @@ The Principle of Least Privilege
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cluster-architecture-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;2.4: Simplified cluster architecture with head node, compute nodes, and shared storage
-</figcaption>
-</figure>
+</figcaption></figure>
 </div>
 </div>
 </div>
@@ -968,10 +955,8 @@ Parallel file systems accessible from all nodes.
 <li>Jobs may wait in queue</li>
 <li>Shared resources mean competition for access</li>
 <li>Less control over software environment</li>
-</ul>
-</section>
-<section id="cloud-computing" class="level3" data-number="2.7.3">
-<h3 data-number="2.7.3" class="anchored" data-anchor-id="cloud-computing"><span class="header-section-number">2.7.3</span> Cloud Computing</h3>
+</ul></section><section id="cloud-computing" class="level3" data-number="2.7.3"><h3 data-number="2.7.3" class="anchored" data-anchor-id="cloud-computing">
+<span class="header-section-number">2.7.3</span> Cloud Computing</h3>
 <p><strong>Cloud computing</strong> provides on-demand computing resources over the internet, with pay-as-you-go pricing. Major providers include Amazon Web Services (AWS), Google Cloud Platform (GCP), and Microsoft Azure.</p>
 <div class="cell" data-layout-align="default">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource default number-lines code-with-copy"><code class="sourceCode default"><span id="cb4-1"><a href="#cb4-1"></a>graph TB</span>
@@ -984,8 +969,7 @@ Parallel file systems accessible from all nodes.
 <span id="cb4-8"><a href="#cb4-8"></a>    U[Users] -.Internet.-&gt; R</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-cloud-architecture" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-cloud-architecture-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-cloud-architecture-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div>
 <pre class="mermaid mermaid-js" data-label="fig-cloud-architecture">graph TB
     R[Region] --&gt; AZ1[Availability Zone 1]
@@ -1000,8 +984,7 @@ Parallel file systems accessible from all nodes.
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cloud-architecture-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;2.5: Cloud computing architecture with multiple availability zones
-</figcaption>
-</figure>
+</figcaption></figure>
 </div>
 </div>
 </div>
@@ -1020,16 +1003,12 @@ Figure&nbsp;2.5: Cloud computing architecture with multiple availability zones
 <li>Requires reliable internet connectivity</li>
 <li>Data transfer costs (especially egress fees)</li>
 <li>Less control compared to local systems</li>
-</ul>
-</section>
-<section id="choosing-the-right-environment" class="level3" data-number="2.7.4">
-<h3 data-number="2.7.4" class="anchored" data-anchor-id="choosing-the-right-environment"><span class="header-section-number">2.7.4</span> Choosing the Right Environment</h3>
+</ul></section><section id="choosing-the-right-environment" class="level3" data-number="2.7.4"><h3 data-number="2.7.4" class="anchored" data-anchor-id="choosing-the-right-environment">
+<span class="header-section-number">2.7.4</span> Choosing the Right Environment</h3>
 <div id="tbl-computing-environments" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-computing-environments-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-computing-environments-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Table&nbsp;2.2: Comparison of computing environments
-</figcaption>
-<div aria-describedby="tbl-computing-environments-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+</figcaption><div aria-describedby="tbl-computing-environments-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <colgroup>
 <col style="width: 25%">
@@ -1037,14 +1016,12 @@ Table&nbsp;2.2: Comparison of computing environments
 <col style="width: 29%">
 <col style="width: 22%">
 </colgroup>
-<thead>
-<tr class="header">
+<thead><tr class="header">
 <th style="text-align: left;">Factor</th>
 <th style="text-align: left;">Local</th>
 <th style="text-align: left;">Cluster</th>
 <th style="text-align: left;">Cloud</th>
-</tr>
-</thead>
+</tr></thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Scale</td>
@@ -1094,10 +1071,8 @@ Tip
 <p>A common workflow: develop and test locally, run production analyses on a cluster, use cloud resources for specialized needs or when cluster queues are full.</p>
 </div>
 </div>
-</section>
-</section>
-<section id="the-evolution-of-scientific-computing" class="level2" data-number="2.8">
-<h2 data-number="2.8" class="anchored" data-anchor-id="the-evolution-of-scientific-computing"><span class="header-section-number">2.8</span> The Evolution of Scientific Computing</h2>
+</section></section><section id="sec-computing-evolution" class="level2" data-number="2.8"><h2 data-number="2.8" class="anchored" data-anchor-id="sec-computing-evolution">
+<span class="header-section-number">2.8</span> The Evolution of Scientific Computing</h2>
 <p>Computing infrastructure has evolved dramatically over the past several decades:</p>
 <div class="cell" data-layout-align="default">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource default number-lines code-with-copy"><code class="sourceCode default"><span id="cb5-1"><a href="#cb5-1"></a>graph LR</span>
@@ -1108,8 +1083,7 @@ Tip
 <span id="cb5-6"><a href="#cb5-6"></a>    E --&gt; F[2020s&lt;br/&gt;Edge/Hybrid]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-computing-evolution" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-computing-evolution-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-computing-evolution-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div>
 <pre class="mermaid mermaid-js" data-label="fig-computing-evolution">graph LR
     A[1960s-70s&lt;br/&gt;Mainframes] --&gt; B[1980s-90s&lt;br/&gt;Personal Computers]
@@ -1122,22 +1096,24 @@ Tip
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-computing-evolution-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;2.6: Evolution of computing paradigms from mainframes to modern hybrid approaches
-</figcaption>
-</figure>
+</figcaption></figure>
 </div>
 </div>
 </div>
 <p>Key drivers of this evolution include:</p>
 <ul>
-<li><strong>Performance Needs</strong>: Ever-increasing computational demands from research</li>
-<li><strong>Economics</strong>: Pursuit of cost optimization and economies of scale</li>
-<li><strong>Connectivity</strong>: Internet bandwidth improvements enabling remote computing</li>
-<li><strong>Virtualization</strong>: Technologies that abstract hardware from software</li>
+<li>
+<strong>Performance Needs</strong>: Ever-increasing computational demands from research</li>
+<li>
+<strong>Economics</strong>: Pursuit of cost optimization and economies of scale</li>
+<li>
+<strong>Connectivity</strong>: Internet bandwidth improvements enabling remote computing</li>
+<li>
+<strong>Virtualization</strong>: Technologies that abstract hardware from software</li>
 </ul>
 <p>Modern research computing increasingly uses <strong>hybrid approaches</strong>, combining local development with cluster and cloud resources based on the specific needs of each project.</p>
-</section>
-<section id="summary" class="level2" data-number="2.9">
-<h2 data-number="2.9" class="anchored" data-anchor-id="summary"><span class="header-section-number">2.9</span> Summary</h2>
+</section><section id="summary" class="level2" data-number="2.9"><h2 data-number="2.9" class="anchored" data-anchor-id="summary">
+<span class="header-section-number">2.9</span> Summary</h2>
 <p>This chapter provided foundational knowledge about computer systems:</p>
 <ul>
 <li>Computers consist of hardware, software, firmware, and data working together</li>
@@ -1148,9 +1124,27 @@ Figure&nbsp;2.6: Evolution of computing paradigms from mainframes to modern hybr
 <li>Computing environments range from local to cluster to cloud, each with tradeoffs</li>
 </ul>
 <p>Understanding these concepts will help you choose appropriate resources for your analyses, interpret performance characteristics, and communicate effectively with system administrators.</p>
-</section>
-<section id="exercises" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="exercises">Exercises</h2>
+</section><section id="additional-reading" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="additional-reading">Additional Reading</h2>
+<p>To deepen your understanding of computer systems architecture:</p>
+<ul>
+<li>
+<strong>“Code: The Hidden Language of Computer Hardware and Software”</strong> by Charles Petzold — An accessible introduction to how computers work from first principles</li>
+<li>
+<strong>“Computer Organization and Design”</strong> by Patterson and Hennessy — The classic textbook on computer architecture</li>
+<li>
+<strong><a href="https://cpu.land/">Putting the “You” in CPU</a></strong> — A free, interactive online guide to how processors work</li>
+<li>
+<strong><a href="https://nostarch.com/how-computers-really-work">How Computers Really Work</a></strong> by Matthew Justice — A practical guide covering hardware, software, and everything in between</li>
+<li>
+<strong>AWS, GCP, and Azure Documentation</strong> — Each cloud provider offers extensive free training on cloud computing concepts</li>
+</ul>
+<p>For GPU computing and parallel processing:</p>
+<ul>
+<li>
+<strong>NVIDIA CUDA Documentation</strong> — Comprehensive guides for GPU programming</li>
+<li>
+<strong><a href="https://developer.nvidia.com/blog/even-easier-introduction-cuda/">An Even Easier Introduction to CUDA</a></strong> — NVIDIA’s beginner-friendly CUDA tutorial</li>
+</ul></section><section id="exercises" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="exercises">Exercises</h2>
 <div class="callout callout-style-default callout-tip callout-titled" title="Practice Exercises">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1162,30 +1156,31 @@ Practice Exercises
 </div>
 <div class="callout-body-container callout-body">
 <ol type="1">
-<li><p><strong>System Exploration</strong>: On your computer, find out:</p>
+<li>
+<p><strong>System Exploration</strong>: On your computer, find out:</p>
 <ul>
 <li>How many CPU cores does your system have?</li>
 <li>How much RAM is installed?</li>
 <li>What type of storage (SSD or HDD) do you have?</li>
 <li>What operating system and version are you running?</li>
-</ul></li>
+</ul>
+</li>
 <li><p><strong>Memory Hierarchy</strong>: Explain why reading data from disk is so much slower than reading from RAM. What implications does this have for analyzing large datasets?</p></li>
-<li><p><strong>Computing Environment Selection</strong>: For each scenario, which computing environment (local, cluster, or cloud) would you recommend and why?</p>
+<li>
+<p><strong>Computing Environment Selection</strong>: For each scenario, which computing environment (local, cluster, or cloud) would you recommend and why?</p>
 <ul>
 <li>Testing a new analysis script on a small dataset</li>
 <li>Running a genome assembly requiring 256 GB of RAM</li>
 <li>Hosting a web application for your lab’s research tools</li>
 <li>Training a deep learning model requiring multiple GPUs for two weeks</li>
-</ul></li>
+</ul>
+</li>
 </ol>
 </div>
 </div>
 
 
-</section>
-
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
     if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -1642,9 +1637,7 @@ Practice Exercises
       }
     }
   });
-  </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="../chapters/01-introduction.html" class="pagination-link" aria-label="Introduction to Computational Tools">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Computational Tools</span></span>
       </a>          
@@ -1656,8 +1649,7 @@ Practice Exercises
   </div>
 </nav>
 </div> <!-- /content -->
-<footer class="footer">
-  <div class="nav-footer">
+<footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">
 <p>© 2025 William A. Cresko | Knight Campus for Accelerating Scientific Impact</p>
 </div>   
@@ -1669,8 +1661,6 @@ Practice Exercises
 </div>
   </div>
 </footer>
-
-
 
 
 </body></html>
